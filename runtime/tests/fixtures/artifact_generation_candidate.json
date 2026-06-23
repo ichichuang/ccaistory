@@ -1,0 +1,30 @@
+{
+  "artifact_id": "fixture_generation_candidate",
+  "artifact_type": "external_generation_candidate",
+  "asset_id": "fixture_asset_r00",
+  "candidate_id": "fixture_candidate_01",
+  "content_hash": {
+    "algorithm": "sha256",
+    "hash": "4444444444444444444444444444444444444444444444444444444444444444"
+  },
+  "created_at": "2026-06-23T00:00:00Z",
+  "dependency_artifact_ids": [
+    "fixture_compiled_prompt",
+    "fixture_semantic_lint_result"
+  ],
+  "metadata": {
+    "actual_prompt_sent_to_external_tool": "fixture prompt sent to external tool"
+  },
+  "parent_artifact_ids": [
+    "fixture_compiled_prompt"
+  ],
+  "project_id": "fixture_project",
+  "run_id": "fixture_run",
+  "source_hash": {
+    "algorithm": "sha256",
+    "hash": "4444444444444444444444444444444444444444444444444444444444444444"
+  },
+  "source_path": "runtime/tests/fixtures/artifact_generation_candidate.json",
+  "status": "generated",
+  "story_id": "fixture_story"
+}

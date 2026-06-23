@@ -1,8 +1,14 @@
 from __future__ import annotations
 
+from datetime import datetime, timezone
 from typing import Any
 
+from artifact_registry.hash_utils import json_sha256
 from core.io import read_json, result
+
+
+def _now() -> str:
+    return datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
 
 
 def create_telemetry_record(**payload: Any) -> dict[str, Any]:
@@ -53,3 +59,49 @@ def validate_telemetry(record: dict[str, Any]) -> dict[str, Any]:
 
 def validate_telemetry_file(path: str) -> dict[str, Any]:
     return validate_telemetry(read_json(path))
+
+
+def create_telemetry_artifact_payload(
+    record: dict[str, Any],
+    *,
+    artifact_id: str,
+    project_id: str = "",
+    story_id: str = "",
+    run_id: str = "",
+    candidate_id: str = "",
+    parent_artifact_ids: list[str] | None = None,
+    dependency_artifact_ids: list[str] | None = None,
+) -> dict[str, Any]:
+    validation = validate_telemetry(record)
+    if not validation["passed"]:
+        return result(False, failures=["telemetry_validation_failed"], telemetry_validation=validation)
+
+    telemetry = record.get("execution_telemetry", record)
+    content_hash = json_sha256(record)
+    if not content_hash.get("hash"):
+        return result(False, failures=content_hash.get("failures", ["telemetry_hash_failed"]))
+
+    artifact = {
+        "artifact_id": artifact_id,
+        "artifact_type": "execution_telemetry",
+        "project_id": project_id,
+        "story_id": story_id,
+        "asset_id": telemetry.get("asset_id") or "",
+        "run_id": run_id,
+        "candidate_id": candidate_id,
+        "source_path": "",
+        "content_hash": content_hash,
+        "source_hash": content_hash,
+        "parent_artifact_ids": parent_artifact_ids or [],
+        "dependency_artifact_ids": dependency_artifact_ids or [],
+        "created_at": _now(),
+        "status": "telemetry_recorded",
+        "metadata": {
+            "actual_prompt_sent_to_external_tool": telemetry.get("actual_prompt_sent_to_external_tool", ""),
+            "tool_name": telemetry.get("tool_name", ""),
+            "output_path": telemetry.get("output_path", ""),
+            "canvas_ratio_requested": telemetry.get("canvas_ratio_requested", ""),
+            "canvas_ratio_actual": telemetry.get("canvas_ratio_actual", ""),
+        },
+    }
+    return result(True, artifact=artifact, telemetry_validation=validation)

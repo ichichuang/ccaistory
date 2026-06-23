@@ -7,7 +7,7 @@
       "required_state": "empty",
       "required_gate_result": "pending",
       "required_inputs": ["story_input"],
-      "outputs": ["story_core"],
+      "outputs": ["story_core", "story_core_artifact"],
       "blocked_if": ["concrete_story_project_exists"],
       "next_action_on_pass": "assess_page_count",
       "next_action_on_fail": "create_story_core"
@@ -47,7 +47,7 @@
       "required_state": "skill_runtime_checked",
       "required_gate_result": "passed",
       "required_inputs": ["story_graph", "skill_runtime_result"],
-      "outputs": ["story_analysis_result", "recommended_skill_plan", "repair_priority"],
+      "outputs": ["story_analysis_result", "story_analysis_result_artifact", "recommended_skill_plan", "repair_priority"],
       "blocked_if": ["story_graph_missing", "story_analyzer_high_risk"],
       "next_action_on_pass": "execute_skill_graph",
       "next_action_on_fail": "repair_story_graph_before_skill_executor"
@@ -67,7 +67,7 @@
       "required_state": "story_analyzed",
       "required_gate_result": "passed",
       "required_inputs": ["story_graph", "skill_runtime_result", "story_analysis_result"],
-      "outputs": ["skill_executor_result", "proposed_changes"],
+      "outputs": ["skill_executor_result", "skill_executor_result_artifact", "proposed_changes"],
       "blocked_if": ["story_graph_missing", "skill_runtime_result_missing", "story_analyzer_high_risk"],
       "next_action_on_pass": "review_skill_executor_proposed_changes",
       "next_action_on_fail": "execute_skill_node"
@@ -77,7 +77,7 @@
       "required_state": "story_analyzed",
       "required_gate_result": "passed",
       "required_inputs": ["story_graph", "skill_runtime_result", "story_analysis_result"],
-      "outputs": ["skill_executor_result", "proposed_changes"],
+      "outputs": ["skill_executor_result", "skill_executor_result_artifact", "proposed_changes"],
       "blocked_if": ["story_graph_missing", "skill_runtime_result_missing", "story_analyzer_high_risk"],
       "next_action_on_pass": "review_skill_executor_proposed_changes",
       "next_action_on_fail": "execute_skill_graph"
@@ -127,7 +127,7 @@
       "required_state": "visual_manifest_ready",
       "required_gate_result": "passed",
       "required_inputs": ["visual_manifest", "visual_assets_contract"],
-      "outputs": ["visual_asset_specs"],
+      "outputs": ["visual_asset_specs", "visual_asset_spec_artifacts"],
       "blocked_if": ["visual_manifest_missing"],
       "next_action_on_pass": "compile_prompts",
       "next_action_on_fail": "build_visual_asset_specs"
@@ -137,7 +137,7 @@
       "required_state": "visual_asset_specs_ready",
       "required_gate_result": "passed",
       "required_inputs": ["visual_asset_specs"],
-      "outputs": ["compiled_prompts"],
+      "outputs": ["compiled_prompts", "compiled_prompt_artifacts"],
       "blocked_if": ["visual_asset_specs_missing", "asset_contract_missing"],
       "next_action_on_pass": "run_semantic_lint",
       "next_action_on_fail": "compile_prompts"
@@ -147,7 +147,7 @@
       "required_state": "prompts_compiled",
       "required_gate_result": "passed",
       "required_inputs": ["compiled_prompts", "visual_assets_contract"],
-      "outputs": ["semantic_lint_result"],
+      "outputs": ["semantic_lint_result", "semantic_lint_result_artifact"],
       "blocked_if": ["compiled_prompt_missing", "contract_missing"],
       "next_action_on_pass": "generate_source_pilot_task_list",
       "next_action_on_fail": "compile_prompts"
@@ -157,7 +157,7 @@
       "required_state": "semantic_lint_passed",
       "required_gate_result": "passed",
       "required_inputs": ["semantic_lint_result", "compiled_prompts"],
-      "outputs": ["source_pilot_task_list"],
+      "outputs": ["source_pilot_task_list", "source_pilot_task_list_artifact"],
       "blocked_if": ["semantic_lint_failed"],
       "next_action_on_pass": "record_execution_telemetry",
       "next_action_on_fail": "compile_prompts"
@@ -166,9 +166,9 @@
       "action_id": "record_execution_telemetry",
       "required_state": "source_pilot_generation",
       "required_gate_result": "passed",
-      "required_inputs": ["external_execution_fact", "actual_prompt_sent_to_external_tool"],
-      "outputs": ["execution_telemetry"],
-      "blocked_if": ["actual_prompt_missing", "reference_assets_unrecorded"],
+      "required_inputs": ["external_generation_candidate", "external_execution_fact", "actual_prompt_sent_to_external_tool"],
+      "outputs": ["execution_telemetry", "execution_telemetry_artifact"],
+      "blocked_if": ["external_generation_candidate_missing", "actual_prompt_missing", "reference_assets_unrecorded"],
       "next_action_on_pass": "run_asset_qa",
       "next_action_on_fail": "record_execution_telemetry"
     },
@@ -176,9 +176,9 @@
       "action_id": "run_asset_qa",
       "required_state": "asset_qa_pending",
       "required_gate_result": "passed",
-      "required_inputs": ["asset_qa_answers", "visual_assets_contract"],
-      "outputs": ["asset_qa_result"],
-      "blocked_if": ["execution_telemetry_missing", "contract_missing"],
+      "required_inputs": ["external_generation_candidate", "execution_telemetry", "asset_qa_answers", "visual_assets_contract"],
+      "outputs": ["asset_qa_result", "asset_qa_result_artifact"],
+      "blocked_if": ["external_generation_candidate_missing", "execution_telemetry_missing", "contract_missing"],
       "next_action_on_pass": "accept_asset",
       "next_action_on_fail": "reject_asset"
     },
@@ -186,9 +186,9 @@
       "action_id": "accept_asset",
       "required_state": "asset_qa_pending",
       "required_gate_result": "passed",
-      "required_inputs": ["asset_qa_result"],
-      "outputs": ["accepted_asset_record"],
-      "blocked_if": ["asset_qa_failed", "hard_failure_present"],
+      "required_inputs": ["external_generation_candidate", "execution_telemetry", "asset_qa_result"],
+      "outputs": ["accepted_asset_record", "accepted_reference_asset"],
+      "blocked_if": ["artifact_registry_validation_failed", "telemetry_missing", "asset_qa_failed", "hard_failure_present"],
       "next_action_on_pass": "build_platform_page_layout",
       "next_action_on_fail": "reject_asset"
     },
@@ -197,7 +197,7 @@
       "required_state": "asset_qa_pending",
       "required_gate_result": "rework_required",
       "required_inputs": ["asset_qa_result"],
-      "outputs": ["asset_rejection_record", "repair_request"],
+      "outputs": ["asset_rejection_record", "rejected_reference_asset", "repair_request"],
       "blocked_if": ["asset_qa_missing"],
       "next_action_on_pass": "compile_prompts",
       "next_action_on_fail": "run_asset_qa"
@@ -206,9 +206,9 @@
       "action_id": "build_platform_page_layout",
       "required_state": "asset_accepted",
       "required_gate_result": "passed",
-      "required_inputs": ["accepted_assets", "platform_layout_contract"],
+      "required_inputs": ["accepted_assets", "accepted_reference_asset", "platform_layout_contract"],
       "outputs": ["platform_layout"],
-      "blocked_if": ["required_asset_not_accepted"],
+      "blocked_if": ["required_asset_not_accepted", "rejected_reference_dependency", "deprecated_reference_dependency"],
       "next_action_on_pass": "run_human_complete_reading",
       "next_action_on_fail": "build_platform_page_layout"
     },

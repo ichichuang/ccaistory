@@ -5,7 +5,11 @@ from typing import Any
 import json
 import subprocess
 import sys
+import tempfile
 
+from artifact_registry.hash_utils import json_sha256
+from artifact_registry.lineage import trace_lineage
+from artifact_registry.registry import check_registry, register_artifact
 from core.io import RUNTIME_ROOT, result
 from contracts.contract_loader import load_contract, r00_required_questions
 from contracts.validate_contracts import validate_contracts
@@ -429,6 +433,113 @@ def run_smoke_tests() -> dict[str, Any]:
         }
     )
 
+    artifact_hash = json_sha256({"artifact": "fixture"})
+    checks.append(
+        {
+            "name": "artifact hash can be generated",
+            "passed": bool(artifact_hash.get("hash")) and artifact_hash.get("algorithm") == "sha256",
+        }
+    )
+
+    with tempfile.TemporaryDirectory() as temp_dir:
+        registry_path = Path(temp_dir) / "registry.json"
+        artifact_fixture_names = [
+            "artifact_visual_asset_spec.json",
+            "artifact_compiled_prompt.json",
+            "artifact_semantic_lint_result.json",
+            "artifact_generation_candidate.json",
+            "artifact_execution_telemetry.json",
+            "artifact_asset_qa_passed.json",
+            "artifact_accepted_reference_asset_valid.json",
+        ]
+        artifact_registrations = [
+            register_artifact(_load(name), registry_path=registry_path)
+            for name in artifact_fixture_names
+        ]
+        checks.append(
+            {
+                "name": "registry can register artifact chain",
+                "passed": all(item["passed"] for item in artifact_registrations),
+            }
+        )
+
+        duplicate_artifact = register_artifact(_load("artifact_visual_asset_spec.json"), registry_path=registry_path)
+        checks.append(
+            {
+                "name": "duplicate artifact_id is blocked",
+                "passed": not duplicate_artifact["passed"] and "duplicate_artifact_id" in duplicate_artifact["failures"],
+            }
+        )
+
+        valid_lineage = trace_lineage("fixture_accepted_reference_asset_valid", registry_path=str(registry_path))
+        checks.append(
+            {
+                "name": "accepted reference asset passes telemetry and QA",
+                "passed": valid_lineage["passed"] and not valid_lineage["missing_required_ancestors"],
+            }
+        )
+        checks.append(
+            {
+                "name": "lineage traces accepted asset to compiled_prompt",
+                "passed": any(
+                    item["artifact_type"] == "compiled_prompt"
+                    for item in valid_lineage["lineage"]
+                ),
+            }
+        )
+
+        missing_qa = register_artifact(
+            _load("artifact_accepted_reference_asset_missing_qa.json"),
+            registry_path=registry_path,
+        )
+        checks.append(
+            {
+                "name": "accepted reference asset missing QA is blocked",
+                "passed": not missing_qa["passed"]
+                and any("accepted_reference_asset" in failure for failure in missing_qa["failures"]),
+            }
+        )
+
+        rejected_registration = register_artifact(_load("artifact_rejected_asset.json"), registry_path=registry_path)
+        rejected_reference_layout = {
+            "artifact_id": "fixture_platform_layout_rejected_reference",
+            "artifact_type": "platform_page_layout",
+            "project_id": "fixture_project",
+            "story_id": "fixture_story",
+            "asset_id": "fixture_asset_r00",
+            "run_id": "fixture_run",
+            "candidate_id": "",
+            "source_path": "",
+            "content_hash": {
+                "hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "algorithm": "sha256",
+            },
+            "source_hash": {
+                "hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "algorithm": "sha256",
+            },
+            "parent_artifact_ids": [],
+            "dependency_artifact_ids": ["fixture_rejected_asset"],
+            "created_at": "2026-06-23T00:00:00Z",
+            "status": "draft",
+            "metadata": {"reference_dependency_ids": ["fixture_rejected_asset"]},
+        }
+        rejected_reference = register_artifact(rejected_reference_layout, registry_path=registry_path)
+        checks.append(
+            {
+                "name": "rejected asset cannot be used as reference",
+                "passed": rejected_registration["passed"] and not rejected_reference["passed"],
+            }
+        )
+
+        registry_check = check_registry(registry_path=registry_path)
+        checks.append(
+            {
+                "name": "artifact registry has zero broken lineage links",
+                "passed": registry_check["passed"] and registry_check["broken_link_count"] == 0,
+            }
+        )
+
     generated_forbidden_artifacts = []
     for path in (RUNTIME_ROOT.parent / "故事项目").iterdir():
         if path.is_dir():
@@ -441,6 +552,10 @@ def run_smoke_tests() -> dict[str, Any]:
     checks.append({"name": "skill executor does not create story project", "passed": not generated_forbidden_artifacts})
     checks.append({"name": "skill executor does not generate images", "passed": not image_artifacts})
     checks.append({"name": "skill executor does not generate execution package", "passed": not list(RUNTIME_ROOT.rglob("*执行包*"))})
+    checks.append({"name": "registry does not create story project", "passed": not generated_forbidden_artifacts})
+    checks.append({"name": "registry does not generate images", "passed": not image_artifacts})
+    checks.append({"name": "registry does not generate execution package", "passed": not list(RUNTIME_ROOT.rglob("*执行包*"))})
+    checks.append({"name": "registry does not generate publish package", "passed": not list(RUNTIME_ROOT.rglob("*发布包*"))})
 
     failed = [check for check in checks if not check["passed"]]
     return result(not failed, smoke_checks=checks, failed_checks=failed)

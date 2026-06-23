@@ -11,6 +11,16 @@ RUNTIME_ROOT = Path(__file__).resolve().parent
 if str(RUNTIME_ROOT) not in sys.path:
     sys.path.insert(0, str(RUNTIME_ROOT))
 
+from artifact_registry.lineage import trace_lineage
+from artifact_registry.registry import (
+    check_registry,
+    get_artifact,
+    list_artifacts,
+    query_artifacts,
+    register_artifact,
+    update_artifact_status,
+    validate_artifact_by_id,
+)
 from core.io import PROJECT_ROOT, print_json, read_json, result
 from contracts.sync_docs_check import check_contract_drift
 from contracts.validate_contracts import validate_contracts
@@ -85,6 +95,38 @@ def main(argv: list[str] | None = None) -> int:
     sub.add_parser("check-contract-drift")
     sub.add_parser("smoke-test")
     sub.add_parser("list-runs")
+
+    artifact_register = sub.add_parser("artifact-register")
+    artifact_register.add_argument("--artifact", required=True)
+    artifact_register.add_argument("--registry")
+    artifact_register.add_argument("--dry-run", action="store_true")
+
+    artifact_list = sub.add_parser("artifact-list")
+    artifact_list.add_argument("--project-id", default="")
+    artifact_list.add_argument("--asset-id", default="")
+    artifact_list.add_argument("--status", default="")
+    artifact_list.add_argument("--registry")
+
+    artifact_get = sub.add_parser("artifact-get")
+    artifact_get.add_argument("--artifact-id", required=True)
+    artifact_get.add_argument("--registry")
+
+    artifact_update = sub.add_parser("artifact-update-status")
+    artifact_update.add_argument("--artifact-id", required=True)
+    artifact_update.add_argument("--status", required=True)
+    artifact_update.add_argument("--registry")
+    artifact_update.add_argument("--dry-run", action="store_true")
+
+    artifact_lineage = sub.add_parser("artifact-lineage")
+    artifact_lineage.add_argument("--artifact-id", required=True)
+    artifact_lineage.add_argument("--registry")
+
+    artifact_validate = sub.add_parser("artifact-validate")
+    artifact_validate.add_argument("--artifact-id", required=True)
+    artifact_validate.add_argument("--registry")
+
+    artifact_check = sub.add_parser("artifact-check-registry")
+    artifact_check.add_argument("--registry")
 
     analyze_story = sub.add_parser("analyze-story")
     analyze_story.add_argument("--story-core", required=True)
@@ -205,6 +247,33 @@ def main(argv: list[str] | None = None) -> int:
         payload = check_contract_drift()
     elif args.command == "list-runs":
         payload = list_runs()
+    elif args.command == "artifact-register":
+        payload = register_artifact(read_json(args.artifact), registry_path=args.registry, dry_run=args.dry_run)
+    elif args.command == "artifact-list":
+        if args.project_id or args.asset_id or args.status:
+            payload = query_artifacts(
+                project_id=args.project_id,
+                asset_id=args.asset_id,
+                status=args.status,
+                registry_path=args.registry,
+            )
+        else:
+            payload = list_artifacts(registry_path=args.registry)
+    elif args.command == "artifact-get":
+        payload = get_artifact(args.artifact_id, registry_path=args.registry)
+    elif args.command == "artifact-update-status":
+        payload = update_artifact_status(
+            args.artifact_id,
+            args.status,
+            registry_path=args.registry,
+            dry_run=args.dry_run,
+        )
+    elif args.command == "artifact-lineage":
+        payload = trace_lineage(args.artifact_id, registry_path=args.registry)
+    elif args.command == "artifact-validate":
+        payload = validate_artifact_by_id(args.artifact_id, registry_path=args.registry)
+    elif args.command == "artifact-check-registry":
+        payload = check_registry(registry_path=args.registry)
     elif args.command == "analyze-story":
         payload = analyze_story_core(read_json(args.story_core))
     elif args.command == "analyze-graph":

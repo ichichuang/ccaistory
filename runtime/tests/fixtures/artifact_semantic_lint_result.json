@@ -1,0 +1,29 @@
+{
+  "artifact_id": "fixture_semantic_lint_result",
+  "artifact_type": "semantic_lint_result",
+  "asset_id": "fixture_asset_r00",
+  "candidate_id": "",
+  "content_hash": {
+    "algorithm": "sha256",
+    "hash": "3333333333333333333333333333333333333333333333333333333333333333"
+  },
+  "created_at": "2026-06-23T00:00:00Z",
+  "dependency_artifact_ids": [
+    "fixture_compiled_prompt"
+  ],
+  "metadata": {
+    "passed": true
+  },
+  "parent_artifact_ids": [
+    "fixture_compiled_prompt"
+  ],
+  "project_id": "fixture_project",
+  "run_id": "fixture_run",
+  "source_hash": {
+    "algorithm": "sha256",
+    "hash": "3333333333333333333333333333333333333333333333333333333333333333"
+  },
+  "source_path": "runtime/tests/fixtures/artifact_semantic_lint_result.json",
+  "status": "lint_passed",
+  "story_id": "fixture_story"
+}

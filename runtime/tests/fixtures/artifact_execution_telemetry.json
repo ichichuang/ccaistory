@@ -1,0 +1,30 @@
+{
+  "artifact_id": "fixture_execution_telemetry",
+  "artifact_type": "execution_telemetry",
+  "asset_id": "fixture_asset_r00",
+  "candidate_id": "fixture_candidate_01",
+  "content_hash": {
+    "algorithm": "sha256",
+    "hash": "5555555555555555555555555555555555555555555555555555555555555555"
+  },
+  "created_at": "2026-06-23T00:00:00Z",
+  "dependency_artifact_ids": [
+    "fixture_generation_candidate"
+  ],
+  "metadata": {
+    "actual_prompt_sent_to_external_tool": "fixture prompt sent to external tool",
+    "tool_name": "manual_external_tool"
+  },
+  "parent_artifact_ids": [
+    "fixture_generation_candidate"
+  ],
+  "project_id": "fixture_project",
+  "run_id": "fixture_run",
+  "source_hash": {
+    "algorithm": "sha256",
+    "hash": "5555555555555555555555555555555555555555555555555555555555555555"
+  },
+  "source_path": "runtime/tests/fixtures/artifact_execution_telemetry.json",
+  "status": "telemetry_recorded",
+  "story_id": "fixture_story"
+}

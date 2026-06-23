@@ -1,9 +1,15 @@
 from __future__ import annotations
 
+from datetime import datetime, timezone
 from typing import Any
 
+from artifact_registry.hash_utils import json_sha256
 from contracts.contract_loader import ContractError, r00_required_questions
 from core.io import read_json, result
+
+
+def _now() -> str:
+    return datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
 
 
 def get_r00_required_questions() -> list[tuple[str, bool, str]]:
@@ -62,3 +68,48 @@ def qa_asset(qa: dict[str, Any]) -> dict[str, Any]:
 
 def qa_asset_file(path: str) -> dict[str, Any]:
     return qa_asset(read_json(path))
+
+
+def create_asset_qa_artifact_payload(
+    qa: dict[str, Any],
+    *,
+    artifact_id: str,
+    project_id: str = "",
+    story_id: str = "",
+    asset_id: str = "",
+    run_id: str = "",
+    candidate_id: str = "",
+    parent_artifact_ids: list[str] | None = None,
+    dependency_artifact_ids: list[str] | None = None,
+) -> dict[str, Any]:
+    qa_result = qa_asset(qa)
+    if not qa_result["passed"]:
+        return result(False, failures=["asset_qa_validation_failed"], asset_qa_validation=qa_result)
+
+    content_hash = json_sha256(qa)
+    if not content_hash.get("hash"):
+        return result(False, failures=content_hash.get("failures", ["asset_qa_hash_failed"]))
+
+    block = qa.get("asset_qa_result", qa)
+    artifact = {
+        "artifact_id": artifact_id,
+        "artifact_type": "asset_qa_result",
+        "project_id": project_id,
+        "story_id": story_id,
+        "asset_id": asset_id or block.get("asset_id", ""),
+        "run_id": run_id,
+        "candidate_id": candidate_id,
+        "source_path": "",
+        "content_hash": content_hash,
+        "source_hash": content_hash,
+        "parent_artifact_ids": parent_artifact_ids or [],
+        "dependency_artifact_ids": dependency_artifact_ids or [],
+        "created_at": _now(),
+        "status": "qa_passed",
+        "metadata": {
+            "asset_type": block.get("asset_type", ""),
+            "decision": qa_result["asset_qa_result"]["decision"],
+            "allow_accepted": qa_result["asset_qa_result"]["allow_accepted"],
+        },
+    }
+    return result(True, artifact=artifact, asset_qa_validation=qa_result)

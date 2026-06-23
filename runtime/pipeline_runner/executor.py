@@ -2,15 +2,21 @@ from __future__ import annotations
 
 from typing import Any
 
+from artifact_registry.registry import register_artifact, validate_artifact_by_id
 from contracts.validate_contracts import validate_contracts
 from core.io import find_story_core, load_json_file, result
 from pipeline_runner.checkpoint import create_checkpoint, mark_step_status, save_checkpoint
 from pipeline_runner.pipeline_errors import PipelineCheckpointError
-from pipeline_runner.run_manifest import create_run_manifest
+from pipeline_runner.run_manifest import append_created_artifact_ids, create_run_manifest
 from story_analyzer.analyzer import analyze_story_core, analyze_story_graph
 
 
 EXTERNAL_GENERATION_ACTIONS = {"generate_source_pilot_task_list"}
+EXTERNAL_REQUIRED_ARTIFACTS = [
+    "external_generation_candidate",
+    "execution_telemetry",
+    "asset_qa_result",
+]
 ACCEPTANCE_ACTIONS = {"accept_asset", "reject_asset"}
 SKILL_EXECUTOR_DRY_RUN_ACTIONS = {"execute_skill_node", "execute_skill_graph"}
 SKILL_EXECUTOR_APPROVAL_ACTIONS = {"review_skill_executor_proposed_changes", "apply_approved_skill_changes"}
@@ -20,6 +26,34 @@ ANALYZER_ACTIONS = {"analyze_story_graph"}
 def _acceptance_inputs_present(step: dict[str, Any]) -> bool:
     required = set(step.get("required_inputs", []))
     return {"execution_telemetry", "asset_qa_result"}.issubset(required)
+
+
+def _register_step_artifacts(step: dict[str, Any], *, dry_run: bool) -> dict[str, Any]:
+    payloads = step.get("artifact_payloads", [])
+    if payloads in (None, []):
+        return result(True, artifact_ids=[])
+    if not isinstance(payloads, list) or not all(isinstance(item, dict) for item in payloads):
+        return result(False, failures=["artifact_payloads_not_list"])
+
+    artifact_ids: list[str] = []
+    for artifact in payloads:
+        registration = register_artifact(artifact, dry_run=dry_run)
+        if not registration["passed"]:
+            return result(False, failures=registration.get("failures", []), artifact_registration=registration)
+        artifact_ids.append(registration["artifact_id"])
+    return result(True, artifact_ids=artifact_ids)
+
+
+def _validate_acceptance_artifact(step: dict[str, Any]) -> dict[str, Any]:
+    artifact_id = step.get("artifact_id") or step.get("accepted_artifact_id")
+    if not artifact_id:
+        return result(True, artifact_id="")
+    if not isinstance(artifact_id, str):
+        return result(False, failures=["acceptance_artifact_id_not_string"])
+    validation = validate_artifact_by_id(artifact_id)
+    if not validation["passed"]:
+        return validation
+    return result(True, artifact_id=artifact_id)
 
 
 def _analyze_project_story(plan_result: dict[str, Any], project_path: str) -> dict[str, Any]:
@@ -152,6 +186,26 @@ def execute_pipeline(
                     },
                 )
 
+            if action_id in ACCEPTANCE_ACTIONS:
+                artifact_validation = _validate_acceptance_artifact(step)
+                if not artifact_validation["passed"]:
+                    mark_step_status(checkpoint, step_id, "failed", "acceptance_artifact_registry_validation_failed")
+                    save_checkpoint(checkpoint)
+                    return result(
+                        False,
+                        run_result={
+                            "run_id": manifest["run_id"],
+                            "run_status": "failed",
+                            "dry_run": dry_run,
+                            "stopped_at": step_id,
+                            "last_error": "acceptance_artifact_registry_validation_failed",
+                            "executed_steps": executed_steps,
+                            "artifact_validation": artifact_validation,
+                            "run_manifest": f"runtime/.runs/{manifest['run_id']}/run_manifest.json",
+                            "checkpoint": f"runtime/.runs/{manifest['run_id']}/checkpoint.json",
+                        },
+                    )
+
             if action_id in SKILL_EXECUTOR_DRY_RUN_ACTIONS and not dry_run:
                 mark_step_status(checkpoint, step_id, "failed", "skill_executor_requires_dry_run")
                 save_checkpoint(checkpoint)
@@ -222,6 +276,7 @@ def execute_pipeline(
                         "dry_run": dry_run,
                         "stopped_at": step_id,
                         "executed_steps": executed_steps,
+                        "required_artifacts_after_external_generation": EXTERNAL_REQUIRED_ARTIFACTS,
                         "run_manifest": f"runtime/.runs/{manifest['run_id']}/run_manifest.json",
                         "checkpoint": f"runtime/.runs/{manifest['run_id']}/checkpoint.json",
                     },
@@ -242,6 +297,27 @@ def execute_pipeline(
                         "checkpoint": f"runtime/.runs/{manifest['run_id']}/checkpoint.json",
                     },
                 )
+
+            artifact_registration = _register_step_artifacts(step, dry_run=dry_run)
+            if not artifact_registration["passed"]:
+                mark_step_status(checkpoint, step_id, "failed", "artifact_registration_failed")
+                save_checkpoint(checkpoint)
+                return result(
+                    False,
+                    run_result={
+                        "run_id": manifest["run_id"],
+                        "run_status": "failed",
+                        "dry_run": dry_run,
+                        "stopped_at": step_id,
+                        "last_error": "artifact_registration_failed",
+                        "artifact_registration": artifact_registration,
+                        "executed_steps": executed_steps,
+                        "run_manifest": f"runtime/.runs/{manifest['run_id']}/run_manifest.json",
+                        "checkpoint": f"runtime/.runs/{manifest['run_id']}/checkpoint.json",
+                    },
+                )
+            if artifact_registration["artifact_ids"]:
+                append_created_artifact_ids(manifest["run_id"], artifact_registration["artifact_ids"])
 
             mark_step_status(checkpoint, step_id, "passed")
             save_checkpoint(checkpoint)

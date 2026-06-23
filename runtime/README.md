@@ -10,6 +10,8 @@ Pipeline Runner adds the dry-run orchestration layer. It reads `pipeline_actions
 
 Story Analyzer adds the content-aware diagnostic layer between Skill Runtime and Skill Executor. It reads `story_core` or `story_graph`, diagnoses story type, page count, node weaknesses, clue payoff, tension curve, and character stakes, then emits `recommended_skill_plan`, `repair_priority`, and `next_action`. It does not rewrite content.
 
+Artifact Registry adds the identity, hash, lineage, and status layer for production artifacts. Accepted reference assets must trace back to `compiled_prompt`, `external_generation_candidate`, `execution_telemetry`, and `asset_qa_result`. Rejected or deprecated assets cannot be used as reference dependencies.
+
 ## Commands
 
 Run all commands from the project root.
@@ -52,6 +54,13 @@ python runtime/aistory.py pipeline-run --project <project_path> --until <gate> -
 python runtime/aistory.py pipeline-status --run-id <run_id>
 python runtime/aistory.py pipeline-resume --run-id <run_id> --dry-run
 python runtime/aistory.py list-runs
+python runtime/aistory.py artifact-register --artifact <artifact_json_path>
+python runtime/aistory.py artifact-list
+python runtime/aistory.py artifact-get --artifact-id <artifact_id>
+python runtime/aistory.py artifact-update-status --artifact-id <artifact_id> --status <status>
+python runtime/aistory.py artifact-lineage --artifact-id <artifact_id>
+python runtime/aistory.py artifact-validate --artifact-id <artifact_id>
+python runtime/aistory.py artifact-check-registry
 python runtime/aistory.py smoke-test
 ```
 
@@ -71,6 +80,9 @@ python runtime/aistory.py smoke-test
 - Hook strength must not override clarity or child safety.
 - External image execution must be preceded by Prompt compilation and semantic lint.
 - Asset acceptance requires execution telemetry and asset QA.
+- Artifact Registry rejects duplicate artifact IDs.
+- Artifact Registry blocks accepted assets without telemetry or QA.
+- Artifact Registry blocks rejected and deprecated assets from reference dependency use.
 
 ## Pipeline Runner
 
@@ -78,7 +90,16 @@ python runtime/aistory.py smoke-test
 - `pipeline_runner.executor` accepts planner output and runs the dry-run framework without creating story files.
 - `pipeline_runner.checkpoint` writes `runtime/.runs/{run_id}/checkpoint.json`.
 - `pipeline_runner.run_manifest` writes `runtime/.runs/{run_id}/run_manifest.json`.
+- Run manifests include `created_artifact_ids` when pipeline stages register artifact payloads.
 - `pipeline_runner.recovery` returns `repair_required`, `approval_required`, `external_generation_required`, `resume_available`, or `complete`.
+
+## Artifact Registry
+
+- `artifact_registry.artifact_schema` defines artifact types, required fields, and statuses.
+- `artifact_registry.hash_utils` creates sha256 hashes for files, canonical JSON, and strings.
+- `artifact_registry.registry` registers, queries, updates, and checks artifact metadata.
+- `artifact_registry.lineage` traces parent and dependency chains.
+- `artifact_registry.validators` blocks missing prerequisites, duplicate IDs, rejected references, deprecated references, and accepted assets without telemetry or QA.
 
 ## Skill Runtime
 

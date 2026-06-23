@@ -73,13 +73,25 @@ def create_run_manifest(
         "contract_versions": contract_versions,
         "command": command,
         "dry_run": dry_run,
+        "artifact_registry_path": "runtime/.artifacts/registry.json",
         "created_artifacts": [
             f"runtime/.runs/{run_id}/run_manifest.json",
             f"runtime/.runs/{run_id}/checkpoint.json",
         ],
+        "created_artifact_ids": [],
         "manual_approval_points": manual_points,
         "blocked_actions_seen": blocked_actions_seen,
     }
+    manifest_path(run_id).write_text(json.dumps(manifest, ensure_ascii=False, indent=2, sort_keys=True), encoding="utf-8")
+    return manifest
+
+
+def append_created_artifact_ids(run_id: str, artifact_ids: list[str]) -> dict[str, Any]:
+    manifest = load_manifest(run_id)
+    current = manifest.get("created_artifact_ids")
+    if not isinstance(current, list):
+        current = []
+    manifest["created_artifact_ids"] = list(dict.fromkeys([*current, *artifact_ids]))
     manifest_path(run_id).write_text(json.dumps(manifest, ensure_ascii=False, indent=2, sort_keys=True), encoding="utf-8")
     return manifest
 

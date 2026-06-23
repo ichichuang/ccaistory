@@ -1,0 +1,27 @@
+{
+  "artifact_id": "fixture_compiled_prompt",
+  "artifact_type": "compiled_prompt",
+  "asset_id": "fixture_asset_r00",
+  "candidate_id": "",
+  "content_hash": {
+    "algorithm": "sha256",
+    "hash": "2222222222222222222222222222222222222222222222222222222222222222"
+  },
+  "created_at": "2026-06-23T00:00:00Z",
+  "dependency_artifact_ids": [],
+  "metadata": {
+    "compiled_prompt": "fixture prompt"
+  },
+  "parent_artifact_ids": [
+    "fixture_visual_asset_spec"
+  ],
+  "project_id": "fixture_project",
+  "run_id": "fixture_run",
+  "source_hash": {
+    "algorithm": "sha256",
+    "hash": "2222222222222222222222222222222222222222222222222222222222222222"
+  },
+  "source_path": "runtime/tests/fixtures/artifact_compiled_prompt.json",
+  "status": "compiled",
+  "story_id": "fixture_story"
+}
