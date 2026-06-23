@@ -26,6 +26,10 @@ from contracts.sync_docs_check import check_contract_drift
 from contracts.validate_contracts import validate_contracts
 from graph_engine.graph_checks import check_graph
 from lint_engine.semantic_lint import lint_asset_file, lint_compiled_file
+from multimodal_qa.artifact_bridge import register_image_qa_artifact_file
+from multimodal_qa.manual_review import validate_image_review_file
+from multimodal_qa.qa_merge import merge_image_review_file
+from multimodal_qa.review_form_generator import generate_image_review_form
 from pipeline_runner.checkpoint import read_checkpoint_status
 from pipeline_runner.executor import execute_pipeline
 from pipeline_runner.planner import plan_pipeline
@@ -207,6 +211,23 @@ def main(argv: list[str] | None = None) -> int:
     qa = sub.add_parser("qa-asset")
     qa.add_argument("--qa", required=True)
 
+    image_review_form = sub.add_parser("generate-image-review-form")
+    image_review_form.add_argument("--asset-type", required=True)
+    image_review_form.add_argument("--asset-id", required=True)
+    image_review_form.add_argument("--candidate-id", required=True)
+    image_review_form.add_argument("--artifact-id", required=True)
+
+    image_review_validate = sub.add_parser("validate-image-review")
+    image_review_validate.add_argument("--review", required=True)
+
+    image_qa_merge = sub.add_parser("merge-image-qa")
+    image_qa_merge.add_argument("--review", required=True)
+
+    image_qa_register = sub.add_parser("register-image-qa-artifact")
+    image_qa_register.add_argument("--review", required=True)
+    image_qa_register.add_argument("--registry")
+    image_qa_register.add_argument("--dry-run", action="store_true")
+
     pipeline_plan = sub.add_parser("pipeline-plan")
     pipeline_plan.add_argument("--project")
     pipeline_plan.add_argument("--until", dest="requested_until", default="")
@@ -334,6 +355,23 @@ def main(argv: list[str] | None = None) -> int:
         payload = validate_telemetry_file(args.telemetry)
     elif args.command == "qa-asset":
         payload = qa_asset_file(args.qa)
+    elif args.command == "generate-image-review-form":
+        payload = generate_image_review_form(
+            asset_type=args.asset_type,
+            asset_id=args.asset_id,
+            candidate_id=args.candidate_id,
+            artifact_id=args.artifact_id,
+        )
+    elif args.command == "validate-image-review":
+        payload = validate_image_review_file(args.review)
+    elif args.command == "merge-image-qa":
+        payload = merge_image_review_file(args.review)
+    elif args.command == "register-image-qa-artifact":
+        payload = register_image_qa_artifact_file(
+            args.review,
+            registry_path=args.registry,
+            dry_run=args.dry_run,
+        )
     elif args.command == "pipeline-plan":
         payload = plan_pipeline(project_path=args.project, requested_until=args.requested_until)
     elif args.command == "pipeline-run":

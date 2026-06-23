@@ -32,6 +32,26 @@ def qa_asset(qa: dict[str, Any]) -> dict[str, Any]:
     answers = _answers(qa)
     failed: list[str] = []
     details: list[dict[str, Any]] = []
+    source_payload_type = block.get("source_payload_type")
+
+    if source_payload_type == "image_review_form":
+        review_validation = block.get("image_review_validation", {})
+        if not isinstance(review_validation, dict):
+            failed.append("image_review_validation_missing")
+            review_validation = {}
+        manual_decision = block.get("manual_decision")
+        if manual_decision != "pass":
+            failed.append("image_review_not_passed")
+            details.append({"manual_decision": manual_decision})
+        if review_validation.get("required_answers_complete") is False:
+            failed.append("image_review_missing_required_answers")
+            details.append({"missing_required_answers": review_validation.get("missing_required_answers", [])})
+        hard_failures = review_validation.get("hard_failures", [])
+        if hard_failures:
+            failed.append("image_review_hard_failure")
+            details.append({"hard_failures": hard_failures})
+        if review_validation.get("allow_accepted") is not True:
+            failed.append("image_review_not_allowed_for_acceptance")
 
     if asset_type == "R00_PAPER_MARK_ANCHOR":
         try:
@@ -62,6 +82,7 @@ def qa_asset(qa: dict[str, Any]) -> dict[str, Any]:
             "failed_rules": failed_unique,
             "details": details,
             "allow_accepted": decision == "accepted",
+            "source_payload_type": source_payload_type or "",
         },
     )
 
@@ -110,6 +131,9 @@ def create_asset_qa_artifact_payload(
             "asset_type": block.get("asset_type", ""),
             "decision": qa_result["asset_qa_result"]["decision"],
             "allow_accepted": qa_result["asset_qa_result"]["allow_accepted"],
+            "source_payload_type": block.get("source_payload_type", ""),
+            "manual_decision": block.get("manual_decision", ""),
+            "source_review_id": block.get("source_review_id", ""),
         },
     }
     return result(True, artifact=artifact, asset_qa_validation=qa_result)

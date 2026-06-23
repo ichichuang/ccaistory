@@ -12,6 +12,8 @@ Story Analyzer adds the content-aware diagnostic layer between Skill Runtime and
 
 Artifact Registry adds the identity, hash, lineage, and status layer for production artifacts. Accepted reference assets must trace back to `compiled_prompt`, `external_generation_candidate`, `execution_telemetry`, and `asset_qa_result`. Rejected or deprecated assets cannot be used as reference dependencies.
 
+Multimodal QA v0.1 adds structured image review without automatic image recognition. It generates `image_review_form`, requires human answers and evidence, validates the form, merges it into `asset_qa_result`, and registers image QA payloads in Artifact Registry. `accepted_reference_asset` requires telemetry, image QA, and asset QA.
+
 ## Commands
 
 Run all commands from the project root.
@@ -47,6 +49,10 @@ python runtime/aistory.py lint-asset --spec <path_to_visual_asset_spec.json>
 python runtime/aistory.py lint-prompt --compiled <path_to_compiled_prompt.json>
 python runtime/aistory.py validate-telemetry --telemetry <path_to_telemetry.json>
 python runtime/aistory.py qa-asset --qa <path_to_asset_qa_result.json>
+python runtime/aistory.py generate-image-review-form --asset-type R00_PAPER_MARK_ANCHOR --asset-id <asset_id> --candidate-id <candidate_id> --artifact-id <candidate_artifact_id>
+python runtime/aistory.py validate-image-review --review <review_form_json_path>
+python runtime/aistory.py merge-image-qa --review <review_form_json_path>
+python runtime/aistory.py register-image-qa-artifact --review <review_form_json_path> --registry <registry_json_path>
 python runtime/aistory.py pipeline-plan --until semantic_lint
 python runtime/aistory.py pipeline-plan --project <project_path> --until <gate>
 python runtime/aistory.py pipeline-run --until semantic_lint --dry-run
@@ -74,14 +80,17 @@ python runtime/aistory.py smoke-test
 - Pipeline Runner actions, state transitions, and gates must come from contracts.
 - Story Analyzer high-risk results must stop before Skill Executor.
 - External image execution must stop at `waiting_for_external_generation`.
+- After external image execution, Pipeline Runner routes through `generate_image_review_form`, `validate_image_review`, `merge_image_qa`, `register_image_qa_artifact`, and `review_asset_for_acceptance`.
 - Skill Runtime repair is metadata-first: patch applier writes repair suggestions and required rewrite fields, not final story prose.
 - Skill Executor candidate repair is approval-first: it emits `proposed_changes` with `human_approval_required=true` and does not overwrite `story_graph` fields.
 - Author style imitation is forbidden.
 - Hook strength must not override clarity or child safety.
 - External image execution must be preceded by Prompt compilation and semantic lint.
-- Asset acceptance requires execution telemetry and asset QA.
+- Multimodal QA v0.1 does not read image pixels or call automatic image recognition.
+- Human reviewers must fill `image_review_form` before accepted/rejected decisions.
+- Asset acceptance requires execution telemetry, image QA, and asset QA.
 - Artifact Registry rejects duplicate artifact IDs.
-- Artifact Registry blocks accepted assets without telemetry or QA.
+- Artifact Registry blocks accepted assets without telemetry, image QA, or QA.
 - Artifact Registry blocks rejected and deprecated assets from reference dependency use.
 
 ## Pipeline Runner
@@ -99,7 +108,16 @@ python runtime/aistory.py smoke-test
 - `artifact_registry.hash_utils` creates sha256 hashes for files, canonical JSON, and strings.
 - `artifact_registry.registry` registers, queries, updates, and checks artifact metadata.
 - `artifact_registry.lineage` traces parent and dependency chains.
-- `artifact_registry.validators` blocks missing prerequisites, duplicate IDs, rejected references, deprecated references, and accepted assets without telemetry or QA.
+- `artifact_registry.validators` blocks missing prerequisites, duplicate IDs, rejected references, deprecated references, and accepted assets without telemetry or image QA.
+
+## Multimodal QA
+
+- `multimodal_qa.review_form_generator` builds schema-only image review forms from `visual_assets.json`.
+- `multimodal_qa.manual_review` validates required answers, hard-fail mismatches, ratio/reference checks, and decision consistency.
+- `multimodal_qa.qa_merge` converts `image_review_form` to `asset_qa_result`.
+- `multimodal_qa.artifact_bridge` creates and registers image-review-backed `asset_qa_result` artifacts.
+- `manual_evidence`, `machine_assist`, `failure_reasons`, and `repair_suggestions` are preserved.
+- `pending`, `fail`, `conditional_pass`, missing required answers, and wrong ratio all block accepted reference assets.
 
 ## Skill Runtime
 

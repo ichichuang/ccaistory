@@ -14,6 +14,10 @@ from core.io import RUNTIME_ROOT, result
 from contracts.contract_loader import load_contract, r00_required_questions
 from contracts.validate_contracts import validate_contracts
 from lint_engine.semantic_lint import lint_asset
+from multimodal_qa.artifact_bridge import create_image_qa_artifact_payload, register_image_qa_artifact
+from multimodal_qa.manual_review import validate_image_review_form
+from multimodal_qa.qa_merge import merge_image_review_to_asset_qa
+from multimodal_qa.review_form_generator import generate_image_review_form
 from pipeline_runner.checkpoint import read_checkpoint_status, save_checkpoint
 from pipeline_runner.executor import execute_pipeline
 from pipeline_runner.planner import plan_pipeline
@@ -79,6 +83,93 @@ def run_smoke_tests() -> dict[str, Any]:
         {
             "name": "asset_qa reads R00 contract",
             "passed": invalid_qa["asset_qa_result"]["details"][0]["question_id"] == "has_stick_figure",
+        }
+    )
+
+    generated_review = generate_image_review_form(
+        asset_type="R00_PAPER_MARK_ANCHOR",
+        asset_id="fixture_asset_r00",
+        candidate_id="fixture_candidate_01",
+        artifact_id="fixture_generation_candidate",
+    )
+    checks.append(
+        {
+            "name": "R00 image review form has 14 contract QA plus common questions",
+            "passed": generated_review["passed"]
+            and generated_review["contract_question_count"] == 14
+            and generated_review["common_question_count"] == 4
+            and generated_review["question_count"] == 18,
+        }
+    )
+
+    passed_review = _load("image_review_r00_passed.json")
+    passed_merge = merge_image_review_to_asset_qa(passed_review)
+    passed_asset_qa = qa_asset({"asset_qa_result": passed_merge["asset_qa_result"]})
+    checks.append(
+        {
+            "name": "passed image review can merge to asset_qa_result",
+            "passed": passed_merge["passed"] and passed_asset_qa["passed"],
+        }
+    )
+
+    missing_review = validate_image_review_form(_load("image_review_r00_missing_required.json"))
+    checks.append(
+        {
+            "name": "missing required image review stays pending and blocked",
+            "passed": not missing_review["passed"]
+            and missing_review["review_validation_result"]["decision"] == "pending"
+            and missing_review["review_validation_result"]["allow_accepted"] is False,
+        }
+    )
+
+    stick_review = validate_image_review_form(_load("image_review_r00_failed_stick_figure.json"))
+    stick_merge = merge_image_review_to_asset_qa(_load("image_review_r00_failed_stick_figure.json"))
+    stick_asset_qa = qa_asset({"asset_qa_result": stick_merge["asset_qa_result"]})
+    checks.append(
+        {
+            "name": "stick figure image review fail is blocked",
+            "passed": stick_review["passed"]
+            and stick_review["review_validation_result"]["allow_accepted"] is False
+            and "has_stick_figure" in stick_review["review_validation_result"]["hard_failures"]
+            and not stick_asset_qa["passed"],
+        }
+    )
+
+    symbol_review = validate_image_review_form(_load("image_review_r00_failed_symbol_sheet.json"))
+    symbol_merge = merge_image_review_to_asset_qa(_load("image_review_r00_failed_symbol_sheet.json"))
+    symbol_asset_qa = qa_asset({"asset_qa_result": symbol_merge["asset_qa_result"]})
+    checks.append(
+        {
+            "name": "symbol sheet image review fail is blocked",
+            "passed": symbol_review["passed"]
+            and symbol_review["review_validation_result"]["allow_accepted"] is False
+            and "is_symbol_sheet" in symbol_review["review_validation_result"]["hard_failures"]
+            and not symbol_asset_qa["passed"],
+        }
+    )
+
+    wrong_ratio_review = validate_image_review_form(_load("image_review_r00_wrong_ratio.json"))
+    wrong_ratio_merge = merge_image_review_to_asset_qa(_load("image_review_r00_wrong_ratio.json"))
+    wrong_ratio_asset_qa = qa_asset({"asset_qa_result": wrong_ratio_merge["asset_qa_result"]})
+    checks.append(
+        {
+            "name": "wrong ratio image review fail is blocked",
+            "passed": wrong_ratio_review["passed"]
+            and wrong_ratio_review["review_validation_result"]["allow_accepted"] is False
+            and "canvas_ratio_mismatch" in wrong_ratio_review["review_validation_result"]["hard_failures"]
+            and not wrong_ratio_asset_qa["passed"],
+        }
+    )
+
+    pending_review = validate_image_review_form(_load("image_review_r00_pending.json"))
+    pending_merge = merge_image_review_to_asset_qa(_load("image_review_r00_pending.json"))
+    pending_asset_qa = qa_asset({"asset_qa_result": pending_merge["asset_qa_result"]})
+    checks.append(
+        {
+            "name": "pending image review cannot be accepted",
+            "passed": pending_review["passed"]
+            and pending_review["review_validation_result"]["allow_accepted"] is False
+            and not pending_asset_qa["passed"],
         }
     )
 
@@ -463,6 +554,25 @@ def run_smoke_tests() -> dict[str, Any]:
             }
         )
 
+        image_qa_payload = create_image_qa_artifact_payload(
+            _load("image_review_r00_passed.json"),
+            registry_path=str(registry_path),
+            source_path="runtime/tests/fixtures/image_review_r00_passed.json",
+        )
+        image_qa_registration = register_image_qa_artifact(
+            _load("image_review_r00_passed.json"),
+            registry_path=str(registry_path),
+            source_path="runtime/tests/fixtures/image_review_r00_passed.json",
+        )
+        checks.append(
+            {
+                "name": "register-image-qa-artifact can generate artifact payload",
+                "passed": image_qa_payload["passed"]
+                and image_qa_payload["artifact"]["artifact_type"] == "asset_qa_result"
+                and image_qa_registration["passed"],
+            }
+        )
+
         duplicate_artifact = register_artifact(_load("artifact_visual_asset_spec.json"), registry_path=registry_path)
         checks.append(
             {
@@ -494,7 +604,7 @@ def run_smoke_tests() -> dict[str, Any]:
         )
         checks.append(
             {
-                "name": "accepted reference asset missing QA is blocked",
+                "name": "accepted reference asset missing image QA is blocked",
                 "passed": not missing_qa["passed"]
                 and any("accepted_reference_asset" in failure for failure in missing_qa["failures"]),
             }

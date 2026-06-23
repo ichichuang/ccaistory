@@ -169,8 +169,58 @@
       "required_inputs": ["external_generation_candidate", "external_execution_fact", "actual_prompt_sent_to_external_tool"],
       "outputs": ["execution_telemetry", "execution_telemetry_artifact"],
       "blocked_if": ["external_generation_candidate_missing", "actual_prompt_missing", "reference_assets_unrecorded"],
-      "next_action_on_pass": "run_asset_qa",
+      "next_action_on_pass": "generate_image_review_form",
       "next_action_on_fail": "record_execution_telemetry"
+    },
+    "generate_image_review_form": {
+      "action_id": "generate_image_review_form",
+      "required_state": "asset_qa_pending",
+      "required_gate_result": "passed",
+      "required_inputs": ["external_generation_candidate", "execution_telemetry", "visual_assets_contract"],
+      "outputs": ["image_review_form"],
+      "blocked_if": ["external_generation_candidate_missing", "execution_telemetry_missing", "contract_missing"],
+      "next_action_on_pass": "validate_image_review",
+      "next_action_on_fail": "generate_image_review_form"
+    },
+    "validate_image_review": {
+      "action_id": "validate_image_review",
+      "required_state": "image_review_form_pending",
+      "required_gate_result": "passed",
+      "required_inputs": ["image_review_form"],
+      "outputs": ["image_review_validation_result", "manual_evidence"],
+      "blocked_if": ["human_review_missing", "required_answer_missing", "hard_failure_decision_mismatch"],
+      "next_action_on_pass": "merge_image_qa",
+      "next_action_on_fail": "generate_image_review_form"
+    },
+    "merge_image_qa": {
+      "action_id": "merge_image_qa",
+      "required_state": "image_review_validated",
+      "required_gate_result": "passed",
+      "required_inputs": ["image_review_form", "image_review_validation_result"],
+      "outputs": ["asset_qa_result"],
+      "blocked_if": ["image_review_missing_required", "image_review_pending", "image_review_failed"],
+      "next_action_on_pass": "register_image_qa_artifact",
+      "next_action_on_fail": "reject_asset"
+    },
+    "register_image_qa_artifact": {
+      "action_id": "register_image_qa_artifact",
+      "required_state": "image_qa_merged",
+      "required_gate_result": "passed",
+      "required_inputs": ["asset_qa_result", "external_generation_candidate", "execution_telemetry"],
+      "outputs": ["asset_qa_result_artifact"],
+      "blocked_if": ["candidate_artifact_missing", "telemetry_artifact_missing", "artifact_registry_validation_failed"],
+      "next_action_on_pass": "review_asset_for_acceptance",
+      "next_action_on_fail": "reject_asset"
+    },
+    "review_asset_for_acceptance": {
+      "action_id": "review_asset_for_acceptance",
+      "required_state": "image_qa_registered",
+      "required_gate_result": "passed",
+      "required_inputs": ["image_review_validation_result", "asset_qa_result", "asset_qa_result_artifact"],
+      "outputs": ["asset_acceptance_review"],
+      "blocked_if": ["image_review_pending", "image_review_failed", "asset_qa_failed"],
+      "next_action_on_pass": "accept_asset",
+      "next_action_on_fail": "reject_asset"
     },
     "run_asset_qa": {
       "action_id": "run_asset_qa",
@@ -184,19 +234,19 @@
     },
     "accept_asset": {
       "action_id": "accept_asset",
-      "required_state": "asset_qa_pending",
+      "required_state": "asset_acceptance_reviewed",
       "required_gate_result": "passed",
-      "required_inputs": ["external_generation_candidate", "execution_telemetry", "asset_qa_result"],
+      "required_inputs": ["external_generation_candidate", "execution_telemetry", "image_review_validation_result", "asset_qa_result", "asset_acceptance_review"],
       "outputs": ["accepted_asset_record", "accepted_reference_asset"],
-      "blocked_if": ["artifact_registry_validation_failed", "telemetry_missing", "asset_qa_failed", "hard_failure_present"],
+      "blocked_if": ["artifact_registry_validation_failed", "telemetry_missing", "image_qa_missing", "image_review_pending", "image_review_failed", "asset_qa_failed", "hard_failure_present"],
       "next_action_on_pass": "build_platform_page_layout",
       "next_action_on_fail": "reject_asset"
     },
     "reject_asset": {
       "action_id": "reject_asset",
-      "required_state": "asset_qa_pending",
+      "required_state": "asset_acceptance_reviewed",
       "required_gate_result": "rework_required",
-      "required_inputs": ["asset_qa_result"],
+      "required_inputs": ["execution_telemetry", "image_review_validation_result", "asset_qa_result"],
       "outputs": ["asset_rejection_record", "rejected_reference_asset", "repair_request"],
       "blocked_if": ["asset_qa_missing"],
       "next_action_on_pass": "compile_prompts",

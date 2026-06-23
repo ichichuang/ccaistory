@@ -1,0 +1,193 @@
+{
+  "actual_canvas_ratio": "9:16",
+  "artifact_id": "fixture_generation_candidate",
+  "asset_id": "fixture_asset_r00",
+  "asset_type": "R00_PAPER_MARK_ANCHOR",
+  "available_reference_dependencies": [],
+  "candidate_id": "fixture_candidate_01",
+  "decision": "fail",
+  "expected_canvas_ratio": "9:16",
+  "expected_reference_dependencies": [],
+  "failure_reasons": [
+    "is_symbol_sheet"
+  ],
+  "image_path": "",
+  "machine_assist": {
+    "mode": "schema_only_no_image_recognition",
+    "version": "v0.1"
+  },
+  "manual_evidence": {
+    "review_note": "fixture manual review evidence",
+    "visible_surface": "clean white paper with controlled short clue marks"
+  },
+  "questions": [
+    {
+      "actual_answer": "no",
+      "evidence": "fixture evidence for has_person",
+      "expected_answer": "no",
+      "hard_fail_if_mismatch": true,
+      "question": "是否有人物？必须否。",
+      "question_id": "has_person",
+      "required": true
+    },
+    {
+      "actual_answer": "no",
+      "evidence": "fixture evidence for has_stick_figure",
+      "expected_answer": "no",
+      "hard_fail_if_mismatch": true,
+      "question": "是否有火柴人？必须否。",
+      "question_id": "has_stick_figure",
+      "required": true
+    },
+    {
+      "actual_answer": "no",
+      "evidence": "fixture evidence for has_complete_scene",
+      "expected_answer": "no",
+      "hard_fail_if_mismatch": true,
+      "question": "是否有完整场景？必须否。",
+      "question_id": "has_complete_scene",
+      "required": true
+    },
+    {
+      "actual_answer": "no",
+      "evidence": "fixture evidence for has_prop_collection",
+      "expected_answer": "no",
+      "hard_fail_if_mismatch": true,
+      "question": "是否有道具集合？必须否。",
+      "question_id": "has_prop_collection",
+      "required": true
+    },
+    {
+      "actual_answer": "yes",
+      "evidence": "manual reviewer saw scattered symbol sheet structure",
+      "expected_answer": "no",
+      "hard_fail_if_mismatch": true,
+      "question": "是否是符号散点表？必须否。",
+      "question_id": "is_symbol_sheet",
+      "required": true
+    },
+    {
+      "actual_answer": "no",
+      "evidence": "fixture evidence for looks_like_ui_or_flowchart",
+      "expected_answer": "no",
+      "hard_fail_if_mismatch": true,
+      "question": "是否像 UI/流程图？必须否。",
+      "question_id": "looks_like_ui_or_flowchart",
+      "required": true
+    },
+    {
+      "actual_answer": "no",
+      "evidence": "fixture evidence for looks_like_dirty_scrap",
+      "expected_answer": "no",
+      "hard_fail_if_mismatch": true,
+      "question": "是否像乱涂垃圾纸？必须否。",
+      "question_id": "looks_like_dirty_scrap",
+      "required": true
+    },
+    {
+      "actual_answer": "yes",
+      "evidence": "fixture evidence for clean_white_paper",
+      "expected_answer": "yes",
+      "hard_fail_if_mismatch": true,
+      "question": "是否纸张清洁白色？必须是。",
+      "question_id": "clean_white_paper",
+      "required": true
+    },
+    {
+      "actual_answer": "yes",
+      "evidence": "fixture evidence for no_yellowed_old_paper",
+      "expected_answer": "yes",
+      "hard_fail_if_mismatch": true,
+      "question": "是否没有泛黄旧纸？必须是。",
+      "question_id": "no_yellowed_old_paper",
+      "required": true
+    },
+    {
+      "actual_answer": "yes",
+      "evidence": "fixture evidence for controlled_child_handwriting_sample",
+      "expected_answer": "yes",
+      "hard_fail_if_mismatch": true,
+      "question": "是否有可控儿童笔迹样本？必须是。",
+      "question_id": "controlled_child_handwriting_sample",
+      "required": true
+    },
+    {
+      "actual_answer": "yes",
+      "evidence": "fixture evidence for reasonable_short_clue_count",
+      "expected_answer": "yes",
+      "hard_fail_if_mismatch": true,
+      "question": "是否短线索数量合理？必须是。",
+      "question_id": "reasonable_short_clue_count",
+      "required": true
+    },
+    {
+      "actual_answer": "yes",
+      "evidence": "fixture evidence for no_long_body_text",
+      "expected_answer": "yes",
+      "hard_fail_if_mismatch": true,
+      "question": "是否没有长正文？必须是。",
+      "question_id": "no_long_body_text",
+      "required": true
+    },
+    {
+      "actual_answer": "yes",
+      "evidence": "fixture evidence for has_visual_center_or_order",
+      "expected_answer": "yes",
+      "hard_fail_if_mismatch": true,
+      "question": "是否有视觉中心或秩序？必须是。",
+      "question_id": "has_visual_center_or_order",
+      "required": true
+    },
+    {
+      "actual_answer": "yes",
+      "evidence": "fixture evidence for usable_as_reference_asset",
+      "expected_answer": "yes",
+      "hard_fail_if_mismatch": true,
+      "question": "是否可作为后续 reference asset？必须是。",
+      "question_id": "usable_as_reference_asset",
+      "required": true
+    },
+    {
+      "actual_answer": "yes",
+      "evidence": "fixture evidence for common_canvas_ratio_correct",
+      "expected_answer": "yes",
+      "hard_fail_if_mismatch": true,
+      "question": "实际比例是否正确？",
+      "question_id": "common_canvas_ratio_correct",
+      "required": true
+    },
+    {
+      "actual_answer": "yes",
+      "evidence": "fixture evidence for common_reference_dependencies_satisfied",
+      "expected_answer": "yes",
+      "hard_fail_if_mismatch": true,
+      "question": "reference_dependencies 是否满足？",
+      "question_id": "common_reference_dependencies_satisfied",
+      "required": true
+    },
+    {
+      "actual_answer": "no",
+      "evidence": "fixture evidence for common_has_long_body_text",
+      "expected_answer": "no",
+      "hard_fail_if_mismatch": true,
+      "question": "是否有长正文？",
+      "question_id": "common_has_long_body_text",
+      "required": true
+    },
+    {
+      "actual_answer": "yes",
+      "evidence": "fixture evidence for common_accepted_reference_ready",
+      "expected_answer": "yes",
+      "hard_fail_if_mismatch": true,
+      "question": "是否可作为 accepted reference？",
+      "question_id": "common_accepted_reference_ready",
+      "required": true
+    }
+  ],
+  "repair_suggestions": [
+    "restore one ordered visual center instead of scattered symbols"
+  ],
+  "review_id": "review_fixture_asset_r00_fixture_candidate_01",
+  "reviewed_at": "2026-06-23T00:00:00Z",
+  "reviewer": "fixture_reviewer"
+}

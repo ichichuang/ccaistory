@@ -44,6 +44,26 @@ def _reference_dependency_ids(artifact: dict[str, Any]) -> list[str]:
     return []
 
 
+def _is_image_review_backed_qa(artifact: dict[str, Any]) -> bool:
+    metadata = artifact.get("metadata", {})
+    return (
+        artifact.get("artifact_type") == "asset_qa_result"
+        and isinstance(metadata, dict)
+        and metadata.get("source_payload_type") == "image_review_form"
+    )
+
+
+def _is_passed_image_qa(artifact: dict[str, Any]) -> bool:
+    metadata = artifact.get("metadata", {})
+    return (
+        _is_image_review_backed_qa(artifact)
+        and artifact.get("status") == "qa_passed"
+        and isinstance(metadata, dict)
+        and metadata.get("allow_accepted") is True
+        and metadata.get("image_review_decision") in {"pass", None}
+    )
+
+
 def validate_artifact(artifact: dict[str, Any], registry: dict[str, Any]) -> dict[str, Any]:
     schema_result = validate_artifact_schema(artifact)
     failures = list(schema_result.get("failures", []))
@@ -74,8 +94,21 @@ def validate_artifact(artifact: dict[str, Any], registry: dict[str, Any]) -> dic
         {"external_generation_candidate", "compiled_prompt"} & associated_types
     ):
         failures.append("execution_telemetry_requires_candidate_or_compiled_prompt")
+    if artifact_type == "image_review_form" and "external_generation_candidate" not in associated_types:
+        failures.append("image_review_form_requires_external_generation_candidate")
     if artifact_type == "asset_qa_result" and "external_generation_candidate" not in associated_types:
         failures.append("asset_qa_result_requires_external_generation_candidate")
+    if artifact_type == "asset_qa_result" and _is_image_review_backed_qa(artifact):
+        required = {"external_generation_candidate", "execution_telemetry"}
+        missing_types = sorted(required - associated_types)
+        if missing_types:
+            failures.append(f"image_asset_qa_missing_dependencies:{','.join(missing_types)}")
+        metadata = artifact.get("metadata", {})
+        if isinstance(metadata, dict):
+            if status == "qa_passed" and metadata.get("allow_accepted") is not True:
+                failures.append("image_asset_qa_passed_requires_allow_accepted")
+            if metadata.get("image_review_decision") in {"fail", "pending", "conditional_pass"} and status == "qa_passed":
+                failures.append("image_asset_qa_passed_requires_manual_pass")
 
     if artifact_type == "accepted_reference_asset" and status == "accepted":
         required = {"external_generation_candidate", "execution_telemetry", "asset_qa_result"}
@@ -89,6 +122,8 @@ def validate_artifact(artifact: dict[str, Any], registry: dict[str, Any]) -> dic
         ]
         if not any(item.get("status") == "qa_passed" for item in qa_artifacts):
             failures.append("accepted_reference_asset_requires_qa_passed")
+        if not any(_is_passed_image_qa(item) for item in qa_artifacts):
+            failures.append("accepted_reference_asset_requires_passed_image_qa")
 
     for reference_id in _reference_dependency_ids(artifact):
         reference = by_id.get(reference_id)

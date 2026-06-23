@@ -137,9 +137,44 @@
     },
     "asset_qa_pending": {
       "state_id": "asset_qa_pending",
-      "allowed_actions": ["run_asset_qa", "accept_asset", "reject_asset"],
+      "allowed_actions": ["generate_image_review_form", "run_asset_qa"],
       "blocked_actions": ["build_platform_page_layout", "run_human_complete_reading", "publish"],
-      "required_artifacts": ["execution_telemetry", "asset_qa_answers"],
+      "required_artifacts": ["execution_telemetry"],
+      "next_states": ["image_review_form_pending", "asset_acceptance_reviewed"]
+    },
+    "image_review_form_pending": {
+      "state_id": "image_review_form_pending",
+      "allowed_actions": ["validate_image_review"],
+      "blocked_actions": ["accept_asset", "build_platform_page_layout", "run_human_complete_reading", "publish"],
+      "required_artifacts": ["image_review_form"],
+      "next_states": ["image_review_validated"]
+    },
+    "image_review_validated": {
+      "state_id": "image_review_validated",
+      "allowed_actions": ["merge_image_qa"],
+      "blocked_actions": ["accept_asset", "build_platform_page_layout", "run_human_complete_reading", "publish"],
+      "required_artifacts": ["image_review_form", "image_review_validation_result"],
+      "next_states": ["image_qa_merged", "asset_acceptance_reviewed"]
+    },
+    "image_qa_merged": {
+      "state_id": "image_qa_merged",
+      "allowed_actions": ["register_image_qa_artifact"],
+      "blocked_actions": ["accept_asset", "build_platform_page_layout", "run_human_complete_reading", "publish"],
+      "required_artifacts": ["asset_qa_result", "image_review_validation_result"],
+      "next_states": ["image_qa_registered", "asset_acceptance_reviewed"]
+    },
+    "image_qa_registered": {
+      "state_id": "image_qa_registered",
+      "allowed_actions": ["review_asset_for_acceptance"],
+      "blocked_actions": ["accept_asset", "build_platform_page_layout", "run_human_complete_reading", "publish"],
+      "required_artifacts": ["asset_qa_result", "asset_qa_result_artifact", "image_review_validation_result"],
+      "next_states": ["asset_acceptance_reviewed"]
+    },
+    "asset_acceptance_reviewed": {
+      "state_id": "asset_acceptance_reviewed",
+      "allowed_actions": ["accept_asset", "reject_asset"],
+      "blocked_actions": ["build_platform_page_layout", "run_human_complete_reading", "publish"],
+      "required_artifacts": ["execution_telemetry", "image_review_validation_result", "asset_qa_result"],
       "next_states": ["asset_accepted", "asset_rejected"]
     },
     "asset_accepted": {

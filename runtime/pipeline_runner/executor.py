@@ -15,6 +15,8 @@ EXTERNAL_GENERATION_ACTIONS = {"generate_source_pilot_task_list"}
 EXTERNAL_REQUIRED_ARTIFACTS = [
     "external_generation_candidate",
     "execution_telemetry",
+    "image_review_form",
+    "image_review_validation_result",
     "asset_qa_result",
 ]
 ACCEPTANCE_ACTIONS = {"accept_asset", "reject_asset"}
@@ -25,7 +27,7 @@ ANALYZER_ACTIONS = {"analyze_story_graph"}
 
 def _acceptance_inputs_present(step: dict[str, Any]) -> bool:
     required = set(step.get("required_inputs", []))
-    return {"execution_telemetry", "asset_qa_result"}.issubset(required)
+    return {"execution_telemetry", "image_review_validation_result", "asset_qa_result"}.issubset(required)
 
 
 def _register_step_artifacts(step: dict[str, Any], *, dry_run: bool) -> dict[str, Any]:

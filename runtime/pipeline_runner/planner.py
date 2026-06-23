@@ -25,6 +25,11 @@ ACTION_GATE_MAP = {
     "run_semantic_lint": "semantic_lint_gate",
     "generate_source_pilot_task_list": "telemetry_gate",
     "record_execution_telemetry": "telemetry_gate",
+    "generate_image_review_form": "asset_qa_gate",
+    "validate_image_review": "asset_qa_gate",
+    "merge_image_qa": "asset_qa_gate",
+    "register_image_qa_artifact": "asset_qa_gate",
+    "review_asset_for_acceptance": "asset_qa_gate",
     "run_asset_qa": "asset_qa_gate",
     "accept_asset": "asset_qa_gate",
     "reject_asset": "asset_qa_gate",
@@ -34,6 +39,8 @@ ACTION_GATE_MAP = {
 
 MANUAL_APPROVAL_ACTIONS = {
     "generate_source_pilot_task_list",
+    "validate_image_review",
+    "review_asset_for_acceptance",
     "review_skill_executor_proposed_changes",
     "apply_approved_skill_changes",
     "accept_asset",
@@ -48,8 +55,9 @@ VIRTUAL_INPUTS = {
 }
 
 ACCEPTANCE_REQUIRED_INPUTS = {
-    "accept_asset": ["execution_telemetry", "asset_qa_result"],
-    "reject_asset": ["execution_telemetry", "asset_qa_result"],
+    "review_asset_for_acceptance": ["execution_telemetry", "image_review_validation_result", "asset_qa_result"],
+    "accept_asset": ["execution_telemetry", "image_review_validation_result", "asset_qa_result"],
+    "reject_asset": ["execution_telemetry", "image_review_validation_result", "asset_qa_result"],
 }
 
 

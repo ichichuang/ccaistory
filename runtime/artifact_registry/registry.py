@@ -176,7 +176,15 @@ def check_registry(*, registry_path: str | Path | None = None) -> dict[str, Any]
     artifacts = _artifact_items(registry)
     failures: list[str] = []
     missing_dependencies: list[dict[str, str]] = []
+    image_qa_artifact_count = 0
     for artifact_id, artifact in artifacts.items():
+        metadata = artifact.get("metadata", {})
+        if (
+            artifact.get("artifact_type") == "asset_qa_result"
+            and isinstance(metadata, dict)
+            and metadata.get("source_payload_type") == "image_review_form"
+        ):
+            image_qa_artifact_count += 1
         schema_result = validate_artifact_schema(artifact)
         if not schema_result["passed"]:
             failures.extend(f"{artifact_id}:{failure}" for failure in schema_result["failures"])
@@ -190,6 +198,7 @@ def check_registry(*, registry_path: str | Path | None = None) -> dict[str, Any]
     return result(
         not failures and not missing_dependencies,
         artifact_count=len(artifacts),
+        image_qa_artifact_count=image_qa_artifact_count,
         missing_dependencies=missing_dependencies,
         broken_link_count=len(missing_dependencies),
         failures=list(dict.fromkeys(failures)),

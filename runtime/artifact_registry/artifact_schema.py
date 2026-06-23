@@ -16,6 +16,7 @@ ARTIFACT_TYPES = {
     "source_pilot_task_list",
     "external_generation_candidate",
     "execution_telemetry",
+    "image_review_form",
     "asset_qa_result",
     "accepted_reference_asset",
     "platform_page_layout",

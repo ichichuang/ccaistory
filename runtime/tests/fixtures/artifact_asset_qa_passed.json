@@ -9,11 +9,14 @@
   },
   "created_at": "2026-06-23T00:00:00Z",
   "dependency_artifact_ids": [
-    "fixture_generation_candidate"
+    "fixture_generation_candidate",
+    "fixture_execution_telemetry"
   ],
   "metadata": {
     "allow_accepted": true,
-    "decision": "accepted"
+    "decision": "accepted",
+    "image_review_decision": "pass",
+    "source_payload_type": "image_review_form"
   },
   "parent_artifact_ids": [
     "fixture_generation_candidate"
