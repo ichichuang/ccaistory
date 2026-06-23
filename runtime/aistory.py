@@ -11,13 +11,16 @@ RUNTIME_ROOT = Path(__file__).resolve().parent
 if str(RUNTIME_ROOT) not in sys.path:
     sys.path.insert(0, str(RUNTIME_ROOT))
 
-from core.io import PROJECT_ROOT, print_json, result
+from core.io import PROJECT_ROOT, print_json, read_json, result
 from graph_engine.graph_checks import check_graph
 from lint_engine.semantic_lint import lint_asset_file, lint_compiled_file
 from prompt_compiler.compiler import compile_asset_file
 from qa_engine.asset_qa import qa_asset_file
 from skill_orchestrator.orchestrator import plan_node_skills, select_story_skills
 from skill_registry.load_skills import load_skills, validate_skills
+from skill_runtime.evaluator import evaluate_node
+from skill_runtime.patch_generator import generate_skill_patch
+from skill_runtime.repair_loop import repair_skill_graph
 from state_machine.state_machine import ACTIONS, can_run, get_status
 from telemetry.telemetry import validate_telemetry_file
 
@@ -78,6 +81,19 @@ def main(argv: list[str] | None = None) -> int:
     plan.add_argument("--pages", type=int, required=True)
     plan.add_argument("--suspense-type")
 
+    evaluate = sub.add_parser("evaluate-node")
+    evaluate.add_argument("--node", required=True)
+
+    patch = sub.add_parser("generate-skill-patch")
+    patch.add_argument("--node", required=True)
+
+    skill_graph = sub.add_parser("check-skill-graph")
+    skill_graph.add_argument("--graph", required=True)
+
+    repair_graph = sub.add_parser("repair-skill-graph")
+    repair_graph.add_argument("--graph", required=True)
+    repair_graph.add_argument("--dry-run", action="store_true", default=True)
+
     graph = sub.add_parser("check-graph")
     graph.add_argument("--project", required=True)
 
@@ -116,6 +132,20 @@ def main(argv: list[str] | None = None) -> int:
             total_pages=args.pages,
             suspense_type=args.suspense_type,
         )
+    elif args.command == "evaluate-node":
+        payload = evaluate_node(read_json(args.node))
+    elif args.command == "generate-skill-patch":
+        node = read_json(args.node)
+        evaluation = evaluate_node(node)
+        payload = generate_skill_patch(
+            node,
+            skill_failures=evaluation["skill_failures"],
+            repair_targets=evaluation["repair_targets"],
+        )
+    elif args.command == "check-skill-graph":
+        payload = repair_skill_graph(read_json(args.graph), dry_run=True)
+    elif args.command == "repair-skill-graph":
+        payload = repair_skill_graph(read_json(args.graph), dry_run=True)
     elif args.command == "check-graph":
         payload = check_graph(args.project)
     elif args.command == "compile-asset":

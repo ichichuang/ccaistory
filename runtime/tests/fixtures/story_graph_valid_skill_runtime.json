@@ -1,0 +1,75 @@
+{
+  "story_graph": {
+    "nodes": [
+      {
+        "node_id": "node_1",
+        "page_index": 1,
+        "total_pages": 3,
+        "page_role": "opening",
+        "applied_skills": [
+          "page_turn_hook",
+          "emotional_pull"
+        ],
+        "typed_hook": "A familiar room contains one wrong detail.",
+        "typed_narration": "The child notices the class clock ticking backward before anyone else reacts.",
+        "next_page_question": "Why does the clock stop only when the child looks away?",
+        "final_hook_sentence": "Then the clock writes the child's name in dust.",
+        "reader_retention_goal": "Hold curiosity around the backward clock and the named warning.",
+        "visual_memory_point": "a dusty classroom clock with reversed hands",
+        "technique_notes": [
+          "page_turn_hook leaves a concrete unanswered question"
+        ]
+      },
+      {
+        "node_id": "node_2",
+        "page_index": 2,
+        "total_pages": 3,
+        "page_role": "middle_escalation",
+        "applied_skills": [
+          "page_turn_hook",
+          "horror_escalation"
+        ],
+        "typed_hook": "The wrong detail becomes a rule.",
+        "typed_narration": "Every time the child blinks, one more classmate forgets the child's name.",
+        "next_page_question": "Who will remember the child if the teacher forgets next?",
+        "final_hook_sentence": "The teacher still calls attendance, but the child's line is now blank.",
+        "reader_retention_goal": "Keep the reader tracking how the rule is spreading.",
+        "visual_memory_point": "an attendance sheet with one erased line",
+        "threat_delta": "The anomaly spreads from an object to other people.",
+        "technique_notes": [
+          "horror_escalation makes the threat more specific"
+        ]
+      },
+      {
+        "node_id": "node_3",
+        "page_index": 3,
+        "total_pages": 3,
+        "page_role": "ending",
+        "applied_skills": [
+          "fate_loop",
+          "strange_tale_twist"
+        ],
+        "typed_hook": "The ending reveals the rule was waiting from the start.",
+        "typed_narration": "The child reaches home and sees the same attendance sheet on the kitchen table.",
+        "next_page_question": "",
+        "final_hook_sentence": "The last blank line begins filling itself in.",
+        "reader_retention_goal": "Leave the reader with a closed loop and one final unease.",
+        "visual_memory_point": "the erased attendance line returning at home",
+        "opening_callback": "The backward classroom clock is now ticking on the kitchen wall.",
+        "technique_notes": [
+          "fate_loop callbacks the first wrong detail"
+        ]
+      }
+    ],
+    "edges": [
+      {
+        "from": "node_1",
+        "to": "node_2"
+      },
+      {
+        "from": "node_2",
+        "to": "node_3"
+      }
+    ]
+  }
+}

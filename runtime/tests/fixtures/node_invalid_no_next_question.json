@@ -1,0 +1,20 @@
+{
+  "node_id": "node_invalid_no_next_question",
+  "page_index": 2,
+  "total_pages": 3,
+  "page_role": "middle_escalation",
+  "applied_skills": [
+    "page_turn_hook",
+    "horror_escalation"
+  ],
+  "typed_hook": "The wrong detail becomes a rule.",
+  "typed_narration": "Every time the child blinks, one more classmate forgets the child's name.",
+  "next_page_question": "",
+  "final_hook_sentence": "The teacher still calls attendance, but the child's line is now blank.",
+  "reader_retention_goal": "Keep the reader tracking how the rule is spreading.",
+  "visual_memory_point": "an attendance sheet with one erased line",
+  "threat_delta": "The anomaly spreads from an object to other people.",
+  "technique_notes": [
+    "horror_escalation makes the threat more specific"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "node_id": "node_invalid_ending_no_callback",
+  "page_index": 3,
+  "total_pages": 3,
+  "page_role": "ending",
+  "applied_skills": [
+    "fate_loop",
+    "strange_tale_twist"
+  ],
+  "typed_hook": "The ending reveals the rule was waiting from the start.",
+  "typed_narration": "The child reaches home and sees the same attendance sheet on the kitchen table.",
+  "next_page_question": "",
+  "final_hook_sentence": "The last blank line begins filling itself in.",
+  "reader_retention_goal": "Leave the reader with a closed loop and one final unease.",
+  "visual_memory_point": "the erased attendance line returning at home",
+  "technique_notes": [
+    "fate_loop confirms recurrence without explaining everything"
+  ]
+}

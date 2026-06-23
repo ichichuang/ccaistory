@@ -8,6 +8,10 @@ from lint_engine.semantic_lint import lint_asset
 from prompt_compiler.compiler import compile_asset
 from qa_engine.asset_qa import qa_asset
 from skill_orchestrator.orchestrator import select_story_skills
+from skill_runtime.evaluator import evaluate_node
+from skill_runtime.patch_applier import apply_skill_patch
+from skill_runtime.patch_generator import generate_skill_patch
+from skill_runtime.repair_loop import repair_skill_graph
 from telemetry.telemetry import validate_telemetry
 
 import json
@@ -44,6 +48,47 @@ def run_smoke_tests() -> dict[str, Any]:
         {
             "name": "12-page horror skill plan generated",
             "passed": bool(plan["selected_skill_set"]) and len(plan["node_skill_plan"]) == 12,
+        }
+    )
+
+    valid_opening = evaluate_node(_load("node_valid_opening.json"))
+    checks.append({"name": "valid opening node passes skill evaluator", "passed": valid_opening["passed"]})
+
+    invalid_no_hook = evaluate_node(_load("node_invalid_no_hook.json"))
+    checks.append({"name": "no_hook node is blocked", "passed": not invalid_no_hook["passed"]})
+
+    invalid_no_next = evaluate_node(_load("node_invalid_no_next_question.json"))
+    checks.append({"name": "no_next_question node is blocked", "passed": not invalid_no_next["passed"]})
+
+    invalid_ending = evaluate_node(_load("node_invalid_ending_no_callback.json"))
+    checks.append({"name": "ending_no_callback node is blocked", "passed": not invalid_ending["passed"]})
+
+    invalid_graph = repair_skill_graph(_load("story_graph_invalid_skill_runtime.json"), dry_run=True)
+    checks.append(
+        {
+            "name": "invalid graph generates repair_plan",
+            "passed": not invalid_graph["passed"] and bool(invalid_graph["repair_plan"]),
+        }
+    )
+
+    valid_graph = repair_skill_graph(_load("story_graph_valid_skill_runtime.json"), dry_run=True)
+    checks.append({"name": "valid graph passes repair_loop", "passed": valid_graph["passed"]})
+
+    patch = generate_skill_patch(
+        _load("node_invalid_no_hook.json"),
+        skill_failures=invalid_no_hook["skill_failures"],
+        repair_targets=invalid_no_hook["repair_targets"],
+    )
+    checks.append({"name": "patch generator emits structured patch", "passed": bool(patch["patches"])})
+
+    dry_run_node = _load("node_invalid_no_hook.json")
+    before_dry_run = json.dumps(dry_run_node, sort_keys=True, ensure_ascii=False)
+    dry_run_result = apply_skill_patch(dry_run_node, patch, dry_run=True)
+    after_dry_run = json.dumps(dry_run_node, sort_keys=True, ensure_ascii=False)
+    checks.append(
+        {
+            "name": "patch applier dry-run does not mutate input",
+            "passed": dry_run_result["passed"] and before_dry_run == after_dry_run,
         }
     )
 
