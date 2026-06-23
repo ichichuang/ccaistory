@@ -1,0 +1,11 @@
+{
+  "candidate_id": "cand_valid_hook",
+  "node_id": "node_executor_needs_hook",
+  "target_field": "typed_hook",
+  "skill_id": "page_turn_hook",
+  "repair_action": "replace_author_style_with_abstract_hook",
+  "candidate_type": "rewrite_instruction",
+  "proposed_text": "为 typed_hook 添加具体悬念：指出本页出现的新异常物件，并把一个清楚问题留到下一页。",
+  "rationale": "typed_hook is empty and needs a concrete page-turn repair.",
+  "risk_flags": ["clarity_before_hook"]
+}

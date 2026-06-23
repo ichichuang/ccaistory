@@ -19,6 +19,9 @@ from skill_runtime.evaluator import evaluate_node
 from skill_runtime.patch_applier import apply_skill_patch
 from skill_runtime.patch_generator import generate_skill_patch
 from skill_runtime.repair_loop import repair_skill_graph
+from skill_executor.candidate_scorer import score_candidate
+from skill_executor.conflict_resolver import resolve_conflicts
+from skill_executor.executor import execute_skill_graph, execute_skill_node
 from telemetry.telemetry import validate_telemetry
 
 import json
@@ -128,6 +131,80 @@ def run_smoke_tests() -> dict[str, Any]:
         }
     )
 
+    executor_invalid_node = execute_skill_node(_load("node_executor_needs_hook.json"), dry_run=True)
+    checks.append(
+        {
+            "name": "invalid node generates proposed_changes",
+            "passed": not executor_invalid_node["passed"] and bool(executor_invalid_node["proposed_changes"]),
+        }
+    )
+    checks.append(
+        {
+            "name": "proposed_changes require human approval",
+            "passed": executor_invalid_node["manual_approval_required"]
+            and all(change.get("human_approval_required") is True for change in executor_invalid_node["proposed_changes"]),
+        }
+    )
+
+    executor_valid_node = execute_skill_node(_load("node_executor_valid.json"), dry_run=True)
+    checks.append(
+        {
+            "name": "valid node does not generate meaningless proposed_changes",
+            "passed": executor_valid_node["passed"] and not executor_valid_node["proposed_changes"],
+        }
+    )
+
+    executor_invalid_graph = execute_skill_graph(_load("story_graph_executor_invalid.json"), dry_run=True)
+    checks.append(
+        {
+            "name": "invalid graph generates executor proposed_changes",
+            "passed": not executor_invalid_graph["passed"] and bool(executor_invalid_graph["proposed_changes"]),
+        }
+    )
+
+    executor_valid_graph = execute_skill_graph(_load("story_graph_executor_valid.json"), dry_run=True)
+    checks.append(
+        {
+            "name": "valid graph passes skill executor",
+            "passed": executor_valid_graph["passed"] and not executor_valid_graph["proposed_changes"],
+        }
+    )
+
+    author_style_score = score_candidate(_load("skill_candidate_invalid_author_style.json"))
+    checks.append(
+        {
+            "name": "author style candidate is blocked",
+            "passed": not author_style_score["passed"]
+            and "author_style_instruction" in author_style_score["hard_failures"],
+        }
+    )
+
+    empty_scare_score = score_candidate(_load("skill_candidate_invalid_empty_scare.json"))
+    checks.append(
+        {
+            "name": "empty scare candidate is blocked",
+            "passed": not empty_scare_score["passed"] and "empty_scare" in empty_scare_score["hard_failures"],
+        }
+    )
+
+    valid_candidate_score = score_candidate(_load("skill_candidate_valid.json"))
+    checks.append(
+        {
+            "name": "valid candidate receives accept recommendation",
+            "passed": valid_candidate_score["passed"]
+            and valid_candidate_score["recommendation"] == "accept_candidate",
+        }
+    )
+
+    conflict_result = resolve_conflicts(_load("skill_candidates_conflict.json"))
+    checks.append(
+        {
+            "name": "conflict resolver emits resolution_plan",
+            "passed": bool(conflict_result["resolution_plan"]["conflicts"])
+            and conflict_result["resolution_plan"]["manual_review_required"],
+        }
+    )
+
     empty_plan = plan_pipeline(requested_until="semantic_lint")
     expected_empty_plan = _load("pipeline_empty_plan_expected.json")
     checks.append(
@@ -143,6 +220,18 @@ def run_smoke_tests() -> dict[str, Any]:
             "name": "valid story_core generates pipeline plan",
             "passed": valid_pipeline_plan["passed"]
             and any(step["action_id"] == "run_semantic_lint" for step in valid_pipeline_plan["plan"]),
+        }
+    )
+    checks.append(
+        {
+            "name": "pipeline plan includes skill executor manual stage",
+            "passed": valid_pipeline_plan["passed"]
+            and any(step["action_id"] == "execute_skill_graph" for step in valid_pipeline_plan["plan"])
+            and any(
+                step["action_id"] == "review_skill_executor_proposed_changes"
+                and step["manual_approval_required"]
+                for step in valid_pipeline_plan["plan"]
+            ),
         }
     )
 
@@ -209,6 +298,9 @@ def run_smoke_tests() -> dict[str, Any]:
     checks.append({"name": "pipeline does not generate images", "passed": not image_artifacts})
     checks.append({"name": "pipeline does not generate execution package", "passed": not list(RUNTIME_ROOT.rglob("*执行包*"))})
     checks.append({"name": "pipeline does not generate publish package", "passed": not list(RUNTIME_ROOT.rglob("*发布包*"))})
+    checks.append({"name": "skill executor does not create story project", "passed": not generated_forbidden_artifacts})
+    checks.append({"name": "skill executor does not generate images", "passed": not image_artifacts})
+    checks.append({"name": "skill executor does not generate execution package", "passed": not list(RUNTIME_ROOT.rglob("*执行包*"))})
 
     failed = [check for check in checks if not check["passed"]]
     return result(not failed, smoke_checks=checks, failed_checks=failed)

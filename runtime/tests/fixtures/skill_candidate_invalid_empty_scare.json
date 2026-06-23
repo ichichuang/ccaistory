@@ -1,0 +1,11 @@
+{
+  "candidate_id": "cand_invalid_empty_scare",
+  "node_id": "node_executor_needs_hook",
+  "target_field": "typed_narration",
+  "skill_id": "horror_escalation",
+  "repair_action": "remove_empty_scare",
+  "candidate_type": "rewrite_instruction",
+  "proposed_text": "Make the page scary, creepy and terrifying.",
+  "rationale": "This intentionally uses empty scare only.",
+  "risk_flags": ["avoid_empty_scare"]
+}

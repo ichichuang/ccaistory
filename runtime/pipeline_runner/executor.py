@@ -11,6 +11,8 @@ from pipeline_runner.run_manifest import create_run_manifest
 
 EXTERNAL_GENERATION_ACTIONS = {"generate_source_pilot_task_list"}
 ACCEPTANCE_ACTIONS = {"accept_asset", "reject_asset"}
+SKILL_EXECUTOR_DRY_RUN_ACTIONS = {"execute_skill_node", "execute_skill_graph"}
+SKILL_EXECUTOR_APPROVAL_ACTIONS = {"review_skill_executor_proposed_changes", "apply_approved_skill_changes"}
 
 
 def _acceptance_inputs_present(step: dict[str, Any]) -> bool:
@@ -112,6 +114,40 @@ def execute_pipeline(
                         "dry_run": dry_run,
                         "stopped_at": step_id,
                         "last_error": "acceptance_requires_telemetry_and_qa",
+                        "executed_steps": executed_steps,
+                        "run_manifest": f"runtime/.runs/{manifest['run_id']}/run_manifest.json",
+                        "checkpoint": f"runtime/.runs/{manifest['run_id']}/checkpoint.json",
+                    },
+                )
+
+            if action_id in SKILL_EXECUTOR_DRY_RUN_ACTIONS and not dry_run:
+                mark_step_status(checkpoint, step_id, "failed", "skill_executor_requires_dry_run")
+                save_checkpoint(checkpoint)
+                return result(
+                    False,
+                    run_result={
+                        "run_id": manifest["run_id"],
+                        "run_status": "failed",
+                        "dry_run": dry_run,
+                        "stopped_at": step_id,
+                        "last_error": "skill_executor_requires_dry_run",
+                        "executed_steps": executed_steps,
+                        "run_manifest": f"runtime/.runs/{manifest['run_id']}/run_manifest.json",
+                        "checkpoint": f"runtime/.runs/{manifest['run_id']}/checkpoint.json",
+                    },
+                )
+
+            if action_id in SKILL_EXECUTOR_APPROVAL_ACTIONS and not step.get("manual_approval_required"):
+                mark_step_status(checkpoint, step_id, "failed", "skill_executor_approval_action_not_manual")
+                save_checkpoint(checkpoint)
+                return result(
+                    False,
+                    run_result={
+                        "run_id": manifest["run_id"],
+                        "run_status": "failed",
+                        "dry_run": dry_run,
+                        "stopped_at": step_id,
+                        "last_error": "skill_executor_approval_action_not_manual",
                         "executed_steps": executed_steps,
                         "run_manifest": f"runtime/.runs/{manifest['run_id']}/run_manifest.json",
                         "checkpoint": f"runtime/.runs/{manifest['run_id']}/checkpoint.json",

@@ -4,6 +4,8 @@
 
 Skill Runtime v0.2 adds deterministic validation for creator-technique effects on `story_graph.nodes`. Skill Orchestrator selects skills; Skill Runtime checks whether those skills actually appear in node structure, generates repair patches, and decides whether the graph can proceed to the next gate.
 
+Skill Executor adds the dry-run candidate layer. Skill Runtime discovers failures and produces patches; Skill Executor turns those patches into structured candidates, scores them, resolves conflicts, and emits `proposed_changes`. It does not write formal story fields. Every proposed change requires human approval before application.
+
 Pipeline Runner adds the dry-run orchestration layer. It reads `pipeline_actions.json`, `state_machine.json`, and `quality_gates.json` to produce auditable plans, run manifests, checkpoints, and recovery status. Pipeline Runner does not replace human aesthetic approval and does not call external image tools.
 
 ## Commands
@@ -24,6 +26,10 @@ python runtime/aistory.py evaluate-node --node <node_json_path>
 python runtime/aistory.py generate-skill-patch --node <node_json_path>
 python runtime/aistory.py check-skill-graph --graph <story_graph_json_path>
 python runtime/aistory.py repair-skill-graph --graph <story_graph_json_path> --dry-run
+python runtime/aistory.py execute-skill-node --node <node_json_path>
+python runtime/aistory.py execute-skill-graph --graph <story_graph_json_path>
+python runtime/aistory.py score-skill-candidate --candidate <candidate_json_path>
+python runtime/aistory.py resolve-skill-conflicts --candidates <candidates_json_path>
 python runtime/aistory.py check-graph --project <project_path>
 python runtime/aistory.py compile-asset --spec <path_to_visual_asset_spec.json>
 python runtime/aistory.py lint-asset --spec <path_to_visual_asset_spec.json>
@@ -50,6 +56,9 @@ python runtime/aistory.py smoke-test
 - Pipeline Runner actions, state transitions, and gates must come from contracts.
 - External image execution must stop at `waiting_for_external_generation`.
 - Skill Runtime repair is metadata-first: patch applier writes repair suggestions and required rewrite fields, not final story prose.
+- Skill Executor candidate repair is approval-first: it emits `proposed_changes` with `human_approval_required=true` and does not overwrite `story_graph` fields.
+- Author style imitation is forbidden.
+- Hook strength must not override clarity or child safety.
 - External image execution must be preceded by Prompt compilation and semantic lint.
 - Asset acceptance requires execution telemetry and asset QA.
 
@@ -68,3 +77,11 @@ python runtime/aistory.py smoke-test
 - `skill_runtime.patch_generator` converts failures into structured repair instructions using `skills.json` repair actions.
 - `skill_runtime.patch_applier` records suggestions in `repair_suggestions`, `technique_notes`, and `required_rewrite_fields`.
 - `skill_runtime.repair_loop` creates `graph_repair_plan` and sets `next_action`.
+
+## Skill Executor
+
+- `skill_executor.candidate_generator` creates structured candidates from Skill Runtime patches without calling external LLMs.
+- `skill_executor.candidate_scorer` scores candidates across clarity, hook strength, next-page pull, emotional pull, skill alignment, safety, originality, and platform readability.
+- `skill_executor.conflict_resolver` identifies field-level conflicts such as hook strength versus clarity and threat escalation versus child safety.
+- `skill_executor.proposed_changes` selects the highest-scoring safe candidate per field and marks it for human approval.
+- `skill_executor.executor` exposes node and graph dry-run execution.

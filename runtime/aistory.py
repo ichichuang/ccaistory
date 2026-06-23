@@ -28,6 +28,9 @@ from skill_registry.load_skills import load_skills, validate_skills
 from skill_runtime.evaluator import evaluate_node
 from skill_runtime.patch_generator import generate_skill_patch
 from skill_runtime.repair_loop import repair_skill_graph
+from skill_executor.candidate_scorer import score_candidate
+from skill_executor.conflict_resolver import resolve_conflicts
+from skill_executor.executor import execute_skill_graph, execute_skill_node
 from state_machine.state_machine import ACTIONS, can_run, get_status
 from telemetry.telemetry import validate_telemetry_file
 
@@ -104,6 +107,18 @@ def main(argv: list[str] | None = None) -> int:
     repair_graph = sub.add_parser("repair-skill-graph")
     repair_graph.add_argument("--graph", required=True)
     repair_graph.add_argument("--dry-run", action="store_true", default=True)
+
+    execute_node = sub.add_parser("execute-skill-node")
+    execute_node.add_argument("--node", required=True)
+
+    execute_graph = sub.add_parser("execute-skill-graph")
+    execute_graph.add_argument("--graph", required=True)
+
+    score_skill_candidate = sub.add_parser("score-skill-candidate")
+    score_skill_candidate.add_argument("--candidate", required=True)
+
+    resolve_skill_conflicts = sub.add_parser("resolve-skill-conflicts")
+    resolve_skill_conflicts.add_argument("--candidates", required=True)
 
     graph = sub.add_parser("check-graph")
     graph.add_argument("--project", required=True)
@@ -189,6 +204,14 @@ def main(argv: list[str] | None = None) -> int:
         payload = repair_skill_graph(read_json(args.graph), dry_run=True)
     elif args.command == "repair-skill-graph":
         payload = repair_skill_graph(read_json(args.graph), dry_run=True)
+    elif args.command == "execute-skill-node":
+        payload = execute_skill_node(read_json(args.node), dry_run=True)
+    elif args.command == "execute-skill-graph":
+        payload = execute_skill_graph(read_json(args.graph), dry_run=True)
+    elif args.command == "score-skill-candidate":
+        payload = score_candidate(read_json(args.candidate))
+    elif args.command == "resolve-skill-conflicts":
+        payload = resolve_conflicts(read_json(args.candidates))
     elif args.command == "check-graph":
         payload = check_graph(args.project)
     elif args.command == "compile-asset":

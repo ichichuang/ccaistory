@@ -39,9 +39,30 @@
     },
     "skill_runtime_checked": {
       "state_id": "skill_runtime_checked",
-      "allowed_actions": ["check_story_graph"],
+      "allowed_actions": ["execute_skill_node", "execute_skill_graph"],
       "blocked_actions": ["build_visual_manifest", "compile_prompts", "generate_images", "publish"],
       "required_artifacts": ["skill_runtime_result"],
+      "next_states": ["skill_executor_checked"]
+    },
+    "skill_executor_checked": {
+      "state_id": "skill_executor_checked",
+      "allowed_actions": ["review_skill_executor_proposed_changes"],
+      "blocked_actions": ["check_story_graph", "build_visual_manifest", "compile_prompts", "generate_images", "publish"],
+      "required_artifacts": ["skill_executor_result", "proposed_changes"],
+      "next_states": ["skill_executor_reviewed"]
+    },
+    "skill_executor_reviewed": {
+      "state_id": "skill_executor_reviewed",
+      "allowed_actions": ["apply_approved_skill_changes"],
+      "blocked_actions": ["check_story_graph", "build_visual_manifest", "compile_prompts", "generate_images", "publish"],
+      "required_artifacts": ["skill_executor_review", "approved_skill_changes"],
+      "next_states": ["skill_executor_applied"]
+    },
+    "skill_executor_applied": {
+      "state_id": "skill_executor_applied",
+      "allowed_actions": ["check_story_graph"],
+      "blocked_actions": ["build_visual_manifest", "compile_prompts", "generate_images", "publish"],
+      "required_artifacts": ["story_graph", "skill_executor_apply_result"],
       "next_states": ["story_graph_ready"]
     },
     "story_graph_ready": {

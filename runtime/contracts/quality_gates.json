@@ -34,9 +34,28 @@
       "required_inputs": ["story_graph", "selected_skill_set", "skill_definitions"],
       "pass_conditions": ["required_skill_fields_present", "no_skill_hard_failures"],
       "fail_conditions": ["skill_effect_missing", "skill_hard_failure_present"],
-      "next_allowed_action_on_pass": "check_story_graph",
+      "next_allowed_action_on_pass": "execute_skill_graph",
       "next_allowed_action_on_fail": "apply_skill_runtime",
-      "blocked_actions": ["build_visual_manifest", "compile_prompts", "generate_images"]
+      "blocked_actions": ["check_story_graph", "build_visual_manifest", "compile_prompts", "generate_images"]
+    },
+    "skill_executor_gate": {
+      "gate_id": "skill_executor_gate",
+      "required_inputs": ["story_graph", "skill_executor_result"],
+      "pass_conditions": [
+        "candidate_generation_completed",
+        "candidate_scores_present",
+        "proposed_changes_require_human_approval",
+        "no_formal_story_graph_field_overwrite"
+      ],
+      "fail_conditions": [
+        "candidate_generation_failed",
+        "unsafe_candidate_accepted",
+        "proposed_changes_missing_human_approval",
+        "formal_story_graph_field_modified"
+      ],
+      "next_allowed_action_on_pass": "review_skill_executor_proposed_changes",
+      "next_allowed_action_on_fail": "execute_skill_graph",
+      "blocked_actions": ["check_story_graph", "build_visual_manifest", "compile_prompts", "generate_images"]
     },
     "graph_integrity_gate": {
       "gate_id": "graph_integrity_gate",

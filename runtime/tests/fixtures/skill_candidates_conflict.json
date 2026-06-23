@@ -1,0 +1,49 @@
+{
+  "node_id": "node_executor_conflict",
+  "candidates": [
+    {
+      "candidate_id": "cand_conflict_hook",
+      "node_id": "node_executor_conflict",
+      "target_field": "typed_hook",
+      "skill_id": "page_turn_hook",
+      "repair_action": "rewrite_final_hook_sentence",
+      "candidate_type": "rewrite_instruction",
+      "proposed_text": "强化 typed_hook 的翻页悬念，让本页留下清楚问题。",
+      "rationale": "Hook pressure targets the same field.",
+      "risk_flags": ["clarity_before_hook"]
+    },
+    {
+      "candidate_id": "cand_conflict_clarity",
+      "node_id": "node_executor_conflict",
+      "target_field": "typed_hook",
+      "skill_id": "world_compression",
+      "repair_action": "keep_only_actionable_fact",
+      "candidate_type": "strengthen_field",
+      "proposed_text": "压缩 typed_hook，只保留读者理解本页行动所需的具体事实。",
+      "rationale": "Clarity compression targets the same field.",
+      "risk_flags": []
+    },
+    {
+      "candidate_id": "cand_conflict_safety",
+      "node_id": "node_executor_conflict",
+      "target_field": "typed_narration",
+      "skill_id": "child_safe_adaptation",
+      "repair_action": "soften_visual_threat",
+      "candidate_type": "rewrite_instruction",
+      "proposed_text": "降低 typed_narration 的威胁呈现强度，保留规则信号和儿童安全边界。",
+      "rationale": "Safety repair competes with threat escalation.",
+      "risk_flags": ["child_safety_boundary"]
+    },
+    {
+      "candidate_id": "cand_conflict_threat",
+      "node_id": "node_executor_conflict",
+      "target_field": "typed_narration",
+      "skill_id": "horror_escalation",
+      "repair_action": "remove_empty_scare",
+      "candidate_type": "rewrite_instruction",
+      "proposed_text": "让 typed_narration 的威胁来自具体规则后果，而不是空泛吓人。",
+      "rationale": "Escalation repair competes with child safety.",
+      "risk_flags": ["avoid_empty_scare"]
+    }
+  ]
+}

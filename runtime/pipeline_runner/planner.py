@@ -13,6 +13,10 @@ ACTION_GATE_MAP = {
     "assess_page_count": "page_count_gate",
     "select_skills": "skill_selection_gate",
     "apply_skill_runtime": "skill_runtime_gate",
+    "execute_skill_node": "skill_executor_gate",
+    "execute_skill_graph": "skill_executor_gate",
+    "review_skill_executor_proposed_changes": "skill_executor_gate",
+    "apply_approved_skill_changes": "skill_executor_gate",
     "check_story_graph": "graph_integrity_gate",
     "build_visual_manifest": "visual_asset_ontology_gate",
     "build_visual_asset_specs": "visual_asset_ontology_gate",
@@ -29,6 +33,8 @@ ACTION_GATE_MAP = {
 
 MANUAL_APPROVAL_ACTIONS = {
     "generate_source_pilot_task_list",
+    "review_skill_executor_proposed_changes",
+    "apply_approved_skill_changes",
     "accept_asset",
     "reject_asset",
     "run_human_complete_reading",

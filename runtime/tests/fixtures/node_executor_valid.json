@@ -1,0 +1,17 @@
+{
+  "node_id": "node_executor_valid",
+  "page_index": 1,
+  "total_pages": 3,
+  "page_role": "opening",
+  "applied_skills": ["page_turn_hook", "emotional_pull"],
+  "typed_hook": "A familiar room contains one wrong detail.",
+  "typed_narration": "The child notices the class clock ticking backward before anyone else reacts.",
+  "next_page_question": "Why does the clock stop only when the child looks away?",
+  "final_hook_sentence": "Then the clock writes the child's name in dust.",
+  "reader_retention_goal": "Hold curiosity around the backward clock and the named warning.",
+  "visual_memory_point": "a dusty classroom clock with reversed hands",
+  "technique_notes": [
+    "page_turn_hook leaves a concrete unanswered question",
+    "emotional_pull ties the detail to the child's isolation"
+  ]
+}

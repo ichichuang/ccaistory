@@ -1,0 +1,11 @@
+{
+  "candidate_id": "cand_invalid_author_style",
+  "node_id": "node_executor_needs_hook",
+  "target_field": "typed_hook",
+  "skill_id": "page_turn_hook",
+  "repair_action": "replace_author_style_with_abstract_hook",
+  "candidate_type": "rewrite_instruction",
+  "proposed_text": "Rewrite the hook in the style of a famous horror author.",
+  "rationale": "This intentionally violates the author style boundary.",
+  "risk_flags": []
+}
