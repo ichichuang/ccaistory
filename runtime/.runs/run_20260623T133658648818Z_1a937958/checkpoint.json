@@ -1,0 +1,25 @@
+{
+  "current_step": "step_01_analyze_story_graph",
+  "last_error": "story_analyzer_high_risk",
+  "next_action": "repair_story_graph_before_skill_executor",
+  "project_path": "/Users/cc/MyPorject/AI+Story/runtime/tests/fixtures/story_graph_analyzer_missing_payoff.json",
+  "run_id": "run_20260623T133658648818Z_1a937958",
+  "started_at": "2026-06-23T13:36:58.653767Z",
+  "steps": [
+    {
+      "action_id": "analyze_story_graph",
+      "gate": "story_analyzer_gate",
+      "manual_approval_required": false,
+      "status": "failed",
+      "step_id": "step_01_analyze_story_graph"
+    },
+    {
+      "action_id": "execute_skill_graph",
+      "gate": "skill_executor_gate",
+      "manual_approval_required": false,
+      "status": "pending",
+      "step_id": "step_02_execute_skill_graph"
+    }
+  ],
+  "updated_at": "2026-06-23T13:36:58.656906Z"
+}

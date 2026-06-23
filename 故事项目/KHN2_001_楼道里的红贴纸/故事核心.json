@@ -45,11 +45,11 @@
     "original_safe": true
   },
   "machine_state": {
-    "current_state": "story_analyzed",
-    "gate_result": "passed",
+    "current_state": "skill_executor_passed",
+    "gate_result": "pass",
     "gate_result_label": "pass",
-    "last_gate_passed": "story_analyzed",
-    "next_allowed_action": "execute_skill_graph",
+    "last_gate_passed": "skill_executor_passed",
+    "next_allowed_action": "build_visual_asset_specs",
     "blocked_actions": [
       "generate_images",
       "generate_prompt_package",
@@ -62,6 +62,7 @@
     "quality_gates": {
       "minimum_viable_story": "pass",
       "story_analysis": "pass",
+      "skill_executor": "pass",
       "copyright_review": "pass",
       "safety_review": "pass"
     },
@@ -69,7 +70,8 @@
       "Story Analyzer passed=true",
       "recommended_pages=8，minimum_pages=6，maximum_pages=8",
       "repair_priority 为空，可进入 Skill Executor",
-      "下一步仅允许 execute_skill_graph，不允许生成图片、执行包或发布包"
+      "Skill Executor passed=true，failed_nodes=[]，proposed_changes=[]，manual_approval_required=false",
+      "下一步仅允许 build_visual_asset_specs，不允许生成图片、执行包或发布包"
     ]
   },
   "minimum_viable_story": {
@@ -605,6 +607,21 @@
       }
     ]
   },
+  "skill_executor_result": {
+    "status": "pass",
+    "passed": true,
+    "dry_run": true,
+    "mode": "graph",
+    "source_graph": "故事核心.json",
+    "command": "python runtime/aistory.py execute-skill-graph --graph '故事项目/KHN2_001_楼道里的红贴纸/故事核心.json'",
+    "node_count": 7,
+    "failed_nodes": [],
+    "proposed_changes": [],
+    "proposed_changes_count": 0,
+    "manual_approval_required": false,
+    "runtime_next_action": "proceed_to_next_gate",
+    "next_action": "build_visual_asset_specs"
+  },
   "derived_views": {
     "platform_graphic_story_pages": 7,
     "visual_direction": {
@@ -632,6 +649,15 @@
       "maximum_pages": 8,
       "allowed_to_enter_skill_executor": true,
       "blocking_issues": []
+    },
+    "story_graph_seed_view": "06_story_graph_seed.md",
+    "skill_executor_result_view": "07_Skill_Executor_结果.md",
+    "skill_executor_summary": {
+      "status": "pass",
+      "failed_nodes": [],
+      "proposed_changes_count": 0,
+      "manual_approval_required": false,
+      "next_action": "build_visual_asset_specs"
     }
   },
   "quality_gates": {
@@ -652,6 +678,13 @@
       "recommended_pages": 8,
       "allows_skill_executor": true,
       "blocking_issues": []
+    },
+    "skill_executor": {
+      "status": "pass",
+      "failed_nodes": [],
+      "proposed_changes_count": 0,
+      "manual_approval_required": false,
+      "next_allowed_action": "build_visual_asset_specs"
     },
     "runtime_precheck": {
       "status": "pass",
@@ -687,6 +720,9 @@
     "artifact_registry_available": true,
     "multimodal_qa_available": true,
     "artifact_count": 0,
+    "image_asset_count": 0,
+    "execution_package_count": 0,
+    "publish_package_count": 0,
     "broken_link_count": 0
   }
 }
