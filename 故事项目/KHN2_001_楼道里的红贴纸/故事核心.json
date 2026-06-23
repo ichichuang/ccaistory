@@ -71,7 +71,12 @@
       "recommended_pages=8，minimum_pages=6，maximum_pages=8",
       "repair_priority 为空，可进入 Skill Executor",
       "Skill Executor passed=true，failed_nodes=[]，proposed_changes=[]，manual_approval_required=false",
-      "下一步仅允许 build_visual_asset_specs，不允许生成图片、执行包或发布包"
+      "下一步仅允许 build_visual_asset_specs，不允许生成图片、执行包或发布包",
+      "story_graph.edges 已扩写为 cause/question/answer/new_question/clue/tension_delta 结构",
+      "7 页方案在 6-8 页合同范围内，按 accepted_with_reason 保留",
+      "线索账本已补齐 red_sticker_arrow、unused_door、wrong_recipient_misdirection、keychain_sticker、blank_red_sticker",
+      "“别走错层”已改为“别跟错箭头”，避免引入未回收楼层错位规则",
+      "主角身份统一为学生主角，视觉层保留儿童安全手账体系"
     ]
   },
   "minimum_viable_story": {
@@ -305,7 +310,7 @@
         "typed_hook": "第二张红贴纸贴在更里面，箭头还是指向同一扇门。",
         "typed_narration": "第二天，第一张还在，第二张却贴在消防栓旁边。林小沐问对门的奶奶，奶奶说那扇门从她搬来就没开过，里面应该只是空管井。林小沐把两张照片并排看，发现箭头像是在把人从电梯口往里带。",
         "next_page_question": "没人开的门，为什么每天都像有人在给它铺路？",
-        "final_hook_sentence": "第二张贴纸下面，铅笔写着很浅的四个字：别走错层。",
+        "final_hook_sentence": "第二张贴纸下面，铅笔写着很浅的五个字：别跟错箭头。",
         "reader_retention_goal": "把异常从单点升级为路线，并引入没人开的门。",
         "visual_memory_point": "two red arrow stickers on white wall, one near a fire hydrant",
         "emotional_turn": "好奇变成谨慎",
@@ -351,7 +356,7 @@
         "page_role": "middle_escalation",
         "total_pages": 7,
         "typed_hook": "第三张贴纸没有贴在墙上，而是贴在她门口的地脚线上。",
-        "typed_narration": "林小沐下班回来才看见第三张。它贴得很低，像只有弯腰系鞋带的人才会发现。箭头没有从门那边指回来，而是从她家门口指向走廊。她想，也许有人怕小孩走错门，才把提示贴低了。",
+        "typed_narration": "林小沐补习班回来才看见第三张。它贴得很低，像只有弯腰系鞋带的人才会发现。箭头没有从门那边指回来，而是从她家门口指向走廊。她想，也许有人怕低年级孩子走错门，才把提示贴低了。",
         "next_page_question": "为什么这条路线偏偏从她家门口开始？",
         "final_hook_sentence": "她关门前看了一眼，贴纸的箭头正好贴着她拖鞋的方向。",
         "reader_retention_goal": "把路线起点靠近主角，但保留“提醒别人”的误导。",
@@ -530,6 +535,9 @@
         "technique_notes": [
           "终局前揭示误导",
           "把路线绑定到主角自身"
+        ],
+        "introduced_clues": [
+          "keychain_sticker"
         ]
       },
       {
@@ -561,7 +569,8 @@
         "twist_reveal": "贴纸不是在提醒别人，而是一直从主角家门口开始给她指路。",
         "paid_off_clues": [
           "red_sticker_arrow",
-          "unused_door"
+          "unused_door",
+          "keychain_sticker"
         ],
         "applied_skills": [
           "fate_loop",
@@ -578,32 +587,98 @@
       {
         "from": "S01",
         "to": "S02",
-        "edge_type": "sequence"
+        "edge_type": "sequence",
+        "cause": "第一张红贴纸没有消失，第二天又出现第二张，说明它不是一次性维修记号。",
+        "question_from_previous": "如果只是维修记号，为什么第二天会多出一张？",
+        "answer_in_current": "第二张贴在消防栓旁，仍把路线引向那扇没人开的门；邻居证词削弱了日常解释。",
+        "new_question_created": "没人开的门，为什么每天都像有人在给它铺路？",
+        "clue_carried_forward": [
+          "red_sticker_arrow",
+          "wrong_recipient_misdirection",
+          "unused_door"
+        ],
+        "payoff_deadline": "S07",
+        "tension_delta": 0.08
       },
       {
         "from": "S02",
         "to": "S03",
-        "edge_type": "sequence"
+        "edge_type": "sequence",
+        "cause": "红贴纸路线继续延伸，并从公共区域贴到主角家门口的低处。",
+        "question_from_previous": "没人开的门，为什么每天都像有人在给它铺路？",
+        "answer_in_current": "第三张贴纸显示路线不是单纯通向门，也从林小沐家门口开始变得私人化。",
+        "new_question_created": "为什么这条路线偏偏从她家门口开始？",
+        "clue_carried_forward": [
+          "red_sticker_arrow",
+          "unused_door",
+          "wrong_recipient_misdirection"
+        ],
+        "payoff_deadline": "S06-S07",
+        "tension_delta": 0.12
       },
       {
         "from": "S03",
         "to": "S04",
-        "edge_type": "sequence"
+        "edge_type": "sequence",
+        "cause": "主角主动移动第三张贴纸，故事需要验证贴纸是否会回应她。",
+        "question_from_previous": "为什么这条路线偏偏从她家门口开始？",
+        "answer_in_current": "新贴纸压住她移动过的边角，证明贴纸知道她的动作。",
+        "new_question_created": "贴纸怎么知道是她动过？",
+        "clue_carried_forward": [
+          "red_sticker_arrow",
+          "wrong_recipient_misdirection"
+        ],
+        "payoff_deadline": "S06",
+        "tension_delta": 0.1
       },
       {
         "from": "S04",
         "to": "S05",
-        "edge_type": "sequence"
+        "edge_type": "sequence",
+        "cause": "贴纸对主角动作作出反馈后，主角转向照片证据验证路线是否一直存在。",
+        "question_from_previous": "贴纸怎么知道是她动过？",
+        "answer_in_current": "第五张补在照片缺口处，显示路线可能一直完整，只是她之前没有看见。",
+        "new_question_created": "如果路线一直完整，只是她以前没看见呢？",
+        "clue_carried_forward": [
+          "red_sticker_arrow",
+          "unused_door"
+        ],
+        "payoff_deadline": "S07",
+        "tension_delta": 0.08
       },
       {
         "from": "S05",
         "to": "S06",
-        "edge_type": "sequence"
+        "edge_type": "sequence",
+        "cause": "照片与墙面矛盾后，路线从楼道表面升级到主角随身物。",
+        "question_from_previous": "如果路线一直完整，只是她以前没看见呢？",
+        "answer_in_current": "钥匙扣背面的红箭头证明路线绑定的是林小沐本人，而不是走错路的别人。",
+        "new_question_created": "如果路线的终点是那扇门，她的钥匙为什么也在路线里？",
+        "clue_carried_forward": [
+          "red_sticker_arrow",
+          "unused_door",
+          "wrong_recipient_misdirection",
+          "keychain_sticker"
+        ],
+        "payoff_deadline": "S07",
+        "tension_delta": -0.03
       },
       {
         "from": "S06",
         "to": "S07",
-        "edge_type": "sequence"
+        "edge_type": "sequence",
+        "cause": "钥匙扣贴纸把家门钥匙与无人门连接，迫使终页回答门后是什么。",
+        "question_from_previous": "如果路线的终点是那扇门，她的钥匙为什么也在路线里？",
+        "answer_in_current": "她家的钥匙打开无人门，门内七张贴纸完整回扣她走过的路线，钥匙扣线索得到兑现。",
+        "new_question_created": "新的空白红贴纸是否会让路线从她家门口重新开始？",
+        "clue_carried_forward": [
+          "red_sticker_arrow",
+          "unused_door",
+          "keychain_sticker",
+          "blank_red_sticker"
+        ],
+        "payoff_deadline": "S07",
+        "tension_delta": 0.23
       }
     ]
   },
@@ -658,6 +733,26 @@
       "proposed_changes_count": 0,
       "manual_approval_required": false,
       "next_action": "build_visual_asset_specs"
+    },
+    "story_graph_refinement_view": "08_story_graph_精修验收.md",
+    "story_graph_refinement_summary": {
+      "status": "pass",
+      "node_count": 7,
+      "edge_count": 6,
+      "page_count_decision": "accepted_with_reason",
+      "clue_ledger_status": "pass",
+      "protagonist_identity_status": "unified",
+      "next_action": "build_visual_asset_specs"
+    },
+    "page_count_decision": {
+      "recommended_pages": 8,
+      "actual_pages": 7,
+      "decision": "accepted_with_reason"
+    },
+    "clue_ledger_summary": {
+      "status": "pass",
+      "critical_unpaid_clues": [],
+      "wrong_floor_rule_handled": true
     }
   },
   "quality_gates": {
@@ -723,6 +818,160 @@
     "image_asset_count": 0,
     "execution_package_count": 0,
     "publish_package_count": 0,
-    "broken_link_count": 0
+    "broken_link_count": 0,
+    "analyze_graph": "pass",
+    "execute_skill_graph": "pass",
+    "check_graph": "pass"
+  },
+  "page_count_decision": {
+    "recommended_pages": 8,
+    "minimum_pages": 6,
+    "maximum_pages": 8,
+    "actual_pages": 7,
+    "decision": "accepted_with_reason",
+    "reason": "7 页位于 Story Analyzer 给出的 6-8 页范围内，当前故事是单一异常、单一门后回扣的微型平台怪谈；S01-S07 已完成引入、递进、反证、随身物揭示和终局回扣。扩成 8 页会增加一轮重复贴纸，收益低于节奏稀释风险。",
+    "risk": "比推荐 8 页少一页，S05 照片证据与 S06 钥匙扣揭示承担较高信息量；后续视觉资产规格需明确保留照片时间线和钥匙扣特写。"
+  },
+  "clue_ledger": {
+    "status": "pass",
+    "critical_unpaid_clues": [],
+    "items": [
+      {
+        "clue_id": "red_sticker_arrow",
+        "introduced_at": "S01",
+        "repeated_at": [
+          "S02",
+          "S03",
+          "S04",
+          "S05",
+          "S06"
+        ],
+        "paid_off_at": "S07",
+        "status": "paid_off",
+        "risk": "low：主机制线索，终页以门内七张贴纸完整回扣。"
+      },
+      {
+        "clue_id": "unused_door",
+        "introduced_at": "S02",
+        "repeated_at": [
+          "S03",
+          "S05",
+          "S06"
+        ],
+        "paid_off_at": "S07",
+        "status": "paid_off",
+        "risk": "low：无人门在终页被主角钥匙打开，完成回收。"
+      },
+      {
+        "clue_id": "wrong_recipient_misdirection",
+        "introduced_at": "S01",
+        "repeated_at": [
+          "S02",
+          "S03",
+          "S04"
+        ],
+        "paid_off_at": "S06",
+        "status": "paid_off",
+        "risk": "low：S06 明确说明贴纸不是提醒走错路的人，而是在给主角指路。"
+      },
+      {
+        "clue_id": "keychain_sticker",
+        "introduced_at": "S06",
+        "repeated_at": [],
+        "paid_off_at": "S07",
+        "status": "paid_off",
+        "risk": "low：S07 用她家的钥匙打开无人门，兑现钥匙扣贴纸。"
+      },
+      {
+        "clue_id": "blank_red_sticker",
+        "introduced_at": "S07",
+        "repeated_at": [],
+        "paid_off_at": "S07",
+        "status": "loop_hook_paid_off_by_callback",
+        "risk": "low：作为结尾闭环余味，不引入新的必解规则；它回扣 S01 的第一张红贴纸。"
+      }
+    ],
+    "wrong_floor_rule_review": {
+      "original_text": "别走错层",
+      "risk_level": "high",
+      "decision": "replaced",
+      "replacement_text": "别跟错箭头",
+      "reason": "“楼层错位”会引入未建立、未回收的新规则；“别跟错箭头”直接绑定红贴纸路线机制。"
+    }
+  },
+  "protagonist_identity_decision": {
+    "identity_mode": "中学生/学生主角 + 儿童安全怪谈视觉体系",
+    "reason": "故事面向儿童安全怪谈视觉体系，主角行动应避免成人平台主角与儿童手账视觉层互相打架；保留手机、钥匙、补习班等中学生可成立的日常行为。",
+    "required_text_adjustments": [
+      {
+        "node_id": "S03",
+        "from": "下班回来",
+        "to": "补习班回来",
+        "status": "applied"
+      },
+      {
+        "node_id": "S02",
+        "from": "别走错层",
+        "to": "别跟错箭头",
+        "status": "applied"
+      }
+    ]
+  },
+  "story_graph_refinement_result": {
+    "status": "pass",
+    "scope": "story_graph_and_state_machine_only",
+    "node_count": 7,
+    "edge_count": 6,
+    "state_machine_consistent_with_skill_executor_view": true,
+    "machine_state_repaired": true,
+    "page_count_decision": "accepted_with_reason",
+    "edges_expanded": true,
+    "edge_required_fields": [
+      "from",
+      "to",
+      "edge_type",
+      "cause",
+      "question_from_previous",
+      "answer_in_current",
+      "new_question_created",
+      "clue_carried_forward",
+      "payoff_deadline",
+      "tension_delta"
+    ],
+    "clue_ledger_status": "pass",
+    "wrong_floor_rule_handled": true,
+    "protagonist_identity_status": "unified",
+    "allowed_to_enter_build_visual_asset_specs": true,
+    "forbidden_outputs_created": false,
+    "derived_view": "08_story_graph_精修验收.md",
+    "post_refinement_checks": {
+      "analyze_graph": {
+        "status": "pass",
+        "passed": true,
+        "repair_priority": [],
+        "clue_failures": [],
+        "tension_failures": [],
+        "character_stakes_passed": true,
+        "note": "graph-only 输入的页数估算不覆盖故事核心中已登记的 Story Analyzer 页数建议。"
+      },
+      "execute_skill_graph": {
+        "status": "pass",
+        "passed": true,
+        "failed_nodes": [],
+        "proposed_changes": [],
+        "manual_approval_required": false,
+        "next_action": "proceed_to_next_gate"
+      },
+      "check_graph": {
+        "status": "pass",
+        "passed": true,
+        "node_count": 7,
+        "edge_count": 6,
+        "failed_rules": []
+      }
+    },
+    "residual_risks": [
+      "runtime can-run/pipeline-plan 的底层 contracts 仍保留 build_visual_manifest/visual_manifest_ready 流程命名；本轮按故事核心与 07 派生视图要求同步 next_allowed_action=build_visual_asset_specs，未迁移底层 contracts。"
+    ]
   }
 }
