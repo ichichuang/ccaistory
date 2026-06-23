@@ -1,6 +1,6 @@
 # AI Story Compiler v0.1
 
-`runtime/` is the executable layer for the AI+Story vault. The Obsidian documents remain the specification layer; this runtime turns the core gates into deterministic local checks.
+`runtime/` is the executable layer for the AI+Story vault. `runtime/contracts/` is the machine-readable source of truth; Obsidian Markdown is the explanatory layer. If Markdown conflicts with contracts, contracts win.
 
 Skill Runtime v0.2 adds deterministic validation for creator-technique effects on `story_graph.nodes`. Skill Orchestrator selects skills; Skill Runtime checks whether those skills actually appear in node structure, generates repair patches, and decides whether the graph can proceed to the next gate.
 
@@ -11,6 +11,9 @@ Run all commands from the project root.
 ```bash
 python runtime/aistory.py status
 python runtime/aistory.py validate
+python runtime/aistory.py list-contracts
+python runtime/aistory.py validate-contracts
+python runtime/aistory.py check-contract-drift
 python runtime/aistory.py list-actions
 python runtime/aistory.py can-run --project <project_path> --action <action>
 python runtime/aistory.py select-skills --story-type horror --pages 12
@@ -30,6 +33,7 @@ python runtime/aistory.py smoke-test
 
 ## Runtime Boundary
 
+- Machine rule changes start in `runtime/contracts/`, then docs and tests are synchronized.
 - The runtime does not create story projects.
 - The runtime does not generate images.
 - The runtime does not create execution packages or publishing packages.

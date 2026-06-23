@@ -1,0 +1,467 @@
+{
+  "contract_id": "visual_assets",
+  "version": 1,
+  "asset_types": {
+    "R00_PAPER_MARK_ANCHOR": {
+      "asset_type": "R00_PAPER_MARK_ANCHOR",
+      "purpose": "Provide the reusable paper, stroke, short clue, and material texture anchor for downstream visual assets.",
+      "required_fields": [
+        "asset_type",
+        "allowed_content",
+        "forbidden_content",
+        "visual_center",
+        "density_range",
+        "composition_mode",
+        "text_policy",
+        "acceptance_questions"
+      ],
+      "allowed_content": [
+        "clean white exercise paper",
+        "blue guide lines and red margin",
+        "controlled short child-handwriting clue samples",
+        "red circle, arrow, question mark, underline, pencil pressure, eraser marks",
+        "one ordered visual center"
+      ],
+      "forbidden_content": [
+        "人物",
+        "person",
+        "human",
+        "火柴人",
+        "stick figure",
+        "完整场景",
+        "full scene",
+        "道具集合",
+        "prop collection",
+        "符号散点表",
+        "symbol sheet",
+        "scattered symbols",
+        "UI/流程图",
+        "dirty scrap paper",
+        "yellowed old paper",
+        "long handwritten body",
+        "制作说明"
+      ],
+      "forbidden_positive_terms": [
+        "人物",
+        "person",
+        "human",
+        "火柴人",
+        "stick figure",
+        "完整场景",
+        "full scene",
+        "道具集合",
+        "prop collection",
+        "符号散点表",
+        "symbol sheet",
+        "scattered symbols"
+      ],
+      "required_canvas": {
+        "ratio": "9:16",
+        "orientation": "portrait",
+        "surface": "single clean paper surface"
+      },
+      "required_text_policy": {
+        "policy_id": "short_clue_fragments_only",
+        "allowed": [
+          "short clue fragments",
+          "child handwriting samples"
+        ],
+        "forbidden": [
+          "long body text",
+          "production instructions",
+          "UI labels"
+        ]
+      },
+      "required_reference_policy": {
+        "policy_id": "root_reference_anchor",
+        "requires_prior_reference": false,
+        "must_be_available_before": [
+          "R01_CHARACTER_ANCHOR",
+          "R02_SCENE_PROP_ANCHOR",
+          "P01_PLATFORM_LAYOUT_SAMPLE",
+          "S_SOURCE_ILLUSTRATION"
+        ]
+      },
+      "hard_failures": [
+        "has_person",
+        "has_stick_figure",
+        "has_complete_scene",
+        "has_prop_collection",
+        "is_symbol_sheet",
+        "looks_like_ui_or_flowchart",
+        "looks_like_dirty_scrap",
+        "not_clean_white_paper",
+        "yellowed_old_paper",
+        "missing_controlled_child_handwriting_sample",
+        "unreasonable_short_clue_count",
+        "long_body_text",
+        "missing_visual_center_or_order",
+        "not_usable_as_reference_asset"
+      ],
+      "qa_questions": [
+        {
+          "question_id": "has_person",
+          "expected": false,
+          "question": "是否有人物？必须否。"
+        },
+        {
+          "question_id": "has_stick_figure",
+          "expected": false,
+          "question": "是否有火柴人？必须否。"
+        },
+        {
+          "question_id": "has_complete_scene",
+          "expected": false,
+          "question": "是否有完整场景？必须否。"
+        },
+        {
+          "question_id": "has_prop_collection",
+          "expected": false,
+          "question": "是否有道具集合？必须否。"
+        },
+        {
+          "question_id": "is_symbol_sheet",
+          "expected": false,
+          "question": "是否是符号散点表？必须否。"
+        },
+        {
+          "question_id": "looks_like_ui_or_flowchart",
+          "expected": false,
+          "question": "是否像 UI/流程图？必须否。"
+        },
+        {
+          "question_id": "looks_like_dirty_scrap",
+          "expected": false,
+          "question": "是否像乱涂垃圾纸？必须否。"
+        },
+        {
+          "question_id": "clean_white_paper",
+          "expected": true,
+          "question": "是否纸张清洁白色？必须是。"
+        },
+        {
+          "question_id": "no_yellowed_old_paper",
+          "expected": true,
+          "question": "是否没有泛黄旧纸？必须是。"
+        },
+        {
+          "question_id": "controlled_child_handwriting_sample",
+          "expected": true,
+          "question": "是否有可控儿童笔迹样本？必须是。"
+        },
+        {
+          "question_id": "reasonable_short_clue_count",
+          "expected": true,
+          "question": "是否短线索数量合理？必须是。"
+        },
+        {
+          "question_id": "no_long_body_text",
+          "expected": true,
+          "question": "是否没有长正文？必须是。"
+        },
+        {
+          "question_id": "has_visual_center_or_order",
+          "expected": true,
+          "question": "是否有视觉中心或秩序？必须是。"
+        },
+        {
+          "question_id": "usable_as_reference_asset",
+          "expected": true,
+          "question": "是否可作为后续 reference asset？必须是。"
+        }
+      ],
+      "unlocks_after_acceptance": [
+        "R01_CHARACTER_ANCHOR",
+        "R02_SCENE_PROP_ANCHOR",
+        "P01_PLATFORM_LAYOUT_SAMPLE",
+        "S_SOURCE_ILLUSTRATION"
+      ]
+    },
+    "R01_CHARACTER_ANCHOR": {
+      "asset_type": "R01_CHARACTER_ANCHOR",
+      "purpose": "Lock reusable character proportion, outfit, silhouette, and childlike drawing treatment.",
+      "required_fields": [
+        "asset_type",
+        "allowed_content",
+        "forbidden_content",
+        "visual_center",
+        "density_range",
+        "composition_mode",
+        "text_policy",
+        "reference_dependencies",
+        "acceptance_questions"
+      ],
+      "allowed_content": [
+        "single character or small character set",
+        "proportion reference",
+        "outfit and silhouette facts",
+        "controlled childlike drawing treatment"
+      ],
+      "forbidden_content": [
+        "complete plot",
+        "full scene",
+        "mainline event",
+        "ending reveal",
+        "author style instruction"
+      ],
+      "required_canvas": {
+        "ratio": "9:16",
+        "orientation": "portrait",
+        "surface": "character reference sheet without story scene payload"
+      },
+      "required_text_policy": {
+        "policy_id": "labels_only_if_needed",
+        "allowed": [
+          "short labels for character facts"
+        ],
+        "forbidden": [
+          "plot narration",
+          "long handwritten body"
+        ]
+      },
+      "required_reference_policy": {
+        "policy_id": "depends_on_r00",
+        "requires_prior_reference": true,
+        "required_references": [
+          "R00_PAPER_MARK_ANCHOR"
+        ]
+      },
+      "hard_failures": [
+        "complete_plot_payload",
+        "full_scene_payload",
+        "missing_r00_reference",
+        "author_style_instruction"
+      ],
+      "qa_questions": [
+        {
+          "question_id": "single_character_focus",
+          "expected": true,
+          "question": "是否聚焦角色锚定事实？必须是。"
+        },
+        {
+          "question_id": "no_complete_plot_payload",
+          "expected": true,
+          "question": "是否没有完整剧情载荷？必须是。"
+        }
+      ],
+      "unlocks_after_acceptance": [
+        "S_SOURCE_ILLUSTRATION"
+      ]
+    },
+    "R02_SCENE_PROP_ANCHOR": {
+      "asset_type": "R02_SCENE_PROP_ANCHOR",
+      "purpose": "Lock reusable scene relationship, key anomaly object, prop scale, and spatial facts.",
+      "required_fields": [
+        "asset_type",
+        "allowed_content",
+        "forbidden_content",
+        "visual_center",
+        "density_range",
+        "composition_mode",
+        "text_policy",
+        "reference_dependencies",
+        "acceptance_questions"
+      ],
+      "allowed_content": [
+        "scene spatial relationship",
+        "key anomaly object",
+        "prop scale",
+        "material and placement facts"
+      ],
+      "forbidden_content": [
+        "mainline event",
+        "ending reveal",
+        "complete plot",
+        "author style instruction"
+      ],
+      "required_canvas": {
+        "ratio": "9:16",
+        "orientation": "portrait",
+        "surface": "scene or prop anchor without story action payload"
+      },
+      "required_text_policy": {
+        "policy_id": "anchor_notes_only",
+        "allowed": [
+          "short anchor notes"
+        ],
+        "forbidden": [
+          "long narration",
+          "platform body copy"
+        ]
+      },
+      "required_reference_policy": {
+        "policy_id": "depends_on_r00",
+        "requires_prior_reference": true,
+        "required_references": [
+          "R00_PAPER_MARK_ANCHOR"
+        ]
+      },
+      "hard_failures": [
+        "mainline_event_payload",
+        "ending_reveal_payload",
+        "missing_r00_reference",
+        "author_style_instruction"
+      ],
+      "qa_questions": [
+        {
+          "question_id": "scene_or_prop_focus",
+          "expected": true,
+          "question": "是否只锚定场景或道具事实？必须是。"
+        },
+        {
+          "question_id": "no_mainline_event_payload",
+          "expected": true,
+          "question": "是否没有主线事件载荷？必须是。"
+        }
+      ],
+      "unlocks_after_acceptance": [
+        "S_SOURCE_ILLUSTRATION"
+      ]
+    },
+    "P01_PLATFORM_LAYOUT_SAMPLE": {
+      "asset_type": "P01_PLATFORM_LAYOUT_SAMPLE",
+      "purpose": "Lock the 9:16 platform page layout sample without becoming a complete story illustration.",
+      "required_fields": [
+        "asset_type",
+        "allowed_content",
+        "forbidden_content",
+        "visual_center",
+        "density_range",
+        "composition_mode",
+        "canvas_ratio",
+        "text_policy",
+        "reference_dependencies",
+        "acceptance_questions"
+      ],
+      "allowed_content": [
+        "9:16 platform page layout",
+        "image and text region sample",
+        "safe spacing and reading order"
+      ],
+      "forbidden_content": [
+        "complete story illustration",
+        "source illustration semantics",
+        "final publish copy",
+        "author style instruction"
+      ],
+      "required_canvas": {
+        "ratio": "9:16",
+        "orientation": "portrait",
+        "surface": "platform layout sample"
+      },
+      "required_text_policy": {
+        "policy_id": "layout_placeholder_text_only",
+        "allowed": [
+          "short placeholder text"
+        ],
+        "forbidden": [
+          "long final body copy",
+          "story ending reveal"
+        ]
+      },
+      "required_reference_policy": {
+        "policy_id": "depends_on_r00_if_visual_texture_used",
+        "requires_prior_reference": true,
+        "required_references": [
+          "R00_PAPER_MARK_ANCHOR"
+        ]
+      },
+      "hard_failures": [
+        "canvas_ratio_not_9_16",
+        "complete_story_illustration_payload",
+        "author_style_instruction"
+      ],
+      "qa_questions": [
+        {
+          "question_id": "canvas_ratio_9_16",
+          "expected": true,
+          "question": "是否为 9:16 版式？必须是。"
+        },
+        {
+          "question_id": "layout_sample_only",
+          "expected": true,
+          "question": "是否只是版式样张而非完整故事图？必须是。"
+        }
+      ],
+      "unlocks_after_acceptance": [
+        "platform_layout_ready"
+      ]
+    },
+    "S_SOURCE_ILLUSTRATION": {
+      "asset_type": "S_SOURCE_ILLUSTRATION",
+      "purpose": "Produce one source illustration page carrying page-level story semantics, emotion, and visual memory point.",
+      "required_fields": [
+        "asset_type",
+        "allowed_content",
+        "forbidden_content",
+        "visual_center",
+        "density_range",
+        "composition_mode",
+        "text_policy",
+        "reference_dependencies",
+        "acceptance_questions"
+      ],
+      "allowed_content": [
+        "single page story action",
+        "character action",
+        "scene emotion",
+        "source_illustration_focus",
+        "visual_memory_point",
+        "short child note layer"
+      ],
+      "forbidden_content": [
+        "long handwritten body",
+        "setting sheet",
+        "platform final body copy",
+        "author style instruction"
+      ],
+      "required_canvas": {
+        "ratio": "3:4",
+        "orientation": "portrait",
+        "surface": "single source illustration page"
+      },
+      "required_text_policy": {
+        "policy_id": "short_child_note_layer_only",
+        "allowed": [
+          "short handwritten clue layer"
+        ],
+        "forbidden": [
+          "long body text",
+          "complete platform narration"
+        ]
+      },
+      "required_reference_policy": {
+        "policy_id": "depends_on_accepted_anchors",
+        "requires_prior_reference": true,
+        "required_references": [
+          "R00_PAPER_MARK_ANCHOR"
+        ],
+        "optional_references": [
+          "R01_CHARACTER_ANCHOR",
+          "R02_SCENE_PROP_ANCHOR"
+        ]
+      },
+      "hard_failures": [
+        "long_handwritten_body",
+        "missing_r00_reference",
+        "source_semantics_missing",
+        "author_style_instruction"
+      ],
+      "qa_questions": [
+        {
+          "question_id": "single_page_semantics",
+          "expected": true,
+          "question": "是否只承载单页故事语义？必须是。"
+        },
+        {
+          "question_id": "no_long_handwritten_body",
+          "expected": true,
+          "question": "是否没有长手写正文？必须是。"
+        }
+      ],
+      "unlocks_after_acceptance": [
+        "asset_accepted"
+      ]
+    }
+  }
+}

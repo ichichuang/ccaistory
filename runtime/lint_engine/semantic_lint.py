@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from typing import Any
 
+from contracts.contract_loader import ContractError, r00_forbidden_positive_terms
 from core.io import read_json, result
 
 
@@ -15,22 +16,11 @@ REQUIRED_FIELDS = [
     "acceptance_questions",
 ]
 
-R00_FORBIDDEN_POSITIVE_TERMS = [
-    "人物",
-    "person",
-    "human",
-    "火柴人",
-    "stick figure",
-    "完整场景",
-    "full scene",
-    "道具集合",
-    "prop collection",
-    "符号散点表",
-    "symbol sheet",
-    "scattered symbols",
-]
-
 AUTHOR_STYLE_TERMS = ["style of", "by artist", "模仿", "仿照", "作者风格", "以某作者"]
+
+
+def get_r00_forbidden_positive_terms() -> list[str]:
+    return r00_forbidden_positive_terms()
 
 
 def _stringify(value: Any) -> str:
@@ -73,12 +63,20 @@ def lint_asset(spec: dict[str, Any]) -> dict[str, Any]:
 
     positive_text = _positive_text(spec)
     if asset_type == "R00_PAPER_MARK_ANCHOR":
-        for term in R00_FORBIDDEN_POSITIVE_TERMS:
-            if term.lower() in positive_text:
-                asset_scope_conflicts.append(term)
-                failed.append("r00_scope_conflict")
-                suggestions.append("Remove characters, stick figures, scenes, prop sets, and symbol sheets from R00 positive scope.")
-                break
+        try:
+            forbidden_terms = get_r00_forbidden_positive_terms()
+        except ContractError as exc:
+            failed.append("contract_missing")
+            suggestions.append(str(exc))
+        else:
+            for term in forbidden_terms:
+                if term.lower() in positive_text:
+                    asset_scope_conflicts.append(term)
+                    failed.append("r00_scope_conflict")
+                    suggestions.append(
+                        "Remove characters, stick figures, scenes, prop sets, and symbol sheets from R00 positive scope."
+                    )
+                    break
 
     if asset_type == "R01_CHARACTER_ANCHOR" and any(term in positive_text for term in ("完整剧情", "主线剧情", "complete plot")):
         asset_scope_conflicts.append("complete_plot_payload")

@@ -1,0 +1,166 @@
+{
+  "contract_id": "pipeline_actions",
+  "version": 1,
+  "actions": {
+    "create_story_core": {
+      "action_id": "create_story_core",
+      "required_state": "empty",
+      "required_gate_result": "pending",
+      "required_inputs": ["story_input"],
+      "outputs": ["story_core"],
+      "blocked_if": ["concrete_story_project_exists"],
+      "next_action_on_pass": "assess_page_count",
+      "next_action_on_fail": "create_story_core"
+    },
+    "assess_page_count": {
+      "action_id": "assess_page_count",
+      "required_state": "story_core_created",
+      "required_gate_result": "passed",
+      "required_inputs": ["story_core"],
+      "outputs": ["page_count_assessment", "minimum_viable_story"],
+      "blocked_if": ["story_core_missing"],
+      "next_action_on_pass": "select_skills",
+      "next_action_on_fail": "assess_page_count"
+    },
+    "select_skills": {
+      "action_id": "select_skills",
+      "required_state": "page_count_assessed",
+      "required_gate_result": "passed",
+      "required_inputs": ["story_core", "skill_definitions"],
+      "outputs": ["selected_skill_set", "node_skill_plan"],
+      "blocked_if": ["skill_definitions_invalid"],
+      "next_action_on_pass": "apply_skill_runtime",
+      "next_action_on_fail": "select_skills"
+    },
+    "apply_skill_runtime": {
+      "action_id": "apply_skill_runtime",
+      "required_state": "skill_selected",
+      "required_gate_result": "passed",
+      "required_inputs": ["story_graph", "selected_skill_set"],
+      "outputs": ["skill_runtime_result", "repair_plan"],
+      "blocked_if": ["story_graph_missing", "unknown_skill_id"],
+      "next_action_on_pass": "check_story_graph",
+      "next_action_on_fail": "apply_skill_runtime"
+    },
+    "check_story_graph": {
+      "action_id": "check_story_graph",
+      "required_state": "skill_runtime_checked",
+      "required_gate_result": "passed",
+      "required_inputs": ["story_graph"],
+      "outputs": ["graph_integrity_result"],
+      "blocked_if": ["skill_runtime_failed"],
+      "next_action_on_pass": "build_visual_manifest",
+      "next_action_on_fail": "check_story_graph"
+    },
+    "build_visual_manifest": {
+      "action_id": "build_visual_manifest",
+      "required_state": "story_graph_ready",
+      "required_gate_result": "passed",
+      "required_inputs": ["story_graph", "visual_assets_contract"],
+      "outputs": ["visual_manifest"],
+      "blocked_if": ["unknown_asset_type", "r00_dependency_missing"],
+      "next_action_on_pass": "build_visual_asset_specs",
+      "next_action_on_fail": "build_visual_manifest"
+    },
+    "build_visual_asset_specs": {
+      "action_id": "build_visual_asset_specs",
+      "required_state": "visual_manifest_ready",
+      "required_gate_result": "passed",
+      "required_inputs": ["visual_manifest", "visual_assets_contract"],
+      "outputs": ["visual_asset_specs"],
+      "blocked_if": ["visual_manifest_missing"],
+      "next_action_on_pass": "compile_prompts",
+      "next_action_on_fail": "build_visual_asset_specs"
+    },
+    "compile_prompts": {
+      "action_id": "compile_prompts",
+      "required_state": "visual_asset_specs_ready",
+      "required_gate_result": "passed",
+      "required_inputs": ["visual_asset_specs"],
+      "outputs": ["compiled_prompts"],
+      "blocked_if": ["visual_asset_specs_missing", "asset_contract_missing"],
+      "next_action_on_pass": "run_semantic_lint",
+      "next_action_on_fail": "compile_prompts"
+    },
+    "run_semantic_lint": {
+      "action_id": "run_semantic_lint",
+      "required_state": "prompts_compiled",
+      "required_gate_result": "passed",
+      "required_inputs": ["compiled_prompts", "visual_assets_contract"],
+      "outputs": ["semantic_lint_result"],
+      "blocked_if": ["compiled_prompt_missing", "contract_missing"],
+      "next_action_on_pass": "generate_source_pilot_task_list",
+      "next_action_on_fail": "compile_prompts"
+    },
+    "generate_source_pilot_task_list": {
+      "action_id": "generate_source_pilot_task_list",
+      "required_state": "semantic_lint_passed",
+      "required_gate_result": "passed",
+      "required_inputs": ["semantic_lint_result", "compiled_prompts"],
+      "outputs": ["source_pilot_task_list"],
+      "blocked_if": ["semantic_lint_failed"],
+      "next_action_on_pass": "record_execution_telemetry",
+      "next_action_on_fail": "compile_prompts"
+    },
+    "record_execution_telemetry": {
+      "action_id": "record_execution_telemetry",
+      "required_state": "source_pilot_generation",
+      "required_gate_result": "passed",
+      "required_inputs": ["external_execution_fact", "actual_prompt_sent_to_external_tool"],
+      "outputs": ["execution_telemetry"],
+      "blocked_if": ["actual_prompt_missing", "reference_assets_unrecorded"],
+      "next_action_on_pass": "run_asset_qa",
+      "next_action_on_fail": "record_execution_telemetry"
+    },
+    "run_asset_qa": {
+      "action_id": "run_asset_qa",
+      "required_state": "asset_qa_pending",
+      "required_gate_result": "passed",
+      "required_inputs": ["asset_qa_answers", "visual_assets_contract"],
+      "outputs": ["asset_qa_result"],
+      "blocked_if": ["execution_telemetry_missing", "contract_missing"],
+      "next_action_on_pass": "accept_asset",
+      "next_action_on_fail": "reject_asset"
+    },
+    "accept_asset": {
+      "action_id": "accept_asset",
+      "required_state": "asset_qa_pending",
+      "required_gate_result": "passed",
+      "required_inputs": ["asset_qa_result"],
+      "outputs": ["accepted_asset_record"],
+      "blocked_if": ["asset_qa_failed", "hard_failure_present"],
+      "next_action_on_pass": "build_platform_page_layout",
+      "next_action_on_fail": "reject_asset"
+    },
+    "reject_asset": {
+      "action_id": "reject_asset",
+      "required_state": "asset_qa_pending",
+      "required_gate_result": "rework_required",
+      "required_inputs": ["asset_qa_result"],
+      "outputs": ["asset_rejection_record", "repair_request"],
+      "blocked_if": ["asset_qa_missing"],
+      "next_action_on_pass": "compile_prompts",
+      "next_action_on_fail": "run_asset_qa"
+    },
+    "build_platform_page_layout": {
+      "action_id": "build_platform_page_layout",
+      "required_state": "asset_accepted",
+      "required_gate_result": "passed",
+      "required_inputs": ["accepted_assets", "platform_layout_contract"],
+      "outputs": ["platform_layout"],
+      "blocked_if": ["required_asset_not_accepted"],
+      "next_action_on_pass": "run_human_complete_reading",
+      "next_action_on_fail": "build_platform_page_layout"
+    },
+    "run_human_complete_reading": {
+      "action_id": "run_human_complete_reading",
+      "required_state": "platform_layout_ready",
+      "required_gate_result": "passed",
+      "required_inputs": ["platform_layout"],
+      "outputs": ["complete_reading_result"],
+      "blocked_if": ["platform_layout_missing"],
+      "next_action_on_pass": "publish_ready",
+      "next_action_on_fail": "build_platform_page_layout"
+    }
+  }
+}

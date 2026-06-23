@@ -1,0 +1,146 @@
+{
+  "contract_id": "state_machine",
+  "version": 1,
+  "states": {
+    "empty": {
+      "state_id": "empty",
+      "allowed_actions": ["create_story_core"],
+      "blocked_actions": ["select_skills", "compile_prompts", "generate_images", "publish"],
+      "required_artifacts": [],
+      "next_states": ["story_core_created"]
+    },
+    "story_core_created": {
+      "state_id": "story_core_created",
+      "allowed_actions": ["assess_page_count"],
+      "blocked_actions": ["compile_prompts", "generate_images", "publish"],
+      "required_artifacts": ["story_core"],
+      "next_states": ["minimum_viable_story", "page_count_assessed"]
+    },
+    "minimum_viable_story": {
+      "state_id": "minimum_viable_story",
+      "allowed_actions": ["assess_page_count"],
+      "blocked_actions": ["build_visual_manifest", "compile_prompts", "generate_images", "publish"],
+      "required_artifacts": ["story_core", "minimum_viable_story"],
+      "next_states": ["page_count_assessed"]
+    },
+    "page_count_assessed": {
+      "state_id": "page_count_assessed",
+      "allowed_actions": ["select_skills"],
+      "blocked_actions": ["apply_skill_runtime", "compile_prompts", "generate_images", "publish"],
+      "required_artifacts": ["story_core", "page_count_assessment"],
+      "next_states": ["skill_selected"]
+    },
+    "skill_selected": {
+      "state_id": "skill_selected",
+      "allowed_actions": ["apply_skill_runtime"],
+      "blocked_actions": ["build_visual_manifest", "compile_prompts", "generate_images", "publish"],
+      "required_artifacts": ["selected_skill_set", "node_skill_plan"],
+      "next_states": ["skill_runtime_checked"]
+    },
+    "skill_runtime_checked": {
+      "state_id": "skill_runtime_checked",
+      "allowed_actions": ["check_story_graph"],
+      "blocked_actions": ["build_visual_manifest", "compile_prompts", "generate_images", "publish"],
+      "required_artifacts": ["skill_runtime_result"],
+      "next_states": ["story_graph_ready"]
+    },
+    "story_graph_ready": {
+      "state_id": "story_graph_ready",
+      "allowed_actions": ["build_visual_manifest", "run_human_complete_reading"],
+      "blocked_actions": ["compile_prompts", "generate_images", "publish"],
+      "required_artifacts": ["story_graph", "graph_integrity_result"],
+      "next_states": ["platform_story_reading_test", "visual_manifest_ready"]
+    },
+    "platform_story_reading_test": {
+      "state_id": "platform_story_reading_test",
+      "allowed_actions": ["build_visual_manifest"],
+      "blocked_actions": ["compile_prompts", "generate_images", "publish"],
+      "required_artifacts": ["story_reading_test_result"],
+      "next_states": ["visual_manifest_ready"]
+    },
+    "visual_manifest_ready": {
+      "state_id": "visual_manifest_ready",
+      "allowed_actions": ["build_visual_asset_specs"],
+      "blocked_actions": ["compile_prompts", "generate_images", "publish"],
+      "required_artifacts": ["visual_manifest"],
+      "next_states": ["visual_asset_specs_ready"]
+    },
+    "visual_asset_specs_ready": {
+      "state_id": "visual_asset_specs_ready",
+      "allowed_actions": ["compile_prompts"],
+      "blocked_actions": ["run_semantic_lint", "generate_images", "publish"],
+      "required_artifacts": ["visual_asset_specs"],
+      "next_states": ["prompts_compiled"]
+    },
+    "prompts_compiled": {
+      "state_id": "prompts_compiled",
+      "allowed_actions": ["run_semantic_lint"],
+      "blocked_actions": ["generate_source_pilot_task_list", "generate_images", "publish"],
+      "required_artifacts": ["compiled_prompts"],
+      "next_states": ["semantic_lint_passed"]
+    },
+    "semantic_lint_passed": {
+      "state_id": "semantic_lint_passed",
+      "allowed_actions": ["generate_source_pilot_task_list"],
+      "blocked_actions": ["record_execution_telemetry", "run_asset_qa", "accept_asset", "publish"],
+      "required_artifacts": ["semantic_lint_result"],
+      "next_states": ["source_pilot_ready"]
+    },
+    "source_pilot_ready": {
+      "state_id": "source_pilot_ready",
+      "allowed_actions": ["record_execution_telemetry"],
+      "blocked_actions": ["run_asset_qa", "accept_asset", "publish"],
+      "required_artifacts": ["source_pilot_task_list"],
+      "next_states": ["source_pilot_generation"]
+    },
+    "source_pilot_generation": {
+      "state_id": "source_pilot_generation",
+      "allowed_actions": ["record_execution_telemetry"],
+      "blocked_actions": ["accept_asset", "build_platform_page_layout", "publish"],
+      "required_artifacts": ["external_execution_fact"],
+      "next_states": ["asset_qa_pending"]
+    },
+    "asset_qa_pending": {
+      "state_id": "asset_qa_pending",
+      "allowed_actions": ["run_asset_qa", "accept_asset", "reject_asset"],
+      "blocked_actions": ["build_platform_page_layout", "run_human_complete_reading", "publish"],
+      "required_artifacts": ["execution_telemetry", "asset_qa_answers"],
+      "next_states": ["asset_accepted", "asset_rejected"]
+    },
+    "asset_accepted": {
+      "state_id": "asset_accepted",
+      "allowed_actions": ["build_platform_page_layout"],
+      "blocked_actions": ["publish"],
+      "required_artifacts": ["accepted_asset_record"],
+      "next_states": ["platform_layout_ready"]
+    },
+    "asset_rejected": {
+      "state_id": "asset_rejected",
+      "allowed_actions": ["compile_prompts", "run_semantic_lint"],
+      "blocked_actions": ["accept_asset", "build_platform_page_layout", "publish"],
+      "required_artifacts": ["asset_rejection_record", "repair_request"],
+      "next_states": ["visual_asset_specs_ready", "prompts_compiled"]
+    },
+    "platform_layout_ready": {
+      "state_id": "platform_layout_ready",
+      "allowed_actions": ["run_human_complete_reading"],
+      "blocked_actions": ["publish"],
+      "required_artifacts": ["platform_layout"],
+      "next_states": ["human_complete_reading_passed"]
+    },
+    "human_complete_reading_passed": {
+      "state_id": "human_complete_reading_passed",
+      "allowed_actions": ["publish_ready"],
+      "blocked_actions": ["create_publish_package"],
+      "required_artifacts": ["complete_reading_result"],
+      "next_states": ["publish_ready"]
+    },
+    "publish_ready": {
+      "state_id": "publish_ready",
+      "allowed_actions": [],
+      "blocked_actions": [],
+      "required_artifacts": ["complete_reading_result", "accepted_assets", "platform_layout"],
+      "next_states": []
+    }
+  }
+}

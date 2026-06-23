@@ -4,6 +4,8 @@ from pathlib import Path
 from typing import Any
 
 from core.io import RUNTIME_ROOT, result
+from contracts.contract_loader import load_contract, r00_required_questions
+from contracts.validate_contracts import validate_contracts
 from lint_engine.semantic_lint import lint_asset
 from prompt_compiler.compiler import compile_asset
 from qa_engine.asset_qa import qa_asset
@@ -28,11 +30,25 @@ def _load(name: str) -> dict[str, Any]:
 def run_smoke_tests() -> dict[str, Any]:
     checks: list[dict[str, Any]] = []
 
+    contract_validation = validate_contracts()
+    checks.append({"name": "validate-contracts passes", "passed": contract_validation["passed"]})
+
+    visual_assets = load_contract("visual_assets")
+    checks.append({"name": "visual_assets.json can load", "passed": bool(visual_assets.get("asset_types"))})
+
+    checks.append({"name": "R00 QA comes from contract", "passed": len(r00_required_questions()) == 14})
+
     valid_compile = compile_asset(_load("r00_valid_spec.json"))
     checks.append({"name": "valid R00 spec can compile", "passed": valid_compile["passed"]})
 
     invalid_stick = lint_asset(_load("r00_invalid_stick_figure_spec.json"))
     checks.append({"name": "R00 stick figure is blocked", "passed": not invalid_stick["passed"]})
+    checks.append(
+        {
+            "name": "semantic_lint reads R00 contract",
+            "passed": "stick figure" in invalid_stick["semantic_lint_result"]["asset_scope_conflicts"],
+        }
+    )
 
     invalid_symbol = lint_asset(_load("r00_invalid_symbol_sheet_spec.json"))
     checks.append({"name": "R00 symbol sheet is blocked", "passed": not invalid_symbol["passed"]})
@@ -42,6 +58,21 @@ def run_smoke_tests() -> dict[str, Any]:
 
     invalid_qa = qa_asset(_load("qa_r00_invalid.json"))
     checks.append({"name": "invalid QA blocks accepted", "passed": not invalid_qa["passed"]})
+    checks.append(
+        {
+            "name": "asset_qa reads R00 contract",
+            "passed": invalid_qa["asset_qa_result"]["details"][0]["question_id"] == "has_stick_figure",
+        }
+    )
+
+    skill_contract = load_contract("skill_definitions")
+    skills_json = _load("../../skill_registry/skills.json")
+    checks.append(
+        {
+            "name": "skill_definitions matches skills.json count",
+            "passed": len(skill_contract["skills"]) == len(skills_json["skills"]) == 12,
+        }
+    )
 
     plan = select_story_skills("horror", 12)
     checks.append(

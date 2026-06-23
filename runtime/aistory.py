@@ -12,6 +12,8 @@ if str(RUNTIME_ROOT) not in sys.path:
     sys.path.insert(0, str(RUNTIME_ROOT))
 
 from core.io import PROJECT_ROOT, print_json, read_json, result
+from contracts.sync_docs_check import check_contract_drift
+from contracts.validate_contracts import validate_contracts
 from graph_engine.graph_checks import check_graph
 from lint_engine.semantic_lint import lint_asset_file, lint_compiled_file
 from prompt_compiler.compiler import compile_asset_file
@@ -64,6 +66,9 @@ def main(argv: list[str] | None = None) -> int:
     sub.add_parser("status")
     sub.add_parser("validate")
     sub.add_parser("list-actions")
+    sub.add_parser("list-contracts")
+    sub.add_parser("validate-contracts")
+    sub.add_parser("check-contract-drift")
     sub.add_parser("smoke-test")
 
     can = sub.add_parser("can-run")
@@ -120,6 +125,20 @@ def main(argv: list[str] | None = None) -> int:
         payload = validate_runtime()
     elif args.command == "list-actions":
         payload = {"actions": ACTIONS}
+    elif args.command == "list-contracts":
+        payload = {
+            "contracts": [
+                "runtime/contracts/state_machine.json",
+                "runtime/contracts/visual_assets.json",
+                "runtime/contracts/skill_definitions.json",
+                "runtime/contracts/quality_gates.json",
+                "runtime/contracts/pipeline_actions.json",
+            ]
+        }
+    elif args.command == "validate-contracts":
+        payload = validate_contracts()
+    elif args.command == "check-contract-drift":
+        payload = check_contract_drift()
     elif args.command == "can-run":
         payload = can_run(args.project, args.action)
     elif args.command == "select-skills":

@@ -1,0 +1,105 @@
+{
+  "contract_id": "quality_gates",
+  "version": 1,
+  "gates": {
+    "story_core_gate": {
+      "gate_id": "story_core_gate",
+      "required_inputs": ["story_core"],
+      "pass_conditions": ["story_core.required_fields_present", "machine_state.current_state == story_core_created"],
+      "fail_conditions": ["missing_story_core", "machine_state_incomplete"],
+      "next_allowed_action_on_pass": "assess_page_count",
+      "next_allowed_action_on_fail": "create_story_core",
+      "blocked_actions": ["select_skills", "compile_prompts", "generate_images", "publish"]
+    },
+    "page_count_gate": {
+      "gate_id": "page_count_gate",
+      "required_inputs": ["story_core", "target_page_count"],
+      "pass_conditions": ["page_count_is_reasonable", "minimum_viable_story_available"],
+      "fail_conditions": ["page_count_missing", "story_too_thin_or_overloaded"],
+      "next_allowed_action_on_pass": "select_skills",
+      "next_allowed_action_on_fail": "assess_page_count",
+      "blocked_actions": ["apply_skill_runtime", "build_visual_manifest", "compile_prompts", "generate_images"]
+    },
+    "skill_selection_gate": {
+      "gate_id": "skill_selection_gate",
+      "required_inputs": ["story_core", "skill_definitions"],
+      "pass_conditions": ["selected_skill_set_not_empty", "selected_skills_exist_in_contract"],
+      "fail_conditions": ["unknown_skill_id", "skill_selection_empty"],
+      "next_allowed_action_on_pass": "apply_skill_runtime",
+      "next_allowed_action_on_fail": "select_skills",
+      "blocked_actions": ["check_story_graph", "build_visual_manifest", "compile_prompts"]
+    },
+    "skill_runtime_gate": {
+      "gate_id": "skill_runtime_gate",
+      "required_inputs": ["story_graph", "selected_skill_set", "skill_definitions"],
+      "pass_conditions": ["required_skill_fields_present", "no_skill_hard_failures"],
+      "fail_conditions": ["skill_effect_missing", "skill_hard_failure_present"],
+      "next_allowed_action_on_pass": "check_story_graph",
+      "next_allowed_action_on_fail": "apply_skill_runtime",
+      "blocked_actions": ["build_visual_manifest", "compile_prompts", "generate_images"]
+    },
+    "graph_integrity_gate": {
+      "gate_id": "graph_integrity_gate",
+      "required_inputs": ["story_graph"],
+      "pass_conditions": ["node_order_valid", "no_missing_required_edges", "no_dead_end_before_ending"],
+      "fail_conditions": ["missing_node", "broken_edge", "ending_unreachable"],
+      "next_allowed_action_on_pass": "build_visual_manifest",
+      "next_allowed_action_on_fail": "check_story_graph",
+      "blocked_actions": ["build_visual_asset_specs", "compile_prompts", "generate_images"]
+    },
+    "visual_asset_ontology_gate": {
+      "gate_id": "visual_asset_ontology_gate",
+      "required_inputs": ["visual_manifest", "visual_assets_contract"],
+      "pass_conditions": ["all_asset_types_known", "r00_precedes_dependent_assets", "required_fields_present"],
+      "fail_conditions": ["unknown_asset_type", "missing_r00_dependency", "asset_scope_conflict"],
+      "next_allowed_action_on_pass": "build_visual_asset_specs",
+      "next_allowed_action_on_fail": "build_visual_manifest",
+      "blocked_actions": ["compile_prompts", "run_semantic_lint", "generate_images"]
+    },
+    "prompt_compile_gate": {
+      "gate_id": "prompt_compile_gate",
+      "required_inputs": ["visual_asset_specs", "visual_assets_contract"],
+      "pass_conditions": ["compiled_prompt_exists", "forbidden_content_not_in_positive_prompt"],
+      "fail_conditions": ["missing_compiled_prompt", "prompt_contract_fields_missing"],
+      "next_allowed_action_on_pass": "run_semantic_lint",
+      "next_allowed_action_on_fail": "compile_prompts",
+      "blocked_actions": ["generate_source_pilot_task_list", "record_execution_telemetry", "run_asset_qa"]
+    },
+    "semantic_lint_gate": {
+      "gate_id": "semantic_lint_gate",
+      "required_inputs": ["compiled_prompt", "visual_assets_contract"],
+      "pass_conditions": ["semantic_lint_result.passed", "no_asset_scope_conflicts"],
+      "fail_conditions": ["r00_scope_conflict", "author_name_as_style_instruction", "forbidden_content_in_compiled_prompt"],
+      "next_allowed_action_on_pass": "generate_source_pilot_task_list",
+      "next_allowed_action_on_fail": "compile_prompts",
+      "blocked_actions": ["record_execution_telemetry", "run_asset_qa", "accept_asset"]
+    },
+    "telemetry_gate": {
+      "gate_id": "telemetry_gate",
+      "required_inputs": ["execution_telemetry", "actual_prompt_sent_to_external_tool"],
+      "pass_conditions": ["telemetry_schema_valid", "actual_prompt_recorded", "reference_assets_recorded"],
+      "fail_conditions": ["telemetry_missing", "actual_prompt_missing", "reference_asset_gap"],
+      "next_allowed_action_on_pass": "run_asset_qa",
+      "next_allowed_action_on_fail": "record_execution_telemetry",
+      "blocked_actions": ["accept_asset", "build_platform_page_layout", "publish"]
+    },
+    "asset_qa_gate": {
+      "gate_id": "asset_qa_gate",
+      "required_inputs": ["asset_qa_result", "visual_assets_contract"],
+      "pass_conditions": ["asset_qa_result.decision == accepted", "hard_failures_empty"],
+      "fail_conditions": ["missing_required_question", "hard_failure_present", "asset_rejected"],
+      "next_allowed_action_on_pass": "accept_asset",
+      "next_allowed_action_on_fail": "reject_asset",
+      "blocked_actions": ["build_platform_page_layout", "run_human_complete_reading", "publish"]
+    },
+    "human_acceptance_gate": {
+      "gate_id": "human_acceptance_gate",
+      "required_inputs": ["platform_layout", "complete_reading_result"],
+      "pass_conditions": ["complete_reading_passed", "no_unresolved_asset_rejections"],
+      "fail_conditions": ["complete_reading_failed", "unresolved_rework_item"],
+      "next_allowed_action_on_pass": "publish_ready",
+      "next_allowed_action_on_fail": "build_platform_page_layout",
+      "blocked_actions": ["publish", "create_publish_package"]
+    }
+  }
+}
