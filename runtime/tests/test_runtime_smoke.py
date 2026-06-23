@@ -50,6 +50,12 @@ def _load(name: str) -> dict[str, Any]:
 
 def run_smoke_tests() -> dict[str, Any]:
     checks: list[dict[str, Any]] = []
+    story_project_root = RUNTIME_ROOT.parent / "故事项目"
+    existing_story_projects = {
+        path.resolve()
+        for path in story_project_root.iterdir()
+        if path.is_dir()
+    } if story_project_root.exists() else set()
 
     contract_validation = validate_contracts()
     checks.append({"name": "validate-contracts passes", "passed": contract_validation["passed"]})
@@ -651,8 +657,8 @@ def run_smoke_tests() -> dict[str, Any]:
         )
 
     generated_forbidden_artifacts = []
-    for path in (RUNTIME_ROOT.parent / "故事项目").iterdir():
-        if path.is_dir():
+    for path in story_project_root.iterdir():
+        if path.is_dir() and path.resolve() not in existing_story_projects:
             generated_forbidden_artifacts.append(str(path))
     checks.append({"name": "pipeline does not create story project", "passed": not generated_forbidden_artifacts})
     image_artifacts = list(RUNTIME_ROOT.rglob("*.png")) + list((RUNTIME_ROOT.parent / "资产库").rglob("*.png"))

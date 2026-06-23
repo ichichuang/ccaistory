@@ -1,0 +1,506 @@
+{
+  "project_id": "KHN2_001",
+  "story_id": "故事0001",
+  "title": "楼道里的红贴纸",
+  "story_title": "楼道里的红贴纸",
+  "source_type": "original",
+  "copyright_status": "original_safe",
+  "target_mode": "platform_graphic_story",
+  "target_page_range": "6-8",
+  "story_type": "micro_horror",
+  "target_platform": "platform_graphic_story",
+  "story_premise": "一栋普通居民楼的楼道墙上每天多出一张红贴纸，贴纸上的箭头都指向走廊尽头那扇平时没人开的门。主角起初以为贴纸是在提醒别人，直到她把每天的位置连起来，发现箭头一直从自己的门口开始，给自己指路。",
+  "source_length_estimate": 1100,
+  "event_count": 2,
+  "twist_count": 1,
+  "required_payoffs": [
+    "red_sticker_arrow"
+  ],
+  "story_constraints": {
+    "original_only": true,
+    "no_adaptation": true,
+    "no_author_style_reference": true,
+    "no_gore": true,
+    "no_corpses": true,
+    "no_real_accidents": true,
+    "no_police_investigation": true,
+    "no_adult_crime": true,
+    "target_pages": "6-8",
+    "core_mechanism": [
+      "楼道墙上每天多一张红贴纸。",
+      "贴纸箭头指向一扇平时没人开的门。",
+      "主角以为贴纸是在提醒别人。",
+      "最后发现贴纸一直在给自己指路。"
+    ],
+    "visual_direction": [
+      "clean white notebook paper",
+      "child note layer",
+      "typed_narration",
+      "source_illustration separated from platform_story_page"
+    ]
+  },
+  "constraints": {
+    "no_gore": true,
+    "child_safe": true,
+    "original_safe": true
+  },
+  "machine_state": {
+    "current_state": "minimum_viable_story",
+    "gate_result": "passed",
+    "gate_result_label": "pass",
+    "last_gate_passed": "minimum_viable_story",
+    "next_allowed_action": "analyze_story",
+    "blocked_actions": [
+      "generate_images",
+      "generate_prompt_package",
+      "generate_webgpt_execution_package",
+      "full_generation",
+      "create_publish_package",
+      "publish",
+      "create_release_plan"
+    ],
+    "quality_gates": {
+      "minimum_viable_story": "pass",
+      "copyright_review": "pass",
+      "safety_review": "pass"
+    },
+    "evidence": [
+      "原创输入已成型",
+      "目标页数为 7 页，落在 6-8 页范围内",
+      "下一步仅允许故事分析，不允许生成图片、执行包或发布包"
+    ]
+  },
+  "minimum_viable_story": {
+    "passed": true,
+    "reason": "核心怪谈机制完整，误导与最终回扣成立，适合进入 Story Analyzer。"
+  },
+  "blocked_actions": [
+    "generate_images",
+    "generate_prompt_package",
+    "generate_webgpt_execution_package",
+    "full_generation",
+    "create_publish_package",
+    "publish",
+    "create_release_plan"
+  ],
+  "story_graph": {
+    "protagonist_want": "弄清红贴纸是不是楼道管理提示，并安全回到自己的日常节奏里",
+    "protagonist_fear": "自己被一条看不见的路线选中，却一直误以为与自己无关",
+    "reader_care_reason": "主角每次都主动做一个小选择，读者能跟着她重新理解贴纸的位置",
+    "relationship_signal": "主角与邻居、门、楼道之间的日常关系逐页变得不可靠",
+    "emotional_turn": "从替别人担心，转为意识到自己才是被指向的人",
+    "nodes": [
+      {
+        "node_id": "S01",
+        "page_index": 1,
+        "page_role": "opening",
+        "total_pages": 7,
+        "typed_hook": "早上出门时，白墙上多了一张很新的红贴纸。",
+        "typed_narration": "林小沐住在六楼，楼道平时只有白墙、鞋印和旧通知。那天电梯旁多了一张红贴纸，贴纸上有一个小箭头，斜斜指向走廊深处。她以为是保洁阿姨留给维修师傅的记号，只把它拍进手机备忘。",
+        "next_page_question": "如果只是维修记号，为什么第二天会多出一张？",
+        "final_hook_sentence": "箭头没有指向电梯，指向那扇她从没见人打开过的门。",
+        "reader_retention_goal": "建立日常楼道中的小异常，并让读者记住红贴纸箭头。",
+        "visual_memory_point": "clean white corridor wall with one red arrow sticker near the elevator",
+        "emotional_turn": "好奇替代匆忙",
+        "suspense_type": "everyday_anomaly",
+        "information_gain": 0.45,
+        "threat_level": 0.28,
+        "uncertainty": 0.62,
+        "emotional_pressure": 0.38,
+        "next_page_pull": 0.72,
+        "protagonist_want": "确认贴纸只是楼道提示",
+        "protagonist_fear": "门后有自己不知道的楼道规则",
+        "reader_care_reason": "她没有鲁莽靠近，只先记录位置",
+        "relationship_signal": "主角与熟悉楼道的关系开始松动",
+        "character_choice": "她拍下第一张贴纸而没有撕掉",
+        "concrete_behavior": "她把手机举到墙边拍照",
+        "introduced_clues": [
+          "red_sticker_arrow",
+          "wrong_recipient_misdirection"
+        ],
+        "applied_skills": [
+          "everyday_anomaly",
+          "page_turn_hook",
+          "emotional_pull"
+        ],
+        "technique_notes": [
+          "用普通楼道建立异常基线",
+          "让主角先误认为贴纸是给别人看的"
+        ]
+      },
+      {
+        "node_id": "S02",
+        "page_index": 2,
+        "page_role": "middle_escalation",
+        "total_pages": 7,
+        "typed_hook": "第二张红贴纸贴在更里面，箭头还是指向同一扇门。",
+        "typed_narration": "第二天，第一张还在，第二张却贴在消防栓旁边。林小沐问对门的奶奶，奶奶说那扇门从她搬来就没开过，里面应该只是空管井。林小沐把两张照片并排看，发现箭头像是在把人从电梯口往里带。",
+        "next_page_question": "没人开的门，为什么每天都像有人在给它铺路？",
+        "final_hook_sentence": "第二张贴纸下面，铅笔写着很浅的四个字：别走错层。",
+        "reader_retention_goal": "把异常从单点升级为路线，并引入没人开的门。",
+        "visual_memory_point": "two red arrow stickers on white wall, one near a fire hydrant",
+        "emotional_turn": "好奇变成谨慎",
+        "suspense_type": "route_anomaly",
+        "information_gain": 0.56,
+        "threat_level": 0.36,
+        "uncertainty": 0.68,
+        "emotional_pressure": 0.46,
+        "next_page_pull": 0.76,
+        "threat_delta": "贴纸从单个记号升级为连续路线，且出现儿童笔记层。",
+        "protagonist_want": "证明这是物业或邻居留下的路线",
+        "protagonist_fear": "路线真的通向那扇没人开的门",
+        "reader_care_reason": "她向邻居求证，读者得到公平反证",
+        "relationship_signal": "邻居证词排除了日常解释的一部分",
+        "character_choice": "她把两张照片并排比对",
+        "concrete_behavior": "她蹲在消防栓旁辨认铅笔字",
+        "introduced_clues": [
+          "unused_door"
+        ],
+        "repeated_clues": [
+          {
+            "clue_id": "red_sticker_arrow",
+            "escalation": "从单点变成两点路线"
+          },
+          {
+            "clue_id": "wrong_recipient_misdirection",
+            "escalation": "主角开始向邻居求证，仍以为提示给别人"
+          }
+        ],
+        "applied_skills": [
+          "horror_escalation",
+          "misdirection_disproof",
+          "page_turn_hook"
+        ],
+        "technique_notes": [
+          "用邻居证词反证维修解释",
+          "威胁递进来自路线变长"
+        ]
+      },
+      {
+        "node_id": "S03",
+        "page_index": 3,
+        "page_role": "middle_escalation",
+        "total_pages": 7,
+        "typed_hook": "第三张贴纸没有贴在墙上，而是贴在她门口的地脚线上。",
+        "typed_narration": "林小沐下班回来才看见第三张。它贴得很低，像只有弯腰系鞋带的人才会发现。箭头没有从门那边指回来，而是从她家门口指向走廊。她想，也许有人怕小孩走错门，才把提示贴低了。",
+        "next_page_question": "为什么这条路线偏偏从她家门口开始？",
+        "final_hook_sentence": "她关门前看了一眼，贴纸的箭头正好贴着她拖鞋的方向。",
+        "reader_retention_goal": "把路线起点靠近主角，但保留“提醒别人”的误导。",
+        "visual_memory_point": "low red sticker on the baseboard outside an apartment door",
+        "emotional_turn": "替别人担心转为轻微不安",
+        "suspense_type": "personalized_route",
+        "information_gain": 0.62,
+        "threat_level": 0.48,
+        "uncertainty": 0.7,
+        "emotional_pressure": 0.58,
+        "next_page_pull": 0.78,
+        "threat_delta": "路线起点从公共空间移到主角家门口。",
+        "protagonist_want": "把贴纸解释为给走错门的小孩看的提示",
+        "protagonist_fear": "贴纸其实知道她每天从哪里出来",
+        "reader_care_reason": "她为别人寻找安全解释，误导更公平",
+        "relationship_signal": "主角与自家门口的安全边界被贴纸打破",
+        "character_choice": "她没有撕掉贴纸，只把鞋柜往里面挪了一点",
+        "concrete_behavior": "她弯腰确认贴纸不是旧污渍",
+        "repeated_clues": [
+          {
+            "clue_id": "red_sticker_arrow",
+            "escalation": "贴纸从公共墙面靠近主角家门口"
+          },
+          {
+            "clue_id": "unused_door",
+            "escalation": "箭头仍然指向同一扇门"
+          },
+          {
+            "clue_id": "wrong_recipient_misdirection",
+            "escalation": "主角把低位贴纸解释成给孩子看的提示"
+          }
+        ],
+        "applied_skills": [
+          "horror_escalation",
+          "child_perspective_wonder",
+          "page_turn_hook"
+        ],
+        "technique_notes": [
+          "儿童手写层只作为安全的线索，不呈现危险",
+          "路线开始个人化"
+        ]
+      },
+      {
+        "node_id": "S04",
+        "page_index": 4,
+        "page_role": "turning_point",
+        "total_pages": 7,
+        "typed_hook": "她把第三张贴纸挪开，晚上墙上多了一张新的。",
+        "typed_narration": "林小沐想帮忙，便把低处那张贴到更显眼的白墙上。晚上回来，原来的地脚线位置空着，白墙上却多了一张新的红贴纸，正好压在她白天贴过的边角上。新贴纸旁边还是铅笔字：别替我贴。",
+        "next_page_question": "贴纸怎么知道是她动过？",
+        "final_hook_sentence": "那一刻她才发现，所有箭头都是从她碰过的地方往前指。",
+        "reader_retention_goal": "打破主角的旁观误解，让贴纸对她的行动作出回应。",
+        "visual_memory_point": "red sticker covering the corner mark left by another sticker",
+        "emotional_turn": "好心帮忙变成被点名的不安",
+        "suspense_type": "disproof_signal",
+        "information_gain": 0.7,
+        "threat_level": 0.58,
+        "uncertainty": 0.72,
+        "emotional_pressure": 0.66,
+        "next_page_pull": 0.8,
+        "threat_delta": "贴纸开始回应主角动作，排除纯公共提示解释。",
+        "protagonist_want": "确认自己没有被贴纸选中",
+        "protagonist_fear": "自己的每个动作都成了路线的一部分",
+        "reader_care_reason": "她的主动干预带来直接反馈",
+        "relationship_signal": "楼道像在回应主角，而不是提醒别人",
+        "character_choice": "她主动移动贴纸以测试解释",
+        "concrete_behavior": "她把旧贴纸边角对齐，检查是否有人重新贴过",
+        "repeated_clues": [
+          {
+            "clue_id": "red_sticker_arrow",
+            "escalation": "贴纸回应主角移动行为"
+          },
+          {
+            "clue_id": "wrong_recipient_misdirection",
+            "escalation": "误导被贴纸反证"
+          }
+        ],
+        "applied_skills": [
+          "misdirection_disproof",
+          "horror_escalation",
+          "page_turn_hook"
+        ],
+        "technique_notes": [
+          "用可验证行为推翻给别人看的解释",
+          "威胁递进来自规则反馈"
+        ]
+      },
+      {
+        "node_id": "S05",
+        "page_index": 5,
+        "page_role": "middle_escalation",
+        "total_pages": 7,
+        "typed_hook": "第五张贴纸贴在她手机照片里没有出现过的位置。",
+        "typed_narration": "她把前四张照片按时间排好，忽然发现少了一段：从她家门口到消防栓之间，本来应该空着。第二天早晨，那段空白处补上第五张，箭头正好接住她每天出门迈出的第一步。贴纸下面写着：终于看见了。",
+        "next_page_question": "如果路线一直完整，只是她以前没看见呢？",
+        "final_hook_sentence": "照片里没有第五张，墙上却像它从来都在那里。",
+        "reader_retention_goal": "让主角和读者同时重新理解路线的起点。",
+        "visual_memory_point": "phone photo timeline beside a new red sticker on blank wall",
+        "emotional_turn": "不安变成回看证据的紧张",
+        "suspense_type": "memory_gap",
+        "information_gain": 0.76,
+        "threat_level": 0.66,
+        "uncertainty": 0.74,
+        "emotional_pressure": 0.72,
+        "next_page_pull": 0.82,
+        "threat_delta": "路线补齐主角没有注意到的空白段，暗示它一直面向她。",
+        "protagonist_want": "用照片证明贴纸是后来才出现的",
+        "protagonist_fear": "证据反而说明自己一直沿路线行动",
+        "reader_care_reason": "她用记录自救，读者能跟着证据翻转",
+        "relationship_signal": "手机照片与真实墙面互相矛盾",
+        "character_choice": "她逐张核对照片时间",
+        "concrete_behavior": "她把手机贴到墙边，对齐照片里的消防栓",
+        "repeated_clues": [
+          {
+            "clue_id": "red_sticker_arrow",
+            "escalation": "路线补上缺口并对准主角第一步"
+          },
+          {
+            "clue_id": "unused_door",
+            "escalation": "所有箭头仍收束到那扇门"
+          }
+        ],
+        "applied_skills": [
+          "horror_escalation",
+          "misdirection_disproof",
+          "platform_completion_rate"
+        ],
+        "technique_notes": [
+          "用照片作为公平反证",
+          "信息增量明确指向主角"
+        ]
+      },
+      {
+        "node_id": "S06",
+        "page_index": 6,
+        "page_role": "pre_ending",
+        "total_pages": 7,
+        "typed_hook": "第六张贴纸不在墙上，而在她的钥匙扣背面。",
+        "typed_narration": "林小沐把钥匙拿出来，才发现钥匙扣背面贴着一枚小红箭头。箭头指向那把她每天用来开家门的钥匙。她终于明白，贴纸不是在提醒走错路的人，而是在把她从家门口、消防栓、白墙，一步一步带到走廊尽头。",
+        "next_page_question": "如果路线的终点是那扇门，她的钥匙为什么也在路线里？",
+        "final_hook_sentence": "她把钥匙举到那扇门前，门缝里露出同样的红色。",
+        "reader_retention_goal": "明确推翻“给别人看”的解释，并把主角推到门前。",
+        "visual_memory_point": "tiny red arrow sticker on the back of a keychain",
+        "emotional_turn": "怀疑变成确认",
+        "suspense_type": "personalized_route_reveal",
+        "information_gain": 0.68,
+        "threat_level": 0.63,
+        "uncertainty": 0.66,
+        "emotional_pressure": 0.69,
+        "next_page_pull": 0.72,
+        "threat_delta": "贴纸从楼道表面进入主角随身物，路线与她本人绑定。",
+        "protagonist_want": "确认终点和自己的钥匙有什么关系",
+        "protagonist_fear": "自己从一开始就是路线的目标",
+        "reader_care_reason": "她完成关键推理，读者得到最后一页前的清晰问题",
+        "relationship_signal": "家门钥匙与陌生门建立联系",
+        "character_choice": "她拿钥匙靠近那扇平时没人开的门",
+        "concrete_behavior": "她把钥匙扣翻到背面，手指停在红箭头上",
+        "paid_off_clues": [
+          "wrong_recipient_misdirection"
+        ],
+        "repeated_clues": [
+          {
+            "clue_id": "red_sticker_arrow",
+            "escalation": "贴纸出现在主角随身物上"
+          },
+          {
+            "clue_id": "unused_door",
+            "escalation": "主角第一次主动站到门前"
+          }
+        ],
+        "applied_skills": [
+          "strange_tale_twist",
+          "horror_escalation",
+          "page_turn_hook"
+        ],
+        "technique_notes": [
+          "终局前揭示误导",
+          "把路线绑定到主角自身"
+        ]
+      },
+      {
+        "node_id": "S07",
+        "page_index": 7,
+        "page_role": "ending",
+        "total_pages": 7,
+        "typed_hook": "那扇没人开的门，用她家的钥匙打开了。",
+        "typed_narration": "门后不是房间，而是一面干净的白墙。墙上贴着七张红贴纸，位置和她这几天走过的路线完全一样。最后一张贴在门内侧，箭头指向她站着的位置。铅笔字很轻：这次没有走错。",
+        "next_page_question": "",
+        "final_hook_sentence": "她回头看见自己家门口，多了一张新的空白红贴纸。",
+        "reader_retention_goal": "完成路线回扣，留下可继续扩展但不越界的余味。",
+        "visual_memory_point": "inside of unused door with seven red stickers on clean white wall",
+        "emotional_turn": "确认变成安静的错位感",
+        "suspense_type": "callback_twist",
+        "information_gain": 0.9,
+        "threat_level": 0.86,
+        "uncertainty": 0.78,
+        "emotional_pressure": 0.86,
+        "next_page_pull": 0.72,
+        "protagonist_want": "确认门后的路线终点",
+        "protagonist_fear": "路线会重新从自己的门口开始",
+        "reader_care_reason": "前文所有贴纸位置被一次性重读",
+        "relationship_signal": "自家门和无人门形成闭环",
+        "character_choice": "她用自己的钥匙打开无人门",
+        "concrete_behavior": "她站在门内侧，对照每张贴纸的位置",
+        "opening_callback": "第一张红贴纸和走廊尽头的无人门在门内墙上被完整回扣。",
+        "payoff_target": "red_sticker_arrow",
+        "twist_reveal": "贴纸不是在提醒别人，而是一直从主角家门口开始给她指路。",
+        "paid_off_clues": [
+          "red_sticker_arrow",
+          "unused_door"
+        ],
+        "applied_skills": [
+          "fate_loop",
+          "strange_tale_twist",
+          "emotional_pull"
+        ],
+        "technique_notes": [
+          "结尾回扣开头贴纸",
+          "用路线闭环解释核心怪谈机制"
+        ]
+      }
+    ],
+    "edges": [
+      {
+        "from": "S01",
+        "to": "S02",
+        "edge_type": "sequence"
+      },
+      {
+        "from": "S02",
+        "to": "S03",
+        "edge_type": "sequence"
+      },
+      {
+        "from": "S03",
+        "to": "S04",
+        "edge_type": "sequence"
+      },
+      {
+        "from": "S04",
+        "to": "S05",
+        "edge_type": "sequence"
+      },
+      {
+        "from": "S05",
+        "to": "S06",
+        "edge_type": "sequence"
+      },
+      {
+        "from": "S06",
+        "to": "S07",
+        "edge_type": "sequence"
+      }
+    ]
+  },
+  "derived_views": {
+    "platform_graphic_story_pages": 7,
+    "visual_direction": {
+      "paper_style": "clean white notebook paper",
+      "overlay_layer": "child note layer",
+      "narration_layer": "typed_narration",
+      "separation_rule": "source_illustration separated from platform_story_page"
+    },
+    "page_roles": [
+      "opening",
+      "middle_escalation",
+      "middle_escalation",
+      "turning_point",
+      "middle_escalation",
+      "pre_ending",
+      "ending"
+    ]
+  },
+  "quality_gates": {
+    "copyright_review": {
+      "status": "pass",
+      "result": "original_safe",
+      "evidence": "未改编既有故事，未引用作者风格，未使用受版权保护表达。"
+    },
+    "minimum_viable_story": {
+      "status": "pass",
+      "target_page_range": "6-8",
+      "planned_pages": 7
+    },
+    "runtime_precheck": {
+      "status": "pass",
+      "checks": [
+        "validate",
+        "validate_contracts",
+        "check_contract_drift",
+        "smoke_test",
+        "artifact_check_registry"
+      ]
+    },
+    "safety_review": {
+      "status": "pass",
+      "blocked_content_absent": [
+        "gore",
+        "corpse",
+        "real_accident",
+        "police_investigation",
+        "adult_crime"
+      ]
+    }
+  },
+  "runtime_status": {
+    "validate": "pass",
+    "validate_contracts": "pass",
+    "check_contract_drift": "pass",
+    "smoke_test": "pass",
+    "artifact_check_registry": "pass",
+    "contracts_available": true,
+    "story_analyzer_available": true,
+    "skill_executor_available": true,
+    "pipeline_runner_available": true,
+    "artifact_registry_available": true,
+    "multimodal_qa_available": true,
+    "artifact_count": 0,
+    "broken_link_count": 0
+  }
+}
