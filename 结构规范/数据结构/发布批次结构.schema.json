@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "发布批次结构",
+  "type": "object",
+  "required": [
+    "story_id",
+    "status",
+    "reading_order",
+    "publishing_order",
+    "archive_order",
+    "human_reading_passed"
+  ],
+  "properties": {
+    "story_id": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    },
+    "reading_order": {
+      "type": "array"
+    },
+    "publishing_order": {
+      "type": "array"
+    },
+    "archive_order": {
+      "type": "array"
+    },
+    "human_reading_passed": {
+      "type": "boolean"
+    }
+  }
+}

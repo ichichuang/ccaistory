@@ -1,0 +1,53 @@
+{
+  "technique_profile": {
+    "mode": "platform_graphic_story",
+    "skill_library": "creator_technique_library",
+    "selected_skill_set": [],
+    "hook_strength_required": 3,
+    "next_page_pull_required": 3,
+    "information_gain_required": 1,
+    "full_story_target_pages": 12,
+    "full_generation_blocked_until": "skill_enhanced_story_graph_pass"
+  },
+  "story_graph": {
+    "nodes": [
+      {
+        "node_id": "S01",
+        "applied_skills": [],
+        "typed_hook": "",
+        "next_page_question": "",
+        "answer_delay": "",
+        "suspense_type": "",
+        "emotional_turn": "",
+        "visual_memory_point": "",
+        "rule_pressure": "",
+        "contradiction": "",
+        "final_hook_sentence": "",
+        "reader_retention_goal": "",
+        "payoff_target": "",
+        "technique_notes": "",
+        "hook_score": {
+          "hook_strength": 0,
+          "information_gain": 0,
+          "emotional_pull": 0,
+          "visual_memory": 0,
+          "next_page_pull": 0,
+          "clarity": 0
+        }
+      }
+    ],
+    "edges": [
+      {
+        "from": "S01",
+        "to": "S02",
+        "question_from_previous": "",
+        "answer_in_current": "",
+        "new_question_created": "",
+        "clue_carried_forward": "",
+        "payoff_deadline": "",
+        "tension_delta": "up"
+      }
+    ]
+  }
+}
+

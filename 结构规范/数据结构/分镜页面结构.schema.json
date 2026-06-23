@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "分镜页面结构",
+  "type": "object",
+  "required": [
+    "page_id",
+    "page_function",
+    "main_story",
+    "reading_order",
+    "production_order",
+    "previous_cause",
+    "current_action",
+    "next_hook",
+    "visible_characters",
+    "mentioned_characters",
+    "forbidden_characters",
+    "scene_mode",
+    "strong_lock",
+    "caption",
+    "visual_focus",
+    "acceptance_criteria"
+  ],
+  "properties": {
+    "page_id": {
+      "type": "string"
+    },
+    "page_function": {
+      "type": "string"
+    },
+    "main_story": {
+      "type": "boolean"
+    },
+    "reading_order": {},
+    "production_order": {},
+    "previous_cause": {
+      "type": "string"
+    },
+    "current_action": {
+      "type": "string"
+    },
+    "next_hook": {
+      "type": "string"
+    },
+    "visible_characters": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "mentioned_characters": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "forbidden_characters": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "scene_mode": {
+      "enum": [
+        "single_scene",
+        "multi_panel_allowed",
+        "anchor_sheet",
+        "object_file",
+        "map",
+        "cover",
+        "appendix"
+      ]
+    },
+    "strong_lock": {
+      "type": "boolean"
+    },
+    "caption": {
+      "type": "string"
+    },
+    "visual_focus": {
+      "type": "string"
+    },
+    "acceptance_criteria": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}
