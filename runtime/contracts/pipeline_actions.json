@@ -39,26 +39,46 @@
       "required_inputs": ["story_graph", "selected_skill_set"],
       "outputs": ["skill_runtime_result", "repair_plan"],
       "blocked_if": ["story_graph_missing", "unknown_skill_id"],
-      "next_action_on_pass": "execute_skill_graph",
+      "next_action_on_pass": "analyze_story_graph",
       "next_action_on_fail": "apply_skill_runtime"
     },
-    "execute_skill_node": {
-      "action_id": "execute_skill_node",
+    "analyze_story_graph": {
+      "action_id": "analyze_story_graph",
       "required_state": "skill_runtime_checked",
       "required_gate_result": "passed",
       "required_inputs": ["story_graph", "skill_runtime_result"],
+      "outputs": ["story_analysis_result", "recommended_skill_plan", "repair_priority"],
+      "blocked_if": ["story_graph_missing", "story_analyzer_high_risk"],
+      "next_action_on_pass": "execute_skill_graph",
+      "next_action_on_fail": "repair_story_graph_before_skill_executor"
+    },
+    "repair_story_graph_before_skill_executor": {
+      "action_id": "repair_story_graph_before_skill_executor",
+      "required_state": "story_analysis_blocked",
+      "required_gate_result": "blocked",
+      "required_inputs": ["story_analysis_result", "repair_priority"],
+      "outputs": ["story_graph_repair_targets"],
+      "blocked_if": ["story_analysis_result_missing", "repair_priority_missing"],
+      "next_action_on_pass": "analyze_story_graph",
+      "next_action_on_fail": "repair_story_graph_before_skill_executor"
+    },
+    "execute_skill_node": {
+      "action_id": "execute_skill_node",
+      "required_state": "story_analyzed",
+      "required_gate_result": "passed",
+      "required_inputs": ["story_graph", "skill_runtime_result", "story_analysis_result"],
       "outputs": ["skill_executor_result", "proposed_changes"],
-      "blocked_if": ["story_graph_missing", "skill_runtime_result_missing"],
+      "blocked_if": ["story_graph_missing", "skill_runtime_result_missing", "story_analyzer_high_risk"],
       "next_action_on_pass": "review_skill_executor_proposed_changes",
       "next_action_on_fail": "execute_skill_node"
     },
     "execute_skill_graph": {
       "action_id": "execute_skill_graph",
-      "required_state": "skill_runtime_checked",
+      "required_state": "story_analyzed",
       "required_gate_result": "passed",
-      "required_inputs": ["story_graph", "skill_runtime_result"],
+      "required_inputs": ["story_graph", "skill_runtime_result", "story_analysis_result"],
       "outputs": ["skill_executor_result", "proposed_changes"],
-      "blocked_if": ["story_graph_missing", "skill_runtime_result_missing"],
+      "blocked_if": ["story_graph_missing", "skill_runtime_result_missing", "story_analyzer_high_risk"],
       "next_action_on_pass": "review_skill_executor_proposed_changes",
       "next_action_on_fail": "execute_skill_graph"
     },

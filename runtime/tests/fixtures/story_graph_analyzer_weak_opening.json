@@ -1,0 +1,63 @@
+{
+  "story_graph": {
+    "protagonist_want": "keep the name visible",
+    "protagonist_fear": "being erased",
+    "reader_care_reason": "the child is actively trying to keep the name",
+    "relationship_signal": "child and teacher",
+    "nodes": [
+      {
+        "node_id": "S01",
+        "page_index": 1,
+        "page_role": "opening",
+        "applied_skills": ["page_turn_hook"],
+        "typed_hook": "",
+        "typed_narration": "The child sees the register.",
+        "next_page_question": "Why is the register blank?",
+        "final_hook_sentence": "",
+        "reader_retention_goal": "Start the mystery.",
+        "visual_memory_point": "a blank register line",
+        "emotional_turn": "fear becomes action",
+        "suspense_type": "everyday_anomaly",
+        "information_gain": 0.2,
+        "threat_level": 0.2,
+        "uncertainty": 0.4,
+        "emotional_pressure": 0.45,
+        "next_page_pull": 0.5,
+        "reader_care_reason": "the child acts",
+        "character_choice": "the child points at the register",
+        "concrete_behavior": "the child lifts a shaking finger",
+        "introduced_clues": ["blank_register"]
+      },
+      {
+        "node_id": "S02",
+        "page_index": 2,
+        "page_role": "ending",
+        "applied_skills": ["fate_loop"],
+        "typed_hook": "The blank register answers.",
+        "typed_narration": "The child opens the page and sees the missing name written backward.",
+        "next_page_question": "",
+        "final_hook_sentence": "The blank register writes the child's name backward.",
+        "reader_retention_goal": "Close the register clue.",
+        "visual_memory_point": "a name written backward",
+        "emotional_turn": "fear becomes recognition",
+        "suspense_type": "callback_twist",
+        "information_gain": 0.8,
+        "threat_level": 0.75,
+        "uncertainty": 0.5,
+        "emotional_pressure": 0.72,
+        "next_page_pull": 0.55,
+        "opening_callback": "The blank register from the opening returns.",
+        "payoff_target": "blank_register",
+        "reader_care_reason": "the child's action causes the reveal",
+        "character_choice": "the child opens the page",
+        "concrete_behavior": "the child steps back"
+      }
+    ],
+    "edges": [
+      {
+        "from": "S01",
+        "to": "S02"
+      }
+    ]
+  }
+}

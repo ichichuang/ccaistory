@@ -1,0 +1,20 @@
+{
+  "blocked_actions_seen": [
+    "empty_state_plan"
+  ],
+  "command": "smoke-test pipeline-run --until semantic_lint --dry-run",
+  "contract_versions": {
+    "pipeline_actions": 1,
+    "quality_gates": 1,
+    "state_machine": 1
+  },
+  "created_artifacts": [
+    "runtime/.runs/run_20260623T120329754380Z_e8093ac9/run_manifest.json",
+    "runtime/.runs/run_20260623T120329754380Z_e8093ac9/checkpoint.json"
+  ],
+  "dry_run": true,
+  "manual_approval_points": [],
+  "project_path": "",
+  "requested_until": "semantic_lint",
+  "run_id": "run_20260623T120329754380Z_e8093ac9"
+}

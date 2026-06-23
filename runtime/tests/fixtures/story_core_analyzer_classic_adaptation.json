@@ -1,0 +1,82 @@
+{
+  "story_id": "story_core_analyzer_classic_adaptation",
+  "story_title": "Classic Source Adaptation Fixture",
+  "story_premise": "A classic adaptation with source-text compression, copyright review, three foreshadows, two payoffs, and a final twist.",
+  "source_type": "classic adaptation copyright review",
+  "target_mode": "platform illustrated story",
+  "constraints": {
+    "avoid_author_style": true
+  },
+  "event_count": 8,
+  "twist_count": 2,
+  "required_payoffs": ["sealed_letter", "missing_guest", "mirror_rule"],
+  "source_length_estimate": 18000,
+  "story_graph": {
+    "protagonist_want": "understand why the old house repeats one dinner",
+    "protagonist_fear": "becoming another missing guest",
+    "reader_care_reason": "the protagonist must choose whether to open the sealed letter",
+    "relationship_signal": "guest and vanished host",
+    "nodes": [
+      {
+        "node_id": "S01",
+        "page_index": 1,
+        "page_role": "opening",
+        "applied_skills": ["world_compression", "page_turn_hook"],
+        "typed_hook": "The old dinner table is set for one guest who has not arrived in fifty years.",
+        "typed_narration": "The protagonist hides the sealed letter in a sleeve before the host notices the empty chair.",
+        "next_page_question": "Why does the host still serve the absent guest?",
+        "final_hook_sentence": "The empty chair scrapes backward by itself.",
+        "reader_retention_goal": "Compress the classic premise into one visible mystery.",
+        "visual_memory_point": "an empty chair moving beside a sealed letter",
+        "emotional_turn": "curiosity becomes caution",
+        "suspense_type": "classic_mystery",
+        "information_gain": 0.5,
+        "threat_level": 0.45,
+        "uncertainty": 0.7,
+        "emotional_pressure": 0.55,
+        "next_page_pull": 0.72,
+        "protagonist_want": "learn who the missing guest is",
+        "protagonist_fear": "being trapped in the dinner",
+        "reader_care_reason": "the protagonist has the only unread letter",
+        "relationship_signal": "host and guest",
+        "character_choice": "the protagonist hides the letter",
+        "concrete_behavior": "the protagonist folds the letter into a sleeve",
+        "introduced_clues": ["sealed_letter"]
+      },
+      {
+        "node_id": "S02",
+        "page_index": 2,
+        "page_role": "ending",
+        "applied_skills": ["strange_tale_twist", "fate_loop"],
+        "typed_hook": "The letter names the guest as the person reading it.",
+        "typed_narration": "The protagonist opens the letter and sees the same table drawn with one extra empty chair.",
+        "next_page_question": "",
+        "final_hook_sentence": "The chair at the beginning scrapes back into place.",
+        "reader_retention_goal": "Pay off the opening chair and letter.",
+        "visual_memory_point": "a drawn table adding one extra chair",
+        "emotional_turn": "caution becomes recognition",
+        "suspense_type": "callback_twist",
+        "information_gain": 0.85,
+        "threat_level": 0.75,
+        "uncertainty": 0.55,
+        "emotional_pressure": 0.78,
+        "next_page_pull": 0.58,
+        "opening_callback": "The moving empty chair from the opening returns.",
+        "payoff_target": "sealed_letter",
+        "twist_reveal": "The missing guest is the next reader of the letter.",
+        "protagonist_want": "leave the house",
+        "protagonist_fear": "becoming the missing guest",
+        "reader_care_reason": "opening the letter changes the protagonist's fate",
+        "relationship_signal": "host and trapped guest",
+        "character_choice": "the protagonist opens the letter",
+        "concrete_behavior": "the protagonist steps away from the chair"
+      }
+    ],
+    "edges": [
+      {
+        "from": "S01",
+        "to": "S02"
+      }
+    ]
+  }
+}

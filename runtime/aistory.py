@@ -32,6 +32,12 @@ from skill_executor.candidate_scorer import score_candidate
 from skill_executor.conflict_resolver import resolve_conflicts
 from skill_executor.executor import execute_skill_graph, execute_skill_node
 from state_machine.state_machine import ACTIONS, can_run, get_status
+from story_analyzer.analyzer import analyze_story_core, analyze_story_graph
+from story_analyzer.character_stakes import analyze_character_stakes
+from story_analyzer.clue_ledger import analyze_clue_ledger
+from story_analyzer.page_count_estimator import estimate_pages_for_story_core
+from story_analyzer.story_type_classifier import classify_story_core
+from story_analyzer.tension_curve import analyze_tension_curve
 from telemetry.telemetry import validate_telemetry_file
 
 
@@ -79,6 +85,27 @@ def main(argv: list[str] | None = None) -> int:
     sub.add_parser("check-contract-drift")
     sub.add_parser("smoke-test")
     sub.add_parser("list-runs")
+
+    analyze_story = sub.add_parser("analyze-story")
+    analyze_story.add_argument("--story-core", required=True)
+
+    analyze_graph = sub.add_parser("analyze-graph")
+    analyze_graph.add_argument("--graph", required=True)
+
+    classify_story = sub.add_parser("classify-story")
+    classify_story.add_argument("--story-core", required=True)
+
+    estimate_pages = sub.add_parser("estimate-pages")
+    estimate_pages.add_argument("--story-core", required=True)
+
+    analyze_clues = sub.add_parser("analyze-clues")
+    analyze_clues.add_argument("--graph", required=True)
+
+    analyze_tension = sub.add_parser("analyze-tension")
+    analyze_tension.add_argument("--graph", required=True)
+
+    analyze_stakes = sub.add_parser("analyze-stakes")
+    analyze_stakes.add_argument("--graph", required=True)
 
     can = sub.add_parser("can-run")
     can.add_argument("--project", required=True)
@@ -178,6 +205,20 @@ def main(argv: list[str] | None = None) -> int:
         payload = check_contract_drift()
     elif args.command == "list-runs":
         payload = list_runs()
+    elif args.command == "analyze-story":
+        payload = analyze_story_core(read_json(args.story_core))
+    elif args.command == "analyze-graph":
+        payload = analyze_story_graph(read_json(args.graph))
+    elif args.command == "classify-story":
+        payload = classify_story_core(read_json(args.story_core))
+    elif args.command == "estimate-pages":
+        payload = estimate_pages_for_story_core(read_json(args.story_core))
+    elif args.command == "analyze-clues":
+        payload = analyze_clue_ledger(read_json(args.graph))
+    elif args.command == "analyze-tension":
+        payload = analyze_tension_curve(read_json(args.graph))
+    elif args.command == "analyze-stakes":
+        payload = analyze_character_stakes(read_json(args.graph))
     elif args.command == "can-run":
         payload = can_run(args.project, args.action)
     elif args.command == "select-skills":

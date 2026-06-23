@@ -1,0 +1,57 @@
+{
+  "story_graph": {
+    "protagonist_want": "",
+    "protagonist_fear": "",
+    "reader_care_reason": "",
+    "relationship_signal": "",
+    "nodes": [
+      {
+        "node_id": "S01",
+        "page_index": 1,
+        "page_role": "opening",
+        "applied_skills": ["page_turn_hook"],
+        "typed_hook": "The classroom clock runs backward.",
+        "typed_narration": "The child observes the clock and sees the register.",
+        "next_page_question": "Why is the register changing?",
+        "final_hook_sentence": "The register line fades.",
+        "reader_retention_goal": "Start the clock mystery.",
+        "visual_memory_point": "a fading register line",
+        "emotional_turn": "fear",
+        "suspense_type": "everyday_anomaly",
+        "information_gain": 0.5,
+        "threat_level": 0.45,
+        "uncertainty": 0.7,
+        "emotional_pressure": 0.55,
+        "next_page_pull": 0.72,
+        "introduced_clues": ["fading_line"]
+      },
+      {
+        "node_id": "S02",
+        "page_index": 2,
+        "page_role": "ending",
+        "applied_skills": ["fate_loop"],
+        "typed_hook": "The fading line writes itself backward.",
+        "typed_narration": "The child watches the register and sees the same line return.",
+        "next_page_question": "",
+        "final_hook_sentence": "The line writes the child's name backward.",
+        "reader_retention_goal": "Pay off the fading line.",
+        "visual_memory_point": "a backward name on the register",
+        "emotional_turn": "fear",
+        "suspense_type": "callback_twist",
+        "information_gain": 0.82,
+        "threat_level": 0.78,
+        "uncertainty": 0.55,
+        "emotional_pressure": 0.75,
+        "next_page_pull": 0.58,
+        "opening_callback": "The fading register line from the opening returns.",
+        "payoff_target": "fading_line"
+      }
+    ],
+    "edges": [
+      {
+        "from": "S01",
+        "to": "S02"
+      }
+    ]
+  }
+}

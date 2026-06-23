@@ -3,21 +3,53 @@ from __future__ import annotations
 from typing import Any
 
 from contracts.validate_contracts import validate_contracts
-from core.io import result
+from core.io import find_story_core, load_json_file, result
 from pipeline_runner.checkpoint import create_checkpoint, mark_step_status, save_checkpoint
 from pipeline_runner.pipeline_errors import PipelineCheckpointError
 from pipeline_runner.run_manifest import create_run_manifest
+from story_analyzer.analyzer import analyze_story_core, analyze_story_graph
 
 
 EXTERNAL_GENERATION_ACTIONS = {"generate_source_pilot_task_list"}
 ACCEPTANCE_ACTIONS = {"accept_asset", "reject_asset"}
 SKILL_EXECUTOR_DRY_RUN_ACTIONS = {"execute_skill_node", "execute_skill_graph"}
 SKILL_EXECUTOR_APPROVAL_ACTIONS = {"review_skill_executor_proposed_changes", "apply_approved_skill_changes"}
+ANALYZER_ACTIONS = {"analyze_story_graph"}
 
 
 def _acceptance_inputs_present(step: dict[str, Any]) -> bool:
     required = set(step.get("required_inputs", []))
     return {"execution_telemetry", "asset_qa_result"}.issubset(required)
+
+
+def _analyze_project_story(plan_result: dict[str, Any], project_path: str) -> dict[str, Any]:
+    story_path = plan_result.get("story_core_path")
+    if not story_path:
+        resolved = find_story_core(project_path)
+        story_path = str(resolved) if resolved is not None else ""
+    if not story_path:
+        return {
+            "passed": False,
+            "next_action": "repair_story_graph_before_skill_executor",
+            "repair_priority": [{"source": "pipeline_runner", "risk_level": "high", "issue": "story_core_missing"}],
+        }
+    resolved_path = find_story_core(story_path)
+    if resolved_path is None:
+        return {
+            "passed": False,
+            "next_action": "repair_story_graph_before_skill_executor",
+            "repair_priority": [{"source": "pipeline_runner", "risk_level": "high", "issue": "story_payload_missing"}],
+        }
+    payload = load_json_file(resolved_path)
+    if not isinstance(payload, dict):
+        return {
+            "passed": False,
+            "next_action": "repair_story_graph_before_skill_executor",
+            "repair_priority": [{"source": "pipeline_runner", "risk_level": "high", "issue": "story_payload_not_object"}],
+        }
+    if isinstance(payload.get("story_graph"), dict):
+        return analyze_story_core(payload)
+    return analyze_story_graph(payload)
 
 
 def execute_pipeline(
@@ -136,6 +168,31 @@ def execute_pipeline(
                         "checkpoint": f"runtime/.runs/{manifest['run_id']}/checkpoint.json",
                     },
                 )
+
+            if action_id in ANALYZER_ACTIONS:
+                analysis_result = _analyze_project_story(plan_result, project_path)
+                if not analysis_result.get("passed"):
+                    mark_step_status(checkpoint, step_id, "failed", "story_analyzer_high_risk")
+                    checkpoint["next_action"] = analysis_result.get(
+                        "next_action",
+                        "repair_story_graph_before_skill_executor",
+                    )
+                    save_checkpoint(checkpoint)
+                    return result(
+                        False,
+                        run_result={
+                            "run_id": manifest["run_id"],
+                            "run_status": "blocked",
+                            "dry_run": dry_run,
+                            "stopped_at": step_id,
+                            "last_error": "story_analyzer_high_risk",
+                            "next_action": checkpoint["next_action"],
+                            "executed_steps": executed_steps,
+                            "story_analysis_result": analysis_result,
+                            "run_manifest": f"runtime/.runs/{manifest['run_id']}/run_manifest.json",
+                            "checkpoint": f"runtime/.runs/{manifest['run_id']}/checkpoint.json",
+                        },
+                    )
 
             if action_id in SKILL_EXECUTOR_APPROVAL_ACTIONS and not step.get("manual_approval_required"):
                 mark_step_status(checkpoint, step_id, "failed", "skill_executor_approval_action_not_manual")

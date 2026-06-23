@@ -34,13 +34,31 @@
       "required_inputs": ["story_graph", "selected_skill_set", "skill_definitions"],
       "pass_conditions": ["required_skill_fields_present", "no_skill_hard_failures"],
       "fail_conditions": ["skill_effect_missing", "skill_hard_failure_present"],
-      "next_allowed_action_on_pass": "execute_skill_graph",
+      "next_allowed_action_on_pass": "analyze_story_graph",
       "next_allowed_action_on_fail": "apply_skill_runtime",
-      "blocked_actions": ["check_story_graph", "build_visual_manifest", "compile_prompts", "generate_images"]
+      "blocked_actions": ["execute_skill_graph", "check_story_graph", "build_visual_manifest", "compile_prompts", "generate_images"]
+    },
+    "story_analyzer_gate": {
+      "gate_id": "story_analyzer_gate",
+      "required_inputs": ["story_graph", "story_analysis_result"],
+      "pass_conditions": [
+        "story_analysis_result.passed",
+        "recommended_skill_plan_present",
+        "repair_priority_empty_or_low_risk"
+      ],
+      "fail_conditions": [
+        "story_analyzer_high_risk",
+        "missing_payoff",
+        "flat_middle",
+        "weak_character_stakes"
+      ],
+      "next_allowed_action_on_pass": "execute_skill_graph",
+      "next_allowed_action_on_fail": "repair_story_graph_before_skill_executor",
+      "blocked_actions": ["execute_skill_node", "execute_skill_graph", "build_visual_manifest", "compile_prompts", "generate_images"]
     },
     "skill_executor_gate": {
       "gate_id": "skill_executor_gate",
-      "required_inputs": ["story_graph", "skill_executor_result"],
+      "required_inputs": ["story_graph", "story_analysis_result", "skill_executor_result"],
       "pass_conditions": [
         "candidate_generation_completed",
         "candidate_scores_present",

@@ -13,6 +13,7 @@ ACTION_GATE_MAP = {
     "assess_page_count": "page_count_gate",
     "select_skills": "skill_selection_gate",
     "apply_skill_runtime": "skill_runtime_gate",
+    "analyze_story_graph": "story_analyzer_gate",
     "execute_skill_node": "skill_executor_gate",
     "execute_skill_graph": "skill_executor_gate",
     "review_skill_executor_proposed_changes": "skill_executor_gate",

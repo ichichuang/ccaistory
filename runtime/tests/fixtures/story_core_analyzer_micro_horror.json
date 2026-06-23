@@ -1,0 +1,118 @@
+{
+  "story_id": "story_core_analyzer_micro_horror",
+  "story_title": "Backward Clock",
+  "story_premise": "A micro horror story about one classroom clock anomaly and one final callback.",
+  "source_type": "original",
+  "target_mode": "platform micro horror",
+  "constraints": {
+    "no_gore": true
+  },
+  "event_count": 1,
+  "twist_count": 1,
+  "required_payoffs": ["clock_name"],
+  "source_length_estimate": 900,
+  "story_graph": {
+    "protagonist_want": "get through attendance without being noticed",
+    "protagonist_fear": "being erased from the class list",
+    "reader_care_reason": "the child is the only one trying to keep their name",
+    "relationship_signal": "the child keeps looking to the teacher for help",
+    "nodes": [
+      {
+        "node_id": "S01",
+        "page_index": 1,
+        "page_role": "opening",
+        "applied_skills": ["page_turn_hook", "emotional_pull"],
+        "typed_hook": "The class clock starts ticking backward during attendance.",
+        "typed_narration": "The child grips the desk because only their name is skipped when the second hand jumps back.",
+        "next_page_question": "Why does the clock move only when the teacher reaches that name?",
+        "final_hook_sentence": "The clock hand points at the empty line in the register.",
+        "reader_retention_goal": "Hold curiosity around the skipped name.",
+        "visual_memory_point": "a classroom clock pointing at a blank register line",
+        "emotional_turn": "fear becomes a decision to speak up",
+        "suspense_type": "everyday_anomaly",
+        "information_gain": 0.45,
+        "threat_level": 0.42,
+        "uncertainty": 0.65,
+        "emotional_pressure": 0.55,
+        "next_page_pull": 0.72,
+        "protagonist_want": "keep the name on the register",
+        "protagonist_fear": "being erased",
+        "reader_care_reason": "the child is alone with a specific danger",
+        "relationship_signal": "teacher and child",
+        "character_choice": "the child raises a hand",
+        "concrete_behavior": "the child grips the desk",
+        "introduced_clues": ["clock_name"]
+      },
+      {
+        "node_id": "S02",
+        "page_index": 2,
+        "page_role": "middle_escalation",
+        "applied_skills": ["horror_escalation", "page_turn_hook"],
+        "typed_hook": "The skipped name starts fading from every workbook.",
+        "typed_narration": "The child writes the name again, but the pencil mark turns to dust before the teacher looks down.",
+        "next_page_question": "What happens if nobody can read the name by the final bell?",
+        "final_hook_sentence": "The dust gathers beneath the same backward clock.",
+        "reader_retention_goal": "Escalate the danger from clock to identity.",
+        "visual_memory_point": "a workbook name turning into gray dust",
+        "emotional_turn": "fear turns into urgency",
+        "suspense_type": "identity_erasure",
+        "information_gain": 0.68,
+        "threat_level": 0.65,
+        "uncertainty": 0.72,
+        "emotional_pressure": 0.7,
+        "next_page_pull": 0.78,
+        "threat_delta": "The anomaly moves from the clock to written names.",
+        "protagonist_want": "rewrite the name before it disappears",
+        "protagonist_fear": "being forgotten by everyone",
+        "reader_care_reason": "the child makes an active attempt",
+        "relationship_signal": "classroom witnesses",
+        "character_choice": "the child writes the name again",
+        "concrete_behavior": "the child presses the pencil hard",
+        "repeated_clues": [
+          {
+            "clue_id": "clock_name",
+            "escalation": "the name now disappears from workbooks"
+          }
+        ]
+      },
+      {
+        "node_id": "S03",
+        "page_index": 3,
+        "page_role": "ending",
+        "applied_skills": ["fate_loop", "strange_tale_twist"],
+        "typed_hook": "The final bell rings from inside the register.",
+        "typed_narration": "The child opens the register and sees the classroom clock drawn beside the only blank line.",
+        "next_page_question": "",
+        "final_hook_sentence": "The blank line writes the child's name backward.",
+        "reader_retention_goal": "Close the loop with one final unease.",
+        "visual_memory_point": "a register line writing a name backward",
+        "emotional_turn": "panic becomes frozen recognition",
+        "suspense_type": "callback_twist",
+        "information_gain": 0.82,
+        "threat_level": 0.82,
+        "uncertainty": 0.55,
+        "emotional_pressure": 0.78,
+        "next_page_pull": 0.58,
+        "opening_callback": "The backward classroom clock returns inside the register.",
+        "payoff_target": "clock_name",
+        "twist_reveal": "The clock was erasing the name from the beginning.",
+        "protagonist_want": "keep the name",
+        "protagonist_fear": "the name returning wrong",
+        "reader_care_reason": "the child's effort causes the callback",
+        "relationship_signal": "teacher, child, register",
+        "character_choice": "the child opens the register",
+        "concrete_behavior": "the child's hand freezes on the page"
+      }
+    ],
+    "edges": [
+      {
+        "from": "S01",
+        "to": "S02"
+      },
+      {
+        "from": "S02",
+        "to": "S03"
+      }
+    ]
+  }
+}

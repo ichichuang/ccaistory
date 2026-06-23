@@ -2,6 +2,9 @@ from __future__ import annotations
 
 from pathlib import Path
 from typing import Any
+import json
+import subprocess
+import sys
 
 from core.io import RUNTIME_ROOT, result
 from contracts.contract_loader import load_contract, r00_required_questions
@@ -22,9 +25,11 @@ from skill_runtime.repair_loop import repair_skill_graph
 from skill_executor.candidate_scorer import score_candidate
 from skill_executor.conflict_resolver import resolve_conflicts
 from skill_executor.executor import execute_skill_graph, execute_skill_node
+from story_analyzer.analyzer import analyze_story_core, analyze_story_graph
+from story_analyzer.character_stakes import analyze_character_stakes
+from story_analyzer.clue_ledger import analyze_clue_ledger
+from story_analyzer.tension_curve import analyze_tension_curve
 from telemetry.telemetry import validate_telemetry
-
-import json
 
 
 FIXTURE_DIR = RUNTIME_ROOT / "tests" / "fixtures"
@@ -87,6 +92,91 @@ def run_smoke_tests() -> dict[str, Any]:
         {
             "name": "12-page horror skill plan generated",
             "passed": bool(plan["selected_skill_set"]) and len(plan["node_skill_plan"]) == 12,
+        }
+    )
+
+    micro_analysis = analyze_story_core(_load("story_core_analyzer_micro_horror.json"))
+    checks.append(
+        {
+            "name": "micro horror recommends 6-8 pages",
+            "passed": 6 <= micro_analysis["page_count"]["recommended_pages"] <= 8,
+        }
+    )
+
+    classic_analysis = analyze_story_core(_load("story_core_analyzer_classic_adaptation.json"))
+    checks.append(
+        {
+            "name": "classic adaptation recommends at least 12 pages",
+            "passed": classic_analysis["page_count"]["minimum_pages"] >= 12
+            and classic_analysis["page_count"]["recommended_pages"] >= 12,
+        }
+    )
+
+    weak_opening_analysis = analyze_story_graph(_load("story_graph_analyzer_weak_opening.json"))
+    checks.append(
+        {
+            "name": "weak opening is diagnosed",
+            "passed": any(
+                "weak_opening_hook" in node["weaknesses"]
+                for node in weak_opening_analysis["node_diagnostics"]
+            ),
+        }
+    )
+
+    missing_payoff_ledger = analyze_clue_ledger(_load("story_graph_analyzer_missing_payoff.json"))
+    checks.append(
+        {
+            "name": "missing payoff is blocked by clue ledger",
+            "passed": any(failure.startswith("unpaid_clue:") for failure in missing_payoff_ledger["failures"]),
+        }
+    )
+
+    flat_middle_tension = analyze_tension_curve(_load("story_graph_analyzer_flat_middle.json"))
+    checks.append(
+        {
+            "name": "flat middle is blocked by tension curve",
+            "passed": "middle_without_escalation" in flat_middle_tension["failures"],
+        }
+    )
+
+    weak_stakes = analyze_character_stakes(_load("story_graph_analyzer_weak_stakes.json"))
+    checks.append(
+        {
+            "name": "weak stakes are blocked by character stakes",
+            "passed": not weak_stakes["passed"] and bool(weak_stakes["missing_stakes"]),
+        }
+    )
+
+    valid_analyzer_result = analyze_story_graph(_load("story_graph_analyzer_valid.json"))
+    checks.append(
+        {
+            "name": "analyzer pass outputs recommended_skill_plan",
+            "passed": valid_analyzer_result["passed"]
+            and bool(valid_analyzer_result["recommended_skill_plan"]["selected_skill_set"]),
+        }
+    )
+
+    cli_result = subprocess.run(
+        [
+            sys.executable,
+            str(RUNTIME_ROOT / "aistory.py"),
+            "analyze-graph",
+            "--graph",
+            str(FIXTURE_DIR / "story_graph_analyzer_valid.json"),
+        ],
+        cwd=RUNTIME_ROOT.parent,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    try:
+        cli_payload = json.loads(cli_result.stdout)
+    except json.JSONDecodeError:
+        cli_payload = {}
+    checks.append(
+        {
+            "name": "CLI analyze-graph is available",
+            "passed": cli_result.returncode == 0 and cli_payload.get("passed") is True,
         }
     )
 
@@ -224,6 +314,16 @@ def run_smoke_tests() -> dict[str, Any]:
     )
     checks.append(
         {
+            "name": "pipeline plan includes story analyzer gate",
+            "passed": valid_pipeline_plan["passed"]
+            and any(
+                step["action_id"] == "analyze_story_graph" and step["gate"] == "story_analyzer_gate"
+                for step in valid_pipeline_plan["plan"]
+            ),
+        }
+    )
+    checks.append(
+        {
             "name": "pipeline plan includes skill executor manual stage",
             "passed": valid_pipeline_plan["passed"]
             and any(step["action_id"] == "execute_skill_graph" for step in valid_pipeline_plan["plan"])
@@ -244,6 +344,46 @@ def run_smoke_tests() -> dict[str, Any]:
             "name": "blocked story_core blocks disallowed action",
             "passed": not blocked_pipeline_plan["passed"]
             and "action_blocked:run_semantic_lint" in blocked_pipeline_plan["blocked_reason"],
+        }
+    )
+
+    high_risk_plan = {
+        "passed": True,
+        "next_allowed_action": "analyze_story_graph",
+        "blocked_reason": [],
+        "plan": [
+            {
+                "step_id": "step_01_analyze_story_graph",
+                "action_id": "analyze_story_graph",
+                "required_inputs": ["story_graph", "skill_runtime_result"],
+                "expected_outputs": ["story_analysis_result", "recommended_skill_plan", "repair_priority"],
+                "gate": "story_analyzer_gate",
+                "manual_approval_required": False,
+            },
+            {
+                "step_id": "step_02_execute_skill_graph",
+                "action_id": "execute_skill_graph",
+                "required_inputs": ["story_graph", "skill_runtime_result", "story_analysis_result"],
+                "expected_outputs": ["skill_executor_result", "proposed_changes"],
+                "gate": "skill_executor_gate",
+                "manual_approval_required": False,
+            },
+        ],
+        "story_core_path": str(FIXTURE_DIR / "story_graph_analyzer_missing_payoff.json"),
+    }
+    blocked_by_analyzer = execute_pipeline(
+        high_risk_plan,
+        project_path=str(FIXTURE_DIR / "story_graph_analyzer_missing_payoff.json"),
+        requested_until="execute_skill_graph",
+        dry_run=True,
+        command="smoke-test analyzer gate",
+    )
+    checks.append(
+        {
+            "name": "analyzer high risk does not enter skill executor",
+            "passed": not blocked_by_analyzer["passed"]
+            and blocked_by_analyzer["run_result"]["stopped_at"] == "step_01_analyze_story_graph"
+            and not blocked_by_analyzer["run_result"]["executed_steps"],
         }
     )
 

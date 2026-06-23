@@ -1,0 +1,62 @@
+{
+  "story_graph": {
+    "protagonist_want": "learn why the clock skips a name",
+    "protagonist_fear": "being forgotten",
+    "reader_care_reason": "the child tries to preserve the name",
+    "relationship_signal": "child and teacher",
+    "nodes": [
+      {
+        "node_id": "S01",
+        "page_index": 1,
+        "page_role": "opening",
+        "applied_skills": ["page_turn_hook"],
+        "typed_hook": "The register skips one name under the backward clock.",
+        "typed_narration": "The child raises a hand before the teacher closes the book.",
+        "next_page_question": "Why does that name vanish?",
+        "final_hook_sentence": "The skipped line leaves gray dust.",
+        "reader_retention_goal": "Track the dust clue.",
+        "visual_memory_point": "gray dust on a skipped register line",
+        "emotional_turn": "fear becomes action",
+        "suspense_type": "everyday_anomaly",
+        "information_gain": 0.5,
+        "threat_level": 0.45,
+        "uncertainty": 0.7,
+        "emotional_pressure": 0.55,
+        "next_page_pull": 0.72,
+        "reader_care_reason": "the child tries to stop it",
+        "character_choice": "the child raises a hand",
+        "concrete_behavior": "the child grips the desk",
+        "introduced_clues": ["gray_dust"]
+      },
+      {
+        "node_id": "S02",
+        "page_index": 2,
+        "page_role": "ending",
+        "applied_skills": ["fate_loop"],
+        "typed_hook": "The teacher closes the register.",
+        "typed_narration": "The child follows the teacher, but the classroom has already emptied.",
+        "next_page_question": "",
+        "final_hook_sentence": "The clock keeps ticking backward.",
+        "reader_retention_goal": "End with unease.",
+        "visual_memory_point": "an empty classroom clock",
+        "emotional_turn": "action becomes dread",
+        "suspense_type": "callback_twist",
+        "information_gain": 0.75,
+        "threat_level": 0.72,
+        "uncertainty": 0.5,
+        "emotional_pressure": 0.7,
+        "next_page_pull": 0.55,
+        "opening_callback": "The backward clock from the opening returns.",
+        "reader_care_reason": "the child's effort fails visibly",
+        "character_choice": "the child follows the teacher",
+        "concrete_behavior": "the child runs to the door"
+      }
+    ],
+    "edges": [
+      {
+        "from": "S01",
+        "to": "S02"
+      }
+    ]
+  }
+}
