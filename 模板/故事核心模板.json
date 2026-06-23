@@ -1,64 +1,22 @@
 {
-  "schema_name": "story_core",
-  "schema_version": "current",
-  "project_identity": {
-    "story_id": "",
-    "project_id": "",
-    "title": "",
-    "project_type": "platform_graphic_story"
-  },
-  "source_status": {
-    "source_type": "",
-    "copyright_risk": "",
-    "adaptation_distance": "",
-    "forbidden_source_elements": [],
-    "allowed_abstract_mechanisms": []
-  },
+  "story_id": "",
+  "project_id": "",
+  "story_title": "",
   "machine_state": {
-    "current_state": "input_received",
+    "current_state": "story_core_created",
     "gate_result": "pending",
-    "platform_graphic_story_required": true,
-    "current_pilot_result": "not_started",
-    "full_generation_blocked_until": "platform_story_graph_expanded",
-    "minimum_main_pages": 10,
-    "recommended_main_pages": 12,
-    "source_illustration_ratio": "3:4",
-    "platform_page_ratio": "9:16",
+    "next_allowed_action": "dry_read_test",
     "blocked_actions": [
-      "full_generation",
-      "publish",
-      "create_publish_package"
+      "generate_images",
+      "generate_prompt_package",
+      "publish"
     ]
-  },
-  "story_contract": {
-    "one_sentence_story": "",
-    "protagonist": "",
-    "threat": "",
-    "rule": "",
-    "wrong_action": "",
-    "consequence": "",
-    "twist": "",
-    "ending_payoff": ""
   },
   "story_graph": {
     "nodes": [],
     "edges": []
   },
-  "visual_project_manifest": {
-    "paper_fingerprint": {
-      "paper_type": "clean white ruled school notebook paper"
-    },
-    "source_illustration_ratio": "3:4",
-    "platform_page_ratio": "9:16"
-  },
-  "prompt_plan": {
-    "four_output_objects": [
-      "source_illustration",
-      "child_note_layer",
-      "typed_narration",
-      "platform_story_page"
-    ]
-  },
+  "derived_views": [],
   "quality_gates": {},
-  "derived_views": []
+  "visual_pipeline": {}
 }

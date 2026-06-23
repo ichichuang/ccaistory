@@ -1,0 +1,21 @@
+{
+  "asset_id": "",
+  "asset_type": "",
+  "asset_scope": "",
+  "story_context": "",
+  "allowed_content": [],
+  "forbidden_content": [],
+  "visual_center": "",
+  "density_range": "",
+  "composition_mode": "",
+  "text_policy": {
+    "typed_narration_in_image": false,
+    "child_note_layer_only": true,
+    "child_note_max_chars": 8
+  },
+  "paper_policy": {},
+  "style_policy": {},
+  "reference_dependencies": [],
+  "acceptance_questions": [],
+  "repair_policy": {}
+}
