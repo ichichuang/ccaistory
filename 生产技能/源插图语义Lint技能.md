@@ -4,30 +4,54 @@
 生产体系：平台图文故事主线生产体系  
 唯一事实源：故事核心.json
 
-## 目的
-执行“源插图语义Lint”阶段任务，并保证不跳过状态机。
+## 1. 技能目的
+检查 compiled_prompt 的缺项、矛盾、禁项和依赖。
 
-## 输入
+## 2. 输入
 - 故事核心.json
 - 上游已通过门禁的派生视图
-- 对应结构规范、模板和验收清单
+- 对应结构规范、模板、提示词锁和验收清单
 
-## 输出
-- 本阶段派生视图或结构化结果
+## 3. 输出
+- 语义 Lint 报告、hard_fail 修复点
 - machine_state 更新建议
-- 阻断项或下一步动作
+- blocked_actions 或返修入口
 
-## 禁止行为
-- 不创建第二事实源
-- 不跳过状态机
-- 不使用作者姓名作为风格指令
-- 未明确授权不得生成图片、执行包或发布包
+## 4. 读取的唯一事实源字段
+- compiled_prompt、negative_constraints、reference_dependencies、asset_type
 
-## 门禁
-- 输入存在
-- 字段完整
-- 与上游状态匹配
-- 无硬失败
+## 5. 允许创建的派生视图
+- 语义 Lint 报告、hard_fail 修复点
+- 派生视图必须登记到 `story_core.derived_views` 或 `story_core.visual_pipeline`
+- 派生视图不得成为第二事实源
 
-## 失败回退
-回退到最近的上游结构层或状态机修复。
+## 6. 禁止行为
+- 不跳过状态机和上游门禁。
+- 不创建故事外图片、执行包、发布包、备份或复盘归档。
+- 不调用 WebGPT 或外部出图工具，除非技能职责明确为人工外部执行后的事实回填。
+- 不使用作者姓名作为风格指令，不引用历史故事名、历史 asset_id 或旧项目。
+- 不把 rejected/rework 资产当作 accepted 使用。
+
+## 7. 门禁
+- 输入字段存在且与当前 machine_state 匹配。
+- 输出字段能回写到 story_core.visual_pipeline.semantic_lint。
+- 对视觉链路：没有 compiled_prompt 不得出图；没有 execution_telemetry 和 actual_prompt_sent_to_external_tool 不得 accepted。
+- 对 R00：不得出现人物、火柴人、完整场景、道具集合或符号散点表；R00 未 accepted 不得继续 R01/R02。
+
+## 8. 失败回退位置
+- 字段缺失：回退到故事核心状态机技能。
+- 上游门禁失败：回退到 源插图Prompt编译技能。
+- 本技能输出不合格：回退到本技能重新生成或最近上游技能。
+- 外部执行事实缺失：回退到图像执行遥测技能；无法补录则 blocked。
+
+## 9. 上游依赖
+- 源插图Prompt编译技能
+
+## 10. 下游入口
+- 提示词巡检与任务清单技能
+
+## 11. 必须写入 story_core 的字段
+- visual_pipeline.semantic_lint、machine_state
+
+## 12. 必须检查的验收清单
+- 源插图语义Lint验收清单
