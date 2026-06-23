@@ -45,11 +45,11 @@
     "original_safe": true
   },
   "machine_state": {
-    "current_state": "minimum_viable_story",
+    "current_state": "story_analyzed",
     "gate_result": "passed",
     "gate_result_label": "pass",
-    "last_gate_passed": "minimum_viable_story",
-    "next_allowed_action": "analyze_story",
+    "last_gate_passed": "story_analyzed",
+    "next_allowed_action": "execute_skill_graph",
     "blocked_actions": [
       "generate_images",
       "generate_prompt_package",
@@ -61,18 +61,185 @@
     ],
     "quality_gates": {
       "minimum_viable_story": "pass",
+      "story_analysis": "pass",
       "copyright_review": "pass",
       "safety_review": "pass"
     },
     "evidence": [
-      "原创输入已成型",
-      "目标页数为 7 页，落在 6-8 页范围内",
-      "下一步仅允许故事分析，不允许生成图片、执行包或发布包"
+      "Story Analyzer passed=true",
+      "recommended_pages=8，minimum_pages=6，maximum_pages=8",
+      "repair_priority 为空，可进入 Skill Executor",
+      "下一步仅允许 execute_skill_graph，不允许生成图片、执行包或发布包"
     ]
   },
   "minimum_viable_story": {
     "passed": true,
     "reason": "核心怪谈机制完整，误导与最终回扣成立，适合进入 Story Analyzer。"
+  },
+  "story_analysis_result": {
+    "status": "pass",
+    "story_type": {
+      "story_type": "platform_horror",
+      "confidence": 0.66,
+      "reason_codes": [
+        "platform_horror_signal"
+      ],
+      "recommended_global_skills": [
+        "page_turn_hook",
+        "platform_completion_rate",
+        "horror_escalation"
+      ]
+    },
+    "page_count_recommendation": {
+      "recommended_pages": 8,
+      "minimum_pages": 6,
+      "maximum_pages": 8,
+      "reason_codes": [
+        "single_anomaly_single_callback_micro_story"
+      ],
+      "risk_if_shortened": []
+    },
+    "recommended_skill_plan": {
+      "source": "story_analyzer",
+      "selected_skill_set": [
+        "page_turn_hook",
+        "platform_completion_rate",
+        "horror_escalation"
+      ],
+      "node_skill_plan": [
+        {
+          "node_id": "S01",
+          "page_index": 1,
+          "skills": [
+            "everyday_anomaly",
+            "page_turn_hook",
+            "emotional_pull"
+          ],
+          "source": "story_analyzer"
+        },
+        {
+          "node_id": "S02",
+          "page_index": 2,
+          "skills": [
+            "horror_escalation",
+            "misdirection_disproof",
+            "page_turn_hook"
+          ],
+          "source": "story_analyzer"
+        },
+        {
+          "node_id": "S03",
+          "page_index": 3,
+          "skills": [
+            "horror_escalation",
+            "child_perspective_wonder",
+            "page_turn_hook"
+          ],
+          "source": "story_analyzer"
+        },
+        {
+          "node_id": "S04",
+          "page_index": 4,
+          "skills": [
+            "misdirection_disproof",
+            "horror_escalation",
+            "page_turn_hook"
+          ],
+          "source": "story_analyzer"
+        },
+        {
+          "node_id": "S05",
+          "page_index": 5,
+          "skills": [
+            "horror_escalation",
+            "misdirection_disproof",
+            "platform_completion_rate"
+          ],
+          "source": "story_analyzer"
+        },
+        {
+          "node_id": "S06",
+          "page_index": 6,
+          "skills": [
+            "strange_tale_twist",
+            "horror_escalation",
+            "page_turn_hook"
+          ],
+          "source": "story_analyzer"
+        },
+        {
+          "node_id": "S07",
+          "page_index": 7,
+          "skills": [
+            "fate_loop",
+            "strange_tale_twist",
+            "emotional_pull"
+          ],
+          "source": "story_analyzer"
+        }
+      ],
+      "required_graph_fields": [
+        "applied_skills",
+        "final_hook_sentence",
+        "next_page_question",
+        "reader_retention_goal",
+        "technique_notes",
+        "typed_hook"
+      ],
+      "validation_questions": [
+        "本页结尾是否留下明确的新问题？",
+        "final_hook_sentence 是否推动下一页阅读？",
+        "本页是否有清楚的完读目标？",
+        "信息量是否适合平台图文节奏？",
+        "本页威胁是否比上一页更具体？",
+        "升级是否来自规则或事实而非空泛吓人？"
+      ]
+    },
+    "risks": {
+      "high_risk": false,
+      "repair_priority": [],
+      "node_diagnostics": [
+        {
+          "node_id": "S01",
+          "risk_level": "low",
+          "weaknesses": []
+        },
+        {
+          "node_id": "S02",
+          "risk_level": "low",
+          "weaknesses": []
+        },
+        {
+          "node_id": "S03",
+          "risk_level": "low",
+          "weaknesses": []
+        },
+        {
+          "node_id": "S04",
+          "risk_level": "low",
+          "weaknesses": []
+        },
+        {
+          "node_id": "S05",
+          "risk_level": "low",
+          "weaknesses": []
+        },
+        {
+          "node_id": "S06",
+          "risk_level": "low",
+          "weaknesses": []
+        },
+        {
+          "node_id": "S07",
+          "risk_level": "low",
+          "weaknesses": []
+        }
+      ],
+      "clue_failures": [],
+      "tension_failures": [],
+      "character_stake_failures": []
+    },
+    "next_action": "proceed_to_skill_executor_or_next_gate"
   },
   "blocked_actions": [
     "generate_images",
@@ -454,7 +621,18 @@
       "middle_escalation",
       "pre_ending",
       "ending"
-    ]
+    ],
+    "story_analyzer_report": "05_Story_Analyzer_分析报告.md",
+    "story_analysis_summary": {
+      "status": "pass",
+      "story_type": "platform_horror",
+      "confidence": 0.66,
+      "recommended_pages": 8,
+      "minimum_pages": 6,
+      "maximum_pages": 8,
+      "allowed_to_enter_skill_executor": true,
+      "blocking_issues": []
+    }
   },
   "quality_gates": {
     "copyright_review": {
@@ -466,6 +644,14 @@
       "status": "pass",
       "target_page_range": "6-8",
       "planned_pages": 7
+    },
+    "story_analysis": {
+      "status": "pass",
+      "story_type": "platform_horror",
+      "confidence": 0.66,
+      "recommended_pages": 8,
+      "allows_skill_executor": true,
+      "blocking_issues": []
     },
     "runtime_precheck": {
       "status": "pass",
