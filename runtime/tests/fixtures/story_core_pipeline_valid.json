@@ -1,0 +1,38 @@
+{
+  "story_id": "fixture_pipeline_valid",
+  "story_title": "Pipeline Valid Fixture",
+  "story_type": "horror",
+  "machine_state": {
+    "current_state": "story_core_created",
+    "gate_result": "passed",
+    "next_allowed_action": "assess_page_count",
+    "blocked_actions": [
+      "compile_prompts",
+      "generate_images",
+      "publish"
+    ]
+  },
+  "story_graph": {
+    "nodes": [
+      {
+        "node_id": "S01",
+        "page_index": 1,
+        "page_role": "opening",
+        "typed_hook": "A clean pipeline fixture hook.",
+        "typed_narration": "A deterministic fixture paragraph.",
+        "next_page_question": "What changes next?",
+        "final_hook_sentence": "The fixture remains unresolved.",
+        "reader_retention_goal": "Verify pipeline planning.",
+        "visual_memory_point": "white page mark",
+        "applied_skills": [
+          "page_turn_hook"
+        ],
+        "technique_notes": [
+          "fixture"
+        ]
+      }
+    ],
+    "edges": []
+  },
+  "visual_pipeline": {}
+}

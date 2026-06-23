@@ -16,6 +16,11 @@ from contracts.sync_docs_check import check_contract_drift
 from contracts.validate_contracts import validate_contracts
 from graph_engine.graph_checks import check_graph
 from lint_engine.semantic_lint import lint_asset_file, lint_compiled_file
+from pipeline_runner.checkpoint import read_checkpoint_status
+from pipeline_runner.executor import execute_pipeline
+from pipeline_runner.planner import plan_pipeline
+from pipeline_runner.recovery import resume_run
+from pipeline_runner.run_manifest import list_runs, load_manifest
 from prompt_compiler.compiler import compile_asset_file
 from qa_engine.asset_qa import qa_asset_file
 from skill_orchestrator.orchestrator import plan_node_skills, select_story_skills
@@ -70,6 +75,7 @@ def main(argv: list[str] | None = None) -> int:
     sub.add_parser("validate-contracts")
     sub.add_parser("check-contract-drift")
     sub.add_parser("smoke-test")
+    sub.add_parser("list-runs")
 
     can = sub.add_parser("can-run")
     can.add_argument("--project", required=True)
@@ -117,6 +123,22 @@ def main(argv: list[str] | None = None) -> int:
     qa = sub.add_parser("qa-asset")
     qa.add_argument("--qa", required=True)
 
+    pipeline_plan = sub.add_parser("pipeline-plan")
+    pipeline_plan.add_argument("--project")
+    pipeline_plan.add_argument("--until", dest="requested_until", default="")
+
+    pipeline_run = sub.add_parser("pipeline-run")
+    pipeline_run.add_argument("--project")
+    pipeline_run.add_argument("--until", dest="requested_until", default="")
+    pipeline_run.add_argument("--dry-run", action="store_true", default=True)
+
+    pipeline_status = sub.add_parser("pipeline-status")
+    pipeline_status.add_argument("--run-id", required=True)
+
+    pipeline_resume = sub.add_parser("pipeline-resume")
+    pipeline_resume.add_argument("--run-id", required=True)
+    pipeline_resume.add_argument("--dry-run", action="store_true", default=True)
+
     args = parser.parse_args(argv)
 
     if args.command == "status":
@@ -139,6 +161,8 @@ def main(argv: list[str] | None = None) -> int:
         payload = validate_contracts()
     elif args.command == "check-contract-drift":
         payload = check_contract_drift()
+    elif args.command == "list-runs":
+        payload = list_runs()
     elif args.command == "can-run":
         payload = can_run(args.project, args.action)
     elif args.command == "select-skills":
@@ -177,6 +201,26 @@ def main(argv: list[str] | None = None) -> int:
         payload = validate_telemetry_file(args.telemetry)
     elif args.command == "qa-asset":
         payload = qa_asset_file(args.qa)
+    elif args.command == "pipeline-plan":
+        payload = plan_pipeline(project_path=args.project, requested_until=args.requested_until)
+    elif args.command == "pipeline-run":
+        plan_result = plan_pipeline(project_path=args.project, requested_until=args.requested_until)
+        payload = execute_pipeline(
+            plan_result,
+            project_path=args.project or "",
+            requested_until=args.requested_until,
+            dry_run=args.dry_run,
+            command=f"pipeline-run --until {args.requested_until} --dry-run",
+        )
+    elif args.command == "pipeline-status":
+        payload = read_checkpoint_status(args.run_id)
+        if payload.get("passed"):
+            try:
+                payload["run_manifest"] = load_manifest(args.run_id)
+            except Exception as exc:  # pragma: no cover - surfaced via CLI JSON
+                payload["run_manifest_error"] = str(exc)
+    elif args.command == "pipeline-resume":
+        payload = resume_run(args.run_id, dry_run=args.dry_run)
     elif args.command == "smoke-test":
         payload = smoke_test()
     else:

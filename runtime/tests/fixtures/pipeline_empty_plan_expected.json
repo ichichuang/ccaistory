@@ -1,0 +1,15 @@
+{
+  "blocked_reason": [
+    "empty_state_plan"
+  ],
+  "current_state": "empty",
+  "missing_inputs": [],
+  "next_allowed_action": "create_story_core",
+  "passed": true,
+  "plan": [],
+  "plan_type": "empty_state_plan",
+  "project_path": "",
+  "requested_until": "semantic_lint",
+  "requested_until_gate": "semantic_lint_gate",
+  "status": "pass"
+}

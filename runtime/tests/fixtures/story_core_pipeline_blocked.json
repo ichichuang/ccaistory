@@ -1,0 +1,27 @@
+{
+  "story_id": "fixture_pipeline_blocked",
+  "story_title": "Pipeline Blocked Fixture",
+  "story_type": "horror",
+  "machine_state": {
+    "current_state": "prompts_compiled",
+    "gate_result": "passed",
+    "next_allowed_action": "run_semantic_lint",
+    "blocked_actions": [
+      "run_semantic_lint",
+      "generate_images",
+      "publish"
+    ]
+  },
+  "story_graph": {
+    "nodes": [],
+    "edges": []
+  },
+  "visual_pipeline": {
+    "compiled_prompts": [
+      {
+        "asset_id": "S01",
+        "prompt": "fixture prompt"
+      }
+    ]
+  }
+}

@@ -243,6 +243,70 @@ def validate_state_machine(failures: list[str]) -> dict[str, Any]:
     return contract
 
 
+def validate_pipeline_contract_links(
+    failures: list[str],
+    actions_contract: dict[str, Any],
+    state_contract: dict[str, Any],
+    gate_contract: dict[str, Any],
+) -> None:
+    actions = actions_contract.get("actions", {})
+    states = state_contract.get("states", {})
+    gates = gate_contract.get("gates", {})
+    if not isinstance(actions, dict) or not isinstance(states, dict) or not isinstance(gates, dict):
+        return
+
+    terminal_markers = {
+        state_id
+        for state_id, state in states.items()
+        if isinstance(state, dict) and not state.get("next_states")
+    }
+    allowed_targets = set(actions) | terminal_markers
+    allowed_gate_results = {"pending", "passed", "rework_required", "blocked"}
+
+    for action_id, action in actions.items():
+        if not isinstance(action, dict):
+            continue
+        required_state = action.get("required_state")
+        state = states.get(required_state)
+        if not isinstance(state, dict):
+            failures.append(f"pipeline_links:{action_id}:required_state_missing:{required_state}")
+            continue
+        if action_id not in state.get("allowed_actions", []):
+            failures.append(f"pipeline_links:{action_id}:not_allowed_by_state:{required_state}")
+        if action.get("required_gate_result") not in allowed_gate_results:
+            failures.append(f"pipeline_links:{action_id}:unknown_required_gate_result:{action.get('required_gate_result')}")
+        for transition_key in ("next_action_on_pass", "next_action_on_fail"):
+            target = action.get(transition_key)
+            if target not in allowed_targets:
+                failures.append(f"pipeline_links:{action_id}:{transition_key}_unknown:{target}")
+
+    for state_id, state in states.items():
+        if not isinstance(state, dict):
+            continue
+        for action_id in state.get("allowed_actions", []):
+            if action_id not in allowed_targets:
+                failures.append(f"pipeline_links:{state_id}:allowed_action_unknown:{action_id}")
+
+    for gate_id, gate in gates.items():
+        if not isinstance(gate, dict):
+            continue
+        for field in ("next_allowed_action_on_pass", "next_allowed_action_on_fail"):
+            target = gate.get(field)
+            if target not in allowed_targets:
+                failures.append(f"pipeline_links:{gate_id}:{field}_unknown:{target}")
+
+    try:
+        from pipeline_runner.planner import ACTION_GATE_MAP
+    except Exception as exc:  # pragma: no cover - surfaced via CLI
+        failures.append(f"pipeline_links:runner_gate_map_unavailable:{exc}")
+        return
+    for action_id, gate_id in ACTION_GATE_MAP.items():
+        if action_id not in actions:
+            failures.append(f"pipeline_links:runner_action_missing:{action_id}")
+        if gate_id not in gates:
+            failures.append(f"pipeline_links:runner_gate_missing:{gate_id}")
+
+
 def _load_skills_file(path: Path) -> list[dict[str, Any]]:
     with path.open("r", encoding="utf-8") as handle:
         data = json.load(handle)
@@ -300,9 +364,10 @@ def validate_contracts() -> dict[str, Any]:
     failures: list[str] = []
     parsed_json = _load_json_contracts(failures)
     visual_contract = validate_visual_assets(failures)
-    validate_quality_gates(failures)
-    validate_pipeline_actions(failures)
-    validate_state_machine(failures)
+    gate_contract = validate_quality_gates(failures)
+    actions_contract = validate_pipeline_actions(failures)
+    state_contract = validate_state_machine(failures)
+    validate_pipeline_contract_links(failures, actions_contract, state_contract, gate_contract)
     skill_contract = validate_skill_definitions(failures)
     r00_qa_count = len(
         visual_contract.get("asset_types", {}).get("R00_PAPER_MARK_ANCHOR", {}).get("qa_questions", [])
@@ -327,4 +392,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-

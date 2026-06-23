@@ -4,6 +4,8 @@
 
 Skill Runtime v0.2 adds deterministic validation for creator-technique effects on `story_graph.nodes`. Skill Orchestrator selects skills; Skill Runtime checks whether those skills actually appear in node structure, generates repair patches, and decides whether the graph can proceed to the next gate.
 
+Pipeline Runner adds the dry-run orchestration layer. It reads `pipeline_actions.json`, `state_machine.json`, and `quality_gates.json` to produce auditable plans, run manifests, checkpoints, and recovery status. Pipeline Runner does not replace human aesthetic approval and does not call external image tools.
+
 ## Commands
 
 Run all commands from the project root.
@@ -28,6 +30,13 @@ python runtime/aistory.py lint-asset --spec <path_to_visual_asset_spec.json>
 python runtime/aistory.py lint-prompt --compiled <path_to_compiled_prompt.json>
 python runtime/aistory.py validate-telemetry --telemetry <path_to_telemetry.json>
 python runtime/aistory.py qa-asset --qa <path_to_asset_qa_result.json>
+python runtime/aistory.py pipeline-plan --until semantic_lint
+python runtime/aistory.py pipeline-plan --project <project_path> --until <gate>
+python runtime/aistory.py pipeline-run --until semantic_lint --dry-run
+python runtime/aistory.py pipeline-run --project <project_path> --until <gate> --dry-run
+python runtime/aistory.py pipeline-status --run-id <run_id>
+python runtime/aistory.py pipeline-resume --run-id <run_id> --dry-run
+python runtime/aistory.py list-runs
 python runtime/aistory.py smoke-test
 ```
 
@@ -37,9 +46,20 @@ python runtime/aistory.py smoke-test
 - The runtime does not create story projects.
 - The runtime does not generate images.
 - The runtime does not create execution packages or publishing packages.
+- Pipeline Runner defaults to dry-run and only writes run artifacts under `runtime/.runs/{run_id}/`.
+- Pipeline Runner actions, state transitions, and gates must come from contracts.
+- External image execution must stop at `waiting_for_external_generation`.
 - Skill Runtime repair is metadata-first: patch applier writes repair suggestions and required rewrite fields, not final story prose.
 - External image execution must be preceded by Prompt compilation and semantic lint.
 - Asset acceptance requires execution telemetry and asset QA.
+
+## Pipeline Runner
+
+- `pipeline_runner.planner` returns `empty_state_plan`, blocked plans, missing-input plans, or ordered steps.
+- `pipeline_runner.executor` accepts planner output and runs the dry-run framework without creating story files.
+- `pipeline_runner.checkpoint` writes `runtime/.runs/{run_id}/checkpoint.json`.
+- `pipeline_runner.run_manifest` writes `runtime/.runs/{run_id}/run_manifest.json`.
+- `pipeline_runner.recovery` returns `repair_required`, `approval_required`, `external_generation_required`, `resume_available`, or `complete`.
 
 ## Skill Runtime
 

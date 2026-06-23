@@ -1,0 +1,18 @@
+{
+  "current_step": "step_manual_accept_asset",
+  "last_error": null,
+  "next_action": "accept_asset",
+  "project_path": "",
+  "run_id": "fixture_manual_approval",
+  "started_at": "2026-01-01T00:00:00Z",
+  "steps": [
+    {
+      "action_id": "accept_asset",
+      "gate": "asset_qa_gate",
+      "manual_approval_required": true,
+      "status": "waiting_for_manual_approval",
+      "step_id": "step_manual_accept_asset"
+    }
+  ],
+  "updated_at": "2026-06-23T11:10:46.409478Z"
+}

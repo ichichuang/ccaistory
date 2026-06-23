@@ -7,6 +7,11 @@ from core.io import RUNTIME_ROOT, result
 from contracts.contract_loader import load_contract, r00_required_questions
 from contracts.validate_contracts import validate_contracts
 from lint_engine.semantic_lint import lint_asset
+from pipeline_runner.checkpoint import read_checkpoint_status, save_checkpoint
+from pipeline_runner.executor import execute_pipeline
+from pipeline_runner.planner import plan_pipeline
+from pipeline_runner.recovery import resume_run
+from pipeline_runner.run_manifest import list_runs
 from prompt_compiler.compiler import compile_asset
 from qa_engine.asset_qa import qa_asset
 from skill_orchestrator.orchestrator import select_story_skills
@@ -123,13 +128,87 @@ def run_smoke_tests() -> dict[str, Any]:
         }
     )
 
+    empty_plan = plan_pipeline(requested_until="semantic_lint")
+    expected_empty_plan = _load("pipeline_empty_plan_expected.json")
+    checks.append(
+        {
+            "name": "pipeline-plan empty repository returns empty_state_plan",
+            "passed": empty_plan == expected_empty_plan,
+        }
+    )
+
+    valid_pipeline_plan = plan_pipeline(FIXTURE_DIR / "story_core_pipeline_valid.json", requested_until="semantic_lint")
+    checks.append(
+        {
+            "name": "valid story_core generates pipeline plan",
+            "passed": valid_pipeline_plan["passed"]
+            and any(step["action_id"] == "run_semantic_lint" for step in valid_pipeline_plan["plan"]),
+        }
+    )
+
+    blocked_pipeline_plan = plan_pipeline(
+        FIXTURE_DIR / "story_core_pipeline_blocked.json",
+        requested_until="semantic_lint",
+    )
+    checks.append(
+        {
+            "name": "blocked story_core blocks disallowed action",
+            "passed": not blocked_pipeline_plan["passed"]
+            and "action_blocked:run_semantic_lint" in blocked_pipeline_plan["blocked_reason"],
+        }
+    )
+
+    pipeline_run = execute_pipeline(
+        empty_plan,
+        requested_until="semantic_lint",
+        dry_run=True,
+        command="smoke-test pipeline-run --until semantic_lint --dry-run",
+    )
+    run_result = pipeline_run.get("run_result", {})
+    manifest_path = RUNTIME_ROOT.parent / run_result.get("run_manifest", "")
+    checkpoint_path = RUNTIME_ROOT.parent / run_result.get("checkpoint", "")
+    checks.append(
+        {
+            "name": "pipeline-run dry-run creates run manifest and checkpoint",
+            "passed": pipeline_run["passed"] and manifest_path.exists() and checkpoint_path.exists(),
+        }
+    )
+
+    pipeline_status = read_checkpoint_status(run_result.get("run_id", ""))
+    checks.append(
+        {
+            "name": "pipeline-status can read run",
+            "passed": pipeline_status["passed"] and pipeline_status["checkpoint"]["run_id"] == run_result.get("run_id"),
+        }
+    )
+
+    manual_checkpoint = _load("pipeline_checkpoint_valid.json")
+    save_checkpoint(manual_checkpoint)
+    resume_result = resume_run("fixture_manual_approval", dry_run=True)
+    checks.append(
+        {
+            "name": "pipeline-resume does not pass manual approval",
+            "passed": resume_result["passed"] and resume_result["resume_status"] == "approval_required",
+        }
+    )
+
+    runs = list_runs()
+    checks.append(
+        {
+            "name": "list-runs is available",
+            "passed": runs["passed"] and any(item["run_id"] == run_result.get("run_id") for item in runs["runs"]),
+        }
+    )
+
     generated_forbidden_artifacts = []
     for path in (RUNTIME_ROOT.parent / "故事项目").iterdir():
         if path.is_dir():
             generated_forbidden_artifacts.append(str(path))
-    checks.append({"name": "no story project created", "passed": not generated_forbidden_artifacts})
-    checks.append({"name": "no images generated", "passed": not list(RUNTIME_ROOT.rglob("*.png"))})
-    checks.append({"name": "no execution package generated", "passed": not list(RUNTIME_ROOT.rglob("*执行包*"))})
+    checks.append({"name": "pipeline does not create story project", "passed": not generated_forbidden_artifacts})
+    image_artifacts = list(RUNTIME_ROOT.rglob("*.png")) + list((RUNTIME_ROOT.parent / "资产库").rglob("*.png"))
+    checks.append({"name": "pipeline does not generate images", "passed": not image_artifacts})
+    checks.append({"name": "pipeline does not generate execution package", "passed": not list(RUNTIME_ROOT.rglob("*执行包*"))})
+    checks.append({"name": "pipeline does not generate publish package", "passed": not list(RUNTIME_ROOT.rglob("*发布包*"))})
 
     failed = [check for check in checks if not check["passed"]]
     return result(not failed, smoke_checks=checks, failed_checks=failed)
