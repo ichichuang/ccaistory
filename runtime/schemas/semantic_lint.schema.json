@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "aistory/semantic_lint.schema.json",
+  "title": "Semantic Lint Result",
+  "type": "object",
+  "required": ["status", "passed", "semantic_lint_result"],
+  "properties": {
+    "status": {"type": "string", "enum": ["pass", "fail"]},
+    "passed": {"type": "boolean"},
+    "semantic_lint_result": {
+      "type": "object",
+      "required": ["failed_rules", "repair_suggestions"],
+      "properties": {
+        "asset_scope_conflicts": {"type": "array", "items": {"type": "string"}},
+        "missing_fields": {"type": "array", "items": {"type": "string"}},
+        "risky_terms": {"type": "array", "items": {"type": "string"}},
+        "failed_rules": {"type": "array", "items": {"type": "string"}},
+        "repair_suggestions": {"type": "array", "items": {"type": "string"}}
+      },
+      "additionalProperties": true
+    }
+  }
+}

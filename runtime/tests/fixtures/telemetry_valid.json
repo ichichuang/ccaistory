@@ -1,0 +1,11 @@
+{
+  "asset_id": "fixture_r00_valid",
+  "asset_type": "R00_PAPER_MARK_ANCHOR",
+  "actual_prompt_sent_to_external_tool": "Asset type R00. Clean white exercise paper with controlled short child-handwriting clue samples.",
+  "reference_assets_required": ["R00_reference"],
+  "reference_assets_uploaded_or_available": ["R00_reference"],
+  "canvas_ratio_requested": "9:16",
+  "canvas_ratio_actual": "9:16",
+  "tool_name": "manual_external_tool_record",
+  "output_path": "manual/not-created-by-runtime"
+}

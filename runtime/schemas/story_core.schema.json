@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "aistory/story_core.schema.json",
+  "title": "AI Story Core",
+  "type": "object",
+  "required": ["story_id", "story_title", "machine_state", "story_graph"],
+  "properties": {
+    "story_id": {"type": "string"},
+    "story_title": {"type": "string"},
+    "story_type": {"type": "string"},
+    "target_platform": {"type": "string"},
+    "machine_state": {"$ref": "state_transition.schema.json#/definitions/machine_state"},
+    "technique_profile": {
+      "type": "object",
+      "properties": {
+        "selected_skills": {"type": "array", "items": {"type": "string"}},
+        "story_type": {"type": "string"},
+        "suspense_type": {"type": "string"},
+        "global_skills": {"type": "array", "items": {"type": "string"}}
+      },
+      "additionalProperties": true
+    },
+    "story_graph": {
+      "type": "object",
+      "required": ["nodes", "edges"],
+      "properties": {
+        "nodes": {
+          "type": "array",
+          "items": {"$ref": "#/definitions/story_graph_node"}
+        },
+        "edges": {
+          "type": "array",
+          "items": {"$ref": "#/definitions/story_graph_edge"}
+        }
+      }
+    }
+  },
+  "definitions": {
+    "story_graph_node": {
+      "type": "object",
+      "required": ["node_id", "page_index", "typed_hook", "typed_narration", "final_hook_sentence", "applied_skills"],
+      "properties": {
+        "node_id": {"type": "string"},
+        "page_index": {"type": "integer", "minimum": 1},
+        "page_role": {"type": "string"},
+        "typed_hook": {"type": "string"},
+        "typed_narration": {"type": "string"},
+        "next_page_question": {"type": "string"},
+        "final_hook_sentence": {"type": "string"},
+        "applied_skills": {"type": "array", "items": {"type": "string"}},
+        "reader_retention_goal": {"type": "string"},
+        "technique_notes": {"type": "array", "items": {"type": "string"}},
+        "opening_callback": {"type": ["boolean", "string"]}
+      },
+      "additionalProperties": true
+    },
+    "story_graph_edge": {
+      "type": "object",
+      "required": ["from", "to"],
+      "properties": {
+        "from": {"type": "string"},
+        "to": {"type": "string"},
+        "edge_type": {"type": "string"}
+      },
+      "additionalProperties": true
+    }
+  }
+}

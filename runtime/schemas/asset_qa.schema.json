@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "aistory/asset_qa.schema.json",
+  "title": "Asset QA Result",
+  "type": "object",
+  "required": ["asset_type", "answers"],
+  "properties": {
+    "asset_id": {"type": "string"},
+    "asset_type": {"type": "string"},
+    "asset_qa_result": {"type": "object"},
+    "answers": {
+      "type": "object",
+      "additionalProperties": {"type": "boolean"}
+    },
+    "decision": {"type": "string", "enum": ["accepted", "rejected", "rework"]},
+    "failed_rules": {"type": "array", "items": {"type": "string"}},
+    "allow_accepted": {"type": "boolean"}
+  },
+  "additionalProperties": true
+}

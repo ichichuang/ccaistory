@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "aistory/state_transition.schema.json",
+  "title": "State Transition",
+  "type": "object",
+  "required": ["machine_state"],
+  "properties": {
+    "machine_state": {"$ref": "#/definitions/machine_state"},
+    "state_transition": {
+      "type": "object",
+      "required": ["from_state", "to_state", "action", "gate_result"],
+      "properties": {
+        "from_state": {"type": "string"},
+        "to_state": {"type": "string"},
+        "action": {"type": "string"},
+        "gate_result": {"type": "string", "enum": ["passed", "rework_required", "blocked"]},
+        "reason": {"type": "string"}
+      },
+      "additionalProperties": true
+    }
+  },
+  "definitions": {
+    "machine_state": {
+      "type": "object",
+      "required": ["current_state", "gate_result", "next_allowed_action", "blocked_actions"],
+      "properties": {
+        "current_state": {"type": "string"},
+        "gate_result": {"type": "string", "enum": ["passed", "rework_required", "blocked"]},
+        "next_allowed_action": {
+          "oneOf": [
+            {"type": "string"},
+            {"type": "array", "items": {"type": "string"}}
+          ]
+        },
+        "blocked_actions": {"type": "array", "items": {"type": "string"}},
+        "quality_gates": {"type": "object"},
+        "blocker": {"type": "string"},
+        "evidence": {"type": "array", "items": {"type": "string"}}
+      },
+      "additionalProperties": true
+    }
+  }
+}

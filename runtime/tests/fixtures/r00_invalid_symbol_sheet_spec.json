@@ -1,0 +1,21 @@
+{
+  "asset_id": "fixture_r00_invalid_symbol_sheet",
+  "asset_type": "R00_PAPER_MARK_ANCHOR",
+  "allowed_content": [
+    "symbol sheet of scattered icons",
+    "many disconnected marks"
+  ],
+  "forbidden_content": [
+    "person",
+    "stick figure",
+    "full scene",
+    "prop collection",
+    "symbol sheet"
+  ],
+  "visual_center": "symbol sheet",
+  "density_range": "high",
+  "composition_mode": "scattered symbols across the page",
+  "text_policy": "short clue fragments only",
+  "canvas_ratio": "9:16",
+  "acceptance_questions": ["not_symbol_sheet"]
+}

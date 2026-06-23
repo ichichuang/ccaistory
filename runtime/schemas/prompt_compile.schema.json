@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "aistory/prompt_compile.schema.json",
+  "title": "Prompt Compile Result",
+  "type": "object",
+  "required": ["asset_type", "compiled_prompt", "prompt_sections", "asset_specific_acceptance_criteria"],
+  "properties": {
+    "asset_id": {"type": ["string", "null"]},
+    "asset_type": {"type": "string"},
+    "compiled_prompt": {"type": "string"},
+    "prompt_sections": {
+      "type": "object",
+      "required": ["asset_type", "visual_center", "allowed_content", "density_range", "composition_mode", "text_policy"],
+      "properties": {
+        "asset_type": {"type": "string"},
+        "visual_center": {"type": "string"},
+        "allowed_content": {"type": "array", "items": {"type": "string"}},
+        "density_range": {"type": "string"},
+        "composition_mode": {"type": "string"},
+        "text_policy": {"type": "string"},
+        "negative_constraints_ref": {"type": "string"}
+      }
+    },
+    "forbidden_content": {"type": "array", "items": {"type": "string"}},
+    "asset_specific_acceptance_criteria": {"type": "array", "items": {"type": "string"}},
+    "acceptance_questions": {"type": "array", "items": {"type": "string"}},
+    "canvas_ratio": {"type": ["string", "null"]}
+  },
+  "additionalProperties": true
+}

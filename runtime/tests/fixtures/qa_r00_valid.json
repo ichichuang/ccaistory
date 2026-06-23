@@ -1,0 +1,20 @@
+{
+  "asset_id": "fixture_r00_valid",
+  "asset_type": "R00_PAPER_MARK_ANCHOR",
+  "answers": {
+    "has_person": false,
+    "has_stick_figure": false,
+    "has_complete_scene": false,
+    "has_prop_collection": false,
+    "is_symbol_sheet": false,
+    "looks_like_ui_or_flowchart": false,
+    "looks_like_dirty_scrap": false,
+    "clean_white_paper": true,
+    "no_yellowed_old_paper": true,
+    "controlled_child_handwriting_sample": true,
+    "reasonable_short_clue_count": true,
+    "no_long_body_text": true,
+    "has_visual_center_or_order": true,
+    "usable_as_reference_asset": true
+  }
+}

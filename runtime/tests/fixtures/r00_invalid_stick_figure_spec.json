@@ -1,0 +1,21 @@
+{
+  "asset_id": "fixture_r00_invalid_stick_figure",
+  "asset_type": "R00_PAPER_MARK_ANCHOR",
+  "allowed_content": [
+    "clean white exercise paper",
+    "small stick figure beside the handwriting"
+  ],
+  "forbidden_content": [
+    "person",
+    "stick figure",
+    "full scene",
+    "prop collection",
+    "symbol sheet"
+  ],
+  "visual_center": "stick figure and clue",
+  "density_range": "low",
+  "composition_mode": "single paper surface",
+  "text_policy": "short clue fragments only",
+  "canvas_ratio": "9:16",
+  "acceptance_questions": ["no_stick_figure"]
+}

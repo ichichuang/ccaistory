@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "aistory/skill.schema.json",
+  "title": "Creator Technique Skill",
+  "type": "object",
+  "required": ["skill_id", "display_name", "applies_to", "input_fields", "output_fields", "graph_fields_affected", "validation_questions", "hard_failures", "repair_actions", "compatible_skills", "forbidden_uses"],
+  "properties": {
+    "skill_id": {"type": "string"},
+    "display_name": {"type": "string"},
+    "applies_to": {"type": "array", "items": {"type": "string"}},
+    "input_fields": {"type": "array", "items": {"type": "string"}},
+    "output_fields": {"type": "array", "items": {"type": "string"}},
+    "graph_fields_affected": {"type": "array", "items": {"type": "string"}},
+    "validation_questions": {"type": "array", "items": {"type": "string"}},
+    "hard_failures": {"type": "array", "items": {"type": "string"}},
+    "repair_actions": {"type": "array", "items": {"type": "string"}},
+    "compatible_skills": {"type": "array", "items": {"type": "string"}},
+    "forbidden_uses": {"type": "array", "items": {"type": "string"}}
+  },
+  "additionalProperties": false
+}

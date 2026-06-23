@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "aistory/execution_telemetry.schema.json",
+  "title": "Execution Telemetry",
+  "type": "object",
+  "required": ["asset_id", "asset_type", "actual_prompt_sent_to_external_tool", "reference_assets_required", "reference_assets_uploaded_or_available", "canvas_ratio_requested", "canvas_ratio_actual"],
+  "properties": {
+    "asset_id": {"type": "string"},
+    "asset_type": {"type": "string"},
+    "actual_prompt_sent_to_external_tool": {"type": "string"},
+    "reference_assets_required": {"type": "array", "items": {"type": "string"}},
+    "reference_assets_uploaded_or_available": {"type": "array", "items": {"type": "string"}},
+    "canvas_ratio_requested": {"type": "string"},
+    "canvas_ratio_actual": {"type": "string"},
+    "tool_name": {"type": "string"},
+    "output_path": {"type": "string"},
+    "allow_accepted_review": {"type": "boolean"}
+  },
+  "additionalProperties": true
+}

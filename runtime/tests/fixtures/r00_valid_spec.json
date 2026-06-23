@@ -1,0 +1,28 @@
+{
+  "asset_id": "fixture_r00_valid",
+  "asset_type": "R00_PAPER_MARK_ANCHOR",
+  "allowed_content": [
+    "clean white exercise paper",
+    "controlled short child-handwriting clue samples",
+    "sparse pencil marks with one visual center"
+  ],
+  "forbidden_content": [
+    "person",
+    "stick figure",
+    "full scene",
+    "prop collection",
+    "symbol sheet",
+    "long handwritten body"
+  ],
+  "visual_center": "one ordered cluster of short handwriting clues",
+  "density_range": "low to medium",
+  "composition_mode": "single clean paper surface with controlled spacing",
+  "text_policy": "short clue fragments only",
+  "canvas_ratio": "9:16",
+  "acceptance_questions": [
+    "no_person",
+    "no_stick_figure",
+    "clean_white_paper",
+    "controlled_child_handwriting_sample"
+  ]
+}
