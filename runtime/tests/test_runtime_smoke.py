@@ -95,7 +95,7 @@ def run_smoke_tests() -> dict[str, Any]:
     generated_review = generate_image_review_form(
         asset_type="R00_PAPER_MARK_ANCHOR",
         asset_id="fixture_asset_r00",
-        candidate_id="fixture_candidate_01",
+        candidate_id="fixture_candidate_alpha",
         artifact_id="fixture_generation_candidate",
     )
     checks.append(

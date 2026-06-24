@@ -2,7 +2,7 @@
   "artifact_id": "fixture_generation_candidate",
   "artifact_type": "external_generation_candidate",
   "asset_id": "fixture_asset_r00",
-  "candidate_id": "fixture_candidate_01",
+  "candidate_id": "fixture_candidate_alpha",
   "content_hash": {
     "algorithm": "sha256",
     "hash": "4444444444444444444444444444444444444444444444444444444444444444"

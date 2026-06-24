@@ -2,7 +2,7 @@
   "artifact_id": "fixture_execution_telemetry",
   "artifact_type": "execution_telemetry",
   "asset_id": "fixture_asset_r00",
-  "candidate_id": "fixture_candidate_01",
+  "candidate_id": "fixture_candidate_alpha",
   "content_hash": {
     "algorithm": "sha256",
     "hash": "5555555555555555555555555555555555555555555555555555555555555555"

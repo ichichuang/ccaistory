@@ -2,7 +2,7 @@
   "artifact_id": "fixture_rejected_asset",
   "artifact_type": "accepted_reference_asset",
   "asset_id": "fixture_asset_r00",
-  "candidate_id": "fixture_candidate_01",
+  "candidate_id": "fixture_candidate_alpha",
   "content_hash": {
     "algorithm": "sha256",
     "hash": "9999999999999999999999999999999999999999999999999999999999999999"

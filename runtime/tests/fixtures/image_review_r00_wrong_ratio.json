@@ -4,7 +4,7 @@
   "asset_id": "fixture_asset_r00",
   "asset_type": "R00_PAPER_MARK_ANCHOR",
   "available_reference_dependencies": [],
-  "candidate_id": "fixture_candidate_01",
+  "candidate_id": "fixture_candidate_alpha",
   "decision": "fail",
   "expected_canvas_ratio": "9:16",
   "expected_reference_dependencies": [],
@@ -187,7 +187,7 @@
   "repair_suggestions": [
     "regenerate or crop to 9:16 portrait canvas"
   ],
-  "review_id": "review_fixture_asset_r00_fixture_candidate_01",
+  "review_id": "review_fixture_asset_r00_fixture_candidate_alpha",
   "reviewed_at": "2026-06-23T00:00:00Z",
   "reviewer": "fixture_reviewer"
 }

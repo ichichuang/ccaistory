@@ -2,7 +2,7 @@
   "artifact_id": "fixture_asset_qa_passed",
   "artifact_type": "asset_qa_result",
   "asset_id": "fixture_asset_r00",
-  "candidate_id": "fixture_candidate_01",
+  "candidate_id": "fixture_candidate_alpha",
   "content_hash": {
     "algorithm": "sha256",
     "hash": "6666666666666666666666666666666666666666666666666666666666666666"

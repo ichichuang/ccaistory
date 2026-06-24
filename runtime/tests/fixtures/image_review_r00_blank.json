@@ -4,7 +4,7 @@
   "asset_id": "fixture_asset_r00",
   "asset_type": "R00_PAPER_MARK_ANCHOR",
   "available_reference_dependencies": [],
-  "candidate_id": "fixture_candidate_01",
+  "candidate_id": "fixture_candidate_alpha",
   "decision": "pending",
   "expected_canvas_ratio": "9:16",
   "expected_reference_dependencies": [],
@@ -177,7 +177,7 @@
     }
   ],
   "repair_suggestions": [],
-  "review_id": "review_fixture_asset_r00_fixture_candidate_01",
+  "review_id": "review_fixture_asset_r00_fixture_candidate_alpha",
   "reviewed_at": "",
   "reviewer": ""
 }
