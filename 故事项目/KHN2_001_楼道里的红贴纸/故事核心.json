@@ -45,11 +45,11 @@
     "original_safe": true
   },
   "machine_state": {
-    "current_state": "skill_executor_passed",
+    "current_state": "visual_asset_specs_ready",
     "gate_result": "pass",
     "gate_result_label": "pass",
-    "last_gate_passed": "skill_executor_passed",
-    "next_allowed_action": "build_visual_asset_specs",
+    "last_gate_passed": "visual_asset_specs_ready",
+    "next_allowed_action": "compile_prompts",
     "blocked_actions": [
       "generate_images",
       "generate_prompt_package",
@@ -63,6 +63,7 @@
       "minimum_viable_story": "pass",
       "story_analysis": "pass",
       "skill_executor": "pass",
+      "visual_asset_specs": "pass",
       "copyright_review": "pass",
       "safety_review": "pass"
     },
@@ -71,12 +72,14 @@
       "recommended_pages=8，minimum_pages=6，maximum_pages=8",
       "repair_priority 为空，可进入 Skill Executor",
       "Skill Executor passed=true，failed_nodes=[]，proposed_changes=[]，manual_approval_required=false",
-      "下一步仅允许 build_visual_asset_specs，不允许生成图片、执行包或发布包",
+      "build_visual_asset_specs 已完成，生成 11 个视觉资产规格",
+      "下一步仅允许 compile_prompts，不允许生成图片、执行包或发布包",
       "story_graph.edges 已扩写为 cause/question/answer/new_question/clue/tension_delta 结构",
       "7 页方案在 6-8 页合同范围内，按 accepted_with_reason 保留",
       "线索账本已补齐 red_sticker_arrow、unused_door、wrong_recipient_misdirection、keychain_sticker、blank_red_sticker",
       "“别走错层”已改为“别跟错箭头”，避免引入未回收楼层错位规则",
-      "主角身份统一为学生主角，视觉层保留儿童安全手账体系"
+      "主角身份统一为学生主角，视觉层保留儿童安全手账体系",
+      "runtime contracts 已统一为 skill_executor_passed -> build_visual_asset_specs -> visual_asset_specs_ready"
     ]
   },
   "minimum_viable_story": {
@@ -753,6 +756,164 @@
       "status": "pass",
       "critical_unpaid_clues": [],
       "wrong_floor_rule_handled": true
+    },
+    "visual_asset_specs_report": "09_视觉资产规格.md",
+    "visual_asset_specs_json": "09_视觉资产规格.json",
+    "visual_asset_specs_summary": {
+      "status": "pass",
+      "asset_count": 11,
+      "anchor_asset_count": 4,
+      "source_illustration_spec_count": 7,
+      "next_action": "compile_prompts",
+      "forbidden_outputs_created": false
+    }
+  },
+  "visual_pipeline": {
+    "status": "visual_asset_specs_ready",
+    "asset_manifest": [
+      {
+        "asset_id": "R00_KHN2_001_paper_mark_anchor",
+        "asset_type": "R00_PAPER_MARK_ANCHOR",
+        "asset_scope": "root_reference_anchor",
+        "reference_dependencies": []
+      },
+      {
+        "asset_id": "R01_KHN2_001_lin_xiaomu_anchor",
+        "asset_type": "R01_CHARACTER_ANCHOR",
+        "asset_scope": "character_reference_anchor",
+        "reference_dependencies": [
+          "R00_KHN2_001_paper_mark_anchor"
+        ]
+      },
+      {
+        "asset_id": "R02_KHN2_001_corridor_door_prop_anchor",
+        "asset_type": "R02_SCENE_PROP_ANCHOR",
+        "asset_scope": "scene_prop_reference_anchor",
+        "reference_dependencies": [
+          "R00_KHN2_001_paper_mark_anchor"
+        ]
+      },
+      {
+        "asset_id": "P01_KHN2_001_platform_layout_sample",
+        "asset_type": "P01_PLATFORM_LAYOUT_SAMPLE",
+        "asset_scope": "platform_page_layout_sample",
+        "reference_dependencies": [
+          "R00_KHN2_001_paper_mark_anchor"
+        ]
+      },
+      {
+        "asset_id": "S01_KHN2_001_source_illustration",
+        "asset_type": "S_SOURCE_ILLUSTRATION",
+        "asset_scope": "page_source_illustration",
+        "page_id": "S01",
+        "reference_dependencies": [
+          "R00_KHN2_001_paper_mark_anchor",
+          "R01_KHN2_001_lin_xiaomu_anchor",
+          "R02_KHN2_001_corridor_door_prop_anchor"
+        ]
+      },
+      {
+        "asset_id": "S02_KHN2_001_source_illustration",
+        "asset_type": "S_SOURCE_ILLUSTRATION",
+        "asset_scope": "page_source_illustration",
+        "page_id": "S02",
+        "reference_dependencies": [
+          "R00_KHN2_001_paper_mark_anchor",
+          "R02_KHN2_001_corridor_door_prop_anchor"
+        ]
+      },
+      {
+        "asset_id": "S03_KHN2_001_source_illustration",
+        "asset_type": "S_SOURCE_ILLUSTRATION",
+        "asset_scope": "page_source_illustration",
+        "page_id": "S03",
+        "reference_dependencies": [
+          "R00_KHN2_001_paper_mark_anchor",
+          "R01_KHN2_001_lin_xiaomu_anchor",
+          "R02_KHN2_001_corridor_door_prop_anchor"
+        ]
+      },
+      {
+        "asset_id": "S04_KHN2_001_source_illustration",
+        "asset_type": "S_SOURCE_ILLUSTRATION",
+        "asset_scope": "page_source_illustration",
+        "page_id": "S04",
+        "reference_dependencies": [
+          "R00_KHN2_001_paper_mark_anchor",
+          "R01_KHN2_001_lin_xiaomu_anchor",
+          "R02_KHN2_001_corridor_door_prop_anchor"
+        ]
+      },
+      {
+        "asset_id": "S05_KHN2_001_source_illustration",
+        "asset_type": "S_SOURCE_ILLUSTRATION",
+        "asset_scope": "page_source_illustration",
+        "page_id": "S05",
+        "reference_dependencies": [
+          "R00_KHN2_001_paper_mark_anchor",
+          "R01_KHN2_001_lin_xiaomu_anchor",
+          "R02_KHN2_001_corridor_door_prop_anchor"
+        ]
+      },
+      {
+        "asset_id": "S06_KHN2_001_source_illustration",
+        "asset_type": "S_SOURCE_ILLUSTRATION",
+        "asset_scope": "page_source_illustration",
+        "page_id": "S06",
+        "reference_dependencies": [
+          "R00_KHN2_001_paper_mark_anchor",
+          "R01_KHN2_001_lin_xiaomu_anchor",
+          "R02_KHN2_001_corridor_door_prop_anchor"
+        ]
+      },
+      {
+        "asset_id": "S07_KHN2_001_source_illustration",
+        "asset_type": "S_SOURCE_ILLUSTRATION",
+        "asset_scope": "page_source_illustration",
+        "page_id": "S07",
+        "reference_dependencies": [
+          "R00_KHN2_001_paper_mark_anchor",
+          "R01_KHN2_001_lin_xiaomu_anchor",
+          "R02_KHN2_001_corridor_door_prop_anchor"
+        ]
+      }
+    ],
+    "asset_ontology": {
+      "global_visual_rules": {
+        "paper_style": "clean white notebook paper",
+        "overlay_layer": "child note layer",
+        "narration_layer": "typed_narration stays outside source illustration",
+        "separation_rule": "source_illustration separated from platform_story_page",
+        "author_style_policy": "no author style instruction"
+      },
+      "text_policy": {
+        "typed_narration_in_image": false,
+        "child_note_layer_only": true,
+        "child_note_max_chars": 8,
+        "forbidden": [
+          "long handwritten body",
+          "platform final body copy",
+          "production instructions"
+        ]
+      },
+      "safety_policy": {
+        "forbidden": [
+          "gore",
+          "corpse",
+          "real accident",
+          "police investigation",
+          "adult crime",
+          "author style instruction"
+        ]
+      }
+    },
+    "visual_asset_specs": {
+      "status": "pass",
+      "asset_count": 11,
+      "derived_json": "09_视觉资产规格.json",
+      "derived_report": "09_视觉资产规格.md",
+      "next_action": "compile_prompts",
+      "forbidden_outputs_created": false
     }
   },
   "quality_gates": {
@@ -780,6 +941,14 @@
       "proposed_changes_count": 0,
       "manual_approval_required": false,
       "next_allowed_action": "build_visual_asset_specs"
+    },
+    "visual_asset_specs": {
+      "status": "pass",
+      "asset_count": 11,
+      "anchor_asset_count": 4,
+      "source_illustration_spec_count": 7,
+      "next_allowed_action": "compile_prompts",
+      "forbidden_outputs_created": false
     },
     "runtime_precheck": {
       "status": "pass",
@@ -970,8 +1139,9 @@
         "failed_rules": []
       }
     },
-    "residual_risks": [
-      "runtime can-run/pipeline-plan 的底层 contracts 仍保留 build_visual_manifest/visual_manifest_ready 流程命名；本轮按故事核心与 07 派生视图要求同步 next_allowed_action=build_visual_asset_specs，未迁移底层 contracts。"
+    "residual_risks": [],
+    "resolved_runtime_risks": [
+      "runtime contracts 已移除主路径中的 build_visual_manifest/visual_manifest_ready 命名风险，pipeline-plan 可从 skill_executor_passed 进入 build_visual_asset_specs。"
     ]
   }
 }

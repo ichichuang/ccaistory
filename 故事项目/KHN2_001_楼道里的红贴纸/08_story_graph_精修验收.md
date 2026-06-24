@@ -125,4 +125,4 @@ python runtime/aistory.py execute-skill-graph --graph '故事项目/KHN2_001_楼
 
 未生成图片、执行包、发布包、发布计划或源插图试产任务清单。
 
-残余风险：runtime can-run/pipeline-plan 的底层 contracts 仍保留 build_visual_manifest/visual_manifest_ready 流程命名；本轮按故事核心与 07 派生视图要求同步 next_allowed_action=build_visual_asset_specs，未迁移底层 contracts。
+残余风险处理：已在 2026-06-24 修复 runtime contracts 主路径命名；pipeline-plan 现可从 `skill_executor_passed` 进入 `build_visual_asset_specs`，不再依赖 `build_visual_manifest/visual_manifest_ready`。

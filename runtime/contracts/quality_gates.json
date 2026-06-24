@@ -18,7 +18,7 @@
       "fail_conditions": ["page_count_missing", "story_too_thin_or_overloaded"],
       "next_allowed_action_on_pass": "select_skills",
       "next_allowed_action_on_fail": "assess_page_count",
-      "blocked_actions": ["apply_skill_runtime", "build_visual_manifest", "compile_prompts", "generate_images"]
+      "blocked_actions": ["apply_skill_runtime", "build_visual_asset_specs", "compile_prompts", "generate_images"]
     },
     "skill_selection_gate": {
       "gate_id": "skill_selection_gate",
@@ -27,7 +27,7 @@
       "fail_conditions": ["unknown_skill_id", "skill_selection_empty"],
       "next_allowed_action_on_pass": "apply_skill_runtime",
       "next_allowed_action_on_fail": "select_skills",
-      "blocked_actions": ["check_story_graph", "build_visual_manifest", "compile_prompts"]
+      "blocked_actions": ["check_story_graph", "build_visual_asset_specs", "compile_prompts"]
     },
     "skill_runtime_gate": {
       "gate_id": "skill_runtime_gate",
@@ -36,7 +36,7 @@
       "fail_conditions": ["skill_effect_missing", "skill_hard_failure_present"],
       "next_allowed_action_on_pass": "analyze_story_graph",
       "next_allowed_action_on_fail": "apply_skill_runtime",
-      "blocked_actions": ["execute_skill_graph", "check_story_graph", "build_visual_manifest", "compile_prompts", "generate_images"]
+      "blocked_actions": ["execute_skill_graph", "check_story_graph", "build_visual_asset_specs", "compile_prompts", "generate_images"]
     },
     "story_analyzer_gate": {
       "gate_id": "story_analyzer_gate",
@@ -54,7 +54,7 @@
       ],
       "next_allowed_action_on_pass": "execute_skill_graph",
       "next_allowed_action_on_fail": "repair_story_graph_before_skill_executor",
-      "blocked_actions": ["execute_skill_node", "execute_skill_graph", "build_visual_manifest", "compile_prompts", "generate_images"]
+      "blocked_actions": ["execute_skill_node", "execute_skill_graph", "build_visual_asset_specs", "compile_prompts", "generate_images"]
     },
     "skill_executor_gate": {
       "gate_id": "skill_executor_gate",
@@ -73,24 +73,24 @@
       ],
       "next_allowed_action_on_pass": "review_skill_executor_proposed_changes",
       "next_allowed_action_on_fail": "execute_skill_graph",
-      "blocked_actions": ["check_story_graph", "build_visual_manifest", "compile_prompts", "generate_images"]
+      "blocked_actions": ["check_story_graph", "build_visual_asset_specs", "compile_prompts", "generate_images"]
     },
     "graph_integrity_gate": {
       "gate_id": "graph_integrity_gate",
       "required_inputs": ["story_graph"],
       "pass_conditions": ["node_order_valid", "no_missing_required_edges", "no_dead_end_before_ending"],
       "fail_conditions": ["missing_node", "broken_edge", "ending_unreachable"],
-      "next_allowed_action_on_pass": "build_visual_manifest",
+      "next_allowed_action_on_pass": "build_visual_asset_specs",
       "next_allowed_action_on_fail": "check_story_graph",
-      "blocked_actions": ["build_visual_asset_specs", "compile_prompts", "generate_images"]
+      "blocked_actions": ["compile_prompts", "generate_images"]
     },
     "visual_asset_ontology_gate": {
       "gate_id": "visual_asset_ontology_gate",
-      "required_inputs": ["visual_manifest", "visual_assets_contract"],
-      "pass_conditions": ["all_asset_types_known", "r00_precedes_dependent_assets", "required_fields_present"],
-      "fail_conditions": ["unknown_asset_type", "missing_r00_dependency", "asset_scope_conflict"],
+      "required_inputs": ["story_graph", "visual_assets_contract", "skill_executor_result", "story_graph_refinement_result"],
+      "pass_conditions": ["all_asset_types_known", "r00_precedes_dependent_assets", "visual_asset_specs_required_fields_present"],
+      "fail_conditions": ["unknown_asset_type", "missing_r00_dependency", "asset_scope_conflict", "story_graph_missing"],
       "next_allowed_action_on_pass": "build_visual_asset_specs",
-      "next_allowed_action_on_fail": "build_visual_manifest",
+      "next_allowed_action_on_fail": "build_visual_asset_specs",
       "blocked_actions": ["compile_prompts", "run_semantic_lint", "generate_images"]
     },
     "prompt_compile_gate": {

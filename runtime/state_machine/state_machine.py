@@ -18,7 +18,6 @@ ACTIONS = [
     "review_skill_executor_proposed_changes",
     "apply_approved_skill_changes",
     "check_story_graph",
-    "build_visual_manifest",
     "build_visual_asset_specs",
     "compile_prompts",
     "run_semantic_lint",
@@ -38,6 +37,10 @@ def _state_block(story_core: dict[str, Any]) -> dict[str, Any]:
     if isinstance(machine_state, dict):
         return machine_state
     return story_core
+
+
+def _gate_result_passed(gate_result: Any) -> bool:
+    return gate_result in {"passed", "pass"}
 
 
 def get_status(project_path: str | Path | None = None) -> dict[str, Any]:
@@ -106,7 +109,7 @@ def can_run(project_path: str | Path, action: str) -> dict[str, Any]:
         return result(False, action=action, reason="action is blocked", blocked_actions=blocked_actions)
 
     gate_result = state.get("gate_result")
-    if gate_result != "passed":
+    if not _gate_result_passed(gate_result):
         return result(False, action=action, reason="gate_result is not passed", gate_result=gate_result)
 
     next_allowed_action = state.get("next_allowed_action")

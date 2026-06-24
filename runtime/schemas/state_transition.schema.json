@@ -13,7 +13,7 @@
         "from_state": {"type": "string"},
         "to_state": {"type": "string"},
         "action": {"type": "string"},
-        "gate_result": {"type": "string", "enum": ["passed", "rework_required", "blocked"]},
+        "gate_result": {"type": "string", "enum": ["passed", "pass", "rework_required", "blocked", "fail"]},
         "reason": {"type": "string"}
       },
       "additionalProperties": true
@@ -25,7 +25,7 @@
       "required": ["current_state", "gate_result", "next_allowed_action", "blocked_actions"],
       "properties": {
         "current_state": {"type": "string"},
-        "gate_result": {"type": "string", "enum": ["passed", "rework_required", "blocked"]},
+        "gate_result": {"type": "string", "enum": ["passed", "pass", "rework_required", "blocked", "fail"]},
         "next_allowed_action": {
           "oneOf": [
             {"type": "string"},

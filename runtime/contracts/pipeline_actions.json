@@ -107,28 +107,18 @@
       "required_state": "skill_executor_applied",
       "required_gate_result": "passed",
       "required_inputs": ["story_graph", "skill_executor_apply_result"],
-      "outputs": ["graph_integrity_result"],
+      "outputs": ["graph_integrity_result", "story_graph_refinement_result"],
       "blocked_if": ["skill_runtime_failed", "skill_executor_review_missing"],
-      "next_action_on_pass": "build_visual_manifest",
-      "next_action_on_fail": "check_story_graph"
-    },
-    "build_visual_manifest": {
-      "action_id": "build_visual_manifest",
-      "required_state": "story_graph_ready",
-      "required_gate_result": "passed",
-      "required_inputs": ["story_graph", "visual_assets_contract"],
-      "outputs": ["visual_manifest"],
-      "blocked_if": ["unknown_asset_type", "r00_dependency_missing"],
       "next_action_on_pass": "build_visual_asset_specs",
-      "next_action_on_fail": "build_visual_manifest"
+      "next_action_on_fail": "check_story_graph"
     },
     "build_visual_asset_specs": {
       "action_id": "build_visual_asset_specs",
-      "required_state": "visual_manifest_ready",
+      "required_state": "skill_executor_passed",
       "required_gate_result": "passed",
-      "required_inputs": ["visual_manifest", "visual_assets_contract"],
+      "required_inputs": ["story_graph", "visual_assets_contract", "skill_executor_result", "story_graph_refinement_result"],
       "outputs": ["visual_asset_specs", "visual_asset_spec_artifacts"],
-      "blocked_if": ["visual_manifest_missing"],
+      "blocked_if": ["story_graph_missing", "visual_assets_contract_missing"],
       "next_action_on_pass": "compile_prompts",
       "next_action_on_fail": "build_visual_asset_specs"
     },

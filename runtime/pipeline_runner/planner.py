@@ -19,7 +19,6 @@ ACTION_GATE_MAP = {
     "review_skill_executor_proposed_changes": "skill_executor_gate",
     "apply_approved_skill_changes": "skill_executor_gate",
     "check_story_graph": "graph_integrity_gate",
-    "build_visual_manifest": "visual_asset_ontology_gate",
     "build_visual_asset_specs": "visual_asset_ontology_gate",
     "compile_prompts": "prompt_compile_gate",
     "run_semantic_lint": "semantic_lint_gate",
@@ -114,6 +113,14 @@ def _first_allowed(next_allowed_action: Any) -> str:
     if isinstance(next_allowed_action, list):
         return next((item for item in next_allowed_action if isinstance(item, str) and item), "")
     return ""
+
+
+def _normalize_gate_result(gate_result: Any) -> Any:
+    if gate_result == "pass":
+        return "passed"
+    if gate_result == "fail":
+        return "blocked"
+    return gate_result
 
 
 def _normalize_gate(requested_until: str | None, gates: dict[str, Any], actions: dict[str, Any]) -> str:
@@ -274,7 +281,7 @@ def plan_pipeline(project_path: str | Path | None = None, requested_until: str |
     first_step = True
     state_id = current_state
     action_id = next_action
-    active_gate_result = gate_result
+    active_gate_result = _normalize_gate_result(gate_result)
 
     for index in range(len(actions) + 1):
         if not action_id:
@@ -350,7 +357,7 @@ def plan_pipeline(project_path: str | Path | None = None, requested_until: str |
                 blocked_reason=[f"action_required_state_mismatch:{action_id}:{action.get('required_state')}"],
             )
 
-        required_gate_result = action.get("required_gate_result")
+        required_gate_result = _normalize_gate_result(action.get("required_gate_result"))
         if first_step and required_gate_result != active_gate_result:
             return _plan_failure(
                 project_path=str(project_path),
