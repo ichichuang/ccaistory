@@ -45,16 +45,14 @@
     "original_safe": true
   },
   "machine_state": {
-    "current_state": "prompts_compiled",
+    "current_state": "semantic_lint_passed",
     "gate_result": "pass",
     "gate_result_label": "pass",
-    "last_gate_passed": "prompts_compiled",
-    "next_allowed_action": "run_semantic_lint",
+    "last_gate_passed": "semantic_lint_passed",
+    "next_allowed_action": "generate_source_pilot_task_list",
     "blocked_actions": [
       "generate_images",
-      "generate_prompt_package",
       "generate_webgpt_execution_package",
-      "generate_source_pilot_task_list",
       "full_generation",
       "create_publish_package",
       "publish",
@@ -67,7 +65,8 @@
       "visual_asset_specs": "pass",
       "copyright_review": "pass",
       "safety_review": "pass",
-      "prompt_compile": "pass"
+      "prompt_compile": "pass",
+      "semantic_lint": "pass"
     },
     "evidence": [
       "Story Analyzer passed=true",
@@ -85,7 +84,10 @@
       "已补齐 S01-S07 paper_policy / style_policy",
       "compile_prompts 已生成 11 条 compiled prompt",
       "Artifact Registry 已登记 1 个 visual_asset_spec 与 11 个 compiled_prompt artifact",
-      "下一步仅允许 run_semantic_lint；仍禁止图片、执行包、source pilot task list、发布包和发布计划"
+      "下一步仅允许 run_semantic_lint；仍禁止图片、执行包、source pilot task list、发布包和发布计划",
+      "run_semantic_lint 已完成，lint_status=pass，passed_count=11，failed_count=0",
+      "Artifact Registry 已登记 11 个 semantic_lint_result artifact，均依赖对应 compiled_prompt artifact",
+      "本阶段未生成图片、未调用 WebGPT、未生成 source pilot task list、执行包、发布包或发布计划"
     ]
   },
   "minimum_viable_story": {
@@ -782,6 +784,15 @@
       "status": "pass",
       "prompt_count": 11,
       "next_required_gate": "semantic_lint"
+    },
+    "semantic_lint_result_json": "故事项目/KHN2_001_楼道里的红贴纸/11_Semantic_Lint_Result.json",
+    "semantic_lint_result_view": "故事项目/KHN2_001_楼道里的红贴纸/11_Semantic_Lint_Result.md",
+    "semantic_lint_result_summary": {
+      "status": "pass",
+      "prompt_count": 11,
+      "passed_count": 11,
+      "failed_count": 0,
+      "next_action": "generate_source_pilot_task_list"
     }
   },
   "visual_pipeline": {
@@ -1034,6 +1045,13 @@
       "status": "pass",
       "prompt_count": 11,
       "next_required_gate": "semantic_lint"
+    },
+    "semantic_lint": {
+      "status": "pass",
+      "prompt_count": 11,
+      "passed_count": 11,
+      "failed_count": 0,
+      "next_allowed_action": "generate_source_pilot_task_list"
     }
   },
   "runtime_status": {
@@ -1048,7 +1066,7 @@
     "pipeline_runner_available": true,
     "artifact_registry_available": true,
     "multimodal_qa_available": true,
-    "artifact_count": 12,
+    "artifact_count": 23,
     "image_asset_count": 0,
     "execution_package_count": 0,
     "publish_package_count": 0,
@@ -1067,7 +1085,38 @@
       "failures": [],
       "registry_path": "/Users/cc/MyPorject/AI+Story/runtime/.artifacts/registry.json"
     },
-    "source_pilot_task_list_count": 0
+    "source_pilot_task_list_count": 0,
+    "run_semantic_lint": {
+      "status": "pass",
+      "prompt_count": 11,
+      "passed_count": 11,
+      "failed_count": 0,
+      "failed_asset_ids": [],
+      "artifact_ids": [
+        "KHN2_001_semantic_lint_result_R00_KHN2_001_paper_mark_anchor",
+        "KHN2_001_semantic_lint_result_R01_KHN2_001_lin_xiaomu_anchor",
+        "KHN2_001_semantic_lint_result_R02_KHN2_001_corridor_door_prop_anchor",
+        "KHN2_001_semantic_lint_result_P01_KHN2_001_platform_layout_sample",
+        "KHN2_001_semantic_lint_result_S01_KHN2_001_source_illustration",
+        "KHN2_001_semantic_lint_result_S02_KHN2_001_source_illustration",
+        "KHN2_001_semantic_lint_result_S03_KHN2_001_source_illustration",
+        "KHN2_001_semantic_lint_result_S04_KHN2_001_source_illustration",
+        "KHN2_001_semantic_lint_result_S05_KHN2_001_source_illustration",
+        "KHN2_001_semantic_lint_result_S06_KHN2_001_source_illustration",
+        "KHN2_001_semantic_lint_result_S07_KHN2_001_source_illustration"
+      ],
+      "lint_result_path": "故事项目/KHN2_001_楼道里的红贴纸/11_Semantic_Lint_Result.json"
+    },
+    "artifact_registry_after_semantic_lint": {
+      "status": "pass",
+      "passed": true,
+      "artifact_count": 23,
+      "image_qa_artifact_count": 0,
+      "missing_dependencies": [],
+      "broken_link_count": 0,
+      "failures": [],
+      "registry_path": "/Users/cc/MyPorject/AI+Story/runtime/.artifacts/registry.json"
+    }
   },
   "page_count_decision": {
     "recommended_pages": 8,
@@ -1289,11 +1338,12 @@
   "artifact_registry": {
     "status": "pass",
     "registry_path": "runtime/.artifacts/registry.json",
-    "artifact_count": 12,
+    "artifact_count": 23,
     "broken_link_count": 0,
     "registered_artifact_types": [
       "visual_asset_spec",
-      "compiled_prompt"
+      "compiled_prompt",
+      "semantic_lint_result"
     ]
   },
   "compiled_prompts": {
@@ -1329,5 +1379,29 @@
       "KHN2_001_compiled_prompt_S07_KHN2_001_source_illustration"
     ],
     "next_required_gate": "semantic_lint"
+  },
+  "semantic_lint_result": {
+    "status": "pass",
+    "source_compiled_prompts": "故事项目/KHN2_001_楼道里的红贴纸/10_Compiled_Prompts.json",
+    "lint_result_path": "故事项目/KHN2_001_楼道里的红贴纸/11_Semantic_Lint_Result.json",
+    "lint_result_view": "故事项目/KHN2_001_楼道里的红贴纸/11_Semantic_Lint_Result.md",
+    "prompt_count": 11,
+    "passed_count": 11,
+    "failed_count": 0,
+    "failed_asset_ids": [],
+    "artifact_ids": [
+      "KHN2_001_semantic_lint_result_R00_KHN2_001_paper_mark_anchor",
+      "KHN2_001_semantic_lint_result_R01_KHN2_001_lin_xiaomu_anchor",
+      "KHN2_001_semantic_lint_result_R02_KHN2_001_corridor_door_prop_anchor",
+      "KHN2_001_semantic_lint_result_P01_KHN2_001_platform_layout_sample",
+      "KHN2_001_semantic_lint_result_S01_KHN2_001_source_illustration",
+      "KHN2_001_semantic_lint_result_S02_KHN2_001_source_illustration",
+      "KHN2_001_semantic_lint_result_S03_KHN2_001_source_illustration",
+      "KHN2_001_semantic_lint_result_S04_KHN2_001_source_illustration",
+      "KHN2_001_semantic_lint_result_S05_KHN2_001_source_illustration",
+      "KHN2_001_semantic_lint_result_S06_KHN2_001_source_illustration",
+      "KHN2_001_semantic_lint_result_S07_KHN2_001_source_illustration"
+    ],
+    "next_allowed_action": "generate_source_pilot_task_list"
   }
 }

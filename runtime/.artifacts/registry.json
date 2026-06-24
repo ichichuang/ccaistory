@@ -385,6 +385,413 @@
       "status": "compiled",
       "story_id": "故事0001"
     },
+    "KHN2_001_semantic_lint_result_P01_KHN2_001_platform_layout_sample": {
+      "artifact_id": "KHN2_001_semantic_lint_result_P01_KHN2_001_platform_layout_sample",
+      "artifact_type": "semantic_lint_result",
+      "asset_id": "P01_KHN2_001_platform_layout_sample",
+      "candidate_id": "",
+      "content_hash": {
+        "algorithm": "sha256",
+        "hash": "d28a12f22fdca245befa248df6819ef6cb6b528a25b8ded9cca4bbd6f7e98c24"
+      },
+      "created_at": "2026-06-24T09:39:25+08:00",
+      "dependency_artifact_ids": [
+        "KHN2_001_compiled_prompt_P01_KHN2_001_platform_layout_sample"
+      ],
+      "metadata": {
+        "asset_scope_conflicts": [],
+        "failed_rules": [],
+        "forbidden_content_hits": [],
+        "lint_result_path": "故事项目/KHN2_001_楼道里的红贴纸/11_Semantic_Lint_Result.json",
+        "lint_status": "pass",
+        "linted_at": "2026-06-24T09:39:25+08:00",
+        "missing_fields": [],
+        "risky_terms": [],
+        "source_compiled_prompt_artifact_id": "KHN2_001_compiled_prompt_P01_KHN2_001_platform_layout_sample"
+      },
+      "parent_artifact_ids": [
+        "KHN2_001_compiled_prompt_P01_KHN2_001_platform_layout_sample"
+      ],
+      "project_id": "KHN2_001",
+      "run_id": "KHN2_001_run_semantic_lint_20260624",
+      "source_hash": {
+        "algorithm": "sha256",
+        "hash": "0cf817394c37cc84d94fbb9882b87dd730c798b668b1520765f95878c1b4a2b9"
+      },
+      "source_path": "故事项目/KHN2_001_楼道里的红贴纸/11_Semantic_Lint_Result.json",
+      "status": "lint_passed",
+      "story_id": "故事0001"
+    },
+    "KHN2_001_semantic_lint_result_R00_KHN2_001_paper_mark_anchor": {
+      "artifact_id": "KHN2_001_semantic_lint_result_R00_KHN2_001_paper_mark_anchor",
+      "artifact_type": "semantic_lint_result",
+      "asset_id": "R00_KHN2_001_paper_mark_anchor",
+      "candidate_id": "",
+      "content_hash": {
+        "algorithm": "sha256",
+        "hash": "bfdc2d1c0398103be00b258932f487b6aefe855ebbcdec676949acae3ec5f996"
+      },
+      "created_at": "2026-06-24T09:39:25+08:00",
+      "dependency_artifact_ids": [
+        "KHN2_001_compiled_prompt_R00_KHN2_001_paper_mark_anchor"
+      ],
+      "metadata": {
+        "asset_scope_conflicts": [],
+        "failed_rules": [],
+        "forbidden_content_hits": [],
+        "lint_result_path": "故事项目/KHN2_001_楼道里的红贴纸/11_Semantic_Lint_Result.json",
+        "lint_status": "pass",
+        "linted_at": "2026-06-24T09:39:25+08:00",
+        "missing_fields": [],
+        "risky_terms": [],
+        "source_compiled_prompt_artifact_id": "KHN2_001_compiled_prompt_R00_KHN2_001_paper_mark_anchor"
+      },
+      "parent_artifact_ids": [
+        "KHN2_001_compiled_prompt_R00_KHN2_001_paper_mark_anchor"
+      ],
+      "project_id": "KHN2_001",
+      "run_id": "KHN2_001_run_semantic_lint_20260624",
+      "source_hash": {
+        "algorithm": "sha256",
+        "hash": "0cf817394c37cc84d94fbb9882b87dd730c798b668b1520765f95878c1b4a2b9"
+      },
+      "source_path": "故事项目/KHN2_001_楼道里的红贴纸/11_Semantic_Lint_Result.json",
+      "status": "lint_passed",
+      "story_id": "故事0001"
+    },
+    "KHN2_001_semantic_lint_result_R01_KHN2_001_lin_xiaomu_anchor": {
+      "artifact_id": "KHN2_001_semantic_lint_result_R01_KHN2_001_lin_xiaomu_anchor",
+      "artifact_type": "semantic_lint_result",
+      "asset_id": "R01_KHN2_001_lin_xiaomu_anchor",
+      "candidate_id": "",
+      "content_hash": {
+        "algorithm": "sha256",
+        "hash": "50f8a5f222a993ecc2e00da14c01467ba720e3ac8460424660139a0672de6914"
+      },
+      "created_at": "2026-06-24T09:39:25+08:00",
+      "dependency_artifact_ids": [
+        "KHN2_001_compiled_prompt_R01_KHN2_001_lin_xiaomu_anchor"
+      ],
+      "metadata": {
+        "asset_scope_conflicts": [],
+        "failed_rules": [],
+        "forbidden_content_hits": [],
+        "lint_result_path": "故事项目/KHN2_001_楼道里的红贴纸/11_Semantic_Lint_Result.json",
+        "lint_status": "pass",
+        "linted_at": "2026-06-24T09:39:25+08:00",
+        "missing_fields": [],
+        "risky_terms": [],
+        "source_compiled_prompt_artifact_id": "KHN2_001_compiled_prompt_R01_KHN2_001_lin_xiaomu_anchor"
+      },
+      "parent_artifact_ids": [
+        "KHN2_001_compiled_prompt_R01_KHN2_001_lin_xiaomu_anchor"
+      ],
+      "project_id": "KHN2_001",
+      "run_id": "KHN2_001_run_semantic_lint_20260624",
+      "source_hash": {
+        "algorithm": "sha256",
+        "hash": "0cf817394c37cc84d94fbb9882b87dd730c798b668b1520765f95878c1b4a2b9"
+      },
+      "source_path": "故事项目/KHN2_001_楼道里的红贴纸/11_Semantic_Lint_Result.json",
+      "status": "lint_passed",
+      "story_id": "故事0001"
+    },
+    "KHN2_001_semantic_lint_result_R02_KHN2_001_corridor_door_prop_anchor": {
+      "artifact_id": "KHN2_001_semantic_lint_result_R02_KHN2_001_corridor_door_prop_anchor",
+      "artifact_type": "semantic_lint_result",
+      "asset_id": "R02_KHN2_001_corridor_door_prop_anchor",
+      "candidate_id": "",
+      "content_hash": {
+        "algorithm": "sha256",
+        "hash": "006e6380da52b666077259c63e670beef926b435eff9a80f389ce9df96921aed"
+      },
+      "created_at": "2026-06-24T09:39:25+08:00",
+      "dependency_artifact_ids": [
+        "KHN2_001_compiled_prompt_R02_KHN2_001_corridor_door_prop_anchor"
+      ],
+      "metadata": {
+        "asset_scope_conflicts": [],
+        "failed_rules": [],
+        "forbidden_content_hits": [],
+        "lint_result_path": "故事项目/KHN2_001_楼道里的红贴纸/11_Semantic_Lint_Result.json",
+        "lint_status": "pass",
+        "linted_at": "2026-06-24T09:39:25+08:00",
+        "missing_fields": [],
+        "risky_terms": [],
+        "source_compiled_prompt_artifact_id": "KHN2_001_compiled_prompt_R02_KHN2_001_corridor_door_prop_anchor"
+      },
+      "parent_artifact_ids": [
+        "KHN2_001_compiled_prompt_R02_KHN2_001_corridor_door_prop_anchor"
+      ],
+      "project_id": "KHN2_001",
+      "run_id": "KHN2_001_run_semantic_lint_20260624",
+      "source_hash": {
+        "algorithm": "sha256",
+        "hash": "0cf817394c37cc84d94fbb9882b87dd730c798b668b1520765f95878c1b4a2b9"
+      },
+      "source_path": "故事项目/KHN2_001_楼道里的红贴纸/11_Semantic_Lint_Result.json",
+      "status": "lint_passed",
+      "story_id": "故事0001"
+    },
+    "KHN2_001_semantic_lint_result_S01_KHN2_001_source_illustration": {
+      "artifact_id": "KHN2_001_semantic_lint_result_S01_KHN2_001_source_illustration",
+      "artifact_type": "semantic_lint_result",
+      "asset_id": "S01_KHN2_001_source_illustration",
+      "candidate_id": "",
+      "content_hash": {
+        "algorithm": "sha256",
+        "hash": "7e36706a6616c1a34d9016406cdb4d6963443a5b5977bc03cfa122c2dc0106fd"
+      },
+      "created_at": "2026-06-24T09:39:25+08:00",
+      "dependency_artifact_ids": [
+        "KHN2_001_compiled_prompt_S01_KHN2_001_source_illustration"
+      ],
+      "metadata": {
+        "asset_scope_conflicts": [],
+        "failed_rules": [],
+        "forbidden_content_hits": [],
+        "lint_result_path": "故事项目/KHN2_001_楼道里的红贴纸/11_Semantic_Lint_Result.json",
+        "lint_status": "pass",
+        "linted_at": "2026-06-24T09:39:25+08:00",
+        "missing_fields": [],
+        "risky_terms": [],
+        "source_compiled_prompt_artifact_id": "KHN2_001_compiled_prompt_S01_KHN2_001_source_illustration"
+      },
+      "parent_artifact_ids": [
+        "KHN2_001_compiled_prompt_S01_KHN2_001_source_illustration"
+      ],
+      "project_id": "KHN2_001",
+      "run_id": "KHN2_001_run_semantic_lint_20260624",
+      "source_hash": {
+        "algorithm": "sha256",
+        "hash": "0cf817394c37cc84d94fbb9882b87dd730c798b668b1520765f95878c1b4a2b9"
+      },
+      "source_path": "故事项目/KHN2_001_楼道里的红贴纸/11_Semantic_Lint_Result.json",
+      "status": "lint_passed",
+      "story_id": "故事0001"
+    },
+    "KHN2_001_semantic_lint_result_S02_KHN2_001_source_illustration": {
+      "artifact_id": "KHN2_001_semantic_lint_result_S02_KHN2_001_source_illustration",
+      "artifact_type": "semantic_lint_result",
+      "asset_id": "S02_KHN2_001_source_illustration",
+      "candidate_id": "",
+      "content_hash": {
+        "algorithm": "sha256",
+        "hash": "1537dd468c01565a637ed16714091318a5f0a1fec4505936f473a7c113c5c351"
+      },
+      "created_at": "2026-06-24T09:39:25+08:00",
+      "dependency_artifact_ids": [
+        "KHN2_001_compiled_prompt_S02_KHN2_001_source_illustration"
+      ],
+      "metadata": {
+        "asset_scope_conflicts": [],
+        "failed_rules": [],
+        "forbidden_content_hits": [],
+        "lint_result_path": "故事项目/KHN2_001_楼道里的红贴纸/11_Semantic_Lint_Result.json",
+        "lint_status": "pass",
+        "linted_at": "2026-06-24T09:39:25+08:00",
+        "missing_fields": [],
+        "risky_terms": [],
+        "source_compiled_prompt_artifact_id": "KHN2_001_compiled_prompt_S02_KHN2_001_source_illustration"
+      },
+      "parent_artifact_ids": [
+        "KHN2_001_compiled_prompt_S02_KHN2_001_source_illustration"
+      ],
+      "project_id": "KHN2_001",
+      "run_id": "KHN2_001_run_semantic_lint_20260624",
+      "source_hash": {
+        "algorithm": "sha256",
+        "hash": "0cf817394c37cc84d94fbb9882b87dd730c798b668b1520765f95878c1b4a2b9"
+      },
+      "source_path": "故事项目/KHN2_001_楼道里的红贴纸/11_Semantic_Lint_Result.json",
+      "status": "lint_passed",
+      "story_id": "故事0001"
+    },
+    "KHN2_001_semantic_lint_result_S03_KHN2_001_source_illustration": {
+      "artifact_id": "KHN2_001_semantic_lint_result_S03_KHN2_001_source_illustration",
+      "artifact_type": "semantic_lint_result",
+      "asset_id": "S03_KHN2_001_source_illustration",
+      "candidate_id": "",
+      "content_hash": {
+        "algorithm": "sha256",
+        "hash": "4a0c13f08cbe99e997faf0c62f3af9fc96e3ece6cdb5d2d9148d4b767fdfe3ec"
+      },
+      "created_at": "2026-06-24T09:39:25+08:00",
+      "dependency_artifact_ids": [
+        "KHN2_001_compiled_prompt_S03_KHN2_001_source_illustration"
+      ],
+      "metadata": {
+        "asset_scope_conflicts": [],
+        "failed_rules": [],
+        "forbidden_content_hits": [],
+        "lint_result_path": "故事项目/KHN2_001_楼道里的红贴纸/11_Semantic_Lint_Result.json",
+        "lint_status": "pass",
+        "linted_at": "2026-06-24T09:39:25+08:00",
+        "missing_fields": [],
+        "risky_terms": [],
+        "source_compiled_prompt_artifact_id": "KHN2_001_compiled_prompt_S03_KHN2_001_source_illustration"
+      },
+      "parent_artifact_ids": [
+        "KHN2_001_compiled_prompt_S03_KHN2_001_source_illustration"
+      ],
+      "project_id": "KHN2_001",
+      "run_id": "KHN2_001_run_semantic_lint_20260624",
+      "source_hash": {
+        "algorithm": "sha256",
+        "hash": "0cf817394c37cc84d94fbb9882b87dd730c798b668b1520765f95878c1b4a2b9"
+      },
+      "source_path": "故事项目/KHN2_001_楼道里的红贴纸/11_Semantic_Lint_Result.json",
+      "status": "lint_passed",
+      "story_id": "故事0001"
+    },
+    "KHN2_001_semantic_lint_result_S04_KHN2_001_source_illustration": {
+      "artifact_id": "KHN2_001_semantic_lint_result_S04_KHN2_001_source_illustration",
+      "artifact_type": "semantic_lint_result",
+      "asset_id": "S04_KHN2_001_source_illustration",
+      "candidate_id": "",
+      "content_hash": {
+        "algorithm": "sha256",
+        "hash": "97db433b25adf4ad626b1e0edebd3c1b63bda984e6d83b6b576275121488fa92"
+      },
+      "created_at": "2026-06-24T09:39:25+08:00",
+      "dependency_artifact_ids": [
+        "KHN2_001_compiled_prompt_S04_KHN2_001_source_illustration"
+      ],
+      "metadata": {
+        "asset_scope_conflicts": [],
+        "failed_rules": [],
+        "forbidden_content_hits": [],
+        "lint_result_path": "故事项目/KHN2_001_楼道里的红贴纸/11_Semantic_Lint_Result.json",
+        "lint_status": "pass",
+        "linted_at": "2026-06-24T09:39:25+08:00",
+        "missing_fields": [],
+        "risky_terms": [],
+        "source_compiled_prompt_artifact_id": "KHN2_001_compiled_prompt_S04_KHN2_001_source_illustration"
+      },
+      "parent_artifact_ids": [
+        "KHN2_001_compiled_prompt_S04_KHN2_001_source_illustration"
+      ],
+      "project_id": "KHN2_001",
+      "run_id": "KHN2_001_run_semantic_lint_20260624",
+      "source_hash": {
+        "algorithm": "sha256",
+        "hash": "0cf817394c37cc84d94fbb9882b87dd730c798b668b1520765f95878c1b4a2b9"
+      },
+      "source_path": "故事项目/KHN2_001_楼道里的红贴纸/11_Semantic_Lint_Result.json",
+      "status": "lint_passed",
+      "story_id": "故事0001"
+    },
+    "KHN2_001_semantic_lint_result_S05_KHN2_001_source_illustration": {
+      "artifact_id": "KHN2_001_semantic_lint_result_S05_KHN2_001_source_illustration",
+      "artifact_type": "semantic_lint_result",
+      "asset_id": "S05_KHN2_001_source_illustration",
+      "candidate_id": "",
+      "content_hash": {
+        "algorithm": "sha256",
+        "hash": "28de9b96418bc861ffb31c002bd5f6f7945209306263c8dafd3aeec8787c3aca"
+      },
+      "created_at": "2026-06-24T09:39:25+08:00",
+      "dependency_artifact_ids": [
+        "KHN2_001_compiled_prompt_S05_KHN2_001_source_illustration"
+      ],
+      "metadata": {
+        "asset_scope_conflicts": [],
+        "failed_rules": [],
+        "forbidden_content_hits": [],
+        "lint_result_path": "故事项目/KHN2_001_楼道里的红贴纸/11_Semantic_Lint_Result.json",
+        "lint_status": "pass",
+        "linted_at": "2026-06-24T09:39:25+08:00",
+        "missing_fields": [],
+        "risky_terms": [],
+        "source_compiled_prompt_artifact_id": "KHN2_001_compiled_prompt_S05_KHN2_001_source_illustration"
+      },
+      "parent_artifact_ids": [
+        "KHN2_001_compiled_prompt_S05_KHN2_001_source_illustration"
+      ],
+      "project_id": "KHN2_001",
+      "run_id": "KHN2_001_run_semantic_lint_20260624",
+      "source_hash": {
+        "algorithm": "sha256",
+        "hash": "0cf817394c37cc84d94fbb9882b87dd730c798b668b1520765f95878c1b4a2b9"
+      },
+      "source_path": "故事项目/KHN2_001_楼道里的红贴纸/11_Semantic_Lint_Result.json",
+      "status": "lint_passed",
+      "story_id": "故事0001"
+    },
+    "KHN2_001_semantic_lint_result_S06_KHN2_001_source_illustration": {
+      "artifact_id": "KHN2_001_semantic_lint_result_S06_KHN2_001_source_illustration",
+      "artifact_type": "semantic_lint_result",
+      "asset_id": "S06_KHN2_001_source_illustration",
+      "candidate_id": "",
+      "content_hash": {
+        "algorithm": "sha256",
+        "hash": "e2580fd477d2422b0e8e7416ca1096a475039a09d162787fc45bfbaf559637d4"
+      },
+      "created_at": "2026-06-24T09:39:25+08:00",
+      "dependency_artifact_ids": [
+        "KHN2_001_compiled_prompt_S06_KHN2_001_source_illustration"
+      ],
+      "metadata": {
+        "asset_scope_conflicts": [],
+        "failed_rules": [],
+        "forbidden_content_hits": [],
+        "lint_result_path": "故事项目/KHN2_001_楼道里的红贴纸/11_Semantic_Lint_Result.json",
+        "lint_status": "pass",
+        "linted_at": "2026-06-24T09:39:25+08:00",
+        "missing_fields": [],
+        "risky_terms": [],
+        "source_compiled_prompt_artifact_id": "KHN2_001_compiled_prompt_S06_KHN2_001_source_illustration"
+      },
+      "parent_artifact_ids": [
+        "KHN2_001_compiled_prompt_S06_KHN2_001_source_illustration"
+      ],
+      "project_id": "KHN2_001",
+      "run_id": "KHN2_001_run_semantic_lint_20260624",
+      "source_hash": {
+        "algorithm": "sha256",
+        "hash": "0cf817394c37cc84d94fbb9882b87dd730c798b668b1520765f95878c1b4a2b9"
+      },
+      "source_path": "故事项目/KHN2_001_楼道里的红贴纸/11_Semantic_Lint_Result.json",
+      "status": "lint_passed",
+      "story_id": "故事0001"
+    },
+    "KHN2_001_semantic_lint_result_S07_KHN2_001_source_illustration": {
+      "artifact_id": "KHN2_001_semantic_lint_result_S07_KHN2_001_source_illustration",
+      "artifact_type": "semantic_lint_result",
+      "asset_id": "S07_KHN2_001_source_illustration",
+      "candidate_id": "",
+      "content_hash": {
+        "algorithm": "sha256",
+        "hash": "4b4b2d2eeca21597a963d85909ecfefcb9ef767bdd99fa411151e0b45692644f"
+      },
+      "created_at": "2026-06-24T09:39:25+08:00",
+      "dependency_artifact_ids": [
+        "KHN2_001_compiled_prompt_S07_KHN2_001_source_illustration"
+      ],
+      "metadata": {
+        "asset_scope_conflicts": [],
+        "failed_rules": [],
+        "forbidden_content_hits": [],
+        "lint_result_path": "故事项目/KHN2_001_楼道里的红贴纸/11_Semantic_Lint_Result.json",
+        "lint_status": "pass",
+        "linted_at": "2026-06-24T09:39:25+08:00",
+        "missing_fields": [],
+        "risky_terms": [],
+        "source_compiled_prompt_artifact_id": "KHN2_001_compiled_prompt_S07_KHN2_001_source_illustration"
+      },
+      "parent_artifact_ids": [
+        "KHN2_001_compiled_prompt_S07_KHN2_001_source_illustration"
+      ],
+      "project_id": "KHN2_001",
+      "run_id": "KHN2_001_run_semantic_lint_20260624",
+      "source_hash": {
+        "algorithm": "sha256",
+        "hash": "0cf817394c37cc84d94fbb9882b87dd730c798b668b1520765f95878c1b4a2b9"
+      },
+      "source_path": "故事项目/KHN2_001_楼道里的红贴纸/11_Semantic_Lint_Result.json",
+      "status": "lint_passed",
+      "story_id": "故事0001"
+    },
     "KHN2_001_visual_asset_spec_09": {
       "artifact_id": "KHN2_001_visual_asset_spec_09",
       "artifact_type": "visual_asset_spec",
@@ -436,5 +843,5 @@
   },
   "created_at": "2026-06-23T00:00:00Z",
   "registry_version": 1,
-  "updated_at": "2026-06-24T01:10:00.580818Z"
+  "updated_at": "2026-06-24T01:39:25.598132Z"
 }
