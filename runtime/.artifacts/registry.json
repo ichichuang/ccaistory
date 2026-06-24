@@ -792,6 +792,170 @@
       "status": "lint_passed",
       "story_id": "故事0001"
     },
+    "KHN2_001_source_pilot_task_list_12": {
+      "artifact_id": "KHN2_001_source_pilot_task_list_12",
+      "artifact_type": "source_pilot_task_list",
+      "asset_id": "",
+      "candidate_id": "",
+      "content_hash": {
+        "algorithm": "sha256",
+        "hash": "25d599ea096c041a12d54d9b4416834eea4ca493a18e7685c067df9963594401"
+      },
+      "created_at": "2026-06-24T10:10:23+08:00",
+      "dependency_artifact_ids": [
+        "KHN2_001_compiled_prompt_R00_KHN2_001_paper_mark_anchor",
+        "KHN2_001_compiled_prompt_R01_KHN2_001_lin_xiaomu_anchor",
+        "KHN2_001_compiled_prompt_R02_KHN2_001_corridor_door_prop_anchor",
+        "KHN2_001_compiled_prompt_P01_KHN2_001_platform_layout_sample",
+        "KHN2_001_compiled_prompt_S01_KHN2_001_source_illustration",
+        "KHN2_001_compiled_prompt_S02_KHN2_001_source_illustration",
+        "KHN2_001_compiled_prompt_S03_KHN2_001_source_illustration",
+        "KHN2_001_compiled_prompt_S04_KHN2_001_source_illustration",
+        "KHN2_001_compiled_prompt_S05_KHN2_001_source_illustration",
+        "KHN2_001_compiled_prompt_S06_KHN2_001_source_illustration",
+        "KHN2_001_compiled_prompt_S07_KHN2_001_source_illustration",
+        "KHN2_001_semantic_lint_result_R00_KHN2_001_paper_mark_anchor",
+        "KHN2_001_semantic_lint_result_R01_KHN2_001_lin_xiaomu_anchor",
+        "KHN2_001_semantic_lint_result_R02_KHN2_001_corridor_door_prop_anchor",
+        "KHN2_001_semantic_lint_result_P01_KHN2_001_platform_layout_sample",
+        "KHN2_001_semantic_lint_result_S01_KHN2_001_source_illustration",
+        "KHN2_001_semantic_lint_result_S02_KHN2_001_source_illustration",
+        "KHN2_001_semantic_lint_result_S03_KHN2_001_source_illustration",
+        "KHN2_001_semantic_lint_result_S04_KHN2_001_source_illustration",
+        "KHN2_001_semantic_lint_result_S05_KHN2_001_source_illustration",
+        "KHN2_001_semantic_lint_result_S06_KHN2_001_source_illustration",
+        "KHN2_001_semantic_lint_result_S07_KHN2_001_source_illustration"
+      ],
+      "metadata": {
+        "blocked_asset_ids": [
+          "R01_KHN2_001_lin_xiaomu_anchor",
+          "R02_KHN2_001_corridor_door_prop_anchor",
+          "P01_KHN2_001_platform_layout_sample",
+          "S01_KHN2_001_source_illustration",
+          "S02_KHN2_001_source_illustration",
+          "S03_KHN2_001_source_illustration",
+          "S04_KHN2_001_source_illustration",
+          "S05_KHN2_001_source_illustration",
+          "S06_KHN2_001_source_illustration",
+          "S07_KHN2_001_source_illustration"
+        ],
+        "blocked_task_count": 10,
+        "compiled_prompt_artifact_ids": [
+          "KHN2_001_compiled_prompt_R00_KHN2_001_paper_mark_anchor",
+          "KHN2_001_compiled_prompt_R01_KHN2_001_lin_xiaomu_anchor",
+          "KHN2_001_compiled_prompt_R02_KHN2_001_corridor_door_prop_anchor",
+          "KHN2_001_compiled_prompt_P01_KHN2_001_platform_layout_sample",
+          "KHN2_001_compiled_prompt_S01_KHN2_001_source_illustration",
+          "KHN2_001_compiled_prompt_S02_KHN2_001_source_illustration",
+          "KHN2_001_compiled_prompt_S03_KHN2_001_source_illustration",
+          "KHN2_001_compiled_prompt_S04_KHN2_001_source_illustration",
+          "KHN2_001_compiled_prompt_S05_KHN2_001_source_illustration",
+          "KHN2_001_compiled_prompt_S06_KHN2_001_source_illustration",
+          "KHN2_001_compiled_prompt_S07_KHN2_001_source_illustration"
+        ],
+        "execution_package_generated": false,
+        "external_generation_performed": false,
+        "image_qa_run": false,
+        "next_required_manual_step": "人工外部生成 R00_KHN2_001_paper_mark_anchor，并在生成后补 execution telemetry 与 image review form。",
+        "publish_package_generated": false,
+        "ready_asset_ids": [
+          "R00_KHN2_001_paper_mark_anchor"
+        ],
+        "ready_task_count": 1,
+        "reference_dependency_order": [
+          {
+            "asset_ids": [
+              "R00_KHN2_001_paper_mark_anchor"
+            ],
+            "blocked_asset_ids": [],
+            "dependency_rule": "No accepted reference dependency required; R00 only.",
+            "ready_asset_ids": [
+              "R00_KHN2_001_paper_mark_anchor"
+            ],
+            "wave": "Wave 1"
+          },
+          {
+            "asset_ids": [
+              "R01_KHN2_001_lin_xiaomu_anchor",
+              "R02_KHN2_001_corridor_door_prop_anchor",
+              "P01_KHN2_001_platform_layout_sample"
+            ],
+            "blocked_asset_ids": [
+              "R01_KHN2_001_lin_xiaomu_anchor",
+              "R02_KHN2_001_corridor_door_prop_anchor",
+              "P01_KHN2_001_platform_layout_sample"
+            ],
+            "dependency_rule": "Open only after R00 accepted.",
+            "ready_asset_ids": [],
+            "wave": "Wave 2"
+          },
+          {
+            "asset_ids": [
+              "S01_KHN2_001_source_illustration",
+              "S02_KHN2_001_source_illustration",
+              "S03_KHN2_001_source_illustration",
+              "S04_KHN2_001_source_illustration",
+              "S05_KHN2_001_source_illustration",
+              "S06_KHN2_001_source_illustration",
+              "S07_KHN2_001_source_illustration"
+            ],
+            "blocked_asset_ids": [
+              "S01_KHN2_001_source_illustration",
+              "S02_KHN2_001_source_illustration",
+              "S03_KHN2_001_source_illustration",
+              "S04_KHN2_001_source_illustration",
+              "S05_KHN2_001_source_illustration",
+              "S06_KHN2_001_source_illustration",
+              "S07_KHN2_001_source_illustration"
+            ],
+            "dependency_rule": "Open only after R00, R01 and R02 accepted.",
+            "ready_asset_ids": [],
+            "wave": "Wave 3"
+          }
+        ],
+        "semantic_lint_artifact_ids": [
+          "KHN2_001_semantic_lint_result_R00_KHN2_001_paper_mark_anchor",
+          "KHN2_001_semantic_lint_result_R01_KHN2_001_lin_xiaomu_anchor",
+          "KHN2_001_semantic_lint_result_R02_KHN2_001_corridor_door_prop_anchor",
+          "KHN2_001_semantic_lint_result_P01_KHN2_001_platform_layout_sample",
+          "KHN2_001_semantic_lint_result_S01_KHN2_001_source_illustration",
+          "KHN2_001_semantic_lint_result_S02_KHN2_001_source_illustration",
+          "KHN2_001_semantic_lint_result_S03_KHN2_001_source_illustration",
+          "KHN2_001_semantic_lint_result_S04_KHN2_001_source_illustration",
+          "KHN2_001_semantic_lint_result_S05_KHN2_001_source_illustration",
+          "KHN2_001_semantic_lint_result_S06_KHN2_001_source_illustration",
+          "KHN2_001_semantic_lint_result_S07_KHN2_001_source_illustration"
+        ],
+        "stage": "generate_source_pilot_task_list",
+        "task_list_path": "故事项目/KHN2_001_楼道里的红贴纸/12_Source_Pilot_Task_List.json",
+        "task_list_view": "故事项目/KHN2_001_楼道里的红贴纸/12_Source_Pilot_Task_List.md",
+        "telemetry_recorded": false,
+        "total_task_count": 11,
+        "webgpt_called": false
+      },
+      "parent_artifact_ids": [
+        "KHN2_001_semantic_lint_result_R00_KHN2_001_paper_mark_anchor",
+        "KHN2_001_semantic_lint_result_R01_KHN2_001_lin_xiaomu_anchor",
+        "KHN2_001_semantic_lint_result_R02_KHN2_001_corridor_door_prop_anchor",
+        "KHN2_001_semantic_lint_result_P01_KHN2_001_platform_layout_sample",
+        "KHN2_001_semantic_lint_result_S01_KHN2_001_source_illustration",
+        "KHN2_001_semantic_lint_result_S02_KHN2_001_source_illustration",
+        "KHN2_001_semantic_lint_result_S03_KHN2_001_source_illustration",
+        "KHN2_001_semantic_lint_result_S04_KHN2_001_source_illustration",
+        "KHN2_001_semantic_lint_result_S05_KHN2_001_source_illustration",
+        "KHN2_001_semantic_lint_result_S06_KHN2_001_source_illustration",
+        "KHN2_001_semantic_lint_result_S07_KHN2_001_source_illustration"
+      ],
+      "project_id": "KHN2_001",
+      "run_id": "KHN2_001_generate_source_pilot_task_list_20260624",
+      "source_hash": {
+        "algorithm": "sha256",
+        "hash": "cea316f8867a4782d09e56d3d999cea1ad1f1e9e22bfb6878d63eacfb47679a9"
+      },
+      "source_path": "故事项目/KHN2_001_楼道里的红贴纸/12_Source_Pilot_Task_List.json",
+      "status": "generated",
+      "story_id": "故事0001"
+    },
     "KHN2_001_visual_asset_spec_09": {
       "artifact_id": "KHN2_001_visual_asset_spec_09",
       "artifact_type": "visual_asset_spec",
@@ -843,5 +1007,5 @@
   },
   "created_at": "2026-06-23T00:00:00Z",
   "registry_version": 1,
-  "updated_at": "2026-06-24T01:39:25.598132Z"
+  "updated_at": "2026-06-24T02:10:23.509525Z"
 }

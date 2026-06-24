@@ -45,11 +45,11 @@
     "original_safe": true
   },
   "machine_state": {
-    "current_state": "semantic_lint_passed",
+    "current_state": "source_pilot_ready",
     "gate_result": "pass",
     "gate_result_label": "pass",
-    "last_gate_passed": "semantic_lint_passed",
-    "next_allowed_action": "generate_source_pilot_task_list",
+    "last_gate_passed": "source_pilot_ready",
+    "next_allowed_action": "manual_external_generation_r00",
     "blocked_actions": [
       "generate_images",
       "generate_webgpt_execution_package",
@@ -66,7 +66,8 @@
       "copyright_review": "pass",
       "safety_review": "pass",
       "prompt_compile": "pass",
-      "semantic_lint": "pass"
+      "semantic_lint": "pass",
+      "source_pilot_task_list": "pass"
     },
     "evidence": [
       "Story Analyzer passed=true",
@@ -87,7 +88,10 @@
       "下一步仅允许 run_semantic_lint；仍禁止图片、执行包、source pilot task list、发布包和发布计划",
       "run_semantic_lint 已完成，lint_status=pass，passed_count=11，failed_count=0",
       "Artifact Registry 已登记 11 个 semantic_lint_result artifact，均依赖对应 compiled_prompt artifact",
-      "本阶段未生成图片、未调用 WebGPT、未生成 source pilot task list、执行包、发布包或发布计划"
+      "本阶段未生成图片、未调用 WebGPT、未生成 source pilot task list、执行包、发布包或发布计划",
+      "generate_source_pilot_task_list 已完成，生成 11 个源插图试产任务，R00 ready，Wave 2/3 因 reference dependencies 阻断",
+      "Artifact Registry 已登记 1 个 source_pilot_task_list artifact，依赖 11 个 compiled_prompt 与 11 个 semantic_lint_result artifact，artifact_count=24",
+      "本阶段未生成图片、未调用 WebGPT、未生成 WebGPT 执行包、未记录 telemetry、未运行 QA、未生成发布包"
     ]
   },
   "minimum_viable_story": {
@@ -261,9 +265,7 @@
   },
   "blocked_actions": [
     "generate_images",
-    "generate_prompt_package",
     "generate_webgpt_execution_package",
-    "generate_source_pilot_task_list",
     "full_generation",
     "create_publish_package",
     "publish",
@@ -793,6 +795,15 @@
       "passed_count": 11,
       "failed_count": 0,
       "next_action": "generate_source_pilot_task_list"
+    },
+    "source_pilot_task_list_json": "故事项目/KHN2_001_楼道里的红贴纸/12_Source_Pilot_Task_List.json",
+    "source_pilot_task_list_view": "故事项目/KHN2_001_楼道里的红贴纸/12_Source_Pilot_Task_List.md",
+    "source_pilot_task_list_summary": {
+      "status": "pass",
+      "total_task_count": 11,
+      "ready_task_count": 1,
+      "blocked_task_count": 10,
+      "next_action": "manual_external_generation_r00"
     }
   },
   "visual_pipeline": {
@@ -1052,6 +1063,13 @@
       "passed_count": 11,
       "failed_count": 0,
       "next_allowed_action": "generate_source_pilot_task_list"
+    },
+    "source_pilot_task_list": {
+      "status": "pass",
+      "total_task_count": 11,
+      "ready_task_count": 1,
+      "blocked_task_count": 10,
+      "next_required_manual_step": "人工外部生成 R00_KHN2_001_paper_mark_anchor，并在生成后补 execution telemetry 与 image review form。"
     }
   },
   "runtime_status": {
@@ -1066,7 +1084,7 @@
     "pipeline_runner_available": true,
     "artifact_registry_available": true,
     "multimodal_qa_available": true,
-    "artifact_count": 23,
+    "artifact_count": 24,
     "image_asset_count": 0,
     "execution_package_count": 0,
     "publish_package_count": 0,
@@ -1085,7 +1103,7 @@
       "failures": [],
       "registry_path": "/Users/cc/MyPorject/AI+Story/runtime/.artifacts/registry.json"
     },
-    "source_pilot_task_list_count": 0,
+    "source_pilot_task_list_count": 1,
     "run_semantic_lint": {
       "status": "pass",
       "prompt_count": 11,
@@ -1111,6 +1129,46 @@
       "status": "pass",
       "passed": true,
       "artifact_count": 23,
+      "image_qa_artifact_count": 0,
+      "missing_dependencies": [],
+      "broken_link_count": 0,
+      "failures": [],
+      "registry_path": "/Users/cc/MyPorject/AI+Story/runtime/.artifacts/registry.json"
+    },
+    "generate_source_pilot_task_list": {
+      "status": "pass",
+      "task_list_path": "故事项目/KHN2_001_楼道里的红贴纸/12_Source_Pilot_Task_List.json",
+      "task_list_view": "故事项目/KHN2_001_楼道里的红贴纸/12_Source_Pilot_Task_List.md",
+      "artifact_id": "KHN2_001_source_pilot_task_list_12",
+      "total_task_count": 11,
+      "ready_task_count": 1,
+      "blocked_task_count": 10,
+      "ready_asset_ids": [
+        "R00_KHN2_001_paper_mark_anchor"
+      ],
+      "blocked_asset_ids": [
+        "R01_KHN2_001_lin_xiaomu_anchor",
+        "R02_KHN2_001_corridor_door_prop_anchor",
+        "P01_KHN2_001_platform_layout_sample",
+        "S01_KHN2_001_source_illustration",
+        "S02_KHN2_001_source_illustration",
+        "S03_KHN2_001_source_illustration",
+        "S04_KHN2_001_source_illustration",
+        "S05_KHN2_001_source_illustration",
+        "S06_KHN2_001_source_illustration",
+        "S07_KHN2_001_source_illustration"
+      ],
+      "external_generation_performed": false,
+      "webgpt_called": false,
+      "execution_package_generated": false,
+      "telemetry_recorded": false,
+      "image_qa_run": false,
+      "publish_package_generated": false
+    },
+    "artifact_registry_after_source_pilot_task_list": {
+      "status": "pass",
+      "passed": true,
+      "artifact_count": 24,
       "image_qa_artifact_count": 0,
       "missing_dependencies": [],
       "broken_link_count": 0,
@@ -1338,12 +1396,13 @@
   "artifact_registry": {
     "status": "pass",
     "registry_path": "runtime/.artifacts/registry.json",
-    "artifact_count": 23,
+    "artifact_count": 24,
     "broken_link_count": 0,
     "registered_artifact_types": [
-      "visual_asset_spec",
       "compiled_prompt",
-      "semantic_lint_result"
+      "semantic_lint_result",
+      "source_pilot_task_list",
+      "visual_asset_spec"
     ]
   },
   "compiled_prompts": {
@@ -1403,5 +1462,30 @@
       "KHN2_001_semantic_lint_result_S07_KHN2_001_source_illustration"
     ],
     "next_allowed_action": "generate_source_pilot_task_list"
+  },
+  "source_pilot_task_list_result": {
+    "status": "pass",
+    "task_list_path": "故事项目/KHN2_001_楼道里的红贴纸/12_Source_Pilot_Task_List.json",
+    "task_list_view": "故事项目/KHN2_001_楼道里的红贴纸/12_Source_Pilot_Task_List.md",
+    "total_task_count": 11,
+    "ready_task_count": 1,
+    "blocked_task_count": 10,
+    "ready_asset_ids": [
+      "R00_KHN2_001_paper_mark_anchor"
+    ],
+    "blocked_asset_ids": [
+      "R01_KHN2_001_lin_xiaomu_anchor",
+      "R02_KHN2_001_corridor_door_prop_anchor",
+      "P01_KHN2_001_platform_layout_sample",
+      "S01_KHN2_001_source_illustration",
+      "S02_KHN2_001_source_illustration",
+      "S03_KHN2_001_source_illustration",
+      "S04_KHN2_001_source_illustration",
+      "S05_KHN2_001_source_illustration",
+      "S06_KHN2_001_source_illustration",
+      "S07_KHN2_001_source_illustration"
+    ],
+    "artifact_id": "KHN2_001_source_pilot_task_list_12",
+    "next_required_manual_step": "人工外部生成 R00_KHN2_001_paper_mark_anchor，并在生成后补 execution telemetry 与 image review form。"
   }
 }
