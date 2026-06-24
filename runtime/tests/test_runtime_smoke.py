@@ -657,9 +657,10 @@ def run_smoke_tests() -> dict[str, Any]:
         )
 
     generated_forbidden_artifacts = []
-    for path in story_project_root.iterdir():
-        if path.is_dir() and path.resolve() not in existing_story_projects:
-            generated_forbidden_artifacts.append(str(path))
+    if story_project_root.exists():
+        for path in story_project_root.iterdir():
+            if path.is_dir() and path.resolve() not in existing_story_projects:
+                generated_forbidden_artifacts.append(str(path))
     checks.append({"name": "pipeline does not create story project", "passed": not generated_forbidden_artifacts})
     image_artifacts = list(RUNTIME_ROOT.rglob("*.png")) + list((RUNTIME_ROOT.parent / "资产库").rglob("*.png"))
     checks.append({"name": "pipeline does not generate images", "passed": not image_artifacts})

@@ -1,0 +1,45 @@
+# ── runtime 运行产物 / 缓存（不提交） ─────────────────────────
+runtime/.runs/
+runtime/.artifacts/
+runtime/artifacts/
+runtime/output/
+runtime/outputs/
+runtime/cache/
+runtime/tmp/
+runtime/temp/
+runtime/logs/
+runtime/reports/
+runtime/generated/
+runtime/compiled/
+runtime/source_pilot/
+runtime/semantic_lint_results/
+runtime/qa_results/
+
+# ── 未来架构工作目录（旧产物不提交） ─────────────────────────
+01-raw/
+50-agent-work/
+90-archive/
+
+# ── 图像与二进制资产（默认不提交；canonical 资产卡用 .md 提交） ──
+*.png
+*.jpg
+*.jpeg
+*.webp
+*.gif
+*.psd
+*.ai
+*.zip
+*.mp4
+*.mov
+
+# ── Python 缓存 ──────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# ── 系统与 Obsidian 个人状态 ─────────────────────────────────
+.DS_Store
+.obsidian/workspace*
+.obsidian/cache/
+.obsidian/app.json
+.obsidian/graph.json
