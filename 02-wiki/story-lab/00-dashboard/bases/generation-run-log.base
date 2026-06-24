@@ -1,0 +1,37 @@
+# Obsidian Bases specification — verify inside Obsidian before relying on it.
+# Source: generation_run cards in 50-agent-work/story-lab/runs/
+filters:
+  and:
+    - 'type == "generation_run"'
+    - 'file.folder == "50-agent-work/story-lab/runs"'
+    # Optional status filters (uncomment one as needed):
+    # - 'status == "failed"'
+    # - 'status == "success"'
+    # - 'status == "partial"'
+properties:
+  note.package_id:
+    displayName: Package
+  note.model:
+    displayName: Model
+  note.status:
+    displayName: Status
+  note.failure_types:
+    displayName: Failure Types
+  note.output_assets:
+    displayName: Output Assets
+  note.created_at:
+    displayName: Created
+views:
+  - type: table
+    name: Generation Run Log
+    order:
+      - file.name
+      - package_id
+      - model
+      - status
+      - failure_types
+      - output_assets
+      - created_at
+    sort:
+      - property: created_at
+        direction: DESC

@@ -1,0 +1,37 @@
+# Obsidian Bases specification — verify inside Obsidian before relying on it.
+# Source: scene cards in 02-wiki/story-lab/40-scenes/
+filters:
+  and:
+    - 'type == "scene"'
+    - 'file.folder == "02-wiki/story-lab/40-scenes"'
+    # Optional status filters (uncomment one as needed):
+    # - 'status == "pending"'
+    # - 'status != "done"'
+    # - 'status == "ready"'
+properties:
+  note.status:
+    displayName: Status
+  note.project_id:
+    displayName: Project
+  note.characters:
+    displayName: Characters
+  note.output_targets:
+    displayName: Output Targets
+  note.related_assets:
+    displayName: Linked Packages
+views:
+  - type: table
+    name: Scene Board
+    order:
+      - file.name
+      - title_zh
+      - project_id
+      - characters
+      - status
+      - output_targets
+      - related_assets
+    sort:
+      - property: project_id
+        direction: ASC
+      - property: status
+        direction: ASC

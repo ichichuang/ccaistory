@@ -15,12 +15,27 @@ runtime/source_pilot/
 runtime/semantic_lint_results/
 runtime/qa_results/
 
-# ── 未来架构工作目录（旧产物不提交） ─────────────────────────
-01-raw/
-50-agent-work/
-90-archive/
+# ── 工作层：01-raw / 50-agent-work / 90-archive ──────────────
+# 默认忽略这三层的内容（原始素材、生成产物、归档资产不入库），
+# 但用 allowlist 保留目录骨架：README.md 与 .gitkeep 仍然跟踪。
+# canonical 知识层 02-wiki 与系统层 00-system 不在此列，完整跟踪。
+01-raw/**
+!01-raw/**/
+!01-raw/**/README.md
+!01-raw/**/.gitkeep
 
-# ── 图像与二进制资产（默认不提交；canonical 资产卡用 .md 提交） ──
+50-agent-work/**
+!50-agent-work/**/
+!50-agent-work/**/README.md
+!50-agent-work/**/.gitkeep
+
+90-archive/**
+!90-archive/**/
+!90-archive/**/README.md
+!90-archive/**/.gitkeep
+
+# ── 图像与二进制资产（默认不提交；canonical 资产卡用 .md / .base 提交） ──
+# 覆盖原始图、生成图、候选图、accepted/rejected 图、视频、压缩包、设计源文件。
 *.png
 *.jpg
 *.jpeg

@@ -1,0 +1,38 @@
+# Obsidian Bases specification — verify inside Obsidian before relying on it.
+# Source: reference_asset cards in 02-wiki/story-lab/reference-assets/
+# Note: binaries are gitignored; each card records its file location.
+filters:
+  and:
+    - 'type == "reference_asset"'
+    - 'file.folder == "02-wiki/story-lab/reference-assets"'
+    # Optional status filters (uncomment one as needed):
+    # - 'status == "active"'
+    # - 'quality_status == "approved"'
+    # - 'status != "archived"'
+properties:
+  note.status:
+    displayName: Status
+  note.project_id:
+    displayName: Project
+  note.used_by:
+    displayName: Used By
+  note.quality_status:
+    displayName: Quality
+  note.cover_image:
+    displayName: Preview
+views:
+  - type: cards
+    name: Reference Asset Gallery
+    image: note.cover_image
+    order:
+      - file.name
+      - title_zh
+      - project_id
+      - status
+      - used_by
+      - quality_status
+    sort:
+      - property: project_id
+        direction: ASC
+      - property: status
+        direction: ASC

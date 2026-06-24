@@ -1,0 +1,43 @@
+# Obsidian Bases specification — verify inside Obsidian before relying on it.
+# Source: character cards in 02-wiki/story-lab/30-characters/
+filters:
+  and:
+    - 'type == "character"'
+    - 'file.folder == "02-wiki/story-lab/30-characters"'
+    # Optional status filters (uncomment one as needed):
+    # - 'status == "active"'
+    # - 'status != "archived"'
+    # - 'failure_count > 0'
+properties:
+  note.cover_image:
+    displayName: Cover
+  note.status:
+    displayName: Status
+  note.project_id:
+    displayName: Project
+  note.visual_style:
+    displayName: Visual Style
+  note.reference_assets:
+    displayName: References
+  note.last_used:
+    displayName: Last Used
+  note.failure_count:
+    displayName: Failures
+views:
+  - type: cards
+    name: Character Gallery
+    image: note.cover_image
+    order:
+      - file.name
+      - title_zh
+      - project_id
+      - status
+      - visual_style
+      - reference_assets
+      - last_used
+      - failure_count
+    sort:
+      - property: project_id
+        direction: ASC
+      - property: last_used
+        direction: DESC

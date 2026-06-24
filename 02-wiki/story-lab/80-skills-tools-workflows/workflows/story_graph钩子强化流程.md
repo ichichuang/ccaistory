@@ -1,0 +1,107 @@
+# story_graph钩子强化流程
+
+状态：活动  
+生产体系：平台图文故事主线生产体系
+
+## 1. 流程目标
+强化开篇、翻页和结尾钩子，使 story_graph 能支撑平台完读。
+
+## 2. 输入
+- 通过页数审查的 story_graph 和技法组合。
+- 总控/状态机与门禁.md
+- 对应 Codex 指令、生产技能、结构规范、模板和验收清单
+
+## 3. 输出
+- 带 hook_scores 和 hook_revisions 的 story_graph。
+- 更新后的 `故事核心.json.machine_state`
+- 通过、返修或阻断报告
+
+## 4. 阶段顺序
+1. 故事核心
+2. 页数合理性审查
+3. 技法组合选择
+4. story_graph 钩子强化
+5. 平台图文故事编排
+6. 图读测试
+7. 视觉项目总清单
+8. 视觉资产本体
+9. 源插图 Prompt 编译
+10. 源插图语义 Lint
+11. 源插图试产任务清单
+12. 外部出图单张执行
+13. 执行遥测
+14. 资产级细粒度验收
+15. accepted/rejected
+16. 平台发布页合成
+17. 人工完整阅读
+18. 发布前检查
+
+## 5. 每阶段允许动作
+- 故事核心：创建唯一事实源，初始化 machine_state。
+- 页数合理性审查：只审查页数、节奏和压缩建议。
+- 技法组合选择：只选择抽象技法，不模仿作者。
+- story_graph 钩子强化：只调整信息顺序、钩子和翻页欲望。
+- 平台图文故事编排：生成页级图文职责和阅读顺序。
+- 图读测试：验证画面可读性并返回编排修复点。
+- 视觉项目总清单：列出资产、依赖和作用域。
+- 视觉资产本体：定义 allowed_content、forbidden_content、reference_dependencies 和验收问题。
+- 源插图 Prompt 编译：从本体生成 compiled_prompt。
+- 源插图语义 Lint：检查 prompt 矛盾、缺项、禁项和依赖。
+- 源插图试产任务清单：只收录 Lint 通过资产并按依赖排序。
+- 外部出图单张执行：人工单张执行，保留实际发送 prompt。
+- 执行遥测：回填 actual_prompt_sent_to_external_tool、工具、参数和输出路径。
+- 资产级细粒度验收：逐资产判定 accepted/rejected/rework。
+- 平台发布页合成：只使用 accepted 资产。
+- 人工完整阅读：检查整篇理解、遮挡、错序和发布风险。
+- 发布前检查：确认无阻断项。
+
+## 6. 每阶段禁止动作
+- 禁止跳过上游门禁。
+- 禁止把派生视图当成第二事实源。
+- 禁止在 compiled_prompt、语义 Lint 和任务清单之前外部出图。
+- 禁止没有 execution_telemetry 或 actual_prompt_sent_to_external_tool 就 accepted。
+- 禁止 R00 未 accepted 时继续 R01/R02。
+- 禁止使用 rejected/rework 资产合成平台发布页。
+- 禁止创建故事外图片、执行包、发布包、备份或复盘归档。
+
+## 7. 状态机迁移
+- 每阶段成功：`gate_result=passed`，`current_state` 迁移到本阶段完成状态，`next_allowed_action` 指向唯一下一阶段。
+- 每阶段返修：`gate_result=rework_required`，`next_allowed_action` 指向最近上游修复入口。
+- 每阶段阻断：`gate_result=blocked`，写入 blocker、evidence、blocked_actions。
+- 状态迁移不得只写 Markdown，必须同步回填 `故事核心.json`。
+
+## 8. 阻断条件
+- 故事核心不存在或 JSON 不可解析。
+- 当前状态与阶段入口不匹配。
+- 必读规范、模板或验收清单缺失。
+- reference_dependencies 未满足。
+- R00 含人物、火柴人、完整场景、道具集合或符号散点表。
+- compiled_prompt、semantic_lint、execution_telemetry、actual_prompt_sent_to_external_tool 或资产级验收缺失。
+
+## 9. 人工检查点
+- 新故事输入和版权边界确认。
+- 页数合理性审查结论确认。
+- 图读测试后确认是否进入视觉链路。
+- 外部出图前确认试产任务清单。
+- 每张候选图 accepted 前人工验收。
+- 平台发布页合成后人工完整阅读。
+
+## 10. 下游入口
+- 默认下游入口：[[00-system/codex-instructions/生成平台图文故事编排]]
+- 若本流程已到平台发布页合成，下游入口为人工完整阅读和发布前检查。
+- 若任一门禁失败，下游入口改为最近上游返修指令。
+
+## 11. 不得跳过的门禁
+- 故事核心门禁
+- 页数合理性审查
+- 技法组合选择与版权边界
+- story_graph 钩子强化
+- 平台图文故事编排
+- 图读测试
+- 视觉资产本体
+- 源插图 Prompt 编译
+- 源插图语义 Lint
+- 源插图试产任务清单
+- 执行遥测
+- 资产级细粒度验收
+- 人工完整阅读

@@ -19,11 +19,11 @@ from qa_engine.asset_qa import get_r00_required_questions
 
 
 R00_MARKDOWN_FILES = [
-    "提示词库/R00纸张笔触锚图锁.md",
-    "总控/状态机与门禁.md",
-    "结构规范/视觉资产本体结构规范.md",
-    "结构规范/源插图语义Lint结构规范.md",
-    "验收清单/R00纸张笔触锚图验收清单.md",
+    "02-wiki/story-lab/60-prompts/legacy-prompt-library/R00纸张笔触锚图锁.md",
+    "02-wiki/story-lab/00-dashboard/legacy-control/状态机与门禁.md",
+    "02-wiki/story-lab/80-skills-tools-workflows/structure-specs/视觉资产本体结构规范.md",
+    "02-wiki/story-lab/80-skills-tools-workflows/structure-specs/源插图语义Lint结构规范.md",
+    "02-wiki/story-lab/80-skills-tools-workflows/acceptance-checklists/R00纸张笔触锚图验收清单.md",
 ]
 
 R00_MARKDOWN_REQUIRED_TERMS = {

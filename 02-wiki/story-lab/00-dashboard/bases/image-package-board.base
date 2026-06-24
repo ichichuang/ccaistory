@@ -1,0 +1,41 @@
+# Obsidian Bases specification — verify inside Obsidian before relying on it.
+# Source: image_execution_package cards in 02-wiki/story-lab/70-execution-packages/
+filters:
+  and:
+    - 'type == "image_execution_package"'
+    - 'file.folder == "02-wiki/story-lab/70-execution-packages"'
+    # Optional status filters (uncomment one as needed):
+    # - 'status == "ready"'
+    # - 'status != "done"'
+    # - 'status == "blocked"'
+properties:
+  note.status:
+    displayName: Status
+  note.project_id:
+    displayName: Project
+  note.scene_id:
+    displayName: Scene
+  note.target_model:
+    displayName: Target Model
+  note.version:
+    displayName: Version
+  note.qa_result:
+    displayName: QA Result
+views:
+  - type: table
+    name: Image Package Board
+    order:
+      - file.name
+      - status
+      - project_id
+      - scene_id
+      - target_model
+      - version
+      - created_at
+      - last_run
+      - qa_result
+    sort:
+      - property: status
+        direction: ASC
+      - property: last_run
+        direction: DESC
