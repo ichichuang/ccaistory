@@ -6,14 +6,20 @@
       "asset_type": "R00_PAPER_MARK_ANCHOR",
       "purpose": "Provide the reusable paper, stroke, short clue, and material texture anchor for downstream visual assets.",
       "required_fields": [
+        "asset_id",
         "asset_type",
+        "asset_scope",
         "allowed_content",
         "forbidden_content",
         "visual_center",
         "density_range",
         "composition_mode",
         "text_policy",
-        "acceptance_questions"
+        "paper_policy",
+        "style_policy",
+        "reference_dependencies",
+        "acceptance_questions",
+        "repair_policy"
       ],
       "allowed_content": [
         "clean white exercise paper",
@@ -181,15 +187,20 @@
       "asset_type": "R01_CHARACTER_ANCHOR",
       "purpose": "Lock reusable character proportion, outfit, silhouette, and childlike drawing treatment.",
       "required_fields": [
+        "asset_id",
         "asset_type",
+        "asset_scope",
         "allowed_content",
         "forbidden_content",
         "visual_center",
         "density_range",
         "composition_mode",
         "text_policy",
+        "paper_policy",
+        "style_policy",
         "reference_dependencies",
-        "acceptance_questions"
+        "acceptance_questions",
+        "repair_policy"
       ],
       "allowed_content": [
         "single character or small character set",
@@ -252,15 +263,20 @@
       "asset_type": "R02_SCENE_PROP_ANCHOR",
       "purpose": "Lock reusable scene relationship, key anomaly object, prop scale, and spatial facts.",
       "required_fields": [
+        "asset_id",
         "asset_type",
+        "asset_scope",
         "allowed_content",
         "forbidden_content",
         "visual_center",
         "density_range",
         "composition_mode",
         "text_policy",
+        "paper_policy",
+        "style_policy",
         "reference_dependencies",
-        "acceptance_questions"
+        "acceptance_questions",
+        "repair_policy"
       ],
       "allowed_content": [
         "scene spatial relationship",
@@ -322,7 +338,9 @@
       "asset_type": "P01_PLATFORM_LAYOUT_SAMPLE",
       "purpose": "Lock the 9:16 platform page layout sample without becoming a complete story illustration.",
       "required_fields": [
+        "asset_id",
         "asset_type",
+        "asset_scope",
         "allowed_content",
         "forbidden_content",
         "visual_center",
@@ -330,8 +348,11 @@
         "composition_mode",
         "canvas_ratio",
         "text_policy",
+        "paper_policy",
+        "style_policy",
         "reference_dependencies",
-        "acceptance_questions"
+        "acceptance_questions",
+        "repair_policy"
       ],
       "allowed_content": [
         "9:16 platform page layout",
@@ -391,15 +412,20 @@
       "asset_type": "S_SOURCE_ILLUSTRATION",
       "purpose": "Produce one source illustration page carrying page-level story semantics, emotion, and visual memory point.",
       "required_fields": [
+        "asset_id",
         "asset_type",
+        "asset_scope",
         "allowed_content",
         "forbidden_content",
         "visual_center",
         "density_range",
         "composition_mode",
         "text_policy",
+        "paper_policy",
+        "style_policy",
         "reference_dependencies",
-        "acceptance_questions"
+        "acceptance_questions",
+        "repair_policy"
       ],
       "allowed_content": [
         "single page story action",

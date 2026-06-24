@@ -1,6 +1,7 @@
 {
   "asset_id": "fixture_r00_invalid_symbol_sheet",
   "asset_type": "R00_PAPER_MARK_ANCHOR",
+  "asset_scope": "root_reference_anchor",
   "allowed_content": [
     "symbol sheet of scattered icons",
     "many disconnected marks"
@@ -16,6 +17,18 @@
   "density_range": "high",
   "composition_mode": "scattered symbols across the page",
   "text_policy": "short clue fragments only",
+  "paper_policy": {
+    "paper_surface": "clean white notebook paper",
+    "cleanliness": "white, clean, not yellowed, not aged, not archival"
+  },
+  "style_policy": {
+    "visual_style": "controlled child handwriting reference",
+    "line_quality": "slightly crooked pencil and ballpoint lines, imperfect but controlled"
+  },
   "canvas_ratio": "9:16",
-  "acceptance_questions": ["not_symbol_sheet"]
+  "reference_dependencies": [],
+  "acceptance_questions": ["not_symbol_sheet"],
+  "repair_policy": {
+    "on_failure": "replace scattered symbols with one ordered visual center"
+  }
 }

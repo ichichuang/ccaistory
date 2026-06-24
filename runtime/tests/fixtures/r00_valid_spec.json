@@ -1,6 +1,7 @@
 {
   "asset_id": "fixture_r00_valid",
   "asset_type": "R00_PAPER_MARK_ANCHOR",
+  "asset_scope": "root_reference_anchor",
   "allowed_content": [
     "clean white exercise paper",
     "controlled short child-handwriting clue samples",
@@ -18,11 +19,23 @@
   "density_range": "low to medium",
   "composition_mode": "single clean paper surface with controlled spacing",
   "text_policy": "short clue fragments only",
+  "paper_policy": {
+    "paper_surface": "clean white notebook paper",
+    "cleanliness": "white, clean, not yellowed, not aged, not archival"
+  },
+  "style_policy": {
+    "visual_style": "controlled child handwriting reference",
+    "line_quality": "slightly crooked pencil and ballpoint lines, imperfect but controlled"
+  },
   "canvas_ratio": "9:16",
+  "reference_dependencies": [],
   "acceptance_questions": [
     "no_person",
     "no_stick_figure",
     "clean_white_paper",
     "controlled_child_handwriting_sample"
-  ]
+  ],
+  "repair_policy": {
+    "on_failure": "remove people, scenes, symbol sheets, and long body text"
+  }
 }

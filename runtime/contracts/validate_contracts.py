@@ -115,6 +115,23 @@ ASSET_KEYS = [
     "unlocks_after_acceptance",
 ]
 
+VISUAL_ASSET_SPEC_REQUIRED_FIELDS = [
+    "asset_id",
+    "asset_type",
+    "asset_scope",
+    "allowed_content",
+    "forbidden_content",
+    "visual_center",
+    "density_range",
+    "composition_mode",
+    "text_policy",
+    "paper_policy",
+    "style_policy",
+    "reference_dependencies",
+    "acceptance_questions",
+    "repair_policy",
+]
+
 GATE_KEYS = [
     "gate_id",
     "required_inputs",
@@ -195,6 +212,17 @@ def validate_visual_assets(failures: list[str]) -> dict[str, Any]:
         _append_missing_keys(failures, f"visual_assets:{asset_type}", asset, ASSET_KEYS)
         if asset.get("asset_type") != asset_type:
             failures.append(f"visual_assets:{asset_type}:asset_type_mismatch")
+        required_fields = asset.get("required_fields")
+        if not isinstance(required_fields, list):
+            failures.append(f"visual_assets:{asset_type}:required_fields_not_list")
+        else:
+            missing_required_fields = [
+                field for field in VISUAL_ASSET_SPEC_REQUIRED_FIELDS if field not in required_fields
+            ]
+            if missing_required_fields:
+                failures.append(
+                    f"visual_assets:{asset_type}:required_fields_missing:{','.join(missing_required_fields)}"
+                )
     r00 = asset_types.get("R00_PAPER_MARK_ANCHOR", {})
     qa_questions = r00.get("qa_questions")
     if not isinstance(qa_questions, list) or len(qa_questions) != 14:

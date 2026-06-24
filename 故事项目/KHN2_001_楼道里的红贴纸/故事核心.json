@@ -45,15 +45,16 @@
     "original_safe": true
   },
   "machine_state": {
-    "current_state": "visual_asset_specs_ready",
+    "current_state": "prompts_compiled",
     "gate_result": "pass",
     "gate_result_label": "pass",
-    "last_gate_passed": "visual_asset_specs_ready",
-    "next_allowed_action": "compile_prompts",
+    "last_gate_passed": "prompts_compiled",
+    "next_allowed_action": "run_semantic_lint",
     "blocked_actions": [
       "generate_images",
       "generate_prompt_package",
       "generate_webgpt_execution_package",
+      "generate_source_pilot_task_list",
       "full_generation",
       "create_publish_package",
       "publish",
@@ -65,7 +66,8 @@
       "skill_executor": "pass",
       "visual_asset_specs": "pass",
       "copyright_review": "pass",
-      "safety_review": "pass"
+      "safety_review": "pass",
+      "prompt_compile": "pass"
     },
     "evidence": [
       "Story Analyzer passed=true",
@@ -79,7 +81,11 @@
       "线索账本已补齐 red_sticker_arrow、unused_door、wrong_recipient_misdirection、keychain_sticker、blank_red_sticker",
       "“别走错层”已改为“别跟错箭头”，避免引入未回收楼层错位规则",
       "主角身份统一为学生主角，视觉层保留儿童安全手账体系",
-      "runtime contracts 已统一为 skill_executor_passed -> build_visual_asset_specs -> visual_asset_specs_ready"
+      "runtime contracts 已统一为 skill_executor_passed -> build_visual_asset_specs -> visual_asset_specs_ready",
+      "已补齐 S01-S07 paper_policy / style_policy",
+      "compile_prompts 已生成 11 条 compiled prompt",
+      "Artifact Registry 已登记 1 个 visual_asset_spec 与 11 个 compiled_prompt artifact",
+      "下一步仅允许 run_semantic_lint；仍禁止图片、执行包、source pilot task list、发布包和发布计划"
     ]
   },
   "minimum_viable_story": {
@@ -255,6 +261,7 @@
     "generate_images",
     "generate_prompt_package",
     "generate_webgpt_execution_package",
+    "generate_source_pilot_task_list",
     "full_generation",
     "create_publish_package",
     "publish",
@@ -765,11 +772,20 @@
       "anchor_asset_count": 4,
       "source_illustration_spec_count": 7,
       "next_action": "compile_prompts",
-      "forbidden_outputs_created": false
+      "forbidden_outputs_created": false,
+      "required_fields_complete": true
+    },
+    "visual_asset_specs_view": "09_视觉资产规格.md",
+    "compiled_prompts_json": "10_Compiled_Prompts.json",
+    "compiled_prompts_view": "10_Compiled_Prompts.md",
+    "compiled_prompts_summary": {
+      "status": "pass",
+      "prompt_count": 11,
+      "next_required_gate": "semantic_lint"
     }
   },
   "visual_pipeline": {
-    "status": "visual_asset_specs_ready",
+    "status": "prompts_compiled",
     "asset_manifest": [
       {
         "asset_id": "R00_KHN2_001_paper_mark_anchor",
@@ -905,6 +921,41 @@
           "adult crime",
           "author style instruction"
         ]
+      },
+      "paper_policy": {
+        "paper_surface": "clean white notebook paper",
+        "line_style": "subtle school notebook lines allowed",
+        "cleanliness": "white, clean, not yellowed, not aged, not archival",
+        "allowed_marks": [
+          "light pencil pressure marks",
+          "eraser traces",
+          "small red circles",
+          "small arrows",
+          "question marks",
+          "short child note marks"
+        ],
+        "forbidden_paper": [
+          "yellowed old paper",
+          "dirty paper",
+          "archive document texture",
+          "parchment",
+          "burned edge",
+          "large blank test sheet"
+        ]
+      },
+      "style_policy": {
+        "visual_style": "child-safe horror notebook source illustration",
+        "drawing_age_feel": "authentic 9-12 year old child drawing influence, but readable",
+        "line_quality": "slightly crooked pencil and ballpoint lines, imperfect but controlled",
+        "color_policy": "mostly pencil/ballpoint with restrained red sticker accents and limited crayon texture",
+        "rendering_policy": "source illustration only, not final platform page, not polished poster, not UI screenshot",
+        "anti_ai_policy": [
+          "avoid polished digital concept art",
+          "avoid generic AI horror composition",
+          "avoid fake printed handwriting",
+          "avoid over-rendered cinematic lighting"
+        ],
+        "text_policy_summary": "no typed narration inside image; Chinese child note only 2-8 characters if present"
       }
     },
     "visual_asset_specs": {
@@ -913,7 +964,15 @@
       "derived_json": "09_视觉资产规格.json",
       "derived_report": "09_视觉资产规格.md",
       "next_action": "compile_prompts",
-      "forbidden_outputs_created": false
+      "forbidden_outputs_created": false,
+      "required_fields_complete": true
+    },
+    "prompt_compile": {
+      "status": "pass",
+      "compiled_prompt_path": "10_Compiled_Prompts.json",
+      "compiled_prompt_view": "10_Compiled_Prompts.md",
+      "prompt_count": 11,
+      "next_required_gate": "semantic_lint"
     }
   },
   "quality_gates": {
@@ -948,7 +1007,8 @@
       "anchor_asset_count": 4,
       "source_illustration_spec_count": 7,
       "next_allowed_action": "compile_prompts",
-      "forbidden_outputs_created": false
+      "forbidden_outputs_created": false,
+      "required_fields_complete": true
     },
     "runtime_precheck": {
       "status": "pass",
@@ -969,6 +1029,11 @@
         "police_investigation",
         "adult_crime"
       ]
+    },
+    "prompt_compile": {
+      "status": "pass",
+      "prompt_count": 11,
+      "next_required_gate": "semantic_lint"
     }
   },
   "runtime_status": {
@@ -983,14 +1048,26 @@
     "pipeline_runner_available": true,
     "artifact_registry_available": true,
     "multimodal_qa_available": true,
-    "artifact_count": 0,
+    "artifact_count": 12,
     "image_asset_count": 0,
     "execution_package_count": 0,
     "publish_package_count": 0,
     "broken_link_count": 0,
     "analyze_graph": "pass",
     "execute_skill_graph": "pass",
-    "check_graph": "pass"
+    "check_graph": "pass",
+    "compile_prompts": "pass",
+    "artifact_registry_after_compile": {
+      "status": "pass",
+      "passed": true,
+      "artifact_count": 12,
+      "image_qa_artifact_count": 0,
+      "missing_dependencies": [],
+      "broken_link_count": 0,
+      "failures": [],
+      "registry_path": "/Users/cc/MyPorject/AI+Story/runtime/.artifacts/registry.json"
+    },
+    "source_pilot_task_list_count": 0
   },
   "page_count_decision": {
     "recommended_pages": 8,
@@ -1143,5 +1220,114 @@
     "resolved_runtime_risks": [
       "runtime contracts 已移除主路径中的 build_visual_manifest/visual_manifest_ready 命名风险，pipeline-plan 可从 skill_executor_passed 进入 build_visual_asset_specs。"
     ]
+  },
+  "visual_asset_spec_repair_result": {
+    "status": "pass",
+    "repaired_asset_ids": [
+      "S01_KHN2_001_source_illustration",
+      "S02_KHN2_001_source_illustration",
+      "S03_KHN2_001_source_illustration",
+      "S04_KHN2_001_source_illustration",
+      "S05_KHN2_001_source_illustration",
+      "S06_KHN2_001_source_illustration",
+      "S07_KHN2_001_source_illustration"
+    ],
+    "repaired_fields": [
+      "paper_policy",
+      "style_policy"
+    ],
+    "original_blocker": "compile_prompts blocked because S01-S07 visual asset specs lacked paper_policy and style_policy.",
+    "prevention_update": {
+      "runtime_compiler": "runtime/prompt_compiler/compiler.py now requires non-empty paper_policy and style_policy.",
+      "contracts": "runtime/contracts/visual_assets.json and validate_contracts.py now require the full visual asset spec field set.",
+      "template_docs": [
+        "模板/视觉资产本体模板.json",
+        "结构规范/视觉资产本体结构规范.md",
+        "结构规范/源插图Prompt编译结构规范.md",
+        "Codex指令/建立视觉资产本体.md",
+        "生产技能/视觉资产本体技能.md",
+        "验收清单/源插图视觉吸引力验收清单.md",
+        "工作流/视觉执行编译流程.md"
+      ]
+    }
+  },
+  "prompt_compile_result": {
+    "status": "pass",
+    "source_visual_asset_spec": "故事项目/KHN2_001_楼道里的红贴纸/09_视觉资产规格.json",
+    "compiled_prompt_path": "故事项目/KHN2_001_楼道里的红贴纸/10_Compiled_Prompts.json",
+    "compiled_prompt_view": "10_Compiled_Prompts.md",
+    "prompt_count": 11,
+    "compiled_asset_ids": [
+      "R00_KHN2_001_paper_mark_anchor",
+      "R01_KHN2_001_lin_xiaomu_anchor",
+      "R02_KHN2_001_corridor_door_prop_anchor",
+      "P01_KHN2_001_platform_layout_sample",
+      "S01_KHN2_001_source_illustration",
+      "S02_KHN2_001_source_illustration",
+      "S03_KHN2_001_source_illustration",
+      "S04_KHN2_001_source_illustration",
+      "S05_KHN2_001_source_illustration",
+      "S06_KHN2_001_source_illustration",
+      "S07_KHN2_001_source_illustration"
+    ],
+    "artifact_ids": [
+      "KHN2_001_visual_asset_spec_09",
+      "KHN2_001_compiled_prompt_R00_KHN2_001_paper_mark_anchor",
+      "KHN2_001_compiled_prompt_R01_KHN2_001_lin_xiaomu_anchor",
+      "KHN2_001_compiled_prompt_R02_KHN2_001_corridor_door_prop_anchor",
+      "KHN2_001_compiled_prompt_P01_KHN2_001_platform_layout_sample",
+      "KHN2_001_compiled_prompt_S01_KHN2_001_source_illustration",
+      "KHN2_001_compiled_prompt_S02_KHN2_001_source_illustration",
+      "KHN2_001_compiled_prompt_S03_KHN2_001_source_illustration",
+      "KHN2_001_compiled_prompt_S04_KHN2_001_source_illustration",
+      "KHN2_001_compiled_prompt_S05_KHN2_001_source_illustration",
+      "KHN2_001_compiled_prompt_S06_KHN2_001_source_illustration",
+      "KHN2_001_compiled_prompt_S07_KHN2_001_source_illustration"
+    ],
+    "next_required_gate": "semantic_lint"
+  },
+  "artifact_registry": {
+    "status": "pass",
+    "registry_path": "runtime/.artifacts/registry.json",
+    "artifact_count": 12,
+    "broken_link_count": 0,
+    "registered_artifact_types": [
+      "visual_asset_spec",
+      "compiled_prompt"
+    ]
+  },
+  "compiled_prompts": {
+    "status": "pass",
+    "compiled_prompt_path": "故事项目/KHN2_001_楼道里的红贴纸/10_Compiled_Prompts.json",
+    "compiled_prompt_view": "10_Compiled_Prompts.md",
+    "prompt_count": 11,
+    "compiled_asset_ids": [
+      "R00_KHN2_001_paper_mark_anchor",
+      "R01_KHN2_001_lin_xiaomu_anchor",
+      "R02_KHN2_001_corridor_door_prop_anchor",
+      "P01_KHN2_001_platform_layout_sample",
+      "S01_KHN2_001_source_illustration",
+      "S02_KHN2_001_source_illustration",
+      "S03_KHN2_001_source_illustration",
+      "S04_KHN2_001_source_illustration",
+      "S05_KHN2_001_source_illustration",
+      "S06_KHN2_001_source_illustration",
+      "S07_KHN2_001_source_illustration"
+    ],
+    "artifact_ids": [
+      "KHN2_001_visual_asset_spec_09",
+      "KHN2_001_compiled_prompt_R00_KHN2_001_paper_mark_anchor",
+      "KHN2_001_compiled_prompt_R01_KHN2_001_lin_xiaomu_anchor",
+      "KHN2_001_compiled_prompt_R02_KHN2_001_corridor_door_prop_anchor",
+      "KHN2_001_compiled_prompt_P01_KHN2_001_platform_layout_sample",
+      "KHN2_001_compiled_prompt_S01_KHN2_001_source_illustration",
+      "KHN2_001_compiled_prompt_S02_KHN2_001_source_illustration",
+      "KHN2_001_compiled_prompt_S03_KHN2_001_source_illustration",
+      "KHN2_001_compiled_prompt_S04_KHN2_001_source_illustration",
+      "KHN2_001_compiled_prompt_S05_KHN2_001_source_illustration",
+      "KHN2_001_compiled_prompt_S06_KHN2_001_source_illustration",
+      "KHN2_001_compiled_prompt_S07_KHN2_001_source_illustration"
+    ],
+    "next_required_gate": "semantic_lint"
   }
 }

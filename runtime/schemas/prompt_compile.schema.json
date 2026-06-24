@@ -3,26 +3,33 @@
   "$id": "aistory/prompt_compile.schema.json",
   "title": "Prompt Compile Result",
   "type": "object",
-  "required": ["asset_type", "compiled_prompt", "prompt_sections", "asset_specific_acceptance_criteria"],
+  "required": ["asset_id", "asset_type", "compiled_prompt", "prompt_sections", "asset_specific_acceptance_criteria", "reference_dependencies", "text_policy", "paper_policy", "style_policy", "acceptance_questions"],
   "properties": {
     "asset_id": {"type": ["string", "null"]},
     "asset_type": {"type": "string"},
     "compiled_prompt": {"type": "string"},
     "prompt_sections": {
       "type": "object",
-      "required": ["asset_type", "visual_center", "allowed_content", "density_range", "composition_mode", "text_policy"],
+      "required": ["asset_type", "visual_center", "allowed_content", "density_range", "composition_mode", "text_policy", "paper_policy", "style_policy", "reference_dependencies"],
       "properties": {
         "asset_type": {"type": "string"},
         "visual_center": {"type": "string"},
         "allowed_content": {"type": "array", "items": {"type": "string"}},
         "density_range": {"type": "string"},
         "composition_mode": {"type": "string"},
-        "text_policy": {"type": "string"},
+        "text_policy": {"type": ["object", "string"]},
+        "paper_policy": {"type": "object"},
+        "style_policy": {"type": "object"},
+        "reference_dependencies": {"type": "array", "items": {"type": "string"}},
         "negative_constraints_ref": {"type": "string"}
       }
     },
     "forbidden_content": {"type": "array", "items": {"type": "string"}},
     "asset_specific_acceptance_criteria": {"type": "array", "items": {"type": "string"}},
+    "reference_dependencies": {"type": "array", "items": {"type": "string"}},
+    "text_policy": {"type": ["object", "string"]},
+    "paper_policy": {"type": "object"},
+    "style_policy": {"type": "object"},
     "acceptance_questions": {"type": "array", "items": {"type": "string"}},
     "canvas_ratio": {"type": ["string", "null"]}
   },

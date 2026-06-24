@@ -250,6 +250,41 @@
         "child_note_layer_only": true,
         "child_note_max_chars": 8
       },
+      "paper_policy": {
+        "paper_surface": "clean white notebook paper",
+        "line_style": "subtle school notebook lines allowed",
+        "cleanliness": "white, clean, not yellowed, not aged, not archival",
+        "allowed_marks": [
+          "light pencil pressure marks",
+          "eraser traces",
+          "small red circles",
+          "small arrows",
+          "question marks",
+          "short child note marks"
+        ],
+        "forbidden_paper": [
+          "yellowed old paper",
+          "dirty paper",
+          "archive document texture",
+          "parchment",
+          "burned edge",
+          "large blank test sheet"
+        ]
+      },
+      "style_policy": {
+        "visual_style": "child-safe horror notebook source illustration",
+        "drawing_age_feel": "authentic 9-12 year old child drawing influence, but readable",
+        "line_quality": "slightly crooked pencil and ballpoint lines, imperfect but controlled",
+        "color_policy": "mostly pencil/ballpoint with restrained red sticker accents and limited crayon texture",
+        "rendering_policy": "source illustration only, not final platform page, not polished poster, not UI screenshot",
+        "anti_ai_policy": [
+          "avoid polished digital concept art",
+          "avoid generic AI horror composition",
+          "avoid fake printed handwriting",
+          "avoid over-rendered cinematic lighting"
+        ],
+        "text_policy_summary": "no typed narration inside image; Chinese child note only 2-8 characters if present"
+      },
       "reference_dependencies": [
         "R00_KHN2_001_paper_mark_anchor",
         "R01_KHN2_001_lin_xiaomu_anchor",
@@ -290,6 +325,41 @@
         "allowed_short_clue": "别跟错箭头",
         "child_note_max_chars": 8
       },
+      "paper_policy": {
+        "paper_surface": "clean white notebook paper",
+        "line_style": "subtle school notebook lines allowed",
+        "cleanliness": "white, clean, not yellowed, not aged, not archival",
+        "allowed_marks": [
+          "light pencil pressure marks",
+          "eraser traces",
+          "small red circles",
+          "small arrows",
+          "question marks",
+          "short child note marks"
+        ],
+        "forbidden_paper": [
+          "yellowed old paper",
+          "dirty paper",
+          "archive document texture",
+          "parchment",
+          "burned edge",
+          "large blank test sheet"
+        ]
+      },
+      "style_policy": {
+        "visual_style": "child-safe horror notebook source illustration",
+        "drawing_age_feel": "authentic 9-12 year old child drawing influence, but readable",
+        "line_quality": "slightly crooked pencil and ballpoint lines, imperfect but controlled",
+        "color_policy": "mostly pencil/ballpoint with restrained red sticker accents and limited crayon texture",
+        "rendering_policy": "source illustration only, not final platform page, not polished poster, not UI screenshot",
+        "anti_ai_policy": [
+          "avoid polished digital concept art",
+          "avoid generic AI horror composition",
+          "avoid fake printed handwriting",
+          "avoid over-rendered cinematic lighting"
+        ],
+        "text_policy_summary": "no typed narration inside image; Chinese child note only 2-8 characters if present"
+      },
       "reference_dependencies": [
         "R00_KHN2_001_paper_mark_anchor",
         "R02_KHN2_001_corridor_door_prop_anchor"
@@ -327,6 +397,41 @@
         "typed_narration_in_image": false,
         "child_note_layer_only": true,
         "child_note_max_chars": 8
+      },
+      "paper_policy": {
+        "paper_surface": "clean white notebook paper",
+        "line_style": "subtle school notebook lines allowed",
+        "cleanliness": "white, clean, not yellowed, not aged, not archival",
+        "allowed_marks": [
+          "light pencil pressure marks",
+          "eraser traces",
+          "small red circles",
+          "small arrows",
+          "question marks",
+          "short child note marks"
+        ],
+        "forbidden_paper": [
+          "yellowed old paper",
+          "dirty paper",
+          "archive document texture",
+          "parchment",
+          "burned edge",
+          "large blank test sheet"
+        ]
+      },
+      "style_policy": {
+        "visual_style": "child-safe horror notebook source illustration",
+        "drawing_age_feel": "authentic 9-12 year old child drawing influence, but readable",
+        "line_quality": "slightly crooked pencil and ballpoint lines, imperfect but controlled",
+        "color_policy": "mostly pencil/ballpoint with restrained red sticker accents and limited crayon texture",
+        "rendering_policy": "source illustration only, not final platform page, not polished poster, not UI screenshot",
+        "anti_ai_policy": [
+          "avoid polished digital concept art",
+          "avoid generic AI horror composition",
+          "avoid fake printed handwriting",
+          "avoid over-rendered cinematic lighting"
+        ],
+        "text_policy_summary": "no typed narration inside image; Chinese child note only 2-8 characters if present"
       },
       "reference_dependencies": [
         "R00_KHN2_001_paper_mark_anchor",
@@ -368,6 +473,41 @@
         "allowed_short_clue": "别替我贴",
         "child_note_max_chars": 8
       },
+      "paper_policy": {
+        "paper_surface": "clean white notebook paper",
+        "line_style": "subtle school notebook lines allowed",
+        "cleanliness": "white, clean, not yellowed, not aged, not archival",
+        "allowed_marks": [
+          "light pencil pressure marks",
+          "eraser traces",
+          "small red circles",
+          "small arrows",
+          "question marks",
+          "short child note marks"
+        ],
+        "forbidden_paper": [
+          "yellowed old paper",
+          "dirty paper",
+          "archive document texture",
+          "parchment",
+          "burned edge",
+          "large blank test sheet"
+        ]
+      },
+      "style_policy": {
+        "visual_style": "child-safe horror notebook source illustration",
+        "drawing_age_feel": "authentic 9-12 year old child drawing influence, but readable",
+        "line_quality": "slightly crooked pencil and ballpoint lines, imperfect but controlled",
+        "color_policy": "mostly pencil/ballpoint with restrained red sticker accents and limited crayon texture",
+        "rendering_policy": "source illustration only, not final platform page, not polished poster, not UI screenshot",
+        "anti_ai_policy": [
+          "avoid polished digital concept art",
+          "avoid generic AI horror composition",
+          "avoid fake printed handwriting",
+          "avoid over-rendered cinematic lighting"
+        ],
+        "text_policy_summary": "no typed narration inside image; Chinese child note only 2-8 characters if present"
+      },
       "reference_dependencies": [
         "R00_KHN2_001_paper_mark_anchor",
         "R01_KHN2_001_lin_xiaomu_anchor",
@@ -408,6 +548,41 @@
         "allowed_short_clue": "终于看见了",
         "child_note_max_chars": 8
       },
+      "paper_policy": {
+        "paper_surface": "clean white notebook paper",
+        "line_style": "subtle school notebook lines allowed",
+        "cleanliness": "white, clean, not yellowed, not aged, not archival",
+        "allowed_marks": [
+          "light pencil pressure marks",
+          "eraser traces",
+          "small red circles",
+          "small arrows",
+          "question marks",
+          "short child note marks"
+        ],
+        "forbidden_paper": [
+          "yellowed old paper",
+          "dirty paper",
+          "archive document texture",
+          "parchment",
+          "burned edge",
+          "large blank test sheet"
+        ]
+      },
+      "style_policy": {
+        "visual_style": "child-safe horror notebook source illustration",
+        "drawing_age_feel": "authentic 9-12 year old child drawing influence, but readable",
+        "line_quality": "slightly crooked pencil and ballpoint lines, imperfect but controlled",
+        "color_policy": "mostly pencil/ballpoint with restrained red sticker accents and limited crayon texture",
+        "rendering_policy": "source illustration only, not final platform page, not polished poster, not UI screenshot",
+        "anti_ai_policy": [
+          "avoid polished digital concept art",
+          "avoid generic AI horror composition",
+          "avoid fake printed handwriting",
+          "avoid over-rendered cinematic lighting"
+        ],
+        "text_policy_summary": "no typed narration inside image; Chinese child note only 2-8 characters if present"
+      },
       "reference_dependencies": [
         "R00_KHN2_001_paper_mark_anchor",
         "R01_KHN2_001_lin_xiaomu_anchor",
@@ -446,6 +621,41 @@
         "typed_narration_in_image": false,
         "child_note_layer_only": true,
         "child_note_max_chars": 8
+      },
+      "paper_policy": {
+        "paper_surface": "clean white notebook paper",
+        "line_style": "subtle school notebook lines allowed",
+        "cleanliness": "white, clean, not yellowed, not aged, not archival",
+        "allowed_marks": [
+          "light pencil pressure marks",
+          "eraser traces",
+          "small red circles",
+          "small arrows",
+          "question marks",
+          "short child note marks"
+        ],
+        "forbidden_paper": [
+          "yellowed old paper",
+          "dirty paper",
+          "archive document texture",
+          "parchment",
+          "burned edge",
+          "large blank test sheet"
+        ]
+      },
+      "style_policy": {
+        "visual_style": "child-safe horror notebook source illustration",
+        "drawing_age_feel": "authentic 9-12 year old child drawing influence, but readable",
+        "line_quality": "slightly crooked pencil and ballpoint lines, imperfect but controlled",
+        "color_policy": "mostly pencil/ballpoint with restrained red sticker accents and limited crayon texture",
+        "rendering_policy": "source illustration only, not final platform page, not polished poster, not UI screenshot",
+        "anti_ai_policy": [
+          "avoid polished digital concept art",
+          "avoid generic AI horror composition",
+          "avoid fake printed handwriting",
+          "avoid over-rendered cinematic lighting"
+        ],
+        "text_policy_summary": "no typed narration inside image; Chinese child note only 2-8 characters if present"
       },
       "reference_dependencies": [
         "R00_KHN2_001_paper_mark_anchor",
@@ -488,6 +698,41 @@
         "child_note_layer_only": true,
         "allowed_short_clue": "这次没有走错",
         "child_note_max_chars": 8
+      },
+      "paper_policy": {
+        "paper_surface": "clean white notebook paper",
+        "line_style": "subtle school notebook lines allowed",
+        "cleanliness": "white, clean, not yellowed, not aged, not archival",
+        "allowed_marks": [
+          "light pencil pressure marks",
+          "eraser traces",
+          "small red circles",
+          "small arrows",
+          "question marks",
+          "short child note marks"
+        ],
+        "forbidden_paper": [
+          "yellowed old paper",
+          "dirty paper",
+          "archive document texture",
+          "parchment",
+          "burned edge",
+          "large blank test sheet"
+        ]
+      },
+      "style_policy": {
+        "visual_style": "child-safe horror notebook source illustration",
+        "drawing_age_feel": "authentic 9-12 year old child drawing influence, but readable",
+        "line_quality": "slightly crooked pencil and ballpoint lines, imperfect but controlled",
+        "color_policy": "mostly pencil/ballpoint with restrained red sticker accents and limited crayon texture",
+        "rendering_policy": "source illustration only, not final platform page, not polished poster, not UI screenshot",
+        "anti_ai_policy": [
+          "avoid polished digital concept art",
+          "avoid generic AI horror composition",
+          "avoid fake printed handwriting",
+          "avoid over-rendered cinematic lighting"
+        ],
+        "text_policy_summary": "no typed narration inside image; Chinese child note only 2-8 characters if present"
       },
       "reference_dependencies": [
         "R00_KHN2_001_paper_mark_anchor",

@@ -14,18 +14,35 @@ SUPPORTED_ASSET_TYPES = {
 }
 
 REQUIRED_SPEC_FIELDS = [
+    "asset_id",
     "asset_type",
+    "asset_scope",
     "allowed_content",
     "forbidden_content",
     "visual_center",
     "density_range",
     "composition_mode",
     "text_policy",
+    "paper_policy",
+    "style_policy",
+    "reference_dependencies",
+    "acceptance_questions",
+    "repair_policy",
 ]
 
 
+def _is_missing_required(value: Any) -> bool:
+    return value in (None, "", [], {})
+
+
+def _is_missing_spec_field(spec: dict[str, Any], field: str) -> bool:
+    if field == "reference_dependencies":
+        return field not in spec or not isinstance(spec.get(field), list)
+    return _is_missing_required(spec.get(field))
+
+
 def compile_asset(spec: dict[str, Any]) -> dict[str, Any]:
-    missing = [field for field in REQUIRED_SPEC_FIELDS if spec.get(field) in (None, "", [])]
+    missing = [field for field in REQUIRED_SPEC_FIELDS if _is_missing_spec_field(spec, field)]
     asset_type = spec.get("asset_type")
     if asset_type not in SUPPORTED_ASSET_TYPES:
         missing.append("asset_type:supported")
@@ -43,6 +60,9 @@ def compile_asset(spec: dict[str, Any]) -> dict[str, Any]:
         "density_range": spec["density_range"],
         "composition_mode": spec["composition_mode"],
         "text_policy": spec["text_policy"],
+        "paper_policy": spec["paper_policy"],
+        "style_policy": spec["style_policy"],
+        "reference_dependencies": spec["reference_dependencies"],
         "negative_constraints_ref": "Use forbidden_content as blocking constraints; do not render them as requested content.",
     }
     compiled_prompt = (
@@ -51,7 +71,9 @@ def compile_asset(spec: dict[str, Any]) -> dict[str, Any]:
         f"Allowed content: {'; '.join(map(str, allowed_content))}. "
         f"Density: {spec['density_range']}. "
         f"Composition: {spec['composition_mode']}. "
-        f"Text policy: {spec['text_policy']}."
+        f"Text policy: {spec['text_policy']}. "
+        f"Paper policy: {spec['paper_policy']}. "
+        f"Style policy: {spec['style_policy']}."
     )
     criteria = asset_acceptance_criteria(asset_type)
     return result(
@@ -59,12 +81,18 @@ def compile_asset(spec: dict[str, Any]) -> dict[str, Any]:
         compiled_prompt={
             "asset_id": spec.get("asset_id"),
             "asset_type": asset_type,
+            "asset_scope": spec.get("asset_scope"),
             "compiled_prompt": compiled_prompt,
             "prompt_sections": prompt_sections,
             "forbidden_content": spec.get("forbidden_content", []),
             "asset_specific_acceptance_criteria": criteria,
             "canvas_ratio": spec.get("canvas_ratio"),
+            "reference_dependencies": spec.get("reference_dependencies", []),
+            "text_policy": spec.get("text_policy"),
+            "paper_policy": spec.get("paper_policy"),
+            "style_policy": spec.get("style_policy"),
             "acceptance_questions": spec.get("acceptance_questions", spec.get("acceptance_criteria", [])),
+            "repair_policy": spec.get("repair_policy"),
         },
     )
 
