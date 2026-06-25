@@ -58,3 +58,6 @@ __pycache__/
 .obsidian/cache/
 .obsidian/app.json
 .obsidian/graph.json
+# 社区插件代码为第三方下载产物（不提交，避免仓库塞入压缩 JS）；
+# 已启用插件清单由 community-plugins.json 跟踪，可在 Obsidian 内一键重装。
+.obsidian/plugins/
