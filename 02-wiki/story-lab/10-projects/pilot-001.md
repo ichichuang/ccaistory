@@ -33,9 +33,10 @@ publishing_readiness_status: blocked
 
 ## Workflow Status
 
-Current workflow: A — Raw Story Intake  
-Status: draft  
-Next workflow: B — Story Analysis and Canonical Card Workflow  
+Current workflow: B — Story Analysis and Canonical Card Workflow  
+Status: draft (Workflow B analysis produced; awaiting human acceptance of story core + page estimate)  
+Previous workflow: A — Raw Story Intake (accepted)  
+Next workflow: C — Character & Scene Extraction (blocked until human acceptance)  
 Image generation: blocked  
 WebGPTImage handoff: blocked  
 ImageExecutionPackage creation: blocked  
@@ -77,25 +78,37 @@ See:
 - `01-raw/story-lab/user-inputs/pilot-001/copyright-adaptation-boundary.md`
 - `01-raw/story-lab/user-inputs/pilot-001/story-analysis-placeholder.md`
 
-## Story Analysis Placeholder
+## Story Core
 
-Workflow B has not started.
+Workflow B selected source cluster: **Cluster 3 — night journey / getting lost** (inspiration-only; fully reconstructed, original, children-safe).
 
-Pending:
+- Target: children-safe illustrated picture book, ages 5–8, ~12–16 pages (built: 14 pages).
+- Premise: A young child and their grown-up, heading home as night falls, try an unfamiliar shortcut and get lost on a dark, quiet road. In the dark the child's imagination turns ordinary things into scary-seeming things. By staying together, staying calm, and asking a kind helper, they discover each scary thing has an ordinary explanation and find their way home.
+- Core conflict: child's fear of the dark/unknown vs. the need to stay calm and find the way home.
+- Theme: scary-seeming things usually have an ordinary explanation; staying together and asking for help is brave; safety rule — don't take unfamiliar shortcuts in the dark.
+- Ending type: rational-reassuring (mystery explained by ordinary causes) + safety lesson.
+- Allowed abstract themes used: night travel & getting lost; fear of the unknown; mistaken supernatural explanation; mystery later explained by ordinary causes; courage / asking for help / safety rules.
 
-- Select one source cluster or mark as mixed inspiration pool.
-- Story input summary
-- Originality-safe abstraction
-- Children-safety adaptation notes
-- New story core
-- Story graph nodes
-- Story graph edges
-- Page-count estimate
-- Dry-read risk check
+Originality & child-safety: no source names, places, wording, plot sequence, twist, or imagery; no drunk driving, Ghost-Festival framing, song/CD, scary face, death, crime, or supernatural payoff. Fear resolves into safety. Dry-read safety check: PASS.
+
+## Story Graph (summary)
+
+- 14 page-nodes; arc rises p1–5, turns at p6 (stay calm / ask for help), resolves p7–14.
+- Clues → payoffs (all resolved): glowing "eyes" → helper's cat; "ghost" moan + pale shape → wind + mist; cold + thinning lamps → strayed into open country.
+- analyze-graph verdict: hook OK; every page has a page-turn question; no dangling clues; no mid-sag; protagonist makes a choice (not only observes); child-safety risk LOW. repair_priority: low. next_action: proceed_to_human_gate.
+- Full nodes/edges + diagnostics: derived record at `50-agent-work/story-lab/runs/pilot-001-workflow-b-story-analysis.md` (gitignored derived cache; not a source of truth).
+
+## Production Status
+
+- Current gate: **Workflow B human approval gate — story core + page-count confirmation.**
+- Story core + 14-page graph + page estimate: **PROPOSED, awaiting human acceptance.**
+- Page count: 14 (within ~12–16 target); long-story page-count review not triggered.
+- Dry-read safety check: PASS.
+- On human acceptance → trigger Workflow C (character/scene extraction) and D (visual/technique). Until then, C/D and the image pipeline remain blocked.
 
 ## Blocked Actions
 
-The following actions are blocked until Workflow B and later human gates approve them:
+The following actions remain blocked until the Workflow B story-core gate is human-accepted and the later C/D human gates approve them:
 
 - Character card creation
 - Scene card creation
