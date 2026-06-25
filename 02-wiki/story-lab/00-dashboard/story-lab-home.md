@@ -3,6 +3,9 @@
 > 黑曜石故事生产 Wiki 的中央枢纽。所有看板、索引与制作卡片的入口。
 > Central hub for the Obsidian Story Production Wiki. Entry point to all boards, indexes, and production cards.
 
+> [!tip] 📖 Operating Manual — START HERE / 操作手册 · 从这里开始
+> 新故事试产完整操作说明（从提供故事到成品发布）/ Full first-story pilot operating manual (story intake → publishing): [First Story Pilot Operating Manual](../../../00-system/migration-reports/First-Story-Pilot-Operating-Manual.md)
+
 ## Purpose / 用途
 
 - 中文：作为故事生产 Wiki 的主入口，汇集各类看板与索引，帮助创作者快速跳转到活跃项目、执行包、修复队列、待办场景、高复用提示词、角色画廊与视觉风格。
