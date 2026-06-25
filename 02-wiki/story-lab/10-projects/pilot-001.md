@@ -3,7 +3,7 @@ type: story_project
 id: pilot-001
 title_zh: AI+Story Pilot 001
 title_en: AI+Story Pilot 001
-status: draft
+status: active
 project_id: pilot-001
 canonical: true
 created_at: 2026-06-25
@@ -33,10 +33,10 @@ publishing_readiness_status: blocked
 
 ## Workflow Status
 
-Current workflow: B — Story Analysis and Canonical Card Workflow  
-Status: draft (Workflow B analysis produced; awaiting human acceptance of story core + page estimate)  
-Previous workflow: A — Raw Story Intake (accepted)  
-Next workflow: C — Character & Scene Extraction (blocked until human acceptance)  
+Current workflow: C — Character & Scene Extraction  
+Status: active (Workflow B story core accepted at human gate)  
+Previous workflow: A — Raw Story Intake (accepted); B — Story Analysis (accepted)  
+Next workflow: D — Visual Style & PromptRecipe (blocked until Workflow C human gate)  
 Image generation: blocked  
 WebGPTImage handoff: blocked  
 ImageExecutionPackage creation: blocked  
@@ -100,11 +100,11 @@ Originality & child-safety: no source names, places, wording, plot sequence, twi
 
 ## Production Status
 
-- Current gate: **Workflow B human approval gate — story core + page-count confirmation.**
-- Story core + 14-page graph + page estimate: **PROPOSED, awaiting human acceptance.**
+- Workflow B human approval gate: **ACCEPTED** (story core + page-count confirmed; 2026-06-25).
+- Accepted story core (locked): Cluster 3 only; 14-page structure; rational-reassuring ending; child-safe mystery + safety lesson.
 - Page count: 14 (within ~12–16 target); long-story page-count review not triggered.
 - Dry-read safety check: PASS.
-- On human acceptance → trigger Workflow C (character/scene extraction) and D (visual/technique). Until then, C/D and the image pipeline remain blocked.
+- Current: Workflow C — character & scene extraction (stops at the Workflow C human gate). Workflow D (visual/technique) and the image pipeline remain blocked.
 
 ## Blocked Actions
 
