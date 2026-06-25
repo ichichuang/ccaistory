@@ -67,6 +67,18 @@ This page is **scaffolding**. The folders it links to may currently be empty —
 - 提示词配方索引 / Prompt recipe index: [prompt-recipe-index](../90-indexes-zh/prompt-recipe-index.md)
 - 工作流与技能索引 / Workflow & skill index: [workflow-skill-index](../90-indexes-zh/workflow-skill-index.md)
 
+## 实时看板 / Live Boards (Bases · 推荐 recommended)
+
+> 由 Obsidian 核心 **Bases** 插件驱动（已启用）；**无需安装 Dataview**。下方各 `.md` 看板内的 Dataview 代码块仅作回退。
+> Powered by the core **Bases** plugin (enabled); **Dataview is not required**. The Dataview blocks inside the `.md` boards are fallback only.
+
+- 图像执行包看板 / Image package board: [image-package-board.base](bases/image-package-board.base)
+- 生成运行日志 / Generation run log: [generation-run-log.base](bases/generation-run-log.base)
+- 修复队列 / Repair queue: [repair-queue.base](bases/repair-queue.base)
+- 参考素材画廊 / Reference asset gallery: [reference-asset-gallery.base](bases/reference-asset-gallery.base)
+- 角色画廊 / Character gallery: [character-gallery.base](bases/character-gallery.base)
+- 场景看板 / Scene board: [scene-board.base](bases/scene-board.base)
+
 ## 活跃项目聚合 / Active Projects (Dataview)
 
 ```dataview
