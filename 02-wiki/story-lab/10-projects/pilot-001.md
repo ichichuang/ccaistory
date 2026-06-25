@@ -37,10 +37,10 @@ publishing_readiness_status: blocked
 
 ## Workflow Status
 
-Current workflow: C — Character & Scene Extraction  
-Status: active (Workflow B story core accepted at human gate)  
-Previous workflow: A — Raw Story Intake (accepted); B — Story Analysis (accepted)  
-Next workflow: D — Visual Style & PromptRecipe (blocked until Workflow C human gate)  
+Current workflow: D — Visual Style & PromptRecipe  
+Status: blocked pending separate human approval to start Workflow D  
+Previous workflow: A — Raw Story Intake (accepted); B — Story Analysis (accepted); C — Character & Scene Extraction (accepted)  
+Next workflow: E — ImageExecutionPackage Creation (blocked)  
 Image generation: blocked  
 WebGPTImage handoff: blocked  
 ImageExecutionPackage creation: blocked  
@@ -129,14 +129,17 @@ Workflow C extracted 7 canonical Scene cards (`40-scenes/`) covering the 14-page
 - Accepted story core (locked): Cluster 3 only; 14-page structure; rational-reassuring ending; child-safe mystery + safety lesson.
 - Page count: 14 (within ~12–16 target); long-story page-count review not triggered.
 - Dry-read safety check: PASS.
-- Current: Workflow C — character & scene extraction **COMPLETE; awaiting Workflow C human gate** (canon sign-off). Extracted 4 Character cards + 7 Scene cards. Workflow D (visual/technique) and the image pipeline remain blocked.
+- Workflow C human approval gate: **ACCEPTED** (character + scene canon confirmed; 2026-06-25).
+  - 4 Character cards accepted
+  - 7 Scene cards accepted
+  - Referential integrity accepted
+  - Source-distance / child-safety accepted
+- Next: Workflow D (Visual Style & PromptRecipe) — **blocked pending separate human approval to start Workflow D**. Image pipeline remains blocked.
 
 ## Blocked Actions
 
-The following actions remain blocked until the Workflow B story-core gate is human-accepted and the later C/D human gates approve them:
+Workflows A, B and C are accepted; Character and Scene card creation are complete. The following remain blocked until Workflow D (and later human gates) are approved:
 
-- Character card creation
-- Scene card creation
 - VisualStyle creation
 - PromptRecipe creation
 - ImageExecutionPackage creation
