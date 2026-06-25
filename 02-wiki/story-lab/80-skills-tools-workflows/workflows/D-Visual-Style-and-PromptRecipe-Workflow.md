@@ -22,7 +22,7 @@ runtime_commands: []
 human_gates: yes
 qa_gates: no
 stop_conditions: ["视觉风格未签收", "技法与执行混写"]
-replacement_for: "视觉执行编译流程（前半）"
+replacement_for: ""
 deprecated_by: ""
 ---
 # D 视觉风格与提示词技法工作流 / Visual Style and PromptRecipe Workflow
@@ -41,7 +41,7 @@ C 工作流完成、角色/场景卡就绪。
 ## Steps / 步骤
 1. 按 `templates/canonical-assets/VisualStyle.md` 在 `50-visual-styles/` 建 VisualStyle 卡（线条/色彩/质感/构图/儿童安全/禁止漂移）。
 2. 按 `templates/canonical-assets/PromptRecipe.md` 在 `60-prompts/` 建/选 PromptRecipe 卡；填 `applicable_asset_types`、`recipe_hash`、`drift_check_policy`；不写入某次执行的真实 prompt 实例。
-3. 历史提示词库 `60-prompts/legacy-prompt-library/` 仅作参考，不直接作为 recipe。
+3. 通用负面约束与提示词规则统一维护在 PromptRecipe 卡的 Negative Prompt Rules 区。
 4. 在 VisualStyle 卡登记 `related_recipes`，在 PromptRecipe 卡登记 `compatible_asset_types`。
 
 ## Outputs / 输出

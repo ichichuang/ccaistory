@@ -22,7 +22,7 @@ runtime_commands: ["compile-asset", "lint-asset", "lint-prompt"]
 human_gates: no
 qa_gates: yes
 stop_conditions: ["缺 paper_policy/style_policy", "lint hard-fail", "无 compiled_prompt 不得出图"]
-replacement_for: "视觉执行编译流程"
+replacement_for: ""
 deprecated_by: ""
 ---
 # F 提示词编译与语义 Lint 工作流 / Prompt Compile and Semantic Lint Workflow

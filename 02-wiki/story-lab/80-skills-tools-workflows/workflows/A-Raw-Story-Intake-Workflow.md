@@ -22,7 +22,7 @@ runtime_commands: ["status"]
 human_gates: yes
 qa_gates: no
 stop_conditions: ["无合法输入", "版权边界未确认"]
-replacement_for: "新故事从输入到试产流程"
+replacement_for: ""
 deprecated_by: ""
 ---
 # A 原始故事接入工作流 / Raw Story Intake Workflow

@@ -18,12 +18,15 @@ from lint_engine.semantic_lint import get_r00_forbidden_positive_terms
 from qa_engine.asset_qa import get_r00_required_questions
 
 
+# R00 drift sources — active canonical docs only. The two legacy copies
+# (legacy-prompt-library/R00纸张笔触锚图锁.md, legacy-control/状态机与门禁.md)
+# were removed in the hard cleanup; the same R00 forbidden-content terms are
+# still enforced across these active canonical files (logic unchanged).
 R00_MARKDOWN_FILES = [
-    "02-wiki/story-lab/60-prompts/legacy-prompt-library/R00纸张笔触锚图锁.md",
-    "02-wiki/story-lab/00-dashboard/legacy-control/状态机与门禁.md",
     "02-wiki/story-lab/80-skills-tools-workflows/structure-specs/视觉资产本体结构规范.md",
     "02-wiki/story-lab/80-skills-tools-workflows/structure-specs/源插图语义Lint结构规范.md",
     "02-wiki/story-lab/80-skills-tools-workflows/acceptance-checklists/R00纸张笔触锚图验收清单.md",
+    "02-wiki/story-lab/80-skills-tools-workflows/acceptance-checklists/源插图语义Lint验收清单.md",
 ]
 
 R00_MARKDOWN_REQUIRED_TERMS = {

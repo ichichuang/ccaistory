@@ -1,6 +1,6 @@
 # PromptRecipe 字段定义 / Field Schema
 
-fileClass：`PromptRecipe`（`type: prompt_recipe`）。卡模板：`../templates/canonical-assets/PromptRecipe.md`。卡片位置：`02-wiki/story-lab/60-prompts/`（历史提示词库在 `60-prompts/legacy-prompt-library/`）。
+fileClass：`PromptRecipe`（`type: prompt_recipe`）。卡模板：`../templates/canonical-assets/PromptRecipe.md`。卡片位置：`02-wiki/story-lab/60-prompts/`。
 
 ## Common required fields / 通用必填字段
 

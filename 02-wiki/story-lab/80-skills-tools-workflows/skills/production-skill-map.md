@@ -65,15 +65,14 @@
 | Pipeline Runner技能 | runtime_maintenance | pipeline-plan, pipeline-run, … | runtime | active |
 | 机器事实源Contracts技能 | system_maintenance | validate-contracts, check-contract-drift | runtime | active |
 
-## 3. 已 deprecated / needs_fix 的 skill（指向替代）
+## 3. 硬清理中移除的旧 skill（角色已并入活跃 skill）
 
-| skill 卡 | status | 替代/去向（deprecated_by） |
-|---|---|---|
-| 总控编排技能 | deprecated | Pipeline Runner技能 |
-| 提示词生成技能 | deprecated | 源插图Prompt编译技能 / PromptRecipe-Authoring-Skill |
-| 视觉候选失败复盘技能 | deprecated | 资产验收与返修技能 |
-| 发布编排技能 | deprecated | 平台发布页合成技能 |
-| 发布后数据回收技能 | needs_fix | 试点后再实现（off 关键插图路径） |
+P0 后续硬清理已删除以下已弃用 skill；其职责由活跃 skill 承接：
+- 编排 / 状态机职责 → `Pipeline Runner技能`、`故事核心状态机技能`。
+- 提示词片段职责 → `源插图Prompt编译技能` / `PromptRecipe-Authoring-Skill`。
+- 视觉候选失败复盘职责 → `资产验收与返修技能`。
+- 发布编排职责 → `平台发布页合成技能`。
+- 发布后数据回收：试点阶段不在关键插图路径，暂不提供（如需，后续单独实现）。
 
 ## 4. 映射到生产阶段（A–L 工作流）
 

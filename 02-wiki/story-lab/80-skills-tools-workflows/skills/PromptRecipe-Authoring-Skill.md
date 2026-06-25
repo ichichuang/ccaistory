@@ -32,7 +32,7 @@ deprecated_by: ""
 创建/选择可复用的 PromptRecipe canonical 卡，与具体执行包分离；统一收编旧的 `提示词生成技能`（已 deprecated）。
 
 ## Inputs / 输入
-- VisualStyle 卡、`60-prompts/legacy-prompt-library/` 参考、负面约束。
+- VisualStyle 卡、负面约束、通用提示词规则。
 
 ## Outputs / 输出
 - `02-wiki/story-lab/60-prompts/<id>.md`（按 `templates/canonical-assets/PromptRecipe.md`），含 `applicable_asset_types`、`recipe_hash`、`drift_check_policy`。

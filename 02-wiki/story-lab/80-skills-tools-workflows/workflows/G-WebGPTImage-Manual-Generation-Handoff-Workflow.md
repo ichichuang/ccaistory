@@ -22,7 +22,7 @@ runtime_commands: []
 human_gates: yes
 qa_gates: no
 stop_conditions: ["无受控执行单", "操作员在包外即兴改图", "未记录实际 prompt"]
-replacement_for: "外部出图工具出图窗口操作手册"
+replacement_for: ""
 deprecated_by: ""
 ---
 # G WebGPTImage 人工出图交接工作流 / WebGPTImage Manual Generation Handoff Workflow

@@ -22,7 +22,7 @@ runtime_commands: ["artifact-check-registry", "artifact-lineage"]
 human_gates: yes
 qa_gates: yes
 stop_conditions: ["accepted_asset_count < required_asset_count", "存在未过 QA 的必需资产", "缺发布就绪检查"]
-replacement_for: "源插图到平台发布页流程（成品部分）"
+replacement_for: ""
 deprecated_by: ""
 ---
 # K 最终插图故事成品装配工作流 / Final Illustrated Story Package Assembly Workflow

@@ -22,7 +22,7 @@ runtime_commands: []
 human_gates: yes
 qa_gates: yes
 stop_conditions: ["人工完整阅读未过", "存在阻断项"]
-replacement_for: "源插图到平台发布页流程（发布部分）"
+replacement_for: ""
 deprecated_by: ""
 ---
 # L 发布就绪工作流 / Publishing Readiness Workflow

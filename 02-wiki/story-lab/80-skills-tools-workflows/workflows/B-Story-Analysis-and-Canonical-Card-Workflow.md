@@ -22,7 +22,7 @@ runtime_commands: ["analyze-story", "analyze-graph", "classify-story", "estimate
 human_gates: yes
 qa_gates: no
 stop_conditions: ["story_analyzer 高风险", "页数/连贯性不合理"]
-replacement_for: "故事生产标准作业流程（前半）"
+replacement_for: ""
 deprecated_by: ""
 ---
 # B 故事分析与规范卡工作流 / Story Analysis and Canonical Card Workflow

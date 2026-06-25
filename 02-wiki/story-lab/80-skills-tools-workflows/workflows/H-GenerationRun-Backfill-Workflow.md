@@ -22,7 +22,7 @@ runtime_commands: ["validate-telemetry", "generate-image-review-form"]
 human_gates: no
 qa_gates: yes
 stop_conditions: ["无 actual_prompt_sent_to_external_tool", "遥测缺失"]
-replacement_for: "本地知识库回填手册"
+replacement_for: ""
 deprecated_by: ""
 ---
 # H 生成记录回填工作流 / GenerationRun Backfill Workflow

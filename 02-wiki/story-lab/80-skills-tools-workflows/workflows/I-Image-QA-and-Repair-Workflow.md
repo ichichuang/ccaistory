@@ -22,7 +22,7 @@ runtime_commands: ["validate-image-review", "merge-image-qa", "qa-asset"]
 human_gates: yes
 qa_gates: yes
 stop_conditions: ["未做人工图像复核", "R00 未 accepted 时继续 R01/R02"]
-replacement_for: "图像试产与连续性验证流程"
+replacement_for: ""
 deprecated_by: ""
 ---
 # I 图像 QA 与返修工作流 / Image QA and Repair Workflow
