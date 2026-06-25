@@ -1,13 +1,8 @@
-# Obsidian Bases specification — verify inside Obsidian before relying on it.
-# Source: repair_note cards in 50-agent-work/story-lab/repair-notes/
 filters:
   and:
-    - 'type == "repair_note"'
-    - 'file.folder == "50-agent-work/story-lab/repair-notes"'
-    # status enum: open / in-progress / closed. Show only unresolved by default:
-    - 'status != "closed"'
-    # Optional extra filters:
-    # - 'priority == "high"'
+    - type == "repair_note"
+    - file.folder == "50-agent-work/story-lab/repair-notes"
+    - status != "closed"
 properties:
   note.package_id:
     displayName: Package

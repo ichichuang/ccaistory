@@ -61,3 +61,7 @@ When Dataview is not installed:
    Read each card's frontmatter: `title_zh`, `status`, `main_characters`, `visual_styles`, `related_packages` (or `related_assets`).
 3. 从某项目卡片出发，可跳转到 [character-gallery](character-gallery.md)、[visual-style-index](visual-style-index.md) 与 [image-package-board](../00-dashboard/image-package-board.md) 查看其下资产。
    From a project card, jump to [character-gallery](character-gallery.md), [visual-style-index](visual-style-index.md), and [image-package-board](../00-dashboard/image-package-board.md) to view its assets.
+
+## Manual Project Links
+
+- [AI+Story Pilot 001](../10-projects/pilot-001.md) — status: draft; workflow: A Raw Story Intake; source: YouTube transcript; source metadata: incomplete; adaptation: inspiration-only.

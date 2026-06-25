@@ -1,13 +1,7 @@
-# Obsidian Bases specification — verify inside Obsidian before relying on it.
-# Source: character cards in 02-wiki/story-lab/30-characters/
 filters:
   and:
-    - 'type == "character"'
-    - 'file.folder == "02-wiki/story-lab/30-characters"'
-    # Optional status filters (uncomment one as needed):
-    # - 'status == "active"'
-    # - 'status != "archived"'
-    # - 'failure_count > 0'
+    - type == "character"
+    - file.folder == "02-wiki/story-lab/30-characters"
 properties:
   note.cover_image:
     displayName: Cover
@@ -26,7 +20,6 @@ properties:
 views:
   - type: cards
     name: Character Gallery
-    image: note.cover_image
     order:
       - file.name
       - title_zh
@@ -41,3 +34,4 @@ views:
         direction: ASC
       - property: last_used
         direction: DESC
+    image: note.cover_image

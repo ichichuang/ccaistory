@@ -1,12 +1,7 @@
-# Obsidian Bases specification — verify inside Obsidian before relying on it.
-# Source: scene cards in 02-wiki/story-lab/40-scenes/
 filters:
   and:
-    - 'type == "scene"'
-    - 'file.folder == "02-wiki/story-lab/40-scenes"'
-    # Optional status filters (enum: draft / in-review / ready / archived):
-    # - 'status == "ready"'
-    # - 'status != "archived"'
+    - type == "scene"
+    - file.folder == "02-wiki/story-lab/40-scenes"
 properties:
   note.status:
     displayName: Status

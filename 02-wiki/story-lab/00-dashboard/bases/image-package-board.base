@@ -1,12 +1,7 @@
-# Obsidian Bases specification — verify inside Obsidian before relying on it.
-# Source: image_execution_package cards in 02-wiki/story-lab/70-execution-packages/
 filters:
   and:
-    - 'type == "image_execution_package"'
-    - 'file.folder == "02-wiki/story-lab/70-execution-packages"'
-    # Optional status filters (enum: draft / ready / generating / accepted / rejected / archived):
-    # - 'status == "ready"'
-    # - 'status != "archived"'
+    - type == "image_execution_package"
+    - file.folder == "02-wiki/story-lab/70-execution-packages"
 properties:
   note.status:
     displayName: Status
