@@ -19,7 +19,11 @@ tags:
 related_assets: []
 source_paths:
   - 01-raw/story-lab/user-inputs/pilot-001/
-main_characters: []
+main_characters:
+  - char-xiaohe
+  - char-mama
+  - char-lantern-grandpa
+  - char-juzi-cat
 worlds: []
 visual_styles: []
 related_packages: []
@@ -98,13 +102,34 @@ Originality & child-safety: no source names, places, wording, plot sequence, twi
 - analyze-graph verdict: hook OK; every page has a page-turn question; no dangling clues; no mid-sag; protagonist makes a choice (not only observes); child-safety risk LOW. repair_priority: low. next_action: proceed_to_human_gate.
 - Full nodes/edges + diagnostics: derived record at `50-agent-work/story-lab/runs/pilot-001-workflow-b-story-analysis.md` (gitignored derived cache; not a source of truth).
 
+## Characters
+
+Workflow C extracted 4 canonical Character cards (`30-characters/`):
+
+- [小禾 / Xiao He](../30-characters/char-xiaohe.md) — protagonist (the child).
+- [妈妈 / Mama](../30-characters/char-mama.md) — caregiver / travel companion.
+- [守灯爷爷 / Lantern Grandpa](../30-characters/char-lantern-grandpa.md) — the safe helper at the cottage.
+- [橘子 / Tangerine the Cat](../30-characters/char-juzi-cat.md) — the cat; the ordinary cause of the "glowing eyes".
+
+## Scenes
+
+Workflow C extracted 7 canonical Scene cards (`40-scenes/`) covering the 14-page graph:
+
+- [黄昏岔路口 / The Fork at Dusk](../40-scenes/scene-fork-at-dusk.md) — p1.
+- [灯火渐稀的小路 / The Fading-Lamp Lane](../40-scenes/scene-fading-lamp-lane.md) — p2.
+- [黑黑的林间小路 / The Dark Wooded Lane](../40-scenes/scene-dark-wooded-lane.md) — p3–p6 (scares + calming turn).
+- [守灯小屋 / The Lantern Cottage](../40-scenes/scene-lantern-cottage.md) — p7–p11 (rescue + ordinary-cause payoffs).
+- [回到亮亮的大路 / Back to the Bright Road](../40-scenes/scene-return-to-bright-road.md) — p12.
+- [家门口 / The Home Doorway](../40-scenes/scene-home-doorway.md) — p13.
+- [窗边的晚安 / Goodnight at the Window](../40-scenes/scene-bedroom-window.md) — p14.
+
 ## Production Status
 
 - Workflow B human approval gate: **ACCEPTED** (story core + page-count confirmed; 2026-06-25).
 - Accepted story core (locked): Cluster 3 only; 14-page structure; rational-reassuring ending; child-safe mystery + safety lesson.
 - Page count: 14 (within ~12–16 target); long-story page-count review not triggered.
 - Dry-read safety check: PASS.
-- Current: Workflow C — character & scene extraction (stops at the Workflow C human gate). Workflow D (visual/technique) and the image pipeline remain blocked.
+- Current: Workflow C — character & scene extraction **COMPLETE; awaiting Workflow C human gate** (canon sign-off). Extracted 4 Character cards + 7 Scene cards. Workflow D (visual/technique) and the image pipeline remain blocked.
 
 ## Blocked Actions
 
