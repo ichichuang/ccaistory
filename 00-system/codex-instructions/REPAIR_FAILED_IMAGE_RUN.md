@@ -1,3 +1,19 @@
+---
+type: codex_instruction
+id: "REPAIR_FAILED_IMAGE_RUN"
+status: active
+canonical: false
+doctrine: obsidian-wiki-canonical
+target_layer: "50-agent-work/story-lab/repair-notes, 90-archive/story-lab/rejected-assets"
+related_templates: ["RepairNote"]
+related_workflows: ["I-Image-QA-and-Repair-Workflow"]
+human_gate: yes
+runtime_role: "tool-layer assist: runtime validate/compile/lint/qa only; canonical writes go to 02-wiki cards, never runtime"
+owner: ichichuang
+updated_at: 2026-06-25
+---
+
+> ✅ ACTIVE / 现行：遵循 Obsidian Story Production Wiki 4 层 canonical 卡片模型。Scope / allowed inputs / allowed outputs / stop-condition / forbidden-actions 见正文。canonical 知识落 02-wiki，操作记录落 50-agent-work，原始输入落 01-raw，被拒材料落 90-archive；runtime/contracts 仅定义校验规则，runtime 产物为派生缓存。
 # Codex 指令：修复失败的图像运行 / REPAIR FAILED IMAGE RUN
 
 > PROCEDURE ONLY. 本文件只描述修复记录与分流过程，不实例化任何真实图像、提示或资产。一律使用占位符（`<repair-id>`、`<run-id>`、`<package-id>`、`<asset-id>`、`<prompt-recipe-id>`、`<visual-style-id>`、EXAMPLE_VALUE、占位）。

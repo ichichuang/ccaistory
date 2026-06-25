@@ -1,6 +1,11 @@
 # AI Story Compiler v0.1
 
-`runtime/` is the executable layer for the AI+Story vault. `runtime/contracts/` is the machine-readable source of truth; Obsidian Markdown is the explanatory layer. If Markdown conflicts with contracts, contracts win.
+`runtime/` is the executable **tool layer** for the AI+Story vault: validator / compiler / linter / QA helper + cache producer. There are two distinct sources of truth, in two separate domains:
+
+- **Validation rules** are owned by `runtime/contracts/` (machine-readable: state machine, quality gates, pipeline actions, visual-asset rules).
+- **Production knowledge** is owned by the Obsidian Markdown **canonical cards** under `02-wiki/story-lab/` (stories, characters, scenes, visual styles, prompt recipes, execution packages, reference assets, QA conclusions, repair notes).
+
+`runtime` outputs and the **Artifact Registry are derived caches** — rebuildable from the canonical cards plus run outputs. The Artifact Registry is **not** the canonical asset registry. Durable production decisions must be written back to the canonical Markdown cards. If validation rules and Markdown cards conflict, **do not silently choose one — block production and require human reconciliation.**
 
 Skill Runtime v0.2 adds deterministic validation for creator-technique effects on `story_graph.nodes`. Skill Orchestrator selects skills; Skill Runtime checks whether those skills actually appear in node structure, generates repair patches, and decides whether the graph can proceed to the next gate.
 

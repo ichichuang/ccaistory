@@ -31,7 +31,7 @@ AI+Story is an **Obsidian Story Production Wiki + runtime tool layer**.
 | `status` | `{"status":"empty"}` | runtime/vault machine-state (empty repo). Does **not** read `02-wiki`. |
 | `validate` | `pass` | JSON validity of `runtime/schemas/*` + `runtime/tests/fixtures/*` + 12-skill registry. **Does not check `02-wiki` card presence/layout.** |
 | `validate-contracts` | `pass` (skill_count 12, r00_qa_count 14) | structure + cross-links of the 5 contract JSONs. |
-| `check-contract-drift` | `pass` (0 broken links) | the **only** command touching `02-wiki`: 5 hard-coded R00 cards + `[[wiki-links]]`. Narrow. |
+| `check-contract-drift` | `pass` (0 broken links) | the **only** command touching `02-wiki`: 5 hard-coded R00 cards + Obsidian wiki-link integrity. Narrow. |
 | `smoke-test` | `pass` (74 checks) | runtime behavior incl. "does-not-generate" guards — but those guards scan **deleted** legacy roots, so they pass vacuously. |
 
 The structural reality: **canonical knowledge model is split.** Templates + English codex-instructions + architecture + runtime *boundary* docs follow the new "small canonical cards in 02-wiki, evidence in 50-agent-work" doctrine. The 32 skill cards + 18 workflows + 19 legacy Chinese codex-instructions + `runtime/README.md` follow the old "one monolithic `故事核心.json` is the single source of truth" model.
@@ -79,7 +79,7 @@ The structural reality: **canonical knowledge model is split.** Templates + Engl
 
 ## 3. Workflow inventory
 
-18 workflows in `02-wiki/story-lab/80-skills-tools-workflows/workflows/`. **Systemic fact:** files 1–11 are near-identical clones of one 18-stage SOP (same §4 stage list, same §5–§11 gate/prohibition lists); they differ only in the goal line and one downstream `[[link]]`. Verified across all 18: **0 mention `50-agent-work`, `70-execution-packages`, `reference-assets`, or `WebGPTImage`; 16/18 contain the prohibition `禁止创建…执行包`** (e.g. `故事生产标准作业流程.md:65`). Files 12–18 are genuinely distinct and runtime-backed.
+18 workflows in `02-wiki/story-lab/80-skills-tools-workflows/workflows/`. **Systemic fact:** files 1–11 are near-identical clones of one 18-stage SOP (same §4 stage list, same §5–§11 gate/prohibition lists); they differ only in the goal line and one downstream wiki-link. Verified across all 18: **0 mention `50-agent-work`, `70-execution-packages`, `reference-assets`, or `WebGPTImage`; 16/18 contain the prohibition `禁止创建…执行包`** (e.g. `故事生产标准作业流程.md:65`). Files 12–18 are genuinely distinct and runtime-backed.
 
 | Workflow path (…/workflows/) | Name | Trigger | Inputs / required cards | Outputs → layer | Human gate | QA gate | Runtime dependency | Risk | Verdict | Required fix |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |

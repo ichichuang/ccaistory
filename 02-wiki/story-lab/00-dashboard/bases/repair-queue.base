@@ -4,17 +4,17 @@ filters:
   and:
     - 'type == "repair_note"'
     - 'file.folder == "50-agent-work/story-lab/repair-notes"'
-    # Optional status filters (uncomment one as needed):
-    # - 'repair_status != "done"'
-    # - 'repair_status == "open"'
+    # status enum: open / in-progress / closed. Show only unresolved by default:
+    - 'status != "closed"'
+    # Optional extra filters:
     # - 'priority == "high"'
 properties:
   note.package_id:
     displayName: Package
   note.failure_types:
     displayName: Failure Types
-  note.repair_status:
-    displayName: Repair Status
+  note.status:
+    displayName: Status
   note.priority:
     displayName: Priority
   note.linked_run:
@@ -28,7 +28,7 @@ views:
       - file.name
       - package_id
       - failure_types
-      - repair_status
+      - status
       - priority
       - linked_run
       - next_action

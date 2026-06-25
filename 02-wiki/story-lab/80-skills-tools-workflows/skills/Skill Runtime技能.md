@@ -1,8 +1,32 @@
+---
+type: skill_card
+id: "Skill Runtime技能"
+title_zh: Skill Runtime技能
+title_en: Skill Runtime Skill
+status: active
+project_id: ""
+related_assets: []
+source_paths: []
+tags: [skill, story-lab]
+created_at: 2026-06-25
+updated_at: 2026-06-25
+owner: ichichuang
+version: v1
+canonical: true
+skill_category: story_analysis
+runtime_commands: ["evaluate-node", "generate-skill-patch", "repair-skill-graph", "check-skill-graph"]
+runtime_support_status: runtime
+input_layer: "runtime-cache"
+output_layer: "50-agent-work"
+human_gate: no
+qa_gate: no
+workflow_dependencies: []
+replacement_for: ""
+deprecated_by: ""
+---
 # Skill Runtime技能
 
-状态：活动  
-生产体系：平台图文故事主线生产体系  
-唯一事实源：story_graph node
+> 事实源声明（canonical doctrine）：本卡 canonical 知识存于 `02-wiki` Markdown；`runtime/contracts` 仅定义校验规则；执行期 JSON 属派生 runtime/agent 产物。下文凡提及“写入 story_core / 故事核心.json / 派生视图”，一律按本卡 frontmatter 的 `input_layer`/`output_layer` 落地：操作记录写入 `50-agent-work`，持久决策回填 `02-wiki` canonical 卡，原始输入留在 `01-raw`，被拒材料入 `90-archive`。runtime 与 Artifact Registry 仅为派生缓存。
 
 ## 1. 技能目的
 检查创作者技法库的 skill 是否真实落到 story_graph 节点上，并把未通过位置转换为结构化修复建议。

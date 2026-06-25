@@ -1,7 +1,33 @@
+---
+type: workflow_card
+id: "Skill Executor候选修复流程"
+title_zh: Skill Executor候选修复流程
+title_en: Skill Executor Candidate-Repair Flow
+status: active
+project_id: ""
+related_assets: []
+source_paths: []
+tags: [workflow, story-lab]
+created_at: 2026-06-25
+updated_at: 2026-06-25
+owner: ichichuang
+version: v1
+canonical: true
+workflow_category: repair
+trigger: ""
+input_layer: "runtime-cache"
+output_layer: "50-agent-work"
+required_cards: []
+runtime_commands: ["score-skill-candidate", "resolve-skill-conflicts", "execute-skill-graph"]
+human_gates: yes
+qa_gates: no
+stop_conditions: []
+replacement_for: ""
+deprecated_by: ""
+---
 # Skill Executor候选修复流程
 
-状态：活动  
-生产体系：平台图文故事主线生产体系
+> 事实源声明（canonical doctrine）：本工作流的产物按 frontmatter 的 `input_layer`/`output_layer` 落地——原始输入 `01-raw`、canonical 卡 `02-wiki`、运行/编译/lint/QA/复核/返修记录 `50-agent-work`、被拒材料 `90-archive`、执行包 `02-wiki/story-lab/70-execution-packages`、接受的参考资产 `02-wiki/story-lab/reference-assets`。`runtime/contracts` 仅定义校验规则，runtime 产物为派生缓存。两窗口生产模型：WebGPT 指令窗规划/复核，WebGPTImage 生成窗仅按受控执行单出图。
 
 ## 1. 入口
 入口来自已运行 Skill Runtime 的 node 或 story_graph。Skill Runtime 负责发现问题并生成 patch，Skill Executor 只处理候选修复和人工批准前的 proposed_changes。

@@ -4,10 +4,9 @@ filters:
   and:
     - 'type == "image_execution_package"'
     - 'file.folder == "02-wiki/story-lab/70-execution-packages"'
-    # Optional status filters (uncomment one as needed):
+    # Optional status filters (enum: draft / ready / generating / accepted / rejected / archived):
     # - 'status == "ready"'
-    # - 'status != "done"'
-    # - 'status == "blocked"'
+    # - 'status != "archived"'
 properties:
   note.status:
     displayName: Status

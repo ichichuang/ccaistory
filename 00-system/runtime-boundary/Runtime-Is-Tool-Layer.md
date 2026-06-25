@@ -60,3 +60,21 @@ runtime 缓存可随时重建，规范事实长存于 Markdown
 - Artifact Registry 是缓存：[Artifact-Registry-Is-Cache.md](./Artifact-Registry-Is-Cache.md)
 - Markdown 是规范来源：[Markdown-Is-Canonical.md](./Markdown-Is-Canonical.md)
 - 总体架构：[../architecture/AI+Story-Obsidian-Wiki-Architecture.md](../architecture/AI+Story-Obsidian-Wiki-Architecture.md)
+
+## 7. 待补校验器（Missing Validators — scope only / 仅定义范围，暂不实现）
+
+当前 `runtime` 行为合规（只写自身缓存、阻断生成、人工门禁），但**尚无任何 runtime 校验强制执行新的 4 层 / Markdown-canonical doctrine**。以下校验器尚缺，先明确范围以便后续安全实现（本次 P0 不改动 runtime 逻辑、不削弱测试）：
+
+| 校验器 / Validator | 应检查 / Should check | 当前状态 |
+| --- | --- | --- |
+| `validate-vault` | canonical 卡是否齐全、是否落在正确 02-wiki 子目录 | 缺（`validate` 仅校验 runtime/schemas + fixtures JSON） |
+| wrong-layer write detector | 是否有产物写到错误的层（如把操作记录写进 02-wiki，或把 canonical 写进 50-agent-work） | 缺 |
+| card ↔ runtime-cache reconciliation | runtime 缓存（compiled_prompt/qa/registry）是否与 02-wiki 卡一致 | 缺 |
+| StoryProject asset-count consistency | `accepted_asset_count` 是否与实际 accepted ReferenceAsset 数一致；`>= required_asset_count` 才能成品 ready | 缺 |
+| required GenerationRun before acceptance | 接受 ReferenceAsset 前必须存在对应 GenerationRun | 部分（artifact 层有，目录层无） |
+| required image-review-form before accepted | 接受前必须有人工图像复核表单 | 部分（Multimodal QA 校验，但无目录级强制） |
+| prompt recipe drift check | compiled_prompt 与登记的 `recipe_hash` 是否漂移 | 缺（hash 已存，未主动比对） |
+| reference asset drift check | 参考资产内容与其 hash 是否漂移 | 缺（hash 已存，未主动比对） |
+| story fact drift check | runtime story_core/story_graph JSON 是否与 02-wiki 故事卡一致 | 缺（无卡↔JSON 对账） |
+
+> 另：现有 `runtime/tests/test_runtime_smoke.py` 的"does-not-generate"守卫仍指向已删除的旧根目录（`故事项目`/`资产库`/`执行包`/`发布包`），因此当前**空跑通过**。后续应把这些守卫改指向新 4 层（断言 runtime 从不写入 `02-wiki`/`01-raw`/`50-agent-work`/`90-archive`，仅写自身缓存），并新增 4 层 doctrine 的正向测试。本次不改动以免削弱测试。

@@ -8,6 +8,9 @@ project_id: "<story-project-id>"
 target_media: ""
 usable_for: []
 applicable_asset_types: []
+compatible_asset_types: []
+recipe_hash: ""
+drift_check_policy: ""
 related_assets: []
 source_paths: []
 tags: []

@@ -4,10 +4,9 @@ filters:
   and:
     - 'type == "scene"'
     - 'file.folder == "02-wiki/story-lab/40-scenes"'
-    # Optional status filters (uncomment one as needed):
-    # - 'status == "pending"'
-    # - 'status != "done"'
+    # Optional status filters (enum: draft / in-review / ready / archived):
     # - 'status == "ready"'
+    # - 'status != "archived"'
 properties:
   note.status:
     displayName: Status
@@ -17,7 +16,7 @@ properties:
     displayName: Characters
   note.output_targets:
     displayName: Output Targets
-  note.related_assets:
+  note.linked_packages:
     displayName: Linked Packages
 views:
   - type: table
@@ -29,7 +28,7 @@ views:
       - characters
       - status
       - output_targets
-      - related_assets
+      - linked_packages
     sort:
       - property: project_id
         direction: ASC

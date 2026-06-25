@@ -28,12 +28,16 @@ fileClass：`PromptRecipe`（`type: prompt_recipe`）。卡模板：`../template
 | target_media | select | image / video / ui / text | "" | 目标媒介 |
 | usable_for | list | — | [] | 适用场景 |
 | applicable_asset_types | list | canonical type 值 | [] | 适用资产类型 |
+| compatible_asset_types | list | canonical type 值 | [] | 兼容资产类型（与 applicable_asset_types 同域，查询别名） |
+| recipe_hash | text | sha256 短哈希 | "" | 技法内容哈希（漂移检测用） |
+| drift_check_policy | text | — | "" | 漂移检测策略（何时重算 recipe_hash 并与 compiled_prompt 比对） |
 
 ## Validation notes / 校验说明
 
 - `type` 必须为 `prompt_recipe`；`canonical=true`。
 - Prompt recipe 必须与具体执行包分离：不得在本卡写入某一次执行的真实 prompt 实例。
 - `applicable_asset_types` 取 canonical 资产 `type` 值（character / scene / visual_style / image_execution_package …）。
+- `recipe_hash` + `drift_check_policy` 用于检测 prompt 配方漂移：编译时若 compiled_prompt 与登记的 recipe_hash 不一致，必须阻断并复核。
 
 ## Dataview / Bases usage / 查询用法
 

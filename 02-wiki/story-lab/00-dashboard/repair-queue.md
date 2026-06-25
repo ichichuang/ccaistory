@@ -20,21 +20,21 @@ Repair notes record failure types and the next action; each points to a specific
 
 - 仅 `type = "repair_note"`。
 - Only `type = "repair_note"`.
-- 默认隐藏 `repair_status = "done"`（已修复）以聚焦未决任务。
-- Default: hide `repair_status = "done"` to focus on open tasks.
+- 默认隐藏 `status = "closed"`（已关闭）以聚焦未决任务。（单一状态字段；旧 `repair_status` 已移除。）
+- Default: hide `status = "closed"` to focus on open tasks. (Single status field; the old `repair_status` was removed.)
 - 可选：按 `failure_types` 包含某值，或按 `package_id = "<package-id>"` 过滤。
 - Optional: filter where `failure_types` contains a value, or by `package_id = "<package-id>"`.
 
 ## Sorting / 排序
 
-- 按 `priority` 排序（高优先级在前）。约定：数值越小越优先，或字符串 `high` > `medium` > `low`，按本仓库实际约定执行。
-- Sort by `priority` (highest first). Convention: lower number = higher priority, or string `high` > `medium` > `low` per this repo's convention.
+- 按 `priority` 排序（枚举 `low` / `medium` / `high` / `urgent`；高优先级在前）。
+- Sort by `priority` (enum `low` / `medium` / `high` / `urgent`; highest first).
 
 ## Display Fields / 展示字段
 
 - `package_id`
 - `failure_types`
-- `repair_status`
+- `status`
 - `priority`
 - `linked_run`
 - `next_action`
@@ -45,12 +45,12 @@ Repair notes record failure types and the next action; each points to a specific
 TABLE
   package_id AS "包ID",
   failure_types AS "失败类型",
-  repair_status AS "修复状态",
+  status AS "状态",
   priority AS "优先级",
   linked_run AS "关联运行",
   next_action AS "下一步"
 FROM "50-agent-work/story-lab/repair-notes"
-WHERE type = "repair_note" AND repair_status != "done"
+WHERE type = "repair_note" AND status != "closed"
 SORT priority ASC
 ```
 
@@ -61,9 +61,9 @@ When Dataview is not installed:
 
 1. 打开 `50-agent-work/story-lab/repair-notes/` 浏览所有修复笔记。
    Open `50-agent-work/story-lab/repair-notes/` and browse all repair notes.
-2. 逐张读取 frontmatter：`package_id`、`failure_types`、`repair_status`、`priority`、`linked_run`、`next_action`。
-   Read each note's frontmatter: `package_id`, `failure_types`, `repair_status`, `priority`, `linked_run`, `next_action`.
-3. 按 `priority` 手动排序，跳过 `repair_status = "done"` 的条目，从最高优先级开始处理。
-   Sort by `priority` manually, skip entries with `repair_status = "done"`, and start from the highest priority.
+2. 逐张读取 frontmatter：`package_id`、`failure_types`、`status`、`priority`、`linked_run`、`next_action`。
+   Read each note's frontmatter: `package_id`, `failure_types`, `status`, `priority`, `linked_run`, `next_action`.
+3. 按 `priority` 手动排序，跳过 `status = "closed"` 的条目，从最高优先级开始处理。
+   Sort by `priority` manually, skip entries with `status = "closed"`, and start from the highest priority.
 4. 根据 `linked_run` 在 [generation-run-log](generation-run-log.md) 中定位失败运行，根据 `package_id` 在 [image-package-board](image-package-board.md) 中定位源执行包。
    Use `linked_run` to find the failed run in [generation-run-log](generation-run-log.md), and `package_id` to find the source package in [image-package-board](image-package-board.md).

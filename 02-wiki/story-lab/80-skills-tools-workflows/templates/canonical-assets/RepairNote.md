@@ -7,10 +7,14 @@ status: open
 project_id: "<story-project-id>"
 package_id: "<package-id>"
 linked_run: "<run-id>"
+source_generation_run: "<run-id>"
+linked_image_review_form: ""
 failure_types: []
-repair_status: open
 priority: ""
 next_action: ""
+output_asset: ""
+target_reference_asset: ""
+close_status: ""
 related_assets: []
 source_paths: []
 tags: []

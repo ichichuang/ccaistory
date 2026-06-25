@@ -20,8 +20,8 @@ Execution-package cards are canonical; generation runs are derived caches.
 
 - 仅 `type = "image_execution_package"`。
 - Only `type = "image_execution_package"`.
-- 可选：按 `status`（如 `draft`、`ready`、`running`、`done`、`blocked`）或 `target_model` 进一步筛选。
-- Optional: further filter by `status` (e.g. `draft`, `ready`, `running`, `done`, `blocked`) or `target_model`.
+- 可选：按 `status`（枚举 `draft`、`ready`、`generating`、`accepted`、`rejected`、`archived`）或 `target_model` 进一步筛选。
+- Optional: further filter by `status` (enum `draft`, `ready`, `generating`, `accepted`, `rejected`, `archived`) or `target_model`.
 - 可选：按 `project_id = "<project-id>"` 限定单个项目。
 - Optional: limit to one project with `project_id = "<project-id>"`.
 
@@ -32,7 +32,7 @@ Execution-package cards are canonical; generation runs are derived caches.
 
 ## Display Fields / 展示字段
 
-- `id` / `package_id`
+- `id`（执行包自身 ID，非 `package_id`——`package_id` 是 run/repair 卡指向本包的外键）
 - `title_zh`
 - `project_id`
 - `scene_id`
@@ -47,7 +47,7 @@ Execution-package cards are canonical; generation runs are derived caches.
 
 ```dataview
 TABLE
-  package_id AS "包ID",
+  id AS "包ID",
   title_zh AS "标题",
   project_id AS "项目",
   scene_id AS "场景",

@@ -12,11 +12,17 @@ prompt_recipe: "<prompt-recipe-id>"
 target_model: ""
 aspect_ratio: "1:1"
 reference_assets: []
+required_reference_assets: []
+prohibited_reference_assets: []
 output_assets: []
+generation_run_ids: []
 related_assets: []
 source_paths: []
 last_run: ""
 qa_result: ""
+r00_dependency_policy: ""
+maximum_anchor_reuse_policy: ""
+final_assembly_dependency: ""
 tags: []
 created_at: 2026-06-24
 updated_at: 2026-06-24
@@ -80,3 +86,12 @@ canonical: true
 ## Result Backfill Procedure / 结果回填流程
 
 <!-- 生成后如何把 GenerationRun 记录到 50-agent-work，并把 accepted 决策回填到 canonical reference asset 卡（runtime 产物只是缓存）。占位。 -->
+
+## R00 Anchor Dependency Policy / R00 锚图依赖策略
+
+<!-- R00 过载防护（canonical 规则）：
+- R00 不得作为所有资产的全局父锚；只能锚定狭窄视觉属性（如纸张质感 + 笔触）。
+- 本执行包必须在 frontmatter `r00_dependency_policy` 明确声明从 R00 借用的具体属性。
+- 需要角色/场景连续性时，依赖 R01/R02 或具体 accepted reference_asset，而非泛化 R00。
+- `maximum_anchor_reuse_policy` 约束单一锚图被多少执行包复用。
+- `prohibited_reference_assets` 不得包含 rejected / deprecated 资产；R00 未通过 QA 时阻断依赖它的执行包。占位。 -->

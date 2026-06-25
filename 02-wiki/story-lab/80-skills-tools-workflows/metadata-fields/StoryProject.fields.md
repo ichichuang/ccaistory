@@ -26,9 +26,13 @@ fileClass：`StoryProject`（`type: story_project`）。卡模板：`../template
 | field | type | allowed values | example | notes |
 |---|---|---|---|---|
 | main_characters | list | character id | [] | 主要角色 |
-| worlds | list | world id | [] | 世界观卡 |
+| worlds | list | world id | [] | 世界观卡（可选；未建 World 卡则留空） |
 | visual_styles | list | visual_style id | [] | 视觉风格 |
 | related_packages | list | image_execution_package id | [] | 关联执行包 |
+| final_package_status | select | not-started / assembling / ready / published | "" | 最终成品状态 |
+| required_asset_count | number | 整数 | 0 | 成品所需 accepted 资产数 |
+| accepted_asset_count | number | 整数 | 0 | 当前已 accepted 资产数 |
+| publishing_readiness_status | select | blocked / pending / ready | "" | 发布就绪状态 |
 
 ## Validation notes / 校验说明
 
@@ -36,6 +40,7 @@ fileClass：`StoryProject`（`type: story_project`）。卡模板：`../template
 - `id` 必须唯一且与文件名一致；不得使用任何真实历史故事名。
 - 日期字段使用 `YYYY-MM-DD`。
 - 列表字段缺省为 `[]`，不要写真实故事数据（架构脚手架阶段）。
+- `final_package_status: ready` 前提：`accepted_asset_count >= required_asset_count` 且 `publishing_readiness_status: ready`（见最终成品装配工作流）。
 
 ## Dataview / Bases usage / 查询用法
 

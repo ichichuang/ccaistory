@@ -1,3 +1,15 @@
+---
+type: codex_instruction
+id: "运行源插图语义Lint"
+status: retired
+canonical: false
+retired_on: 2026-06-25
+retired_reason: "legacy single-JSON source-of-truth + deleted root-level layout; superseded by Obsidian-Wiki doctrine"
+replaced_by: "00-system/codex-instructions/ English instructions + workflows A-L"
+owner: ichichuang
+---
+
+> ⛔ RETIRED / 已退役：本指令基于旧的单一 JSON 事实源与已删除的旧根目录布局，与当前 Obsidian Story Production Wiki 的 4 层 canonical 卡片模型冲突，仅作历史保留、不得作为现行操作指令。请改用同目录英文指令（START_NEW_STORY_OBSIDIAN_WIKI / CREATE_IMAGE_EXECUTION_PACKAGE / BACKFILL_GENERATION_RUN / REPAIR_FAILED_IMAGE_RUN / ACCEPT_REFERENCE_ASSET）与工作流卡 A–L。下文保留的旧字段名仅供迁移对照。
 # 运行源插图语义Lint
 
 状态：活动  

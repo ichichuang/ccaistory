@@ -20,8 +20,8 @@ Run records are derived caches; the canonical configuration lives in the executi
 
 - 仅 `type = "generation_run"`。
 - Only `type = "generation_run"`.
-- 可选：按 `status`（如 `success`、`failed`、`partial`）或 `model` 过滤。
-- Optional: filter by `status` (e.g. `success`, `failed`, `partial`) or `model`.
+- 可选：按 `status`（枚举 `planned`、`running`、`passed`、`failed`、`accepted`、`rejected`）或 `model` 过滤。
+- Optional: filter by `status` (enum `planned`, `running`, `passed`, `failed`, `accepted`, `rejected`) or `model`.
 - 可选：按 `package_id = "<package-id>"` 查看单个包的全部运行。
 - Optional: filter by `package_id = "<package-id>"` to see all runs of one package.
 

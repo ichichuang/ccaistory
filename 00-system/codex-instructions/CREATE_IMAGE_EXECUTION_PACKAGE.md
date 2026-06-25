@@ -1,3 +1,19 @@
+---
+type: codex_instruction
+id: "CREATE_IMAGE_EXECUTION_PACKAGE"
+status: active
+canonical: false
+doctrine: obsidian-wiki-canonical
+target_layer: "02-wiki/70-execution-packages"
+related_templates: ["ImageExecutionPackage", "PromptRecipe"]
+related_workflows: ["E-ImageExecutionPackage-Creation-Workflow"]
+human_gate: yes
+runtime_role: "tool-layer assist: runtime validate/compile/lint/qa only; canonical writes go to 02-wiki cards, never runtime"
+owner: ichichuang
+updated_at: 2026-06-25
+---
+
+> ✅ ACTIVE / 现行：遵循 Obsidian Story Production Wiki 4 层 canonical 卡片模型。Scope / allowed inputs / allowed outputs / stop-condition / forbidden-actions 见正文。canonical 知识落 02-wiki，操作记录落 50-agent-work，原始输入落 01-raw，被拒材料落 90-archive；runtime/contracts 仅定义校验规则，runtime 产物为派生缓存。
 # Codex 指令：创建图像执行包 / CREATE IMAGE EXECUTION PACKAGE
 
 > PROCEDURE ONLY. 本文件只描述编写图像执行包卡片的过程，不实例化任何真实图像、提示或资产。一律使用占位符（`<package-id>`、`<scene-id>`、`<character-id>`、`<visual-style-id>`、`<prompt-recipe-id>`、`<asset-id>`、EXAMPLE_VALUE、占位）。

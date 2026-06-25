@@ -9,6 +9,10 @@ main_characters: []
 worlds: []
 visual_styles: []
 related_packages: []
+final_package_status: ""
+required_asset_count: 0
+accepted_asset_count: 0
+publishing_readiness_status: ""
 related_assets: []
 source_paths: []
 tags: []
