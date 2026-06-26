@@ -53,13 +53,14 @@ publishing_readiness_status: blocked
 ## Workflow Status
 
 - Current workflow: G — WebGPTImage Manual Handoff
-- Status: blocked pending separate human approval to start Workflow G
+- Status: Workflow G started for p01 only; manual WebGPTImage execution pending
 - Previous workflow: A — Raw Story Intake (accepted); B — Story Analysis (accepted); C — Character & Scene Extraction (accepted); D — Visual Style & PromptRecipe (accepted)
 - Workflow D human approval gate: ACCEPTED (visual style + prompt recipe confirmed; 2026-06-26).
 - Workflow E human gate: ACCEPTED for draft package plan (2026-06-26).
 - Workflow F human/QA gate: ACCEPTED (prompt compile + semantic lint passed; 2026-06-26).
-- Image generation: blocked
-- WebGPTImage handoff: blocked
+- Workflow G status: STARTED for p01 only; controlled manual handoff record created for `iep-pilot-001-p01-fork-at-dusk`.
+- Image generation: blocked until a human manually uses the p01 handoff in WebGPTImage and records evidence
+- WebGPTImage handoff: p01 manual handoff created; p02-p14 remain blocked
 - ImageExecutionPackage creation: 14 cards accepted for p01–p14; all package `status` values are `ready`
 
 ## Source Paths
@@ -181,8 +182,18 @@ Workflow F human/QA gate accepted prompt compile and semantic lint on 2026-06-26
 - recipe_hash verified for all packages: `6020fc5e5c83e043`.
 - compiled prompt records created under `50-agent-work/story-lab/compiled-prompts/` (gitignored derived records).
 - semantic lint records created under `50-agent-work/story-lab/semantic-lint-results/` (gitignored derived records).
-- WebGPTImage handoff remains blocked.
-- image generation remains blocked.
+- At Workflow F acceptance time, WebGPTImage handoff and image generation remained blocked.
+- Current update: Workflow G has now created a p01-only manual handoff; image generation remains blocked until human execution evidence exists.
+
+Workflow G manual handoff started on 2026-06-26 for p01 only:
+
+- Workflow G status: STARTED for `iep-pilot-001-p01-fork-at-dusk` only.
+- Controlled manual handoff record: `50-agent-work/story-lab/webgptimage-handoffs/pilot-001/iep-pilot-001-p01-fork-at-dusk.md`.
+- Compiled prompt source: `50-agent-work/story-lab/compiled-prompts/iep-pilot-001-p01-fork-at-dusk.json`.
+- Semantic lint source: `50-agent-work/story-lab/semantic-lint-results/iep-pilot-001-p01-fork-at-dusk.json`.
+- WebGPTImage remains manual; no runtime or agent image generation occurred.
+- No GenerationRun, ReferenceAsset, final package, or publishing record was created.
+- p02–p14 remain blocked for Workflow G.
 
 Ready execution packages:
 
@@ -235,18 +246,18 @@ Ready execution packages:
   - recipe_hash verified for all packages: `6020fc5e5c83e043`
   - compiled prompt records created under `50-agent-work/story-lab/compiled-prompts/` (gitignored derived records)
   - semantic lint records created under `50-agent-work/story-lab/semantic-lint-results/` (gitignored derived records)
-  - WebGPTImage handoff remains blocked
-  - image generation remains blocked
+  - At Workflow F acceptance time, WebGPTImage handoff and image generation remained blocked
+  - Current update: p01-only Workflow G handoff created; image generation remains blocked until human execution evidence exists
 - Current workflow: G — WebGPTImage Manual Handoff.
-- Status: blocked pending separate human approval to start Workflow G.
-- Image pipeline remains blocked.
+- Status: started for p01 only; controlled manual handoff created and awaiting human WebGPTImage execution.
+- Image pipeline remains blocked until manual WebGPTImage evidence exists.
 
 ## Blocked Actions
 
-Workflows A, B, C, D, Workflow E draft package plan, and Workflow F prompt compile + semantic lint are accepted. Character and Scene card creation are complete, the Workflow D VisualStyle/PromptRecipe gate is accepted, and 14 ImageExecutionPackage cards are ready. The following remain blocked until later human/QA gates are approved:
+Workflows A, B, C, D, Workflow E draft package plan, and Workflow F prompt compile + semantic lint are accepted. Workflow G has started for p01 only by creating a controlled manual handoff record. Character and Scene card creation are complete, the Workflow D VisualStyle/PromptRecipe gate is accepted, and 14 ImageExecutionPackage cards are ready. The following remain blocked until later human/QA gates are approved:
 
-- WebGPTImage execution prompt / handoff
-- Image generation
+- WebGPTImage handoff for p02-p14
+- Image generation until a human manually uses the p01 handoff in WebGPTImage and records evidence
 - GenerationRun
 - ReferenceAsset
 - final package assembly
