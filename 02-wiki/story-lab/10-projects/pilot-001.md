@@ -52,15 +52,15 @@ publishing_readiness_status: blocked
 
 ## Workflow Status
 
-- Current workflow: F — Prompt Compile and Semantic Lint
-- Status: blocked pending separate human approval to start Workflow F
+- Current workflow: G — WebGPTImage Manual Handoff
+- Status: blocked pending separate human approval to start Workflow G
 - Previous workflow: A — Raw Story Intake (accepted); B — Story Analysis (accepted); C — Character & Scene Extraction (accepted); D — Visual Style & PromptRecipe (accepted)
 - Workflow D human approval gate: ACCEPTED (visual style + prompt recipe confirmed; 2026-06-26).
 - Workflow E human gate: ACCEPTED for draft package plan (2026-06-26).
-- Workflow F: prompt compile / semantic lint (blocked pending separate human approval)
+- Workflow F human/QA gate: ACCEPTED (prompt compile + semantic lint passed; 2026-06-26).
 - Image generation: blocked
 - WebGPTImage handoff: blocked
-- ImageExecutionPackage creation: 14 draft cards accepted for p01–p14; all package `status` values remain `draft`
+- ImageExecutionPackage creation: 14 cards accepted for p01–p14; all package `status` values are `ready`
 
 ## Source Paths
 
@@ -158,7 +158,7 @@ Accepted cards:
 
 Workflow D acceptance alone did not authorize ImageExecutionPackage creation, prompt compilation, WebGPTImage handoff, or image generation.
 
-Workflow E draft package creation was started on 2026-06-26 by explicit human instruction. Created draft cards remain non-ready and do not authorize Workflow F/G, prompt compilation, WebGPTImage handoff, image generation, GenerationRun, ReferenceAsset, final package assembly, or publishing readiness.
+Workflow E draft package creation was started on 2026-06-26 by explicit human instruction. Workflow E created the package plan only; it did not authorize WebGPTImage handoff, image generation, GenerationRun, ReferenceAsset, final package assembly, or publishing readiness.
 
 Workflow E human gate accepted the draft package plan on 2026-06-26:
 
@@ -172,7 +172,19 @@ Workflow E human gate accepted the draft package plan on 2026-06-26:
 - Package status remains `draft`.
 - F/G/image generation remain blocked.
 
-Draft execution packages:
+Workflow F human/QA gate accepted prompt compile and semantic lint on 2026-06-26:
+
+- Workflow F human/QA gate: ACCEPTED (prompt compile + semantic lint passed; 2026-06-26).
+- 14 ImageExecutionPackage cards compile pass.
+- 14 ImageExecutionPackage cards semantic lint pass.
+- 14 ImageExecutionPackage cards ready.
+- recipe_hash verified for all packages: `6020fc5e5c83e043`.
+- compiled prompt records created under `50-agent-work/story-lab/compiled-prompts/` (gitignored derived records).
+- semantic lint records created under `50-agent-work/story-lab/semantic-lint-results/` (gitignored derived records).
+- WebGPTImage handoff remains blocked.
+- image generation remains blocked.
+
+Ready execution packages:
 
 - [p01 / The Fork at Dusk](../70-execution-packages/iep-pilot-001-p01-fork-at-dusk.md)
 - [p02 / The Fading-Lamp Lane](../70-execution-packages/iep-pilot-001-p02-fading-lamp-lane.md)
@@ -214,18 +226,25 @@ Draft execution packages:
   - all packages bind `pr-pilot-001-safe-night-picturebook`
   - recipe_hash verified: `6020fc5e5c83e043`
   - Scene `linked_packages` verified
-  - package status remains `draft`
-  - F/G/image generation remain blocked
-- Current workflow: F — Prompt Compile and Semantic Lint.
-- Status: blocked pending separate human approval to start Workflow F.
+  - package status advanced through Workflow F to `ready`
+  - G/image generation remain blocked
+- Workflow F human/QA gate: ACCEPTED (prompt compile + semantic lint passed; 2026-06-26).
+  - 14 ImageExecutionPackage cards compile pass
+  - 14 ImageExecutionPackage cards semantic lint pass
+  - 14 ImageExecutionPackage cards ready
+  - recipe_hash verified for all packages: `6020fc5e5c83e043`
+  - compiled prompt records created under `50-agent-work/story-lab/compiled-prompts/` (gitignored derived records)
+  - semantic lint records created under `50-agent-work/story-lab/semantic-lint-results/` (gitignored derived records)
+  - WebGPTImage handoff remains blocked
+  - image generation remains blocked
+- Current workflow: G — WebGPTImage Manual Handoff.
+- Status: blocked pending separate human approval to start Workflow G.
 - Image pipeline remains blocked.
 
 ## Blocked Actions
 
-Workflows A, B, C, D, and Workflow E draft package plan are accepted. Character and Scene card creation are complete, the Workflow D VisualStyle/PromptRecipe gate is accepted, and 14 Workflow E draft package cards exist. The following remain blocked until later human/QA gates are approved:
+Workflows A, B, C, D, Workflow E draft package plan, and Workflow F prompt compile + semantic lint are accepted. Character and Scene card creation are complete, the Workflow D VisualStyle/PromptRecipe gate is accepted, and 14 ImageExecutionPackage cards are ready. The following remain blocked until later human/QA gates are approved:
 
-- prompt compile / semantic lint
-- package status ready transition
 - WebGPTImage execution prompt / handoff
 - Image generation
 - GenerationRun
