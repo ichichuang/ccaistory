@@ -17,8 +17,9 @@ reference_assets: []
 forbidden_changes:
   - "do not age the child up or down"
   - "do not change the yellow raincoat or red boots"
-  - "fear must read as gentle/safe, never traumatic"
-  - "no realistic or horror styling"
+  - "identity lock: remains a human child; never an animal, plush, doll, mascot, hedgehog, rabbit, or bear substitute"
+  - "childlike fear, trembling, uncertainty, and an eerie atmosphere are allowed; no realistic trauma, severe injury, gore, or sexualized content"
+  - "no realistic-photographic styling; the child-drawn horror notebook visual style is allowed (this is not a horror-style ban)"
 related_assets: []
 source_paths: []
 last_used: ""
@@ -54,7 +55,7 @@ A young child about six or seven, with a round, friendly face and bright, curiou
 
 ## Expression and Pose Notes / 表情与动作
 
-Allowed: curious, gently scared (wide eyes, a small clutch of the caregiver's hand), a steadying breath, relieved smile, proud, cozy/sleepy. Not allowed: terror, hysterical crying, anguish — fear stays gentle and safe.
+Allowed: curious, scared, trembling, uneasy, wide-eyed (a small clutch of the caregiver's hand), a steadying breath, relieved smile, proud, cozy/sleepy. Childlike fear and an eerie mood are fine under the notebook-horror style. Not allowed: realistic terror, anguished trauma, or any depiction that reads as real abuse or severe injury — fear stays childlike, not realistic trauma.
 
 ## Scene Usage / 场景使用
 
@@ -63,7 +64,8 @@ Appears in every scene (p1–p14). See `../40-scenes/`.
 ## Forbidden Changes / 禁止变化
 
 - No aging up/down; no swapping the yellow raincoat / red boots.
-- No horror or realistic styling; fear never depicted as traumatic.
+- Identity lock: remains a human child; never an animal, plush, doll, mascot, hedgehog, rabbit, or bear substitute.
+- Horror treatment is visual-style dependent: under `vs-pilot-001-child-horror-notebook`, childlike fear, trembling, uncertainty, and an eerie atmosphere are allowed; realistic trauma, severe injury, gore, and sexualized content remain forbidden. ("No horror styling" is no longer a universal visual ban.)
 
 ## Related Assets / 关联资产
 

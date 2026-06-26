@@ -20,17 +20,17 @@ visual_style:
 visual_style_id: vs-pilot-001-child-horror-notebook
 prompt_recipe: pr-pilot-001-child-horror-notebook
 prompt_recipe_id: pr-pilot-001-child-horror-notebook
-recipe_hash: "58802ab763ac5dc6"
+recipe_hash: "267c7dfe258e43ba"
 compile_result_ref: "50-agent-work/story-lab/compiled-prompts/iep-pilot-001-p08-lantern-cottage-welcome.json"
 semantic_lint_result_ref: "50-agent-work/story-lab/semantic-lint-results/iep-pilot-001-p08-lantern-cottage-welcome.json"
 recipe_hash_check: "stale"
-recipe_hash_expected: "58802ab763ac5dc6"
+recipe_hash_expected: "267c7dfe258e43ba"
 recipe_hash_actual: ""
 compile_status: stale
 semantic_lint_status: stale
 workflow_f_gate: "superseded by the 2026-06-26 visual-system refactor; stale under the new recipe; recompile/relint required; not auto-released"
 downstream_generation_status: blocked
-blocked_reason: "Visual-system refactor to vs-pilot-001-child-horror-notebook + pr-pilot-001-child-horror-notebook (recipe_hash 58802ab763ac5dc6). The prior warm-safe compile/lint is stale; this package must be recompiled and relinted under the new recipe before it can be ready. Not auto-released; image generation blocked."
+blocked_reason: "Visual-system refactor to vs-pilot-001-child-horror-notebook + pr-pilot-001-child-horror-notebook (recipe_hash 267c7dfe258e43ba). The prior warm-safe compile/lint is stale; this package must be recompiled and relinted under the new recipe before it can be ready. Not auto-released; image generation blocked."
 repair_notes: []
 target_model: "WebGPTImage blocked until Workflow G"
 aspect_ratio: "1:1"
@@ -41,7 +41,8 @@ allowed_content:
   - "Lantern Grandpa warmly welcomes Xiao He and Mama with lantern light."
   - "Relief begins; the old road and open fields are explained as ordinary and safe."
 forbidden_content:
-  - "No horror, monster, ghost, gore, crime, adult content, occult or supernatural-punishment content."
+  - "Hard content-safety only (live): no gore, no realistic corpse, no real child abuse, no severe child injury or trauma, no crime, no adult or sexual content."
+  - "Superseded as a global style ban under vs-pilot-001-child-horror-notebook: 'No horror / No ghost / No supernatural / occult / supernatural-punishment' is no longer a project-wide style rule; this page's rational-safe tone is a story-layer choice only, not a ban on supernatural content."
   - "Lantern Grandpa must never read as eerie, sinister, ambiguous, predatory, uncanny, or magical."
   - "No source names, source places, copied source wording, image text, or WebGPTImage final prompt text."
 output_assets: []
@@ -90,7 +91,7 @@ canonical: true
 - Characters: [char-xiaohe](../30-characters/char-xiaohe.md), [char-mama](../30-characters/char-mama.md), [char-lantern-grandpa](../30-characters/char-lantern-grandpa.md)
 - VisualStyle: [vs-pilot-001-child-horror-notebook](../50-visual-styles/vs-pilot-001-child-horror-notebook.md)
 - PromptRecipe: [pr-pilot-001-child-horror-notebook](../60-prompts/pr-pilot-001-child-horror-notebook.md)
-- Recipe hash (new binding): `58802ab763ac5dc6` — not yet recompiled under the new recipe (stale)
+- Recipe hash (new binding): `267c7dfe258e43ba` — not yet recompiled under the new recipe (stale)
 
 ## Target Asset / 目标资产
 
@@ -110,21 +111,22 @@ Workflow F ready package plan for the p08 page illustration: a kind welcome in l
 
 ## Forbidden Content / 禁止内容
 
-- No horror, realistic thriller, jump scares, monsters, ghost faces, gore, blood, crime, weapons, adult or sexualized content.
-- No religious punishment, occult symbols, magic, possession, curses, or supernatural payoff.
+- Hard content-safety (live under the new style): no gore, no blood, no realistic corpse, no real child abuse, no severe child injury or visible trauma, no crime reproduction, no weapons used to harm, no sexual or adult content.
+- Superseded as a global style ban: the prior "No horror, realistic thriller, jump scares, monsters, ghost faces" wording no longer acts as a project-wide style ban under `vs-pilot-001-child-horror-notebook`. Any remaining page-level rational-safe constraints below are story-layer choices for this specific rational-reassuring story, not a ban on supernatural or creepy content for the project.
+- Superseded as a global style ban: "no religious punishment, occult symbols, magic, possession, curses, or supernatural payoff" is no longer a project-wide style rule under the new visual system; it is retained only as this page's story-layer rational-safe choice for this rational-reassuring story.
 - Lantern Grandpa must never read as eerie, sinister, ambiguous, predatory, uncanny, or magical.
 - No source names, source places, source wording, copied sequence packaging, channel identity, or identifiable horror motifs.
 - No printed narration, final prompt text, image IDs, or WebGPTImage handoff text in the source illustration.
 
 ## Prompt Recipe Binding / Prompt 技法绑定
 
-Re-pointed to `pr-pilot-001-child-horror-notebook` (recipe_hash `58802ab763ac5dc6`). The existing compiled-prompt record was produced under the deprecated `pr-pilot-001-safe-night-picturebook` and is STALE; this package must be recompiled under the new recipe before it can be `ready`. This card does not contain external execution prompt text.
+Re-pointed to `pr-pilot-001-child-horror-notebook` (recipe_hash `267c7dfe258e43ba`). The existing compiled-prompt record was produced under the deprecated `pr-pilot-001-safe-night-picturebook` and is STALE; this package must be recompiled under the new recipe before it can be `ready`. This card does not contain external execution prompt text.
 
 ## Workflow F Compile and Semantic Lint / Workflow F 编译与语义 Lint
 
 - Compile result: `50-agent-work/story-lab/compiled-prompts/iep-pilot-001-p08-lantern-cottage-welcome.json`.
 - Semantic lint result: `50-agent-work/story-lab/semantic-lint-results/iep-pilot-001-p08-lantern-cottage-welcome.json`.
-- Recipe hash comparison: `stale` (expected `58802ab763ac5dc6`; the existing compiled record was hashed `6020fc5e5c83e043` under the deprecated recipe; recompile required).
+- Recipe hash comparison: `stale` (expected `267c7dfe258e43ba`; the existing compiled record was hashed `6020fc5e5c83e043` under the deprecated recipe; recompile required).
 - Compile status: `stale` (recompile required under the new recipe).
 - Semantic lint status: `stale` (relint required under the new recipe).
 - Package state: `draft`; downgraded from `ready` by the visual-system refactor. Not auto-released; blocked until recompiled/relinted under the new recipe and re-approved.

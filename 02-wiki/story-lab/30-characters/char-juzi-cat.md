@@ -14,9 +14,9 @@ visual_lock:
   - "big round eyes that catch lantern light"
 reference_assets: []
 forbidden_changes:
-  - "always friendly and cute; never menacing"
-  - "keep orange tabby + white paws + bell collar"
-  - "the eye-glow is only reflected lantern light, never supernatural"
+  - "identity lock: remains a cat; keep orange tabby + white paws + bell collar"
+  - "story-layer role note (not a universal visual ban): in the current pilot-001 rational-reassuring story Tangerine is the friendly payoff and the eye-glow resolves as reflected lantern light; under vs-pilot-001-child-horror-notebook the glowing eyes may instead read as an eerie red-pen-circled anomaly when an approved package calls for it. 'Never menacing / never supernatural eye-glow' is a story-role choice here, not a global style ban"
+  - "no realistic trauma, gore, or sexualized content"
 related_assets: []
 source_paths: []
 last_used: ""
@@ -58,7 +58,8 @@ Appears p9 (and may cameo p10–p11 at the cottage). See `../40-scenes/`.
 
 ## Forbidden Changes / 禁止变化
 
-- Always cute and friendly; keep markings + bell collar; the eye-glow is reflection only.
+- Identity lock: remains a cat; keep orange tabby markings + white paws + bell collar.
+- Story-layer role note (not a universal visual ban): in the current pilot-001 rational-reassuring story Tangerine is friendly and the eye-glow resolves as reflected lantern light. Under `vs-pilot-001-child-horror-notebook`, the glowing eyes may instead be drawn as an eerie red-pen-circled anomaly when an approved package calls for it. "Always cute / never supernatural eye-glow" is a story-role choice here, **not** a global style ban. Realistic trauma, gore, and sexualized content remain forbidden.
 
 ## Related Assets / 关联资产
 

@@ -62,7 +62,7 @@ publishing_readiness_status: blocked
 - ReferenceAsset: **none** (still empty).
 - Image generation: **blocked** — stop at the repair human gate; do not generate images, call WebGPTImage, or create ReferenceAsset/GenerationRun.
 - WebGPTImage handoff: p01 `repair_02` handoff prepared (gated, not executed); p02–p14 remain blocked.
-- ImageExecutionPackage status: p01 = `ready` (repair_02 compile/lint pass, handoff pending the gate); p02–p14 = `draft` (stale under the new recipe; not auto-released).
+- ImageExecutionPackage status: after the 2026-06-26 consistency refinement (recipe rehashed `58802ab763ac5dc6` → `267c7dfe258e43ba`), **all 14 packages are `draft` and stale**: p01's repair_02 compile/lint is now stale against the new hash (handoff still `repair_02_manual_pending`, cannot execute until recompiled), and p02–p14 remain stale and not auto-released.
 
 ## Visual System Refactor (2026-06-26)
 
@@ -84,7 +84,7 @@ This project underwent a **visual-system refactor**. The original warm-safe-nigh
 New (current) cards — pending the repair human gate (not yet re-accepted):
 
 - VisualStyle: `vs-pilot-001-child-horror-notebook` (儿童手绘怪谈作业本风格)
-- PromptRecipe: `pr-pilot-001-child-horror-notebook` (儿童手绘怪谈作业本提示词配方); recipe_hash `58802ab763ac5dc6`
+- PromptRecipe: `pr-pilot-001-child-horror-notebook` (儿童手绘怪谈作业本提示词配方); recipe_hash `267c7dfe258e43ba` (consistency-refined from `58802ab763ac5dc6`)
 
 Deprecated cards (history only; do not bind):
 
@@ -92,6 +92,19 @@ Deprecated cards (history only; do not bind):
 - `pr-pilot-001-safe-night-picturebook` → `status: deprecated`
 
 Scope honored by this refactor: only the underlying VisualStyle / PromptRecipe / Package / Handoff were repaired. No image was generated, no WebGPTImage call was made, no ReferenceAsset or GenerationRun was created, and no final package was assembled. p01 story direction is unchanged (re-skin only).
+
+## Visual System Consistency Refinement (2026-06-26)
+
+A consistency refinement followed the visual-system refactor to make the child-horror-notebook style **story-driven, not motif-locked**. No new acceptance; this remains pending the repair human gate.
+
+- **Style is reusable; story content is variable.** The child-horror-notebook style is reusable — it describes paper, line quality, childish drawing, red-pen annotation behavior, the creepy notebook atmosphere, and supernatural *permission*. It does not hard-code any fixed horror motifs as mandatory content.
+- **Motifs are examples only.** A talking wardrobe, a dark door gap, a night window, strange eyes, a ghost shadow, and red-pen anomaly notes are now in clearly labeled "Example Motifs Only" / "Examples, not requirements" sections in the VisualStyle and PromptRecipe. They must **not** be injected into any image or story unless the current StoryProject, Scene card, Character cards, or approved `ImageExecutionPackage` call for them.
+- **Actual image content comes from each package.** For every generated image, the strange event, location, characters, props, and emotional beat must come from the approved `ImageExecutionPackage` (`allowed_content`) and the canonical cards it binds — never from the style's example list.
+- **p01 remains the dusk fork scene, not a wardrobe scene** — familiar brighter road vs. darker unknown shortcut, human child + human adult, no motif injection.
+- PromptRecipe recipe text was restructured (style / character / scene / story-specific strange event / annotation / content-safety / supernatural-permission components); the fixed motif list was replaced by `{{story_specific_strange_event_from_package}}`. `recipe_hash` recomputed `58802ab763ac5dc6` → `267c7dfe258e43ba`; `drift_check_policy` now excludes the placeholder line and motif examples (no concrete package content, no fixed motif examples as mandatory story content).
+- Character cards: global warm-safe visual bans ("no horror styling", "no supernatural attributes", "never eerie") were downgraded to story-layer role notes; identity locks preserved (Xiao He = human child, Mama = human adult, Lantern Grandpa = human elderly man, Tangerine = cat; human characters never animal/plush/doll/mascot substitutes). Childlike fear and an eerie atmosphere are allowed; realistic trauma, gore, and sexualized content remain forbidden.
+- p02–p14: broad "No horror / No ghost / No supernatural" `forbidden_content` was marked superseded as a global style ban; rational-safe story content retained as story-layer only. Packages kept `status: draft`, `compile_status: stale`, `semantic_lint_status: stale`, `downstream_generation_status: blocked`; not recompiled, not made ready, no handoffs created.
+- **No image is accepted. No ReferenceAsset exists. No GenerationRun exists.** The repair human gate is still pending. WebGPTImage and image generation remain blocked. This refinement edited cards only; it generated nothing.
 
 ## Source Paths
 
@@ -179,10 +192,10 @@ Current (bound) cards:
 
 - VisualStyle: `vs-pilot-001-child-horror-notebook`
 - PromptRecipe: `pr-pilot-001-child-horror-notebook`
-- recipe_hash: `58802ab763ac5dc6`
-- Character `visual_style` references re-pointed to the new style
+- recipe_hash: `267c7dfe258e43ba` (consistency-refined from `58802ab763ac5dc6`)
+- Character `visual_style` references re-pointed to the new style; global warm-safe visual bans downgraded to story-layer role notes; identity locks preserved
 - Scene cards unchanged
-- p01 re-pointed and recompiled as `repair_02`; p02–p14 re-pointed and downgraded out of `ready` (stale; not auto-released)
+- p01 re-pointed and recompiled as `repair_02`, then made **stale** by the consistency refinement (recipe rehashed); now `draft`/stale, handoff still `repair_02_manual_pending`. p02–p14 re-pointed and downgraded out of `ready` (stale; not auto-released)
 
 - [pilot-001 儿童手绘怪谈作业本风格 / Child-Drawn Horror Notebook Style](../50-visual-styles/vs-pilot-001-child-horror-notebook.md) — current; `status: draft`, pending the repair human gate.
 - [pilot-001 儿童手绘怪谈作业本提示词配方 / Child-Drawn Horror Notebook Prompt Recipe](../60-prompts/pr-pilot-001-child-horror-notebook.md) — current; reusable recipe only, not an execution prompt.
@@ -234,7 +247,7 @@ Workflow G manual handoff started on 2026-06-26 for p01 only:
 - No GenerationRun, ReferenceAsset, final package, or publishing record was created.
 - p02–p14 remain blocked for Workflow G.
 
-Execution packages (current status: p01 = `ready` repair_02 handoff pending the gate; p02–p14 = `draft`, stale under the new recipe, not auto-released):
+Execution packages (current status after the 2026-06-26 consistency refinement: all 14 = `draft` and stale — p01's repair_02 compile/lint is stale against `267c7dfe258e43ba`, handoff still `repair_02_manual_pending`; p02–p14 stale under the new recipe, not auto-released):
 
 - [p01 / The Fork at Dusk](../70-execution-packages/iep-pilot-001-p01-fork-at-dusk.md)
 - [p02 / The Fading-Lamp Lane](../70-execution-packages/iep-pilot-001-p02-fading-lamp-lane.md)
@@ -253,7 +266,7 @@ Execution packages (current status: p01 = `ready` repair_02 handoff pending the 
 
 ## Production Status
 
-> Visual layer refactored 2026-06-26 — see [Visual System Refactor](#visual-system-refactor-2026-06-26). The Workflow D/E/F acceptance bullets below are historical: their `vs-pilot-001-warm-safe-night-picturebook` / `pr-pilot-001-safe-night-picturebook` bindings and `6020fc5e5c83e043` hash are superseded by `vs-pilot-001-child-horror-notebook` / `pr-pilot-001-child-horror-notebook` (recipe_hash `58802ab763ac5dc6`). Packages are no longer all `ready` — p01 is `ready` (repair_02, gated) and p02–p14 are `draft` (stale, not auto-released).
+> Visual layer refactored 2026-06-26 — see [Visual System Refactor](#visual-system-refactor-2026-06-26) and the [Visual System Consistency Refinement](#visual-system-consistency-refinement-2026-06-26). The Workflow D/E/F acceptance bullets below are historical: their `vs-pilot-001-warm-safe-night-picturebook` / `pr-pilot-001-safe-night-picturebook` bindings and `6020fc5e5c83e043` hash are superseded by `vs-pilot-001-child-horror-notebook` / `pr-pilot-001-child-horror-notebook` (recipe_hash `267c7dfe258e43ba`, consistency-refined from `58802ab763ac5dc6`). After the consistency refinement, packages are no longer all `ready` — **all 14 are `draft` and stale** (p01 repair_02 stale against the new hash, handoff still `repair_02_manual_pending`; p02–p14 stale, not auto-released).
 
 - Workflow B human approval gate: **ACCEPTED** (story core + page-count confirmed; 2026-06-25).
 - Accepted story core (locked): Cluster 3 only; 14-page structure; rational-reassuring ending; child-safe mystery + safety lesson.
@@ -291,7 +304,7 @@ Execution packages (current status: p01 = `ready` repair_02 handoff pending the 
   - Current update: p01-only Workflow G handoff created; image generation remains blocked until human execution evidence exists
 - Visual-system refactor (2026-06-26): the warm-safe visual layer was deprecated and replaced; the prior Workflow D acceptance is superseded for the visual layer.
 - Current workflow: **D/F/G repair loop** — rolled back from G; awaiting the repair human gate.
-- Status: p01 re-pointed + recompiled as `repair_02` (gated handoff prepared, not executed); p02–p14 re-pointed and downgraded out of `ready`.
+- Status: p01 re-pointed + recompiled as `repair_02` (gated handoff prepared, not executed), then made stale by the 2026-06-26 consistency refinement (recipe rehashed to `267c7dfe258e43ba`); p01 is now `draft`/stale with the handoff still `repair_02_manual_pending`. p02–p14 re-pointed and downgraded out of `ready`.
 - Image pipeline remains blocked: no image generated, no WebGPTImage call, no ReferenceAsset, no GenerationRun.
 
 ## Blocked Actions

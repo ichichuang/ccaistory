@@ -43,7 +43,7 @@ canonical: true
 
 ## Deprecation / 弃用
 
-- Status: `deprecated`. Superseded by `pr-pilot-001-child-horror-notebook` (recipe_hash `58802ab763ac5dc6`).
+- Status: `deprecated`. Superseded by `pr-pilot-001-child-horror-notebook` (current recipe_hash `267c7dfe258e43ba`, consistency-refined from `58802ab763ac5dc6`).
 - Reason: over-safe / polished digital / animalized humans / no horror; its global "no horror / no supernatural / low fear" negative rules and "rounded friendly shapes" wording biased the model toward a cute commercial picture book.
 - All `pilot-001` execution packages have been re-pointed to the new recipe. The stale `recipe_hash` values below (`62b75f8590685a10` / `6020fc5e5c83e043`) are historical only.
 

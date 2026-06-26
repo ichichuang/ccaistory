@@ -19,8 +19,8 @@ compatible_asset_types:
   - scene
   - visual_style
   - image_execution_package
-recipe_hash: "58802ab763ac5dc6"
-drift_check_policy: "recipe_hash = first 16 hex chars of sha256 over the UTF-8 text formed by joining with newlines, in document order, every line beginning with '- ' between the '## Allowed Content' and '## Dependency Rules' headers (i.e. the Allowed Content, Forbidden Content, and Negative Prompt Rules directives). Workflow F must recompute this from the reusable recipe payload, compare it with the stored recipe_hash, and block compilation on any mismatch or if concrete execution text, image_id binding, WebGPTImage handoff text, source-video identifiers, or hard content-safety violations (gore, sexual content, real child abuse, real-crime reproduction, in-image platform/prompt text) have been added. The check must NOT block merely because horror, supernatural, unexplained, ghost, or creepy content is present — those are allowed by this recipe."
+recipe_hash: "267c7dfe258e43ba"
+drift_check_policy: "recipe_hash = first 16 hex chars of sha256 over the UTF-8 text formed by joining with single newlines, in document order, every line beginning with '- ' between the '## Allowed Content' and '## Dependency Rules' headers (the Allowed Content, Forbidden Content, and Negative Prompt Rules directives), EXCLUDING any line containing a '{{...}}' placeholder and any line inside an 'Examples, not requirements' block. The basis is therefore the reusable, story-independent style / safety / supernatural-permission directives only; it deliberately does NOT include concrete package content (specific characters, scene, or page), the per-page strange-event placeholder, or the motif examples (which are illustrative, never mandatory story content). Workflow F must recompute this from the reusable recipe payload, compare it with the stored recipe_hash, and block compilation on any mismatch or if concrete execution text, image_id binding, WebGPTImage handoff text, source-video identifiers, or hard content-safety violations (gore, sexual content, real child abuse, real-crime reproduction, in-image platform/prompt text) have been added. The check must NOT block merely because horror, supernatural, unexplained, ghost, or creepy content is present — those are allowed by this recipe."
 related_assets: []
 source_paths: []
 tags:
@@ -42,7 +42,7 @@ canonical: true
 
 ## Workflow D Gate / 工作流 D 门禁
 
-Proposed recipe for the `pilot-001` D/F/G repair loop. Not yet accepted. Stored `recipe_hash` is recomputed for this new recipe as `58802ab763ac5dc6` (see Change Log); Workflow F must recompute and compare per `drift_check_policy`. Supersedes the deprecated `pr-pilot-001-safe-night-picturebook`.
+Proposed recipe for the `pilot-001` D/F/G repair loop. Not yet accepted. After the 2026-06-26 consistency refinement (story-driven content, motifs demoted to examples), the stored `recipe_hash` is recomputed as `267c7dfe258e43ba` (see Change Log; previously `58802ab763ac5dc6`); Workflow F must recompute and compare per `drift_check_policy`. Supersedes the deprecated `pr-pilot-001-safe-night-picturebook`.
 
 ## Purpose / 用途
 
@@ -58,25 +58,41 @@ This recipe is not an execution package and is not tied to any page, shot, or `i
 
 ## Prompt Components / 提示词组件
 
-Use these as reusable components during Workflow E/F only. Fill placeholders from approved canonical cards and package fields at compile time.
+Use these as reusable components during Workflow E/F only. Each component's source is fixed below; fill placeholders from approved canonical cards and the bound package's fields at compile time. **Style is reusable; story content is variable** — the style/atmosphere/safety components never change per page, while the character, scene, and strange-event components are supplied by the approved cards and `ImageExecutionPackage`.
 
-- Positive style core (bind verbatim): `Chinese child-drawn horror notebook page, lined school notebook paper, rough pencil and ballpoint outlines, colored-pencil and crayon fill, visible eraser marks, red pen circles and arrows, childish Chinese handwriting, uneven proportions, imperfect hand-drawn perspective, matte scanned paper texture, creepy but child-drawn, supernatural mystery atmosphere, one clear strange event on the page`.
-- Negative style core (bind verbatim): `no polished digital illustration, no commercial picture book finish, no fantasy animal characters, no anthropomorphic hedgehogs, no plush mascots, no 3D, no cinematic realism, no oil painting, no photorealism, no glossy gradients, no perfectly clean line art, no cute fairy tale animal cast, no over-rendered AI storybook style, no platform text, no prompt text`.
-- Subject component: `{{approved_characters_from_character_cards}}` with human-only identity; childish drawing is fine but identity must stay clear.
-- Character anti-drift component: `human characters drawn as humans; a child may be drawn childishly/stick-figure-leaning but never as an animal, hedgehog, plush, doll, or mascot; keep clothing and human child/adult identity readable`.
-- Scene component: `{{approved_scene_from_scene_card}}` rendered as one clear strange event on a notebook page.
-- Horror/atmosphere component: `supernatural, spooky, unexplained or half-explained folk-tale mood allowed; dark gaps, a talking wardrobe, a night window, strange eyes, a blurry shadow, a sound from under the bed/desk or inside a cupboard; red-pen circles/arrows/question marks and a short childish Chinese handwritten title (2–12 chars) marking the anomaly`.
-- Content-safety component: `creepy but child-drawn, not realistic horror photography; no explicit gore, no realistic corpse, no real child abuse, no severe child injury/trauma, no sexual or adult content, no real-crime reproduction`.
-- Source-distance component: `original reconstruction; no source-video names, places, wording, sequence packaging, or recognizable horror imagery`.
+- **Style component (fixed)** — bind verbatim, identical on every page. Positive style core: `Chinese child-drawn horror notebook page, lined school notebook paper, rough pencil and ballpoint outlines, colored-pencil and crayon fill, visible eraser marks, red pen circles and arrows, childish Chinese handwriting, uneven proportions, imperfect hand-drawn perspective, matte scanned paper texture, creepy but child-drawn, supernatural mystery atmosphere, one clear strange event on the page`. Negative style core: `no polished digital illustration, no commercial picture book finish, no fantasy animal characters, no anthropomorphic hedgehogs, no plush mascots, no 3D, no cinematic realism, no oil painting, no photorealism, no glossy gradients, no perfectly clean line art, no cute fairy tale animal cast, no over-rendered AI storybook style, no platform text, no prompt text`.
+- **Character component (from Character cards)** — `{{approved_characters_from_character_cards}}`, human-only identity; a child may be drawn childishly/stick-figure-leaning but never as an animal, hedgehog, plush, doll, or mascot; keep clothing and human child/adult identity readable. Character facts come only from the approved Character cards.
+- **Scene component (from Scene card)** — `{{approved_scene_from_scene_card}}`: location, layout, time of day, and staging come only from the approved Scene card.
+- **Story-specific strange event component (from ImageExecutionPackage allowed_content)** — `{{story_specific_strange_event_from_package}}` rendered in the child-drawn horror notebook style. The one strange event on the page comes only from the approved package's `allowed_content`; do not invent or inject any motif the package does not contain.
+- **Annotation component** — red-pen circles, arrows, and question marks, plus a short childish handwritten Chinese note/title (2–12 chars), may highlight the package-specific anomaly or the point of uncertainty. Annotations may mark the event but must never replace the actual scene, and must not spell long legible sentences.
+- **Content-safety component** — block explicit gore, realistic corpse, real child abuse, severe child injury/trauma, sexual or adult content, real-crime reproduction, and any in-image platform UI, prompt text, image IDs, or WebGPTImage handoff text. Always enforced.
+- **Supernatural-permission component** — horror, supernatural, ghostly, strange, unexplained, or half-explained content is allowed whenever it is story/package-appropriate and must not be blocked merely for being supernatural. This permission never forces supernatural content; it only removes the old blanket ban.
+- **Source-distance component** — `original reconstruction; no source-video names, places, wording, sequence packaging, or recognizable horror imagery`.
+
+### Examples, not requirements / 示例，非必需
+
+The motifs below are **examples of the visual language only** — they show the *kind* of strange event the style can render. They are **not** mandatory content and are **not** part of `recipe_hash`. **Do not add these examples to a compiled prompt unless they are present in the approved package or scene.**
+
+- a talking wardrobe / 会说话的衣柜
+- darkness inside a door gap / 门缝里的黑暗
+- a window at night / 夜里的窗户
+- strange eyes / 奇怪的眼睛
+- a blurry ghost shadow / 模糊的鬼影
+- a sound from under the desk or bed or inside a cupboard / 桌下、床下或柜子里的声音
+- a red-pen circled anomaly / 红笔圈出的异常处
+
+The compiled scene event must instead come from `{{story_specific_strange_event_from_package}}`; these examples must never become a fixed checklist, and a page may contain none of them.
 
 ## Allowed Content / allowed_content
 
+The directives below are the reusable, story-independent drawing-method, atmosphere, and safety/permission envelope. The single strange event itself is NOT fixed here — it is supplied per page by the approved package (see the story-specific strange event component). The placeholder line (containing `{{ }}`) and any "Examples, not requirements" motif are illustrative and are excluded from `recipe_hash`.
+
 - Lined school notebook or old worksheet paper background with creases, pressure marks, smudges, worn corners, faint yellowing, and a matte scanned-paper look.
 - Rough black pencil and ballpoint outlines with colored-pencil and crayon fill, visible eraser marks, uneven childish proportions, and imperfect hand-drawn perspective.
-- Red-pen circles, arrows, and question marks plus short childish Chinese handwriting (2–12 characters) marking the strange thing on the page.
-- One clear strange event per page: a talking wardrobe, darkness inside a door gap, a window at night, a sound from under the desk or bed or inside the cupboard, a blurry shadow, strange eyes, or a circled anomaly.
-- Supernatural, spooky, unexplained, or half-explained folk-tale atmosphere where the fear reads as a child's scary drawing rather than a realistic horror film.
-- Human characters drawn as humans with clear identity: for pilot-001, Xiao He as a 6–7-year-old human child in a yellow hooded raincoat, red boots, and small round backpack, and Mama as a human adult caregiver in a teal coat and scarf; a child may look scared, trembling, or hiding by a lamp.
+- Red-pen circles, arrows, and question marks plus short childish Chinese handwriting (2–12 characters) marking the package-specific strange thing, never replacing the scene and never spelling long legible sentences.
+- One clear strange event per page, supplied only by the approved package: `{{story_specific_strange_event_from_package}}` rendered in the child-drawn horror notebook style; the recipe itself fixes no specific motif.
+- Supernatural, spooky, unexplained, or half-explained folk-tale atmosphere is allowed where story/package-appropriate, with the fear reading as a child's scary drawing rather than a realistic horror film; supernatural content must not be blocked merely for being supernatural.
+- Human characters drawn as humans with clear identity taken only from the approved Character cards; childish, stick-figure-leaning drawing is fine but identity must stay readable and must never become an animal, hedgehog, plush, doll, or mascot.
 
 ## Forbidden Content / forbidden_content
 
@@ -86,6 +102,7 @@ Use these as reusable components during Workflow E/F only. Fill placeholders fro
 - Over-safe, over-warm, over-rational basis that explains every strange thing away as an ordinary cause; treating "no supernatural" or "low fear" as a rule is itself forbidden.
 - Explicit gore, realistic corpses, real child abuse, severe injury or visible trauma inflicted on a child, sexual or adult content, or real-crime-case reproduction.
 - Source-video names, places, wording, packaging, recognizable horror imagery, copied sequence framing, or any platform UI, prompt text, image id, or WebGPTImage handoff text inside the image.
+- Injecting any example motif from the recipe's "Examples, not requirements" list when it is not present in the approved package or scene; those example motifs are illustrative only and are never mandatory content.
 
 ## Negative Prompt Rules / negative rules
 
@@ -141,3 +158,4 @@ Workflow E may bind this recipe to an ImageExecutionPackage only after the refac
 
 - 2026-06-26: Created as the visual-system refactor recipe replacing the deprecated `pr-pilot-001-safe-night-picturebook`. Reframes the base direction from warm-safe picture book to child-drawn horror notebook; allows supernatural/unexplained content; keeps human-only character locks and hard content-safety lines. No image execution authorized.
 - 2026-06-26: Computed a reproducible `recipe_hash` = `58802ab763ac5dc6` (sha256-short over the 18 Allowed/Forbidden/Negative directive lines) and documented the drift-check basis in `drift_check_policy`, including that horror/supernatural content must not trigger a block.
+- 2026-06-26 (consistency refinement): Made the content component **story-driven instead of motif-locked**. Restructured Prompt Components into fixed style, character (from Character cards), scene (from Scene card), story-specific strange event (from `ImageExecutionPackage` `allowed_content`), annotation, content-safety, and supernatural-permission components. Replaced the fixed Allowed-Content motif list (talking wardrobe / door gap / night window / strange eyes / blurry shadow) with the placeholder rule `{{story_specific_strange_event_from_package}}` rendered in the child-drawn horror notebook style, and moved those motifs into an "Examples, not requirements" block that must not be injected unless present in the approved package or scene. Generalized the concrete Xiao He/Mama line to "from the approved Character cards." Updated `drift_check_policy` so the hash basis excludes the `{{ }}` placeholder line and the example motifs (no concrete package content, no fixed motif examples as mandatory content). Recomputed `recipe_hash` = `267c7dfe258e43ba` (was `58802ab763ac5dc6`). Positive/negative style cores unchanged. No image execution authorized.

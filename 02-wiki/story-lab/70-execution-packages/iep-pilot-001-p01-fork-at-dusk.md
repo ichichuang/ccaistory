@@ -3,7 +3,7 @@ type: image_execution_package
 id: iep-pilot-001-p01-fork-at-dusk
 title_zh: pilot-001 p01 黄昏岔路口图像执行包
 title_en: pilot-001 p01 The Fork at Dusk Image Execution Package
-status: ready
+status: draft
 project_id: pilot-001
 scene_id: scene-fork-at-dusk
 page_or_spread_range: p01
@@ -18,20 +18,20 @@ visual_style:
 visual_style_id: vs-pilot-001-child-horror-notebook
 prompt_recipe: pr-pilot-001-child-horror-notebook
 prompt_recipe_id: pr-pilot-001-child-horror-notebook
-recipe_hash: "58802ab763ac5dc6"
+recipe_hash: "267c7dfe258e43ba"
 compile_result_ref: "50-agent-work/story-lab/compiled-prompts/iep-pilot-001-p01-fork-at-dusk-repair_02.json"
 semantic_lint_result_ref: "50-agent-work/story-lab/semantic-lint-results/iep-pilot-001-p01-fork-at-dusk-repair_02.json"
-recipe_hash_check: "match"
-recipe_hash_expected: "58802ab763ac5dc6"
+recipe_hash_check: "stale"
+recipe_hash_expected: "267c7dfe258e43ba"
 recipe_hash_actual: "58802ab763ac5dc6"
-compile_status: pass
-semantic_lint_status: pass
-workflow_f_gate: "repair_02 prompt compile and semantic lint passed against the new child-horror-notebook visual system"
-workflow_g_gate: "repair_02 prepared for p01 only; controlled manual handoff created; candidate not accepted; awaiting repair human gate"
+compile_status: stale
+semantic_lint_status: stale
+workflow_f_gate: "superseded by the 2026-06-26 consistency refinement; the repair_02 compile/lint passed against the prior recipe text (recipe_hash 58802ab763ac5dc6); the recipe was refined to be story-driven and rehashed to 267c7dfe258e43ba, so p01's repair_02 compile/lint is now stale and must be recompiled/relinted before any handoff"
+workflow_g_gate: "repair_02 manual handoff prepared for p01 only; candidate not accepted; now stale after the consistency refinement (needs recompile against 267c7dfe258e43ba); awaiting repair human gate"
 webgptimage_handoff_record_ref: "50-agent-work/story-lab/webgptimage-handoffs/pilot-001/iep-pilot-001-p01-fork-at-dusk-repair_02.md"
 webgptimage_handoff_status: "repair_02_manual_pending"
 downstream_generation_status: blocked
-blocked_reason: "Visual-system refactor. The prior p01 manual generation failed (over-safe / polished digital / animalized humans / no horror) under the now-deprecated warm-safe base style. p01 is re-pointed to vs-pilot-001-child-horror-notebook + pr-pilot-001-child-horror-notebook and recompiled as repair_02. Image generation stays blocked: stop at the repair human gate; do not accept any prior candidate."
+blocked_reason: "Visual-system refactor + 2026-06-26 consistency refinement. The prior p01 manual generation failed (over-safe / polished digital / animalized humans / no horror) under the now-deprecated warm-safe base style. p01 is re-pointed to vs-pilot-001-child-horror-notebook + pr-pilot-001-child-horror-notebook and was recompiled as repair_02 against recipe_hash 58802ab763ac5dc6. The consistency refinement made the recipe story-driven (motifs demoted to examples) and rehashed it to 267c7dfe258e43ba, so the repair_02 compile/lint is now stale and must be recompiled/relinted. Image generation stays blocked: stop at the repair human gate; do not accept any prior candidate."
 repair_notes:
   - repair-pilot-001-p01-visual-system-refactor
   - repair-pilot-001-p01-webgptimage-style-species-drift
@@ -64,7 +64,7 @@ qa_result: "failed"
 r00_dependency_policy: "No R00 dependency. No ReferenceAsset exists or is required for this Workflow F repair_02 compile/lint pass; any future anchor dependency must be separately accepted and declared before use."
 maximum_anchor_reuse_policy: "No anchor reuse in this package. Do not create, reuse, or imply R00/R01/R02 assets from this package."
 dependency_notes: "Depends only on accepted Workflow A-C canonical cards (StoryProject, Scene, Character) plus the new D-stage VisualStyle/PromptRecipe pending the repair human gate."
-blocking_notes: "Prior p01 manual WebGPTImage result failed (over-safe / polished digital / animalized humans / no horror) and is not accepted. The visual-system refactor re-pointed this package to the child-horror-notebook style/recipe and recompiled it as repair_02. Image generation evidence, GenerationRun, ReferenceAsset, final package, and publishing records remain blocked pending the repair human gate and new repair_02 execution + QA. p02-p14 handoffs remain blocked."
+blocking_notes: "Prior p01 manual WebGPTImage result failed (over-safe / polished digital / animalized humans / no horror) and is not accepted. The visual-system refactor re-pointed this package to the child-horror-notebook style/recipe and recompiled it as repair_02 (against recipe_hash 58802ab763ac5dc6). The 2026-06-26 consistency refinement made the recipe story-driven and rehashed it to 267c7dfe258e43ba, so the repair_02 compile/lint is now stale and must be recompiled/relinted before the handoff can execute. Content is unchanged: p01 remains the dusk fork scene (familiar bright road vs darker unknown shortcut), human child + human adult, with no wardrobe/door-gap/ghost-shadow motif injected. Image generation evidence, GenerationRun, ReferenceAsset, final package, and publishing records remain blocked pending the repair human gate and new repair_02 recompile + execution + QA. p02-p14 handoffs remain blocked."
 final_assembly_dependency: pilot-001
 tags:
   - story-lab
@@ -73,8 +73,8 @@ tags:
   - workflow-d
   - workflow-f
   - workflow-g
-  - ready
-  - lint-passed
+  - stale-recompile
+  - blocked
   - repair-02
   - visual-system-refactor
   - child-horror-notebook
@@ -88,7 +88,7 @@ canonical: true
 
 # pilot-001 p01 黄昏岔路口图像执行包 / The Fork at Dusk Image Execution Package
 
-> The prior p01 manual WebGPTImage result failed and is not accepted. A visual-system refactor replaced the deprecated warm-safe base style with the child-drawn horror notebook system, re-pointed this package, and recompiled it as `repair_02`. This card is not a GenerationRun, ReferenceAsset, final package, publishing record, or image output. Image generation remains blocked at the repair human gate.
+> The prior p01 manual WebGPTImage result failed and is not accepted. A visual-system refactor replaced the deprecated warm-safe base style with the child-drawn horror notebook system, re-pointed this package, and recompiled it as `repair_02`. A subsequent 2026-06-26 consistency refinement made the recipe story-driven (motifs demoted to examples) and rehashed it from `58802ab763ac5dc6` to `267c7dfe258e43ba`, so this package's `repair_02` compile/lint is now **stale** and must be recompiled/relinted before any handoff. The p01 content is unchanged — still the dusk fork scene, no wardrobe/door-gap/ghost-shadow motif injected. This card is not a GenerationRun, ReferenceAsset, final package, publishing record, or image output. Image generation remains blocked at the repair human gate.
 
 ## Package Summary / 执行包概要
 
@@ -98,7 +98,7 @@ canonical: true
 - Characters: [char-xiaohe](../30-characters/char-xiaohe.md), [char-mama](../30-characters/char-mama.md)
 - VisualStyle: [vs-pilot-001-child-horror-notebook](../50-visual-styles/vs-pilot-001-child-horror-notebook.md)
 - PromptRecipe: [pr-pilot-001-child-horror-notebook](../60-prompts/pr-pilot-001-child-horror-notebook.md)
-- Recipe hash: `58802ab763ac5dc6`
+- Recipe hash: `267c7dfe258e43ba` (bound recipe's current hash; the repair_02 compile was produced against the prior `58802ab763ac5dc6`, so the compile is stale)
 - Repair notes: `repair-pilot-001-p01-visual-system-refactor` (active); `repair-pilot-001-p01-webgptimage-style-species-drift` (superseded)
 
 ## Target Asset / 目标资产
@@ -109,7 +109,7 @@ Workflow F `repair_02` package plan for the p01 page illustration: the dusk road
 
 - Required canonical cards: StoryProject `pilot-001`, Scene `scene-fork-at-dusk`, Character cards `char-xiaohe` and `char-mama`, VisualStyle `vs-pilot-001-child-horror-notebook`, PromptRecipe `pr-pilot-001-child-horror-notebook`.
 - Required ReferenceAsset cards: none currently available or created.
-- Blocking state: prior p01 manual candidate failed and must not be accepted or reused. The base visual system was refactored. Workflow F `repair_02` compile/lint passed against the new recipe. Workflow G `repair_02` manual handoff is prepared for p01 only; image generation remains blocked at the repair human gate.
+- Blocking state: prior p01 manual candidate failed and must not be accepted or reused. The base visual system was refactored, then the recipe was refined to be story-driven and rehashed to `267c7dfe258e43ba`. The `repair_02` compile/lint (run against `58802ab763ac5dc6`) is now **stale** and must be recompiled/relinted under the refined recipe. Workflow G `repair_02` manual handoff is prepared for p01 only but cannot execute until recompiled; image generation remains blocked at the repair human gate.
 
 ## Allowed Content / 允许内容
 
@@ -130,16 +130,16 @@ Workflow F `repair_02` package plan for the p01 page illustration: the dusk road
 
 ## Prompt Recipe Binding / Prompt 技法绑定
 
-Bound to `pr-pilot-001-child-horror-notebook` with verified `repair_02` `recipe_hash: 58802ab763ac5dc6`. Workflow F compiled this package into the referenced derived repair_02 prompt record; this card does not contain external execution prompt text.
+Bound to `pr-pilot-001-child-horror-notebook`, whose current `recipe_hash` is `267c7dfe258e43ba`. The `repair_02` compile was produced against the prior recipe text (`58802ab763ac5dc6`); after the consistency refinement it is stale and must be recompiled. This card does not contain external execution prompt text.
 
 ## Workflow F Compile and Semantic Lint / Workflow F 编译与语义 Lint
 
-- Compile result: `50-agent-work/story-lab/compiled-prompts/iep-pilot-001-p01-fork-at-dusk-repair_02.json`.
-- Semantic lint result: `50-agent-work/story-lab/semantic-lint-results/iep-pilot-001-p01-fork-at-dusk-repair_02.json`.
-- Recipe hash comparison: `match` (`58802ab763ac5dc6`).
-- Compile status: `pass`.
-- Semantic lint status: `pass`.
-- Package state: `ready` for the p01 `repair_02` handoff only; prior manual candidate failed and is not accepted.
+- Compile result: `50-agent-work/story-lab/compiled-prompts/iep-pilot-001-p01-fork-at-dusk-repair_02.json` (produced against `58802ab763ac5dc6`; stale).
+- Semantic lint result: `50-agent-work/story-lab/semantic-lint-results/iep-pilot-001-p01-fork-at-dusk-repair_02.json` (stale).
+- Recipe hash comparison: `stale` (expected `267c7dfe258e43ba`; the repair_02 record was hashed `58802ab763ac5dc6`; recompile required).
+- Compile status: `stale` (recompile required under the refined recipe).
+- Semantic lint status: `stale` (relint required under the refined recipe).
+- Package state: `draft`; downgraded from `ready` by the consistency refinement. The `repair_02` handoff remains `repair_02_manual_pending` but cannot execute until recompiled/relinted and re-approved at the repair human gate; prior manual candidate failed and is not accepted.
 
 ## Workflow G Manual Handoff / Workflow G 人工交接
 

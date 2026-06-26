@@ -17,6 +17,8 @@ forbidden_changes:
   - "always calm and reassuring; never panicked or out of control"
   - "do not change the teal coat"
   - "stays a supportive caregiver; no adult subplots"
+  - "identity lock: remains a human adult caregiver; never an animal, plush, doll, mascot, or animal substitute"
+  - "no realistic trauma, severe injury, gore, or sexualized content (the child-drawn horror notebook visual style itself is allowed)"
 related_assets: []
 source_paths: []
 last_used: ""
@@ -61,6 +63,8 @@ Appears p1–p13. See `../40-scenes/`.
 ## Forbidden Changes / 禁止变化
 
 - Never panicked or sinister; keep the teal coat; no adult/romantic subplots.
+- Identity lock: remains a human adult caregiver; never an animal, plush, doll, mascot, or animal substitute.
+- Horror treatment is visual-style dependent: Mama may be drawn in the `vs-pilot-001-child-horror-notebook` style and share an eerie page while her demeanor stays calm and reassuring. Her calm is a story-layer role choice, not a horror-style ban. Realistic trauma, gore, and sexualized content remain forbidden.
 
 ## Related Assets / 关联资产
 

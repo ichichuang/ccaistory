@@ -37,6 +37,14 @@ Proposed visual system for the `pilot-001` D/F/G repair loop. Not yet accepted. 
 
 A page from a 9–12-year-old child's "scary-story notebook." Rough black pencil/ballpoint outlines, colored-pencil and crayon fill, visible eraser marks, red-pen circles and question marks, arrows, a little childish Chinese handwriting. The paper shows creases, pressure marks, smudges, worn corners, and a faintly yellowed old / scanned look. Perspective is off, proportions are childish, furniture and people look hand-drawn by a kid — but the content carries a creepy, supernatural, partly-unexplained folk-tale mood. **The fear is "scary as a child would draw it," not a realistic horror film.**
 
+## Visual System Scope / 视觉系统职责边界
+
+**Style is reusable; story content is variable.** This visual system controls **drawing method and atmosphere only** — paper, line quality, childish drawing, red-pen annotation behavior, the creepy notebook mood, and supernatural *permission*. It must **not** overwrite scene content and must **not** hard-code any fixed set of horror motifs as mandatory content.
+
+For every generated image, the strange event, location, characters, props, and emotional beat must come from the approved `ImageExecutionPackage` (and the canonical StoryProject / Scene / Character cards it binds). The visual system never injects its own scene events; each compiled image renders only the specific scene event approved for that package.
+
+风格可复用，故事内容可变。本视觉系统**只**控制绘制方法与气氛（纸张、线条、儿童手绘、红笔批注方式、作业本怪谈氛围、超自然「许可」），**不得**覆盖场景内容，**不得**把任何一组固定怪谈母题写成强制内容。每张图的奇异事件、地点、角色、道具与情绪节拍，都必须来自获批的 `ImageExecutionPackage`（及其绑定的 StoryProject / Scene / Character 规范卡）。视觉系统绝不自行注入场景事件；每张编译出的图只渲染其执行包获批的那一个具体场景事件。
+
 ## Mandatory Positive Style Core / 强制正向风格核心
 
 Bind this verbatim as the positive style anchor in every compiled prompt for this project:
@@ -79,14 +87,14 @@ Bind this verbatim as the negative style anchor in every compiled prompt for thi
 - 允许单图加批注的"作业本一页"布局；允许歪斜边框、随手画的分隔线。
 - 透视可以不准、家具可以画歪、地面可以飘；这是特征不是缺陷。
 - 不要专业绘本的居中精致构图、电影分镜感、写实景深。
-- 可以出现少量幼稚手写中文标题（2–12 字短句），如"衣柜在说话。""门缝里有东西。"作为画内手写，而非排版文字。
+- 可以出现少量幼稚手写中文标题（2–12 字短句）作为画内手写，而非排版文字。标题内容必须来自当前 `ImageExecutionPackage` / Scene 获批的具体事件；**不得**套用固定母题示例（如"衣柜在说话。""门缝里有东西。"——这些仅为示例，见「Example Motifs Only / 仅作示例的母题」），除非当前故事/包确有该内容。
 
 ## Content Safety Rules / 内容安全
 
 本节是内容安全边界，**不是**降低恐怖或禁止超自然的规则。
 
-- 允许：超自然、灵异、鬼怪、未知东西、未解释/半解释的民间怪谈气氛。
-- 允许：衣柜说话、门缝里的黑暗、夜里的窗户、桌下/床下/柜子里传来的声音、模糊影子、奇怪眼睛、红圈标注的异常处。
+- 允许（可用范围）：超自然、灵异、鬼怪、未知东西、未解释/半解释的民间怪谈气氛。
+- 允许的具体奇异元素（**仅为示例，非必需内容**）：衣柜说话、门缝里的黑暗、夜里的窗户、桌下/床下/柜子里传来的声音、模糊影子、奇怪眼睛、红圈标注的异常处等，都只是「Example Motifs Only / 仅作示例的母题」中的示例，用于说明这套风格*能*画哪类怪事。**不得**在当前故事/包没有要求时注入画面；每张图的实际奇异事件必须来自获批的 `ImageExecutionPackage`。
 - 允许：小孩害怕、发抖、疑惑、躲在灯旁等情绪表现。
 - 仍然禁止（硬性内容安全线）：
   - 露骨血腥 gore、写实尸体。
@@ -110,10 +118,25 @@ Bind this verbatim as the negative style anchor in every compiled prompt for thi
 ## Horror Rules / 恐怖规则
 
 - 允许超自然、允许未解释、允许半解释。
-- 允许黑暗、柜门缝、奇怪眼睛、怪声、鬼影、异常批注。
+- 允许的恐怖元素范围广泛（黑暗、怪声、异常批注等均可）；但任何具体母题（柜门缝、奇怪眼睛、鬼影等）**仅为示例**，是否出现由当前故事/包决定，**不得**默认注入（见「Example Motifs Only / 仅作示例的母题」）。
 - **不要求**所有恐怖都有普通自然解释；**不要求**把怪事改写成普通原因。
 - 恐怖表达应像儿童画出的怪谈，不是成人恐怖电影。
 - 写实 gore 与性内容仍然禁止（见 Content Safety Rules）。
+
+## Example Motifs Only / 仅作示例的母题
+
+The following are **examples of the visual language only** — they illustrate the *kind* of strange content this style *can* render. They are **not** required content and **must not** be injected into any story or image unless the current StoryProject, Scene card, Character cards, or approved `ImageExecutionPackage` actually call for them:
+
+- a talking wardrobe / 会说话的衣柜
+- darkness inside a door gap / 门缝里的黑暗
+- a window at night / 夜里的窗户
+- strange eyes / 奇怪的眼睛
+- a blurry ghost shadow / 模糊的鬼影
+- red-pen "anomaly" notes circling something odd / 红笔圈出的「异常」批注
+
+These examples must never become a fixed checklist or required content. A page may contain none of them. Each compiled image renders only the specific scene event approved for its `ImageExecutionPackage`; the strange event, location, characters, props, and emotional beat come from that package and the canonical cards, not from this example list.
+
+以上仅为视觉语言的**示例**，用于说明这套风格*能*画哪类怪事；它们**不是**必需内容，**不得**在当前故事/场景/角色/获批执行包没有要求时注入。示例不得变成固定清单或强制内容——某一页可以一个都不含。每张编译出的图只渲染其 `ImageExecutionPackage` 获批的那一个具体场景事件；奇异事件、地点、角色、道具与情绪节拍都来自该执行包与规范卡，而非本示例清单。
 
 ## Forbidden Style Drift / 禁止风格漂移
 

@@ -14,9 +14,10 @@ visual_lock:
   - "always carries a glowing lantern"
 reference_assets: []
 forbidden_changes:
-  - "must read as warm, safe and welcoming — never eerie, sinister, or ambiguous"
+  - "identity lock: remains a human elderly man (unless a future story rewrite changes his role); never an animal, plush, doll, mascot, or animal substitute"
   - "keep lantern + round glasses + grey beard"
-  - "no supernatural attributes"
+  - "story-layer role note (not a universal visual ban): in the current pilot-001 rational-reassuring story he is written as the warm, safe helper, so this story renders him kindly rather than eerie. 'Never eerie / no supernatural attributes' is a story-role choice here, not a global style ban — the child-drawn horror notebook visual style still applies to how he is drawn"
+  - "no realistic trauma, severe injury, gore, or sexualized content"
 related_assets: []
 source_paths: []
 last_used: ""
@@ -40,7 +41,7 @@ canonical: true
 
 The safe, trusted helper. Lives in the warm little cottage along the lane; welcomes the lost travelers, gives them light, gently explains the ordinary cause behind each scary-seeming thing, and guides them back to the familiar road. Embodies the story's "asking for help is brave" message.
 
-> Safety note: deliberately the warm opposite of any "scary old neighbor" trope — he must always be rendered as kindly and reassuring.
+> Safety note (current-story role): in this pilot-001 rational-reassuring story he is deliberately the warm opposite of any "scary old neighbor" trope and is rendered as kindly and reassuring. This is his story role here, not a universal ban on the notebook-horror visual style (paper, line quality, red-pen annotation, creepy notebook atmosphere still apply to how he is drawn); a future story rewrite could change his role.
 
 ## Canonical Description / 规范外观描述
 
@@ -61,7 +62,8 @@ Appears p7–p12 (cottage + guiding back). See `../40-scenes/`.
 
 ## Forbidden Changes / 禁止变化
 
-- Never eerie/sinister/ambiguous; keep lantern + glasses + beard; no supernatural attributes.
+- Identity lock: remains a human elderly man (unless a future story rewrite changes his role); never an animal, plush, doll, mascot, or animal substitute. Keep lantern + glasses + beard.
+- Story-layer role note (not a universal visual ban): in the current pilot-001 rational-reassuring story he is the warm, safe helper, so this story renders him kindly rather than eerie. "Never eerie / no supernatural attributes" is a story-role choice here, **not** a global style ban — the `vs-pilot-001-child-horror-notebook` visual style (paper, line quality, red-pen annotation, creepy notebook atmosphere) still applies to how he is drawn. Realistic trauma, gore, and sexualized content remain forbidden.
 
 ## Related Assets / 关联资产
 
