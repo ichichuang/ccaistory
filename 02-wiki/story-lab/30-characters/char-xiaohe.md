@@ -6,7 +6,7 @@ title_en: Xiao He
 status: draft
 project_id: pilot-001
 cover_image: ""
-visual_style: "vs-pilot-001-warm-safe-night-picturebook"
+visual_style: "vs-pilot-001-child-horror-notebook"
 visual_lock:
   - "age ~6–7 child proportions"
   - "short dark hair with a small clip"

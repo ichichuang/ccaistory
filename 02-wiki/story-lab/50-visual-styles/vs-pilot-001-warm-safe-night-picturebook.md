@@ -3,7 +3,7 @@ type: visual_style
 id: "vs-pilot-001-warm-safe-night-picturebook"
 title_zh: pilot-001 温暖安全夜路图文书风格
 title_en: pilot-001 Warm Safe Night Picture Book Style
-status: draft
+status: deprecated
 project_id: "pilot-001"
 reference_assets: []
 related_recipes:
@@ -15,6 +15,8 @@ tags:
   - pilot-001
   - visual-style
   - children-safe
+  - deprecated
+  - superseded
 created_at: 2026-06-26
 updated_at: 2026-06-26
 owner: ichichuang
@@ -24,11 +26,17 @@ canonical: true
 
 # pilot-001 温暖安全夜路图文书风格 / Warm Safe Night Picture Book Style
 
-> Workflow D human gate accepted (2026-06-26). StoryProject `pilot-001` is the final gate source; frontmatter remains `status: draft` because the VisualStyle schema does not define `accepted` or `active`. This card defines visual rules only. It does not generate images, create execution packages, or authorize WebGPTImage handoff.
+> ⛔ DEPRECATED (2026-06-26 visual-system refactor). Superseded by [vs-pilot-001-child-horror-notebook](./vs-pilot-001-child-horror-notebook.md). This warm-safe direction failed in practice: it pushed output toward over-safe, polished digital, animalized-human, no-horror picture-book imagery. Do not bind this style to any new or repaired execution package. Kept for history only. It does not generate images, create execution packages, or authorize WebGPTImage handoff.
 
-## Workflow D Gate / 工作流 D 门禁
+## Deprecation / 弃用
 
-Workflow D human gate accepted. This VisualStyle is accepted for `pilot-001` through the StoryProject gate record, while this card retains schema-compliant `status: draft`.
+- Status: `deprecated`. Superseded by `vs-pilot-001-child-horror-notebook`.
+- Reason: over-safe / polished digital / animalized humans / no horror; the base "warm-safe-night" framing itself biased the model away from the intended child-drawn怪谈 aesthetic.
+- A `deprecated` style must not be bound by new execution packages (per `VisualStyle.fields.md` validation). All `pilot-001` packages have been re-pointed to the new style.
+
+## Workflow D Gate / 工作流 D 门禁 (historical)
+
+This VisualStyle was previously accepted for `pilot-001` through the StoryProject gate record. That acceptance is now superseded by the visual-system refactor.
 
 ## Style Summary / 风格概要
 
@@ -39,6 +47,15 @@ Children-safe illustrated picture book style for a gentle night journey. The loo
 - Soft rounded outlines with visible hand-drawn warmth.
 - Simple child-friendly shapes; no sharp, scratchy, jagged, or horror-comic linework.
 - Character silhouettes must remain readable in low light, especially Xiao He, Mama, Lantern Grandpa, and Tangerine the Cat.
+- Xiao He and Mama must read as ordinary human people with human faces, human hands, and child/adult human proportions; never animal, mascot, doll, plush, or anthropomorphic substitutes.
+- Keep slight human imperfection in the linework: uneven pencil edges, visible colored-pencil pressure, and small hand-made irregularities are preferred over polished symmetry.
+
+## Human Character Locks / 人类角色锁定
+
+- Xiao He is a human child, about six or seven years old, in a buttercup-yellow hooded raincoat, red rubber boots, and a small round backpack.
+- Mama is a human adult caregiver in a teal coat and soft scarf, calm and reassuring, visibly taller than Xiao He.
+- Do not replace either person with hedgehogs, mice, rabbits, bears, cute animals, dolls, plush-like humans, mascot characters, or anthropomorphic figures.
+- Clothing and caregiver relationship must stay readable even if the figures are small in the composition.
 
 ## Color Rules / 配色
 
@@ -51,6 +68,7 @@ Children-safe illustrated picture book style for a gentle night journey. The loo
 
 - Matte paper, watercolor, gouache, and colored-pencil texture are preferred.
 - Surfaces should feel touchable and storybook-like: soft raincoat fabric, wool cardigan, misty air, damp road, warm wood.
+- The final look should feel hand-made on paper: visible pencil sketch marks, colored-pencil grain, watercolor blooms, gouache opacity, and small imperfect edges.
 - No photorealism, cinematic thriller grading, glossy 3D realism, uncanny skin, or realistic distress.
 
 ## Composition Rules / 构图
@@ -76,6 +94,8 @@ Children-safe illustrated picture book style for a gentle night journey. The loo
 - No magical explanation for the cat, mist, wind, lantern, cottage, or road.
 - No adult-oriented suspense aesthetics, fear marketing, or shock-value imagery.
 - No style imitation based on a named living artist, channel identity, film, franchise, or recognizable source work.
+- No polished digital fantasy illustration, cinematic lighting, glossy over-rendered AI storybook finish, or cute-animal fairytale look.
+- No character species drift: human characters must not become animals, plush figures, dolls, mascots, or anthropomorphic designs.
 
 ## Reference Assets / 参考资产
 

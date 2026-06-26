@@ -3,7 +3,7 @@ type: image_execution_package
 id: iep-pilot-001-p09-lantern-cottage-cat-eyes
 title_zh: pilot-001 p09 守灯小屋猫眼解释图像执行包
 title_en: pilot-001 p09 Lantern Cottage Cat Eyes Image Execution Package
-status: ready
+status: draft
 project_id: pilot-001
 scene_id: scene-lantern-cottage
 page_or_spread_range: p09
@@ -18,21 +18,21 @@ character_ids:
   - char-lantern-grandpa
   - char-juzi-cat
 visual_style:
-  - vs-pilot-001-warm-safe-night-picturebook
-visual_style_id: vs-pilot-001-warm-safe-night-picturebook
-prompt_recipe: pr-pilot-001-safe-night-picturebook
-prompt_recipe_id: pr-pilot-001-safe-night-picturebook
-recipe_hash: "6020fc5e5c83e043"
+  - vs-pilot-001-child-horror-notebook
+visual_style_id: vs-pilot-001-child-horror-notebook
+prompt_recipe: pr-pilot-001-child-horror-notebook
+prompt_recipe_id: pr-pilot-001-child-horror-notebook
+recipe_hash: "58802ab763ac5dc6"
 compile_result_ref: "50-agent-work/story-lab/compiled-prompts/iep-pilot-001-p09-lantern-cottage-cat-eyes.json"
 semantic_lint_result_ref: "50-agent-work/story-lab/semantic-lint-results/iep-pilot-001-p09-lantern-cottage-cat-eyes.json"
-recipe_hash_check: "match"
-recipe_hash_expected: "6020fc5e5c83e043"
-recipe_hash_actual: "6020fc5e5c83e043"
-compile_status: pass
-semantic_lint_status: pass
-workflow_f_gate: "human_qa_gate; WebGPTImage blocked; image generation blocked"
+recipe_hash_check: "stale"
+recipe_hash_expected: "58802ab763ac5dc6"
+recipe_hash_actual: ""
+compile_status: stale
+semantic_lint_status: stale
+workflow_f_gate: "superseded by the 2026-06-26 visual-system refactor; stale under the new recipe; recompile/relint required; not auto-released"
 downstream_generation_status: blocked
-blocked_reason: ""
+blocked_reason: "Visual-system refactor to vs-pilot-001-child-horror-notebook + pr-pilot-001-child-horror-notebook (recipe_hash 58802ab763ac5dc6). The prior warm-safe compile/lint is stale; this package must be recompiled and relinted under the new recipe before it can be ready. Not auto-released; image generation blocked."
 repair_notes: []
 target_model: "WebGPTImage blocked until Workflow G"
 aspect_ratio: "1:1"
@@ -54,15 +54,15 @@ related_assets:
   - char-mama
   - char-lantern-grandpa
   - char-juzi-cat
-  - vs-pilot-001-warm-safe-night-picturebook
-  - pr-pilot-001-safe-night-picturebook
+  - vs-pilot-001-child-horror-notebook
+  - pr-pilot-001-child-horror-notebook
 source_paths: []
 last_run: ""
 qa_result: ""
 r00_dependency_policy: "No R00 dependency. No ReferenceAsset exists or is required for this Workflow F compile/lint pass; any future anchor dependency must be separately accepted and declared before use."
 maximum_anchor_reuse_policy: "No anchor reuse in this package. Do not create, reuse, or imply R00/R01/R02 assets from this package."
 dependency_notes: "Depends only on accepted Workflow A-D canonical cards: StoryProject, Scene, Character, VisualStyle, and PromptRecipe."
-blocking_notes: "Workflow F prompt compile / semantic lint passed. Stop at Workflow F human/QA gate; Workflow G WebGPTImage handoff, image generation, GenerationRun, ReferenceAsset, final package, and publishing records remain blocked."
+blocking_notes: "Re-pointed by the visual-system refactor and downgraded out of ready. Compile/lint under the deprecated warm-safe recipe is stale; recompile/relint under pr-pilot-001-child-horror-notebook is required before ready. Not auto-released. Workflow G WebGPTImage handoff, image generation, GenerationRun, ReferenceAsset, final package, and publishing records remain blocked."
 final_assembly_dependency: pilot-001
 tags:
   - story-lab
@@ -70,8 +70,10 @@ tags:
   - image-execution-package
   - workflow-e
   - workflow-f
-  - ready
-  - lint-passed
+  - visual-system-refactor
+  - child-horror-notebook
+  - stale-recompile
+  - blocked
 created_at: 2026-06-26
 updated_at: 2026-06-26
 owner: ichichuang
@@ -81,7 +83,7 @@ canonical: true
 
 # pilot-001 p09 守灯小屋猫眼解释图像执行包 / Lantern Cottage Cat Eyes Image Execution Package
 
-> Workflow F compile and semantic lint passed. This is not a WebGPTImage handoff, GenerationRun, ReferenceAsset, final package, publishing record, or image output.
+> Re-pointed by the 2026-06-26 visual-system refactor and downgraded out of `ready`. This package's prior Workflow F compile/lint ran against the now-deprecated warm-safe recipe and is STALE; it must be recompiled and relinted under `pr-pilot-001-child-horror-notebook` before it can be `ready` again. Not auto-released. This is not a WebGPTImage handoff, GenerationRun, ReferenceAsset, final package, publishing record, or image output.
 
 ## Package Summary / 执行包概要
 
@@ -89,9 +91,9 @@ canonical: true
 - Page: `p09`
 - Scene: [scene-lantern-cottage](../40-scenes/scene-lantern-cottage.md)
 - Characters: [char-xiaohe](../30-characters/char-xiaohe.md), [char-mama](../30-characters/char-mama.md), [char-lantern-grandpa](../30-characters/char-lantern-grandpa.md), [char-juzi-cat](../30-characters/char-juzi-cat.md)
-- VisualStyle: [vs-pilot-001-warm-safe-night-picturebook](../50-visual-styles/vs-pilot-001-warm-safe-night-picturebook.md)
-- PromptRecipe: [pr-pilot-001-safe-night-picturebook](../60-prompts/pr-pilot-001-safe-night-picturebook.md)
-- Recipe hash: `6020fc5e5c83e043`
+- VisualStyle: [vs-pilot-001-child-horror-notebook](../50-visual-styles/vs-pilot-001-child-horror-notebook.md)
+- PromptRecipe: [pr-pilot-001-child-horror-notebook](../60-prompts/pr-pilot-001-child-horror-notebook.md)
+- Recipe hash (new binding): `58802ab763ac5dc6` — not yet recompiled under the new recipe (stale)
 
 ## Target Asset / 目标资产
 
@@ -99,9 +101,9 @@ Workflow F ready package plan for the p09 page illustration: the glowing dots pa
 
 ## Dependency Graph / 依赖图
 
-- Required canonical cards: StoryProject `pilot-001`, Scene `scene-lantern-cottage`, Character cards `char-xiaohe`, `char-mama`, `char-lantern-grandpa`, and `char-juzi-cat`, VisualStyle `vs-pilot-001-warm-safe-night-picturebook`, PromptRecipe `pr-pilot-001-safe-night-picturebook`.
+- Required canonical cards: StoryProject `pilot-001`, Scene `scene-lantern-cottage`, Character cards `char-xiaohe`, `char-mama`, `char-lantern-grandpa`, and `char-juzi-cat`, VisualStyle `vs-pilot-001-child-horror-notebook`, PromptRecipe `pr-pilot-001-child-horror-notebook`.
 - Required ReferenceAsset cards: none currently available or created.
-- Blocking state: Workflow F compile and semantic lint passed; stop at Workflow F human/QA gate. Workflow G, WebGPTImage handoff, and image generation remain blocked.
+- Blocking state: visual-system refactor re-pointed this package to the child-horror-notebook style/recipe and downgraded it out of `ready`. The prior compile/lint is stale. Workflow G, WebGPTImage handoff, and image generation remain blocked; not auto-released.
 
 ## Allowed Content / 允许内容
 
@@ -119,16 +121,16 @@ Workflow F ready package plan for the p09 page illustration: the glowing dots pa
 
 ## Prompt Recipe Binding / Prompt 技法绑定
 
-Bound to `pr-pilot-001-safe-night-picturebook` with verified `recipe_hash: 6020fc5e5c83e043`. Workflow F compiled this package into the referenced derived prompt record; this card does not contain external execution prompt text.
+Re-pointed to `pr-pilot-001-child-horror-notebook` (recipe_hash `58802ab763ac5dc6`). The existing compiled-prompt record was produced under the deprecated `pr-pilot-001-safe-night-picturebook` and is STALE; this package must be recompiled under the new recipe before it can be `ready`. This card does not contain external execution prompt text.
 
 ## Workflow F Compile and Semantic Lint / Workflow F 编译与语义 Lint
 
 - Compile result: `50-agent-work/story-lab/compiled-prompts/iep-pilot-001-p09-lantern-cottage-cat-eyes.json`.
 - Semantic lint result: `50-agent-work/story-lab/semantic-lint-results/iep-pilot-001-p09-lantern-cottage-cat-eyes.json`.
-- Recipe hash comparison: `match` (`6020fc5e5c83e043`).
-- Compile status: `pass`.
-- Semantic lint status: `pass`.
-- Package state: `ready`; downstream WebGPTImage handoff and image generation remain blocked until separate Workflow G authorization.
+- Recipe hash comparison: `stale` (expected `58802ab763ac5dc6`; the existing compiled record was hashed `6020fc5e5c83e043` under the deprecated recipe; recompile required).
+- Compile status: `stale` (recompile required under the new recipe).
+- Semantic lint status: `stale` (relint required under the new recipe).
+- Package state: `draft`; downgraded from `ready` by the visual-system refactor. Not auto-released; blocked until recompiled/relinted under the new recipe and re-approved.
 
 ## Reference Asset Binding / 参考资产绑定
 

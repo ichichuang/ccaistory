@@ -6,7 +6,7 @@ title_en: Mama
 status: draft
 project_id: pilot-001
 cover_image: ""
-visual_style: "vs-pilot-001-warm-safe-night-picturebook"
+visual_style: "vs-pilot-001-child-horror-notebook"
 visual_lock:
   - "warm adult caregiver, calm demeanor"
   - "medium-length dark hair"

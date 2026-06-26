@@ -26,6 +26,8 @@ main_characters:
   - char-juzi-cat
 worlds: []
 visual_styles:
+  - vs-pilot-001-child-horror-notebook
+deprecated_visual_styles:
   - vs-pilot-001-warm-safe-night-picturebook
 related_packages:
   - iep-pilot-001-p01-fork-at-dusk
@@ -52,16 +54,44 @@ publishing_readiness_status: blocked
 
 ## Workflow Status
 
-- Current workflow: G — WebGPTImage Manual Handoff
-- Status: Workflow G started for p01 only; manual WebGPTImage execution pending
-- Previous workflow: A — Raw Story Intake (accepted); B — Story Analysis (accepted); C — Character & Scene Extraction (accepted); D — Visual Style & PromptRecipe (accepted)
-- Workflow D human approval gate: ACCEPTED (visual style + prompt recipe confirmed; 2026-06-26).
-- Workflow E human gate: ACCEPTED for draft package plan (2026-06-26).
-- Workflow F human/QA gate: ACCEPTED (prompt compile + semantic lint passed; 2026-06-26).
-- Workflow G status: STARTED for p01 only; controlled manual handoff record created for `iep-pilot-001-p01-fork-at-dusk`.
-- Image generation: blocked until a human manually uses the p01 handoff in WebGPTImage and records evidence
-- WebGPTImage handoff: p01 manual handoff created; p02-p14 remain blocked
-- ImageExecutionPackage creation: 14 cards accepted for p01–p14; all package `status` values are `ready`
+- Current workflow: **D/F/G repair loop (visual-system refactor)** — rolled back from G.
+- Status: the base visual system was refactored from warm-safe picture book to **child-drawn horror notebook**. p01 routed to `repair_02`; p02–p14 re-pointed and downgraded out of `ready`. Awaiting the **repair human gate**.
+- Previous workflow: A — Raw Story Intake (accepted); B — Story Analysis (accepted); C — Character & Scene Extraction (accepted); D — Visual Style & PromptRecipe (**previously accepted; that visual-layer acceptance is now superseded by the refactor**).
+- Workflow G p01 attempt: **failed** (over-safe / polished digital / animalized humans / no horror).
+- Image accepted: **no**.
+- ReferenceAsset: **none** (still empty).
+- Image generation: **blocked** — stop at the repair human gate; do not generate images, call WebGPTImage, or create ReferenceAsset/GenerationRun.
+- WebGPTImage handoff: p01 `repair_02` handoff prepared (gated, not executed); p02–p14 remain blocked.
+- ImageExecutionPackage status: p01 = `ready` (repair_02 compile/lint pass, handoff pending the gate); p02–p14 = `draft` (stale under the new recipe; not auto-released).
+
+## Visual System Refactor (2026-06-26)
+
+This project underwent a **visual-system refactor**. The original warm-safe-night picture-book visual system failed in practice and biased generation away from the intended aesthetic.
+
+- Old style failure reasons: **over-safe / polished digital / animalized humans / no horror**. The "warm-safe-night" framing and global "no horror / no supernatural / low fear" rules pushed output toward cute commercial-picture-book / fairy-tale-animal imagery.
+- Root cause: **base visual system mismatch** — the VisualStyle and PromptRecipe themselves were wrong, not just a per-image prompt.
+- Action: replaced the base visual system with a **child-drawn horror notebook** system that allows supernatural/unexplained content while keeping human-only characters and hard content-safety lines.
+
+| Item | State |
+|---|---|
+| Workflow G p01 attempt | failed |
+| Workflow D/F/G repair loop | required (in progress) |
+| Reason | base visual system mismatch |
+| Image accepted | no |
+| ReferenceAsset | no |
+| Next | visual system refactor → repair human gate → p01 repair_02 |
+
+New (current) cards — pending the repair human gate (not yet re-accepted):
+
+- VisualStyle: `vs-pilot-001-child-horror-notebook` (儿童手绘怪谈作业本风格)
+- PromptRecipe: `pr-pilot-001-child-horror-notebook` (儿童手绘怪谈作业本提示词配方); recipe_hash `58802ab763ac5dc6`
+
+Deprecated cards (history only; do not bind):
+
+- `vs-pilot-001-warm-safe-night-picturebook` → `status: deprecated`
+- `pr-pilot-001-safe-night-picturebook` → `status: deprecated`
+
+Scope honored by this refactor: only the underlying VisualStyle / PromptRecipe / Package / Handoff were repaired. No image was generated, no WebGPTImage call was made, no ReferenceAsset or GenerationRun was created, and no final package was assembled. p01 story direction is unchanged (re-skin only).
 
 ## Source Paths
 
@@ -143,21 +173,30 @@ Workflow C extracted 7 canonical Scene cards (`40-scenes/`) covering the 14-page
 
 ## Visual Style & Prompt Recipe
 
-Workflow D human gate accepted. StoryProject `pilot-001` is the final gate source; the VisualStyle and PromptRecipe cards retain `status: draft` because their schemas do not define `accepted` or `active`.
+**Refactored 2026-06-26 (see [Visual System Refactor](#visual-system-refactor-2026-06-26)).** The visual layer was rebuilt; the prior Workflow D acceptance of the warm-safe cards is superseded. The new cards retain `status: draft` (their schemas define no `accepted`/`active`) and are **pending the repair human gate** — not yet re-accepted.
 
-- VisualStyle accepted: `vs-pilot-001-warm-safe-night-picturebook`
-- PromptRecipe accepted: `pr-pilot-001-safe-night-picturebook`
-- recipe_hash verified: `6020fc5e5c83e043`
-- Character visual_style references verified
+Current (bound) cards:
+
+- VisualStyle: `vs-pilot-001-child-horror-notebook`
+- PromptRecipe: `pr-pilot-001-child-horror-notebook`
+- recipe_hash: `58802ab763ac5dc6`
+- Character `visual_style` references re-pointed to the new style
 - Scene cards unchanged
-- source-distance / child-safety accepted
+- p01 re-pointed and recompiled as `repair_02`; p02–p14 re-pointed and downgraded out of `ready` (stale; not auto-released)
 
-Accepted cards:
+- [pilot-001 儿童手绘怪谈作业本风格 / Child-Drawn Horror Notebook Style](../50-visual-styles/vs-pilot-001-child-horror-notebook.md) — current; `status: draft`, pending the repair human gate.
+- [pilot-001 儿童手绘怪谈作业本提示词配方 / Child-Drawn Horror Notebook Prompt Recipe](../60-prompts/pr-pilot-001-child-horror-notebook.md) — current; reusable recipe only, not an execution prompt.
 
-- [pilot-001 温暖安全夜路图文书风格 / Warm Safe Night Picture Book Style](../50-visual-styles/vs-pilot-001-warm-safe-night-picturebook.md) — schema status remains `draft`; gate accepted in this StoryProject.
-- [pilot-001 儿童安全夜路图文书提示词配方 / Child-Safe Night Picture Book Prompt Recipe](../60-prompts/pr-pilot-001-safe-night-picturebook.md) — schema status remains `draft`; reusable recipe only, not an execution prompt.
+Deprecated cards (history only; `status: deprecated`; do not bind):
 
-Workflow D acceptance alone did not authorize ImageExecutionPackage creation, prompt compilation, WebGPTImage handoff, or image generation.
+- [pilot-001 温暖安全夜路图文书风格 / Warm Safe Night Picture Book Style](../50-visual-styles/vs-pilot-001-warm-safe-night-picturebook.md) — superseded; old hash `62b75f8590685a10` / `6020fc5e5c83e043` historical.
+- [pilot-001 儿童安全夜路图文书提示词配方 / Child-Safe Night Picture Book Prompt Recipe](../60-prompts/pr-pilot-001-safe-night-picturebook.md) — superseded.
+
+Neither the prior Workflow D acceptance nor this refactor authorizes image generation, prompt execution, WebGPTImage handoff, ReferenceAsset, or GenerationRun. The refactor stops at the repair human gate.
+
+### Historical Workflow D/E/F/G (superseded for the visual layer)
+
+The records below describe the original warm-safe pipeline and are kept for history. The visual-style/recipe bindings and `recipe_hash` values in them are now superseded by the refactor above.
 
 Workflow E draft package creation was started on 2026-06-26 by explicit human instruction. Workflow E created the package plan only; it did not authorize WebGPTImage handoff, image generation, GenerationRun, ReferenceAsset, final package assembly, or publishing readiness.
 
@@ -195,7 +234,7 @@ Workflow G manual handoff started on 2026-06-26 for p01 only:
 - No GenerationRun, ReferenceAsset, final package, or publishing record was created.
 - p02–p14 remain blocked for Workflow G.
 
-Ready execution packages:
+Execution packages (current status: p01 = `ready` repair_02 handoff pending the gate; p02–p14 = `draft`, stale under the new recipe, not auto-released):
 
 - [p01 / The Fork at Dusk](../70-execution-packages/iep-pilot-001-p01-fork-at-dusk.md)
 - [p02 / The Fading-Lamp Lane](../70-execution-packages/iep-pilot-001-p02-fading-lamp-lane.md)
@@ -213,6 +252,8 @@ Ready execution packages:
 - [p14 / Goodnight at the Window](../70-execution-packages/iep-pilot-001-p14-bedroom-window-goodnight.md)
 
 ## Production Status
+
+> Visual layer refactored 2026-06-26 — see [Visual System Refactor](#visual-system-refactor-2026-06-26). The Workflow D/E/F acceptance bullets below are historical: their `vs-pilot-001-warm-safe-night-picturebook` / `pr-pilot-001-safe-night-picturebook` bindings and `6020fc5e5c83e043` hash are superseded by `vs-pilot-001-child-horror-notebook` / `pr-pilot-001-child-horror-notebook` (recipe_hash `58802ab763ac5dc6`). Packages are no longer all `ready` — p01 is `ready` (repair_02, gated) and p02–p14 are `draft` (stale, not auto-released).
 
 - Workflow B human approval gate: **ACCEPTED** (story core + page-count confirmed; 2026-06-25).
 - Accepted story core (locked): Cluster 3 only; 14-page structure; rational-reassuring ending; child-safe mystery + safety lesson.
@@ -248,20 +289,23 @@ Ready execution packages:
   - semantic lint records created under `50-agent-work/story-lab/semantic-lint-results/` (gitignored derived records)
   - At Workflow F acceptance time, WebGPTImage handoff and image generation remained blocked
   - Current update: p01-only Workflow G handoff created; image generation remains blocked until human execution evidence exists
-- Current workflow: G — WebGPTImage Manual Handoff.
-- Status: started for p01 only; controlled manual handoff created and awaiting human WebGPTImage execution.
-- Image pipeline remains blocked until manual WebGPTImage evidence exists.
+- Visual-system refactor (2026-06-26): the warm-safe visual layer was deprecated and replaced; the prior Workflow D acceptance is superseded for the visual layer.
+- Current workflow: **D/F/G repair loop** — rolled back from G; awaiting the repair human gate.
+- Status: p01 re-pointed + recompiled as `repair_02` (gated handoff prepared, not executed); p02–p14 re-pointed and downgraded out of `ready`.
+- Image pipeline remains blocked: no image generated, no WebGPTImage call, no ReferenceAsset, no GenerationRun.
 
 ## Blocked Actions
 
-Workflows A, B, C, D, Workflow E draft package plan, and Workflow F prompt compile + semantic lint are accepted. Workflow G has started for p01 only by creating a controlled manual handoff record. Character and Scene card creation are complete, the Workflow D VisualStyle/PromptRecipe gate is accepted, and 14 ImageExecutionPackage cards are ready. The following remain blocked until later human/QA gates are approved:
+Workflows A, B, C are accepted. The Workflow D visual layer was **refactored** (warm-safe cards deprecated; new child-horror-notebook cards pending the repair human gate). p01 is routed to `repair_02`; p02–p14 are downgraded out of `ready` and not auto-released. The following remain blocked until the repair human gate and later human/QA gates are approved:
 
-- WebGPTImage handoff for p02-p14
-- Image generation until a human manually uses the p01 handoff in WebGPTImage and records evidence
+- The repair human gate for the new visual system (must approve before any p01 `repair_02` generation)
+- WebGPTImage handoff execution for p01 (gated) and all of p02–p14
+- Image generation (no image may be generated by this refactor)
 - GenerationRun
 - ReferenceAsset
 - final package assembly
 - publishing readiness
+- recompile / relint of p02–p14 under the new recipe (required before they can return to `ready`)
 
 ## Notes
 
