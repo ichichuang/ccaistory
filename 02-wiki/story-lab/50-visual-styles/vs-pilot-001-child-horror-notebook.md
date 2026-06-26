@@ -25,11 +25,11 @@ canonical: true
 
 # pilot-001 儿童手绘怪谈作业本风格 / Child-Drawn Horror Notebook Style
 
-> Visual-system refactor (2026-06-26). This card replaces the deprecated `vs-pilot-001-warm-safe-night-picturebook`, which failed by drifting into over-safe, polished digital, animalized-human, no-horror output. This card defines visual rules only. It does not generate images, create execution packages, create ReferenceAssets, or authorize WebGPTImage handoff. Status remains `status: draft` because the VisualStyle schema has no `accepted`/`active`; this refactor is **pending the repair human gate** and is not yet accepted in StoryProject `pilot-001`.
+> Clean active VisualStyle for `pilot-001` GPTImage production (visual pipeline reset 2026-06-26). This card defines visual rules only — it does not generate images, create execution packages, create ReferenceAssets, or authorize a GPTImage handoff. `status: draft` because the VisualStyle schema has no `accepted`/`active`. An earlier warm-safe night-picture-book visual system was removed from the project; its failed p01 manual attempt is not accepted and must never be used as a reference.
 
-## Workflow D Gate / 工作流 D 门禁
+## Production Gate / 生产门禁
 
-Proposed visual system for the `pilot-001` D/F/G repair loop. Not yet accepted. Awaiting the repair human gate before any p01 `repair_02` generation. Supersedes the deprecated warm-safe-night picture-book style.
+Active visual system for `pilot-001` clean GPTImage production-handoff preparation. Defines drawing method and atmosphere only. Image generation stays **manual and blocked** until a human operator uses the clean GPTImage prompt; this card authorizes no automated image generation, GenerationRun, ReferenceAsset, or final package.
 
 ## Style Summary / 风格概要
 
@@ -38,6 +38,8 @@ Proposed visual system for the `pilot-001` D/F/G repair loop. Not yet accepted. 
 A page from a 9–12-year-old child's "scary-story notebook." Rough black pencil/ballpoint outlines, colored-pencil and crayon fill, visible eraser marks, red-pen circles and question marks, arrows, a little childish Chinese handwriting. The paper shows creases, pressure marks, smudges, worn corners, and a faintly yellowed old / scanned look. Perspective is off, proportions are childish, furniture and people look hand-drawn by a kid — but the content carries a creepy, supernatural, partly-unexplained folk-tale mood. **The fear is "scary as a child would draw it," not a realistic horror film.**
 
 ## Visual System Scope / 视觉系统职责边界
+
+> **Style is reusable; story content is variable. This visual system controls drawing method and atmosphere only. It must not inject wardrobes, door gaps, eyes, ghosts, or any example motif unless the current package asks for them.**
 
 **Style is reusable; story content is variable.** This visual system controls **drawing method and atmosphere only** — paper, line quality, childish drawing, red-pen annotation behavior, the creepy notebook mood, and supernatural *permission*. It must **not** overwrite scene content and must **not** hard-code any fixed set of horror motifs as mandatory content.
 
@@ -152,12 +154,12 @@ These examples must never become a fixed checklist or required content. A page m
 
 ## Reference Assets / 参考资产
 
-None. This refactor does not create ReferenceAsset cards or image files. A future R00 paper/brushstroke style anchor or any reference asset must be accepted through the later ReferenceAsset workflow before use. The failed warm-safe p01 candidate must never be used as a reference.
+None. This card does not create ReferenceAsset cards or image files. A future R00 paper/brushstroke style anchor or any reference asset must be accepted through the later ReferenceAsset workflow before use. The failed earlier p01 candidate must never be used as a reference.
 
 ## Related Prompt Recipes / 关联 Prompt Recipe
 
 - `pr-pilot-001-child-horror-notebook`
 
-## Supersedes / 取代
+## Removed History / 历史清理
 
-- Deprecated: `vs-pilot-001-warm-safe-night-picturebook` (over-safe / polished digital / animalized humans / no horror).
+- An earlier warm-safe night-picture-book visual system (over-safe / polished digital / animalized humans / no horror) was **removed** in the 2026-06-26 visual pipeline reset. It is not part of the active pipeline and must not be bound. This card is now the only active VisualStyle for `pilot-001`.

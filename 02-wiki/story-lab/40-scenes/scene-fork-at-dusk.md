@@ -60,7 +60,7 @@ Xiao He in yellow raincoat + red boots; Mama in teal coat. Dusk lighting here is
 
 ## Image Targets / 出图目标
 
-`output_targets: [image]`. Linked Workflow E draft package: `iep-pilot-001-p01-fork-at-dusk`. Package remains `status: draft`; Workflow F/G and image generation remain blocked.
+`output_targets: [image]`. Linked execution package (clean draft): `iep-pilot-001-p01-fork-at-dusk`, bound to the clean child-horror-notebook style/recipe (`recipe_hash` `267c7dfe258e43ba`). Package remains `status: draft`; image generation remains manual and blocked.
 
 ## QA Notes / QA 备注
 

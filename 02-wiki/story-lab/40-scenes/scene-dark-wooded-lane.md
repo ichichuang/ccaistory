@@ -16,11 +16,7 @@ props:
   - "a pale shape drifting low (later: mist)"
 output_targets:
   - image
-linked_packages:
-  - iep-pilot-001-p03-dark-wooded-lane-cold-trees
-  - iep-pilot-001-p04-dark-wooded-lane-glowing-dots
-  - iep-pilot-001-p05-dark-wooded-lane-mist-and-moan
-  - iep-pilot-001-p06-dark-wooded-lane-steady-breath
+linked_packages: []
 related_assets: []
 source_paths: []
 tags:
@@ -65,7 +61,7 @@ The dots, the fence-pipe, and the mist must be placed and shaped so their cottag
 
 ## Image Targets / 出图目标
 
-`output_targets: [image]`. Linked Workflow E draft packages: `iep-pilot-001-p03-dark-wooded-lane-cold-trees`, `iep-pilot-001-p04-dark-wooded-lane-glowing-dots`, `iep-pilot-001-p05-dark-wooded-lane-mist-and-moan`, `iep-pilot-001-p06-dark-wooded-lane-steady-breath`. Packages remain `status: draft`; Workflow F/G and image generation remain blocked.
+`output_targets: [image]`. Execution packages for this scene were cleared in the 2026-06-26 visual pipeline reset (Option B clean restart); only p01 currently has a package, and a package for this scene must be recreated later. Image generation remains manual and blocked.
 
 ## QA Notes / QA 备注
 

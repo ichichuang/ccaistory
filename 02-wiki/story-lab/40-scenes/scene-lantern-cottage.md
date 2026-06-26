@@ -18,12 +18,7 @@ props:
   - "a simple pointing gesture / little map of how far they strayed"
 output_targets:
   - image
-linked_packages:
-  - iep-pilot-001-p07-lantern-cottage-warm-light
-  - iep-pilot-001-p08-lantern-cottage-welcome
-  - iep-pilot-001-p09-lantern-cottage-cat-eyes
-  - iep-pilot-001-p10-lantern-cottage-wind-and-mist
-  - iep-pilot-001-p11-lantern-cottage-open-country
+linked_packages: []
 related_assets: []
 source_paths: []
 tags:
@@ -70,7 +65,7 @@ Tangerine = orange tabby, white paws, bell collar; Lantern Grandpa with lantern 
 
 ## Image Targets / 出图目标
 
-`output_targets: [image]`. Linked Workflow E draft packages: `iep-pilot-001-p07-lantern-cottage-warm-light`, `iep-pilot-001-p08-lantern-cottage-welcome`, `iep-pilot-001-p09-lantern-cottage-cat-eyes`, `iep-pilot-001-p10-lantern-cottage-wind-and-mist`, `iep-pilot-001-p11-lantern-cottage-open-country`. Packages remain `status: draft`; Workflow F/G and image generation remain blocked.
+`output_targets: [image]`. Execution packages for this scene were cleared in the 2026-06-26 visual pipeline reset (Option B clean restart); only p01 currently has a package, and a package for this scene must be recreated later. Image generation remains manual and blocked.
 
 ## QA Notes / QA 备注
 

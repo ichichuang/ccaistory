@@ -38,11 +38,11 @@ canonical: true
 
 # pilot-001 儿童手绘怪谈作业本提示词配方 / Child-Drawn Horror Notebook Prompt Recipe
 
-> Visual-system refactor (2026-06-26). This card replaces the deprecated `pr-pilot-001-safe-night-picturebook`, which failed by enforcing over-safe, polished, animal-prone, no-horror output. Reusable recipe only. This card does not generate a concrete image, does not contain a WebGPTImage execution prompt, does not bind any single `image_id`, and must not be pasted into an image model as an execution sheet. Status remains `status: draft` (schema has no `accepted`/`active`); this refactor is **pending the repair human gate** and is not yet accepted in StoryProject `pilot-001`.
+> Clean active PromptRecipe for `pilot-001` GPTImage production (visual pipeline reset 2026-06-26). Reusable, story-driven recipe only. This card does not generate a concrete image, does not contain a GPTImage execution prompt, does not bind any single `image_id`, and must not be pasted into an image model as an execution sheet. `status: draft` (schema has no `accepted`/`active`). An earlier warm-safe night-picture-book recipe was removed from the project and must not be bound.
 
-## Workflow D Gate / 工作流 D 门禁
+## Production Gate / 生产门禁
 
-Proposed recipe for the `pilot-001` D/F/G repair loop. Not yet accepted. After the 2026-06-26 consistency refinement (story-driven content, motifs demoted to examples), the stored `recipe_hash` is recomputed as `267c7dfe258e43ba` (see Change Log; previously `58802ab763ac5dc6`); Workflow F must recompute and compare per `drift_check_policy`. Supersedes the deprecated `pr-pilot-001-safe-night-picturebook`.
+Active reusable recipe for `pilot-001` clean GPTImage production-handoff preparation. Story-driven — motifs are examples only, never mandatory. The stored `recipe_hash` is `267c7dfe258e43ba`, the **only active recipe hash** for `pilot-001`; Workflow F must recompute and compare per `drift_check_policy`. Image generation stays manual and blocked until a human operator uses the clean GPTImage prompt.
 
 ## Purpose / 用途
 
@@ -119,7 +119,7 @@ Apply these as reusable negative rules in later compiled prompts. They intention
 
 - Must bind `vs-pilot-001-child-horror-notebook` as the visual style in any future package.
 - Must draw character facts only from approved Character cards (human-only) and scene facts only from approved Scene cards.
-- Must not invent ReferenceAsset dependencies. No reference assets are accepted; the failed warm-safe p01 candidate must never be used as a reference, anchor, or continuity dependency.
+- Must not invent ReferenceAsset dependencies. No reference assets are accepted; the failed earlier p01 candidate must never be used as a reference, anchor, or continuity dependency.
 - Must not include actual WebGPTImage execution text, final per-image prompts, raw image outputs, or `image_id` bindings.
 
 ## Workflow E/F Compilation Placeholders / 后续编译预留位
@@ -142,7 +142,7 @@ Workflow E may bind this recipe to an ImageExecutionPackage only after the refac
 
 - Repair human gate: human review confirms the notebook-horror visual system, human-only characters, allowed supernatural content, hard content-safety lines, source-distance, and no execution prompt.
 - Workflow E/F: future `compile-asset`, `lint-asset`, and `lint-prompt` must block if a hard content-safety violation appears (gore, sexual content, real child abuse, real-crime reproduction, in-image platform/prompt text), if recipe text is mixed with a concrete execution prompt, or if the recipe_hash mismatches. They must NOT block merely for horror/supernatural/creepy content.
-- WebGPTImage remains blocked until a later G handoff from a ready, lint-passed package; this refactor authorizes only a p01 `repair_02` handoff pending human action.
+- GPTImage remains blocked until a human operator manually uses a clean p01 GPTImage handoff built from a ready, lint-passed package; this card authorizes no automated image generation, GenerationRun, ReferenceAsset, or final package.
 
 ## Repair Hooks / 修复钩子
 
@@ -156,6 +156,4 @@ Workflow E may bind this recipe to an ImageExecutionPackage only after the refac
 
 ## Change Log / 变更记录
 
-- 2026-06-26: Created as the visual-system refactor recipe replacing the deprecated `pr-pilot-001-safe-night-picturebook`. Reframes the base direction from warm-safe picture book to child-drawn horror notebook; allows supernatural/unexplained content; keeps human-only character locks and hard content-safety lines. No image execution authorized.
-- 2026-06-26: Computed a reproducible `recipe_hash` = `58802ab763ac5dc6` (sha256-short over the 18 Allowed/Forbidden/Negative directive lines) and documented the drift-check basis in `drift_check_policy`, including that horror/supernatural content must not trigger a block.
-- 2026-06-26 (consistency refinement): Made the content component **story-driven instead of motif-locked**. Restructured Prompt Components into fixed style, character (from Character cards), scene (from Scene card), story-specific strange event (from `ImageExecutionPackage` `allowed_content`), annotation, content-safety, and supernatural-permission components. Replaced the fixed Allowed-Content motif list (talking wardrobe / door gap / night window / strange eyes / blurry shadow) with the placeholder rule `{{story_specific_strange_event_from_package}}` rendered in the child-drawn horror notebook style, and moved those motifs into an "Examples, not requirements" block that must not be injected unless present in the approved package or scene. Generalized the concrete Xiao He/Mama line to "from the approved Character cards." Updated `drift_check_policy` so the hash basis excludes the `{{ }}` placeholder line and the example motifs (no concrete package content, no fixed motif examples as mandatory content). Recomputed `recipe_hash` = `267c7dfe258e43ba` (was `58802ab763ac5dc6`). Positive/negative style cores unchanged. No image execution authorized.
+- 2026-06-26 (visual pipeline reset): Established as the single clean, reusable, **story-driven** PromptRecipe for `pilot-001` GPTImage production. The earlier warm-safe night-picture-book recipe and all of its intermediate recipe hashes were removed from the active pipeline. Components: fixed style / character (from Character cards) / scene (from Scene card) / story-specific strange event (from `ImageExecutionPackage` `allowed_content`) / annotation / content-safety / supernatural-permission / source-distance. The fixed motif list was replaced by `{{story_specific_strange_event_from_package}}`; motifs are kept only in an "Examples, not requirements" block and are excluded from `recipe_hash`. Active `recipe_hash` = `267c7dfe258e43ba` (sha256-short over the 18 reusable Allowed/Forbidden/Negative directive lines, excluding the `{{ }}` placeholder line and the example motifs). No image execution authorized.

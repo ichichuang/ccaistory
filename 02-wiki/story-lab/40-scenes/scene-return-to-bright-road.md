@@ -15,8 +15,7 @@ props:
   - "the wooden signpost (callback to the fork)"
 output_targets:
   - image
-linked_packages:
-  - iep-pilot-001-p12-return-to-bright-road
+linked_packages: []
 related_assets: []
 source_paths: []
 tags:
@@ -62,7 +61,7 @@ Lighting brightens back up toward the fork-scene level; same signpost design as 
 
 ## Image Targets / 出图目标
 
-`output_targets: [image]`. Linked Workflow E draft package: `iep-pilot-001-p12-return-to-bright-road`. Package remains `status: draft`; Workflow F/G and image generation remain blocked.
+`output_targets: [image]`. Execution packages for this scene were cleared in the 2026-06-26 visual pipeline reset (Option B clean restart); only p01 currently has a package, and a package for this scene must be recreated later. Image generation remains manual and blocked.
 
 ## QA Notes / QA 备注
 

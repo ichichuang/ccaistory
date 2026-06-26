@@ -14,8 +14,7 @@ props:
   - "first low wisps of mist"
 output_targets:
   - image
-linked_packages:
-  - iep-pilot-001-p02-fading-lamp-lane
+linked_packages: []
 related_assets: []
 source_paths: []
 tags:
@@ -60,7 +59,7 @@ Lighting dims from the fork scene; mist introduced low and thin. Raincoat / teal
 
 ## Image Targets / 出图目标
 
-`output_targets: [image]`. Linked Workflow E draft package: `iep-pilot-001-p02-fading-lamp-lane`. Package remains `status: draft`; Workflow F/G and image generation remain blocked.
+`output_targets: [image]`. Execution packages for this scene were cleared in the 2026-06-26 visual pipeline reset (Option B clean restart); only p01 currently has a package, and a package for this scene must be recreated later. Image generation remains manual and blocked.
 
 ## QA Notes / QA 备注
 
