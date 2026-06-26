@@ -52,14 +52,15 @@ publishing_readiness_status: blocked
 
 ## Workflow Status
 
-- Current workflow: E — ImageExecutionPackage Creation
-- Status: Workflow E draft package plan created; human review gate pending before any package can become `ready`
+- Current workflow: F — Prompt Compile and Semantic Lint
+- Status: blocked pending separate human approval to start Workflow F
 - Previous workflow: A — Raw Story Intake (accepted); B — Story Analysis (accepted); C — Character & Scene Extraction (accepted); D — Visual Style & PromptRecipe (accepted)
 - Workflow D human approval gate: ACCEPTED (visual style + prompt recipe confirmed; 2026-06-26).
-- Next workflow after E approval: F — prompt compile / semantic lint (blocked)
+- Workflow E human gate: ACCEPTED for draft package plan (2026-06-26).
+- Workflow F: prompt compile / semantic lint (blocked pending separate human approval)
 - Image generation: blocked
 - WebGPTImage handoff: blocked
-- ImageExecutionPackage creation: 14 draft cards created for p1–p14; package `ready` transition blocked pending Workflow E human gate
+- ImageExecutionPackage creation: 14 draft cards accepted for p01–p14; all package `status` values remain `draft`
 
 ## Source Paths
 
@@ -159,6 +160,18 @@ Workflow D acceptance alone did not authorize ImageExecutionPackage creation, pr
 
 Workflow E draft package creation was started on 2026-06-26 by explicit human instruction. Created draft cards remain non-ready and do not authorize Workflow F/G, prompt compilation, WebGPTImage handoff, image generation, GenerationRun, ReferenceAsset, final package assembly, or publishing readiness.
 
+Workflow E human gate accepted the draft package plan on 2026-06-26:
+
+- Workflow E human gate: ACCEPTED for draft package plan.
+- 14 ImageExecutionPackage draft cards accepted.
+- p01–p14 coverage verified.
+- All packages bind `vs-pilot-001-warm-safe-night-picturebook`.
+- All packages bind `pr-pilot-001-safe-night-picturebook`.
+- recipe_hash verified: `6020fc5e5c83e043`.
+- Scene `linked_packages` verified.
+- Package status remains `draft`.
+- F/G/image generation remain blocked.
+
 Draft execution packages:
 
 - [p01 / The Fork at Dusk](../70-execution-packages/iep-pilot-001-p01-fork-at-dusk.md)
@@ -194,16 +207,25 @@ Draft execution packages:
   - Character visual_style references verified
   - Scene cards unchanged
   - source-distance / child-safety accepted
-- Current workflow: E — ImageExecutionPackage Creation.
-- Status: 14 ImageExecutionPackage draft cards created for p1–p14; Workflow E human gate remains pending before any `ready` transition.
+- Workflow E human approval gate: ACCEPTED (draft package plan confirmed; 2026-06-26).
+  - 14 ImageExecutionPackage draft cards accepted
+  - p01–p14 coverage verified
+  - all packages bind `vs-pilot-001-warm-safe-night-picturebook`
+  - all packages bind `pr-pilot-001-safe-night-picturebook`
+  - recipe_hash verified: `6020fc5e5c83e043`
+  - Scene `linked_packages` verified
+  - package status remains `draft`
+  - F/G/image generation remain blocked
+- Current workflow: F — Prompt Compile and Semantic Lint.
+- Status: blocked pending separate human approval to start Workflow F.
 - Image pipeline remains blocked.
 
 ## Blocked Actions
 
-Workflows A, B, C, and D are accepted; Character and Scene card creation are complete, the Workflow D VisualStyle/PromptRecipe gate is accepted, and Workflow E draft package cards exist. The following remain blocked until later human/QA gates are approved:
+Workflows A, B, C, D, and Workflow E draft package plan are accepted. Character and Scene card creation are complete, the Workflow D VisualStyle/PromptRecipe gate is accepted, and 14 Workflow E draft package cards exist. The following remain blocked until later human/QA gates are approved:
 
-- setting any ImageExecutionPackage to `ready`
 - prompt compile / semantic lint
+- package status ready transition
 - WebGPTImage execution prompt / handoff
 - Image generation
 - GenerationRun
