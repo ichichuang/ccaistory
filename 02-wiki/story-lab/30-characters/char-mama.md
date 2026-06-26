@@ -6,7 +6,7 @@ title_en: Mama
 status: draft
 project_id: pilot-001
 cover_image: ""
-visual_style: ""
+visual_style: "vs-pilot-001-warm-safe-night-picturebook"
 visual_lock:
   - "warm adult caregiver, calm demeanor"
   - "medium-length dark hair"
@@ -26,7 +26,7 @@ tags:
   - pilot-001
   - character
 created_at: 2026-06-25
-updated_at: 2026-06-25
+updated_at: 2026-06-26
 owner: ichichuang
 version: v0
 canonical: true
@@ -34,7 +34,7 @@ canonical: true
 
 # 妈妈 / Mama
 
-> Canonical Character card — pilot-001 (Cluster 3). `visual_style` assigned later in Workflow D (empty here). Original and child-safe.
+> Canonical Character card — pilot-001 (Cluster 3). `visual_style` assigned in Workflow D and accepted by the Workflow D human gate. Original and child-safe.
 
 ## Role in Story / 故事中的定位
 
@@ -64,4 +64,4 @@ Appears p1–p13. See `../40-scenes/`.
 
 ## Related Assets / 关联资产
 
-None yet (visual style + anchor images are downstream / blocked).
+No reference/anchor images yet. Visual style is assigned by Workflow D and accepted by the Workflow D human gate.

@@ -6,7 +6,7 @@ title_en: Xiao He
 status: draft
 project_id: pilot-001
 cover_image: ""
-visual_style: ""
+visual_style: "vs-pilot-001-warm-safe-night-picturebook"
 visual_lock:
   - "age ~6–7 child proportions"
   - "short dark hair with a small clip"
@@ -28,7 +28,7 @@ tags:
   - pilot-001
   - character
 created_at: 2026-06-25
-updated_at: 2026-06-25
+updated_at: 2026-06-26
 owner: ichichuang
 version: v0
 canonical: true
@@ -36,7 +36,7 @@ canonical: true
 
 # 小禾 / Xiao He
 
-> Canonical Character card — identity + appearance lock for the accepted pilot-001 story core (Cluster 3). Rendering style (`visual_style`) is assigned later in Workflow D and is intentionally empty here. Original and child-safe; no source-derived identity.
+> Canonical Character card — identity + appearance lock for the accepted pilot-001 story core (Cluster 3). Rendering style (`visual_style`) is assigned in Workflow D and accepted by the Workflow D human gate. Original and child-safe; no source-derived identity.
 
 ## Role in Story / 故事中的定位
 
@@ -67,4 +67,4 @@ Appears in every scene (p1–p14). See `../40-scenes/`.
 
 ## Related Assets / 关联资产
 
-None yet. Reference/anchor images and visual style are produced downstream (Workflow D / reference-asset workflow), which are currently blocked.
+No reference/anchor images yet. Visual style is assigned by Workflow D and accepted by the Workflow D human gate; reference assets remain downstream and blocked.

@@ -7,7 +7,7 @@ status: active
 project_id: pilot-001
 canonical: true
 created_at: 2026-06-25
-updated_at: 2026-06-25
+updated_at: 2026-06-26
 owner: ichichuang
 version: v0
 tags:
@@ -25,7 +25,8 @@ main_characters:
   - char-lantern-grandpa
   - char-juzi-cat
 worlds: []
-visual_styles: []
+visual_styles:
+  - vs-pilot-001-warm-safe-night-picturebook
 related_packages: []
 final_package_status: not-started
 required_asset_count: 0
@@ -37,13 +38,14 @@ publishing_readiness_status: blocked
 
 ## Workflow Status
 
-Current workflow: D — Visual Style & PromptRecipe  
-Status: blocked pending separate human approval to start Workflow D  
-Previous workflow: A — Raw Story Intake (accepted); B — Story Analysis (accepted); C — Character & Scene Extraction (accepted)  
-Next workflow: E — ImageExecutionPackage Creation (blocked)  
-Image generation: blocked  
-WebGPTImage handoff: blocked  
-ImageExecutionPackage creation: blocked  
+- Current workflow: E — ImageExecutionPackage Creation
+- Status: blocked pending separate human approval to start Workflow E
+- Previous workflow: A — Raw Story Intake (accepted); B — Story Analysis (accepted); C — Character & Scene Extraction (accepted); D — Visual Style & PromptRecipe (accepted)
+- Workflow D human approval gate: ACCEPTED (visual style + prompt recipe confirmed; 2026-06-26).
+- Next workflow after E approval: F — prompt compile / semantic lint (blocked)
+- Image generation: blocked
+- WebGPTImage handoff: blocked
+- ImageExecutionPackage creation: blocked pending separate human approval to start Workflow E
 
 ## Source Paths
 
@@ -123,6 +125,24 @@ Workflow C extracted 7 canonical Scene cards (`40-scenes/`) covering the 14-page
 - [家门口 / The Home Doorway](../40-scenes/scene-home-doorway.md) — p13.
 - [窗边的晚安 / Goodnight at the Window](../40-scenes/scene-bedroom-window.md) — p14.
 
+## Visual Style & Prompt Recipe
+
+Workflow D human gate accepted. StoryProject `pilot-001` is the final gate source; the VisualStyle and PromptRecipe cards retain `status: draft` because their schemas do not define `accepted` or `active`.
+
+- VisualStyle accepted: `vs-pilot-001-warm-safe-night-picturebook`
+- PromptRecipe accepted: `pr-pilot-001-safe-night-picturebook`
+- recipe_hash verified: `6020fc5e5c83e043`
+- Character visual_style references verified
+- Scene cards unchanged
+- source-distance / child-safety accepted
+
+Accepted cards:
+
+- [pilot-001 温暖安全夜路图文书风格 / Warm Safe Night Picture Book Style](../50-visual-styles/vs-pilot-001-warm-safe-night-picturebook.md) — schema status remains `draft`; gate accepted in this StoryProject.
+- [pilot-001 儿童安全夜路图文书提示词配方 / Child-Safe Night Picture Book Prompt Recipe](../60-prompts/pr-pilot-001-safe-night-picturebook.md) — schema status remains `draft`; reusable recipe only, not an execution prompt.
+
+Workflow D acceptance does not authorize ImageExecutionPackage creation, prompt compilation, WebGPTImage handoff, or image generation. Workflow E remains blocked pending separate human approval.
+
 ## Production Status
 
 - Workflow B human approval gate: **ACCEPTED** (story core + page-count confirmed; 2026-06-25).
@@ -134,19 +154,29 @@ Workflow C extracted 7 canonical Scene cards (`40-scenes/`) covering the 14-page
   - 7 Scene cards accepted
   - Referential integrity accepted
   - Source-distance / child-safety accepted
-- Next: Workflow D (Visual Style & PromptRecipe) — **blocked pending separate human approval to start Workflow D**. Image pipeline remains blocked.
+- Workflow D human approval gate: ACCEPTED (visual style + prompt recipe confirmed; 2026-06-26).
+  - VisualStyle accepted: `vs-pilot-001-warm-safe-night-picturebook`
+  - PromptRecipe accepted: `pr-pilot-001-safe-night-picturebook`
+  - recipe_hash verified: `6020fc5e5c83e043`
+  - Character visual_style references verified
+  - Scene cards unchanged
+  - source-distance / child-safety accepted
+- Current workflow: E — ImageExecutionPackage Creation.
+- Status: blocked pending separate human approval to start Workflow E.
+- Image pipeline remains blocked.
 
 ## Blocked Actions
 
-Workflows A, B and C are accepted; Character and Scene card creation are complete. The following remain blocked until Workflow D (and later human gates) are approved:
+Workflows A, B, C, and D are accepted; Character and Scene card creation are complete, and the Workflow D VisualStyle/PromptRecipe gate is accepted. The following remain blocked until separate human approval starts Workflow E and later gates are approved:
 
-- VisualStyle creation
-- PromptRecipe creation
 - ImageExecutionPackage creation
-- WebGPTImage prompt writing
+- prompt compile / semantic lint
+- WebGPTImage execution prompt / handoff
 - Image generation
-- Final package assembly
-- Publishing readiness
+- GenerationRun
+- ReferenceAsset
+- final package assembly
+- publishing readiness
 
 ## Notes
 
