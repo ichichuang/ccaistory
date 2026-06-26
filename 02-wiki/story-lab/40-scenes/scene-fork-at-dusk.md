@@ -14,7 +14,8 @@ props:
   - "dusk sky with the first stars"
 output_targets:
   - image
-linked_packages: []
+linked_packages:
+  - iep-pilot-001-p01-fork-at-dusk
 related_assets: []
 source_paths: []
 tags:
@@ -22,7 +23,7 @@ tags:
   - pilot-001
   - scene
 created_at: 2026-06-25
-updated_at: 2026-06-25
+updated_at: 2026-06-26
 owner: ichichuang
 version: v0
 canonical: true
@@ -59,7 +60,7 @@ Xiao He in yellow raincoat + red boots; Mama in teal coat. Dusk lighting here is
 
 ## Image Targets / 出图目标
 
-`output_targets: [image]`. No execution package yet (E blocked).
+`output_targets: [image]`. Linked Workflow E draft package: `iep-pilot-001-p01-fork-at-dusk`. Package remains `status: draft`; Workflow F/G and image generation remain blocked.
 
 ## QA Notes / QA 备注
 

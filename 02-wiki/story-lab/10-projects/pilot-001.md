@@ -27,7 +27,21 @@ main_characters:
 worlds: []
 visual_styles:
   - vs-pilot-001-warm-safe-night-picturebook
-related_packages: []
+related_packages:
+  - iep-pilot-001-p01-fork-at-dusk
+  - iep-pilot-001-p02-fading-lamp-lane
+  - iep-pilot-001-p03-dark-wooded-lane-cold-trees
+  - iep-pilot-001-p04-dark-wooded-lane-glowing-dots
+  - iep-pilot-001-p05-dark-wooded-lane-mist-and-moan
+  - iep-pilot-001-p06-dark-wooded-lane-steady-breath
+  - iep-pilot-001-p07-lantern-cottage-warm-light
+  - iep-pilot-001-p08-lantern-cottage-welcome
+  - iep-pilot-001-p09-lantern-cottage-cat-eyes
+  - iep-pilot-001-p10-lantern-cottage-wind-and-mist
+  - iep-pilot-001-p11-lantern-cottage-open-country
+  - iep-pilot-001-p12-return-to-bright-road
+  - iep-pilot-001-p13-home-doorway
+  - iep-pilot-001-p14-bedroom-window-goodnight
 final_package_status: not-started
 required_asset_count: 0
 accepted_asset_count: 0
@@ -39,13 +53,13 @@ publishing_readiness_status: blocked
 ## Workflow Status
 
 - Current workflow: E — ImageExecutionPackage Creation
-- Status: blocked pending separate human approval to start Workflow E
+- Status: Workflow E draft package plan created; human review gate pending before any package can become `ready`
 - Previous workflow: A — Raw Story Intake (accepted); B — Story Analysis (accepted); C — Character & Scene Extraction (accepted); D — Visual Style & PromptRecipe (accepted)
 - Workflow D human approval gate: ACCEPTED (visual style + prompt recipe confirmed; 2026-06-26).
 - Next workflow after E approval: F — prompt compile / semantic lint (blocked)
 - Image generation: blocked
 - WebGPTImage handoff: blocked
-- ImageExecutionPackage creation: blocked pending separate human approval to start Workflow E
+- ImageExecutionPackage creation: 14 draft cards created for p1–p14; package `ready` transition blocked pending Workflow E human gate
 
 ## Source Paths
 
@@ -141,7 +155,26 @@ Accepted cards:
 - [pilot-001 温暖安全夜路图文书风格 / Warm Safe Night Picture Book Style](../50-visual-styles/vs-pilot-001-warm-safe-night-picturebook.md) — schema status remains `draft`; gate accepted in this StoryProject.
 - [pilot-001 儿童安全夜路图文书提示词配方 / Child-Safe Night Picture Book Prompt Recipe](../60-prompts/pr-pilot-001-safe-night-picturebook.md) — schema status remains `draft`; reusable recipe only, not an execution prompt.
 
-Workflow D acceptance does not authorize ImageExecutionPackage creation, prompt compilation, WebGPTImage handoff, or image generation. Workflow E remains blocked pending separate human approval.
+Workflow D acceptance alone did not authorize ImageExecutionPackage creation, prompt compilation, WebGPTImage handoff, or image generation.
+
+Workflow E draft package creation was started on 2026-06-26 by explicit human instruction. Created draft cards remain non-ready and do not authorize Workflow F/G, prompt compilation, WebGPTImage handoff, image generation, GenerationRun, ReferenceAsset, final package assembly, or publishing readiness.
+
+Draft execution packages:
+
+- [p01 / The Fork at Dusk](../70-execution-packages/iep-pilot-001-p01-fork-at-dusk.md)
+- [p02 / The Fading-Lamp Lane](../70-execution-packages/iep-pilot-001-p02-fading-lamp-lane.md)
+- [p03 / The Dark Wooded Lane — Cold Trees](../70-execution-packages/iep-pilot-001-p03-dark-wooded-lane-cold-trees.md)
+- [p04 / The Dark Wooded Lane — Glowing Dots](../70-execution-packages/iep-pilot-001-p04-dark-wooded-lane-glowing-dots.md)
+- [p05 / The Dark Wooded Lane — Mist and Moan](../70-execution-packages/iep-pilot-001-p05-dark-wooded-lane-mist-and-moan.md)
+- [p06 / The Dark Wooded Lane — Steady Breath](../70-execution-packages/iep-pilot-001-p06-dark-wooded-lane-steady-breath.md)
+- [p07 / The Lantern Cottage — Warm Light](../70-execution-packages/iep-pilot-001-p07-lantern-cottage-warm-light.md)
+- [p08 / The Lantern Cottage — Welcome](../70-execution-packages/iep-pilot-001-p08-lantern-cottage-welcome.md)
+- [p09 / The Lantern Cottage — Cat Eyes](../70-execution-packages/iep-pilot-001-p09-lantern-cottage-cat-eyes.md)
+- [p10 / The Lantern Cottage — Wind and Mist](../70-execution-packages/iep-pilot-001-p10-lantern-cottage-wind-and-mist.md)
+- [p11 / The Lantern Cottage — Open Country](../70-execution-packages/iep-pilot-001-p11-lantern-cottage-open-country.md)
+- [p12 / Back to the Bright Road](../70-execution-packages/iep-pilot-001-p12-return-to-bright-road.md)
+- [p13 / The Home Doorway](../70-execution-packages/iep-pilot-001-p13-home-doorway.md)
+- [p14 / Goodnight at the Window](../70-execution-packages/iep-pilot-001-p14-bedroom-window-goodnight.md)
 
 ## Production Status
 
@@ -162,14 +195,14 @@ Workflow D acceptance does not authorize ImageExecutionPackage creation, prompt 
   - Scene cards unchanged
   - source-distance / child-safety accepted
 - Current workflow: E — ImageExecutionPackage Creation.
-- Status: blocked pending separate human approval to start Workflow E.
+- Status: 14 ImageExecutionPackage draft cards created for p1–p14; Workflow E human gate remains pending before any `ready` transition.
 - Image pipeline remains blocked.
 
 ## Blocked Actions
 
-Workflows A, B, C, and D are accepted; Character and Scene card creation are complete, and the Workflow D VisualStyle/PromptRecipe gate is accepted. The following remain blocked until separate human approval starts Workflow E and later gates are approved:
+Workflows A, B, C, and D are accepted; Character and Scene card creation are complete, the Workflow D VisualStyle/PromptRecipe gate is accepted, and Workflow E draft package cards exist. The following remain blocked until later human/QA gates are approved:
 
-- ImageExecutionPackage creation
+- setting any ImageExecutionPackage to `ready`
 - prompt compile / semantic lint
 - WebGPTImage execution prompt / handoff
 - Image generation

@@ -14,7 +14,8 @@ props:
   - "a welcome mat / glowing doorway"
 output_targets:
   - image
-linked_packages: []
+linked_packages:
+  - iep-pilot-001-p13-home-doorway
 related_assets: []
 source_paths: []
 tags:
@@ -22,7 +23,7 @@ tags:
   - pilot-001
   - scene
 created_at: 2026-06-25
-updated_at: 2026-06-25
+updated_at: 2026-06-26
 owner: ichichuang
 version: v0
 canonical: true
@@ -61,7 +62,7 @@ Night, but safe and warm. Xiao He (yellow raincoat) and Mama (teal coat) consist
 
 ## Image Targets / 出图目标
 
-`output_targets: [image]`. No execution package yet (E blocked).
+`output_targets: [image]`. Linked Workflow E draft package: `iep-pilot-001-p13-home-doorway`. Package remains `status: draft`; Workflow F/G and image generation remain blocked.
 
 ## QA Notes / QA 备注
 

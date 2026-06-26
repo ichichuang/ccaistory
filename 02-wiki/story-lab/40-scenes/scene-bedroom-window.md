@@ -13,7 +13,8 @@ props:
   - "optional: a little orange-cat toy (callback to Tangerine)"
 output_targets:
   - image
-linked_packages: []
+linked_packages:
+  - iep-pilot-001-p14-bedroom-window-goodnight
 related_assets: []
 source_paths: []
 tags:
@@ -21,7 +22,7 @@ tags:
   - pilot-001
   - scene
 created_at: 2026-06-25
-updated_at: 2026-06-25
+updated_at: 2026-06-26
 owner: ichichuang
 version: v0
 canonical: true
@@ -57,7 +58,7 @@ Cozy night lighting. Resolves the night/dark motif as safe. Xiao He recognizable
 
 ## Image Targets / 出图目标
 
-`output_targets: [image]`. No execution package yet (E blocked).
+`output_targets: [image]`. Linked Workflow E draft package: `iep-pilot-001-p14-bedroom-window-goodnight`. Package remains `status: draft`; Workflow F/G and image generation remain blocked.
 
 ## QA Notes / QA 备注
 
