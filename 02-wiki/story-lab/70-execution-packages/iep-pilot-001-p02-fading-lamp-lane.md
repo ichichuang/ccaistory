@@ -26,9 +26,10 @@ compile_result_ref: 50-agent-work/story-lab/compiled-prompts/compiled-prompt-pil
 semantic_lint_result_ref: 50-agent-work/story-lab/semantic-lint-results/semantic-lint-pilot-001-p02-fading-lamp-lane.json
 compile_status: pass
 semantic_lint_status: pass
-webgptimage_handoff_status: not_created
+webgptimage_handoff_status: prepared
+webgptimage_handoff_record_ref: 50-agent-work/story-lab/webgptimage-handoffs/pilot-001/handoff-pilot-001-p02-fading-lamp-lane-gptimage.md
 downstream_generation_status: blocked
-blocked_reason: "Workflow F compile and semantic lint passed for p02. WebGPTImage handoff has not been created, and image generation remains blocked until separately authorized."
+blocked_reason: "Workflow F compile and semantic lint passed for p02. GPTImage handoff is prepared for human use only; image generation remains blocked until separately authorized."
 target_model: "GPTImage manual window (human-operated); not authorized for automated generation"
 aspect_ratio: "1:1"
 reference_assets:
@@ -68,7 +69,7 @@ asset_qa_result_ref: ""
 r00_dependency_policy: "Use ra-pilot-001-r00-master-style-character-anchor only for notebook paper texture, rough child-drawn line quality, red-pen annotation language, scanned-paper material feeling, Xiao He and Mama visual appearance, and their relative proportions. Do not borrow the p01 fork scene, signpost layout, road split, or story event."
 maximum_anchor_reuse_policy: "R00 reuse is allowed only for p02-p14 continuity through explicit required_reference_assets binding. Each page must keep its own Scene and ImageExecutionPackage content."
 dependency_notes: "Depends on scene-fading-lamp-lane, char-xiaohe, char-mama, vs-pilot-001-child-horror-notebook, pr-pilot-001-child-horror-notebook, and accepted R00 ReferenceAsset ra-pilot-001-r00-master-style-character-anchor."
-blocking_notes: "No compile, semantic lint, WebGPTImage handoff, generation, QA, or ReferenceAsset acceptance is authorized by this draft package."
+blocking_notes: "Workflow F compile and semantic lint are complete. GPTImage handoff is prepared for human use only; image generation, GenerationRun, QA, ReferenceAsset acceptance, final package, and publishing records remain blocked until separately authorized."
 final_assembly_dependency: pilot-001
 tags:
   - story-lab
@@ -89,7 +90,7 @@ canonical: true
 
 # pilot-001 p02 灯火渐稀小路图像执行包 / The Fading-Lamp Lane Image Execution Package
 
-> Ready p02 ImageExecutionPackage after Workflow F compile and semantic lint. It binds the accepted R00 master visual reference for narrow continuity only. It does not authorize WebGPTImage handoff, image generation, QA, acceptance, final package assembly, or publishing records.
+> Ready p02 ImageExecutionPackage after Workflow F compile and semantic lint. It binds the accepted R00 master visual reference for narrow continuity only. The GPTImage handoff is prepared for human use only; it does not authorize image generation, QA, acceptance, final package assembly, or publishing records.
 
 ## Package Summary / 执行包概要
 
@@ -102,6 +103,8 @@ canonical: true
 - Recipe hash: `267c7dfe258e43ba`
 - Required R00 reference: [ra-pilot-001-r00-master-style-character-anchor](../reference-assets/ra-pilot-001-r00-master-style-character-anchor.md)
 - Package status: `ready`
+- WebGPTImage handoff status: `prepared`
+- WebGPTImage handoff record: `50-agent-work/story-lab/webgptimage-handoffs/pilot-001/handoff-pilot-001-p02-fading-lamp-lane-gptimage.md`
 - Downstream generation status: `blocked`
 - Compile result: `50-agent-work/story-lab/compiled-prompts/compiled-prompt-pilot-001-p02-fading-lamp-lane.json`
 - Semantic lint result: `50-agent-work/story-lab/semantic-lint-results/semantic-lint-pilot-001-p02-fading-lamp-lane.json`
@@ -156,7 +159,7 @@ Initial full-story order: 2 of 14. This card is planning metadata only and does 
 
 ## Manual Execution Status / 人工执行状态
 
-No WebGPTImage handoff exists for p02. No image generation is authorized by this step; the next controlled workflow is p02 GPTImage handoff preparation only.
+The p02 GPTImage handoff is prepared for human use only at `50-agent-work/story-lab/webgptimage-handoffs/pilot-001/handoff-pilot-001-p02-fading-lamp-lane-gptimage.md`. No image generation is authorized by this package, and no candidate image, GenerationRun, QA, or ReferenceAsset acceptance exists for p02.
 
 ## QA Acceptance Criteria / QA 验收标准
 
