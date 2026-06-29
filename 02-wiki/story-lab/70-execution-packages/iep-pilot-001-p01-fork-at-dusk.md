@@ -88,6 +88,13 @@ canonical: true
 - PromptRecipe: [pr-pilot-001-child-horror-notebook](../60-prompts/pr-pilot-001-child-horror-notebook.md)
 - Recipe hash: `267c7dfe258e43ba` (the only active recipe hash for `pilot-001`)
 
+## Series Master Anchor / 系列主锚
+
+**p01 is the designated series master anchor.** In this serialized picture book, style, character, and proportion consistency are mandatory across all pages. Once a p01 image is **accepted** at the p01 QA / human gate, that accepted image becomes the **master visual reference** for every later page (p02-p14): later pages upload it as the master reference and inherit its notebook-paper style, line quality, red-pen language, matte texture, square format, character design, and proportions — only the scene event changes per page (see the project card's "Series Continuity & Master Anchor" section and the recipe's "Series Continuity Prefix").
+
+- Current state: **no p01 image is accepted yet**; generation is manual and blocked, and no ReferenceAsset/GenerationRun exists. The anchor **activates only on a genuine acceptance** — a failed or unaccepted candidate must never be used as the master.
+- On acceptance: register the accepted p01 image as the `R00` master ReferenceAsset through the proper ReferenceAsset workflow before any later-page generation.
+
 ## Target Asset / 目标资产
 
 Draft package plan for the p01 page illustration: the dusk road fork rendered as a child-drawn horror notebook page, with human-only character locks. Story direction is the dusk fork scene (re-skin only). No image asset, compiled prompt, or handoff is created by this card.

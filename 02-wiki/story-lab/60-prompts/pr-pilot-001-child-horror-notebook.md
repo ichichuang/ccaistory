@@ -122,6 +122,20 @@ Apply these as reusable negative rules in later compiled prompts. They intention
 - Must not invent ReferenceAsset dependencies. No reference assets are accepted; the failed earlier p01 candidate must never be used as a reference, anchor, or continuity dependency.
 - Must not include actual WebGPTImage execution text, final per-image prompts, raw image outputs, or `image_id` bindings.
 
+## Series Continuity Prefix / 系列连贯前缀
+
+Reusable master-reference prefix for **serialized production**: prepend this to every **later page's** compiled prompt (p02 onward) and upload the **accepted p01 master image** as the reference, so style, character design, proportions, and page language stay locked to the master while only the scene event changes. Use it only once a genuinely accepted p01 image exists — a failed or unaccepted candidate must never be the master. This is operational continuity language and is **not** part of `recipe_hash`. The page's own strange event still comes from that page's `ImageExecutionPackage` `allowed_content`.
+
+```
+Use the uploaded image as the MASTER REFERENCE for style, character design, proportions, and page language. Match it exactly.
+
+Keep the same child-drawn horror notebook look on lined school-notebook paper; the same rough pencil and ballpoint line quality with colored-pencil and crayon fill and visible eraser marks; the same uneven childish proportions and imperfect hand-drawn perspective; the same red-pen annotation language (red circles, arrows, and question marks, plus an optional short childish Chinese handwritten note marking this page's anomaly, never replacing the scene); the same matte scanned-paper texture with creases, smudges, and worn corners; and the same 1:1 square format.
+
+Keep the characters identical to the master. Xiao He is a human child in a buttercup-yellow hooded raincoat, red rubber boots, and a small round backpack, with short dark hair and the proportions of a six-to-seven-year-old child. Mama is a human adult caregiver in a teal coat and a soft scarf, with medium-length dark hair and adult proportions, clearly taller than Xiao He. Do not redesign them, do not change their clothing or palette, and never turn them into an animal, hedgehog, plush, doll, mascot, or anthropomorphic figure. Keep their relative height and body proportions the same as the master on every page, and keep the same gentle, childlike emotional rendering (childlike fear, unease, curiosity, relief — never realistic trauma).
+
+Only the scene event changes for this page: {{story_specific_strange_event_from_package}}, taken from the approved ImageExecutionPackage and Scene card. Render that one event in the master's style. Do not change the style, paper, materials, line quality, red-pen language, proportions, or character design. Do not add any platform UI, prompt text, image id, caption, watermark, or readable sign words inside the image. No polished digital illustration, no 3D, no photorealism, no animalized humans, no anthropomorphic hedgehogs, no plush mascots, no explicit gore, no sexual content, no real-crime imagery.
+```
+
 ## Workflow E/F Compilation Placeholders / 后续编译预留位
 
 Reserved for later workflows; do not fill in this card:

@@ -49,6 +49,7 @@ publishing_readiness_status: blocked
 - Failed earlier p01 output is **not accepted** and must **not** be used as a reference.
 - **No image accepted. No ReferenceAsset exists. No GenerationRun exists.**
 - WebGPTImage / GPTImage remains **manual**. Image generation remains **blocked** until the user manually uses the clean p01 GPTImage prompt.
+- Serialized production: **p01 is the designated series master anchor** — once a p01 image is accepted, that accepted image is the mandatory style/character/proportion reference for all later pages. See [Series Continuity & Master Anchor](#series-continuity--master-anchor-serialized-production). (No image accepted yet; the anchor activates on acceptance.)
 
 ### Style is reusable; story content is variable
 
@@ -158,6 +159,45 @@ Neither this card nor the active visual system authorizes image generation, prom
 - [p01 / The Fork at Dusk](../70-execution-packages/iep-pilot-001-p01-fork-at-dusk.md) - fresh `draft`, bound to the active style/recipe (`recipe_hash` `267c7dfe258e43ba`); not compiled, not linted, no handoff executed; image generation blocked.
 
 p02-p14 packages were deleted in the reset and **must be recreated later** before the full 14-page story can proceed.
+
+## Series Continuity & Master Anchor (serialized production)
+
+This is a **serialized** picture book: across all pages **style consistency, character consistency, and proportion consistency are mandatory**. To enforce that, **p01 (the dusk fork page) is the designated series master anchor** — once a p01 image is accepted at the p01 QA / human gate, that **accepted p01 image is the master visual reference** for every later page (p02-p14). Only the scene event changes from page to page; the look stays locked to the master.
+
+> **Acceptance precondition (current state).** No p01 image is accepted yet — generation is still manual and blocked, and no ReferenceAsset/GenerationRun exists. The master anchor **activates only when a genuinely accepted (QA-passed) p01 image exists**; a failed or unaccepted candidate must never be used as the anchor. On acceptance, the accepted p01 image should be registered as the `R00` master ReferenceAsset through the proper ReferenceAsset workflow before later-page generation begins. Until then, the rules below are the standing production contract for the series.
+
+### Continuity Rule Set (mandatory for every future page)
+
+Every later page must match the accepted p01 master on **all** of the following:
+
+- **same notebook-paper style** — lined school-notebook page, same paper character.
+- **same rough child-drawn line quality** — rough pencil/ballpoint outlines, colored-pencil/crayon fill, visible eraser marks, uneven childish proportions, imperfect hand-drawn perspective.
+- **same red-pen annotation language** — red-pen circles, arrows, and question marks (plus optional short childish Chinese handwriting) used the same way to mark the page's anomaly/uncertainty, never replacing the scene.
+- **same matte scanned paper texture** — matte scanned-paper look with creases, smudges, worn corners, faint yellowing.
+- **same square format** — 1:1 square image on every page.
+- **same character appearance** — character designs identical to the master (see Character Continuity).
+- **same character proportions** — identical body/head proportions and relative heights to the master.
+- **same emotional rendering language** — childlike fear, trembling, unease, curiosity, relief drawn in the same gentle child-drawn register (never realistic trauma).
+
+### Character Continuity (never redesign, never animalize)
+
+- **Xiao He** = human child; buttercup-yellow hooded raincoat, red rubber boots, small round backpack; short dark hair; ~6-7-year-old child proportions.
+- **Mama** = human adult caregiver; teal coat and soft scarf; medium-length dark hair; adult proportions, clearly taller than Xiao He.
+- **Never redesign** Xiao He or Mama — clothing, hair, face, and palette stay fixed to the master.
+- **Never animalize** them — no animal, hedgehog, plush, doll, mascot, or anthropomorphic substitute; they stay human on every page.
+- **Keep relative height and proportions stable** across all pages — Xiao He stays a small child beside a taller adult Mama; their size ratio does not drift page to page.
+- (Lantern Grandpa = human elderly man and Tangerine = cat keep their identity locks too when they appear.)
+
+### Page Continuity (per future page)
+
+- **Every future page must use the accepted p01 image as the style and character reference** (uploaded as the master reference at GPTImage time).
+- **Only the scene event changes** from page to page — the location/beat/strange event comes from that page's `ImageExecutionPackage` and Scene card.
+- **Style, material, page language, and proportions stay stable** — paper, line quality, red-pen language, matte texture, square format, character design, and proportions are inherited from the master and must not drift.
+- A page is a continuity failure (repair / regenerate) if the style, paper, character design, or proportions diverge from the master, or if a human character is animalized.
+
+### Reusable GPTImage continuity prefix
+
+For later pages, prepend the **Series Continuity Prefix** defined in `pr-pilot-001-child-horror-notebook` (see that recipe's "Series Continuity Prefix" section) to the page's compiled prompt, with the accepted p01 master image uploaded as the reference. The prefix locks style, character design, proportions, and page language to the master; the page's own scene event is the only variable.
 
 ## Production Status
 

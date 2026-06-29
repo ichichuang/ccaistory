@@ -45,6 +45,8 @@ A page from a 9–12-year-old child's "scary-story notebook." Rough black pencil
 
 For every generated image, the strange event, location, characters, props, and emotional beat must come from the approved `ImageExecutionPackage` (and the canonical StoryProject / Scene / Character cards it binds). The visual system never injects its own scene events; each compiled image renders only the specific scene event approved for that package.
 
+**Series continuity (serialized production).** Once a p01 image is accepted, it is the series master anchor: every later page must match it on style, paper, line quality, red-pen annotation language, matte texture, square format, character design, and proportions — only the scene event changes per page. See the project card's "Series Continuity & Master Anchor" section and the recipe's "Series Continuity Prefix." (No image is accepted yet; the anchor activates only on a genuine acceptance — never a failed candidate.)
+
 风格可复用，故事内容可变。本视觉系统**只**控制绘制方法与气氛（纸张、线条、儿童手绘、红笔批注方式、作业本怪谈氛围、超自然「许可」），**不得**覆盖场景内容，**不得**把任何一组固定怪谈母题写成强制内容。每张图的奇异事件、地点、角色、道具与情绪节拍，都必须来自获批的 `ImageExecutionPackage`（及其绑定的 StoryProject / Scene / Character 规范卡）。视觉系统绝不自行注入场景事件；每张编译出的图只渲染其执行包获批的那一个具体场景事件。
 
 ## Mandatory Positive Style Core / 强制正向风格核心
