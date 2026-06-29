@@ -14,15 +14,18 @@ props:
   - "first low wisps of mist"
 output_targets:
   - image
-linked_packages: []
-related_assets: []
+linked_packages:
+  - iep-pilot-001-p02-fading-lamp-lane
+related_assets:
+  - iep-pilot-001-p02-fading-lamp-lane
+  - ra-pilot-001-r00-master-style-character-anchor
 source_paths: []
 tags:
   - story-lab
   - pilot-001
   - scene
 created_at: 2026-06-25
-updated_at: 2026-06-26
+updated_at: 2026-06-29
 owner: ichichuang
 version: v0
 canonical: true
@@ -30,7 +33,7 @@ canonical: true
 
 # 灯火渐稀的小路 / The Fading-Lamp Lane
 
-> Canonical Scene card — pilot-001 (Cluster 3). Pages: p2. Child-safe. Execution packages downstream (blocked).
+> Canonical Scene card — pilot-001 (Cluster 3). Pages: p2. Child-safe. p02 ImageExecutionPackage recreated as draft; generation remains blocked.
 
 ## Narrative Function / 叙事功能
 
@@ -59,7 +62,7 @@ Lighting dims from the fork scene; mist introduced low and thin. Raincoat / teal
 
 ## Image Targets / 出图目标
 
-`output_targets: [image]`. Execution packages for this scene were cleared in the 2026-06-26 visual pipeline reset (Option B clean restart); only p01 currently has a package, and a package for this scene must be recreated later. Image generation remains manual and blocked.
+`output_targets: [image]`. The p02 package [iep-pilot-001-p02-fading-lamp-lane](../70-execution-packages/iep-pilot-001-p02-fading-lamp-lane.md) has been recreated as a draft using the accepted R00 master visual reference. Image generation remains manual and blocked.
 
 ## QA Notes / QA 备注
 
