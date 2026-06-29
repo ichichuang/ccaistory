@@ -7,7 +7,7 @@ status: active
 project_id: pilot-001
 canonical: true
 created_at: 2026-06-25
-updated_at: 2026-06-26
+updated_at: 2026-06-29
 owner: ichichuang
 version: v0
 tags:
@@ -41,14 +41,17 @@ publishing_readiness_status: blocked
 
 **Visual pipeline reset completed (2026-06-26).** The old warm-safe visual system was removed from active use and the visual pipeline was rebuilt around a single clean child-drawn horror notebook style for GPTImage production.
 
-- Current workflow: **clean GPTImage production handoff preparation.**
+- Current workflow: **Workflow I gate after p01 GenerationRun backfill.**
 - Current active visual system: `vs-pilot-001-child-horror-notebook`.
 - Current active recipe: `pr-pilot-001-child-horror-notebook` (active `recipe_hash` `267c7dfe258e43ba` — the only active recipe hash for `pilot-001`).
 - Workflows A (Raw Intake), B (Story Analysis), C (Character & Scene Extraction) remain accepted; the story core, graph, characters, and scenes are unchanged.
 - Packages: **Option B (clean restart)** was chosen — only `iep-pilot-001-p01-fork-at-dusk` exists, as a fresh `draft`. **p02-p14 packages were deleted and must be recreated later.**
 - Failed earlier p01 output is **not accepted** and must **not** be used as a reference.
-- **No image accepted. No ReferenceAsset exists. No GenerationRun exists.**
-- WebGPTImage / GPTImage remains **manual**. Image generation remains **blocked** until the user manually uses the clean p01 GPTImage prompt.
+- **No image accepted. No ReferenceAsset exists.**
+- Workflow H for p01 is **started/completed**: one manual WebGPTImage / GPTImage candidate exists, with GenerationRun `gr-pilot-001-p01-20260626-172625-webgptimage`.
+- Candidate image: `01-raw/story-lab/generated-raw/pilot-001/iep-pilot-001-p01-fork-at-dusk/pilot-001-p01-candidate-20260626-172625.png`.
+- Workflow I QA is **pending**. The candidate must not be treated as accepted, as a ReferenceAsset, or as the R00 master anchor.
+- WebGPTImage / GPTImage remains **manual**. No automated generation is authorized.
 - Serialized production: **p01 is the designated series master anchor** — once a p01 image is accepted, that accepted image is the mandatory style/character/proportion reference for all later pages. See [Series Continuity & Master Anchor](#series-continuity--master-anchor-serialized-production). (No image accepted yet; the anchor activates on acceptance.)
 
 ### Style is reusable; story content is variable
@@ -150,13 +153,13 @@ Current (active) cards:
 - Character `visual_style` references point to the active style; global warm-safe visual bans were removed/downgraded to story-layer role notes; human identity locks preserved.
 - Scene cards: `linked_packages` reset to p01 only (other scenes cleared pending package re-creation).
 
-Neither this card nor the active visual system authorizes image generation, prompt execution, GPTImage handoff execution, ReferenceAsset, or GenerationRun. Image generation stays manual and blocked until the user uses the clean p01 GPTImage prompt.
+Neither this card nor the active visual system authorizes automated image generation, ReferenceAsset creation, or acceptance. The p01 candidate was produced manually and backfilled through Workflow H; Workflow I QA remains pending.
 
 ## Execution Packages
 
 **Option B (clean restart)** chosen. Only one package exists:
 
-- [p01 / The Fork at Dusk](../70-execution-packages/iep-pilot-001-p01-fork-at-dusk.md) - fresh `draft`, bound to the active style/recipe (`recipe_hash` `267c7dfe258e43ba`); not compiled, not linted, no handoff executed; image generation blocked.
+- [p01 / The Fork at Dusk](../70-execution-packages/iep-pilot-001-p01-fork-at-dusk.md) - fresh `draft`, bound to the active style/recipe (`recipe_hash` `267c7dfe258e43ba`); Workflow H backfilled one manual candidate and GenerationRun; QA pending; no ReferenceAsset accepted.
 
 p02-p14 packages were deleted in the reset and **must be recreated later** before the full 14-page story can proceed.
 
@@ -164,7 +167,7 @@ p02-p14 packages were deleted in the reset and **must be recreated later** befor
 
 This is a **serialized** picture book: across all pages **style consistency, character consistency, and proportion consistency are mandatory**. To enforce that, **p01 (the dusk fork page) is the designated series master anchor** — once a p01 image is accepted at the p01 QA / human gate, that **accepted p01 image is the master visual reference** for every later page (p02-p14). Only the scene event changes from page to page; the look stays locked to the master.
 
-> **Acceptance precondition (current state).** No p01 image is accepted yet — generation is still manual and blocked, and no ReferenceAsset/GenerationRun exists. The master anchor **activates only when a genuinely accepted (QA-passed) p01 image exists**; a failed or unaccepted candidate must never be used as the anchor. On acceptance, the accepted p01 image should be registered as the `R00` master ReferenceAsset through the proper ReferenceAsset workflow before later-page generation begins. Until then, the rules below are the standing production contract for the series.
+> **Acceptance precondition (current state).** No p01 image is accepted yet — one manual p01 candidate and its GenerationRun exist, but Workflow I QA is still pending and no ReferenceAsset exists. The master anchor **activates only when a genuinely accepted (QA-passed) p01 image exists**; a failed, pending, or unaccepted candidate must never be used as the anchor. On acceptance, the accepted p01 image should be registered as the `R00` master ReferenceAsset through the proper ReferenceAsset workflow before later-page generation begins. Until then, the rules below are the standing production contract for the series.
 
 ### Continuity Rule Set (mandatory for every future page)
 
@@ -207,16 +210,21 @@ For later pages, prepend the **Series Continuity Prefix** defined in `pr-pilot-0
 - Dry-read safety check: PASS.
 - Workflow C human approval gate: **ACCEPTED** (character + scene canon confirmed; 2026-06-25): 4 Character cards, 7 Scene cards, referential integrity, source-distance / child-safety.
 - Visual pipeline reset (2026-06-26): old warm-safe VisualStyle + PromptRecipe removed; single clean child-horror-notebook style/recipe active (`recipe_hash` `267c7dfe258e43ba`); packages reset to a single fresh p01 draft (Option B).
-- Current workflow: **clean GPTImage production handoff preparation.**
-- Image pipeline remains blocked: no image generated, no GPTImage call, no ReferenceAsset, no GenerationRun. WebGPTImage / GPTImage stays manual.
+- Workflow H GenerationRun backfill for p01: **COMPLETED** (2026-06-29 backfill of 2026-06-26 manual WebGPTImage / GPTImage candidate).
+- Candidate image exists at `01-raw/story-lab/generated-raw/pilot-001/iep-pilot-001-p01-fork-at-dusk/pilot-001-p01-candidate-20260626-172625.png`.
+- GenerationRun: `50-agent-work/story-lab/runs/gr-pilot-001-p01-20260626-172625-webgptimage.md`.
+- Current workflow: **Workflow I image QA gate.**
+- QA status: **pending**.
+- ReferenceAsset status: **none**.
 
 ## Blocked Actions
 
-Workflows A, B, C are accepted. The visual pipeline was reset to a single clean child-horror-notebook style/recipe and a single fresh p01 draft package. The following remain blocked:
+Workflows A, B, C are accepted. Workflow H backfilled one p01 candidate and GenerationRun. The following remain blocked:
 
-- Image generation (no image may be generated; GPTImage stays manual until the user uses the clean prompt)
-- GPTImage handoff execution
-- GenerationRun
+- Image acceptance
+- Workflow J ReferenceAsset acceptance
+- R00 master anchor activation
+- p02-p14 package creation or generation
 - ReferenceAsset
 - final package assembly
 - publishing readiness

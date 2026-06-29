@@ -26,9 +26,9 @@ compile_result_ref: ""
 semantic_lint_result_ref: ""
 compile_status: ""
 semantic_lint_status: ""
-webgptimage_handoff_status: ""
-downstream_generation_status: blocked
-blocked_reason: "Clean visual pipeline reset (2026-06-26). Fresh draft p01 package bound to the clean child-horror-notebook VisualStyle/PromptRecipe. Not compiled, not linted, no handoff executed. Image generation stays manual and blocked until a human operator uses the clean p01 GPTImage handoff."
+webgptimage_handoff_status: manual_candidate_generated
+downstream_generation_status: candidate_backfilled_qa_pending
+blocked_reason: "Workflow H backfilled one manual WebGPTImage/GPTImage p01 candidate. QA is pending; no ReferenceAsset is accepted; the R00 master anchor remains inactive until Workflow I passes and Workflow J accepts it."
 target_model: "GPTImage manual window (human-operated); not authorized for automated generation"
 aspect_ratio: "1:1"
 reference_assets: []
@@ -44,20 +44,24 @@ forbidden_content:
   - "No polished digital illustration, commercial picture-book finish, over-rendered AI storybook style, glossy gradients, clean vector line art, 3D, cinematic realism, photorealism, or oil painting."
   - "No legible signpost words; no platform UI, prompt text, image id, or GPTImage handoff text inside the image; no source names, places, wording, or recognizable source imagery."
 output_assets: []
-generation_run_ids: []
+candidate_image_paths:
+  - 01-raw/story-lab/generated-raw/pilot-001/iep-pilot-001-p01-fork-at-dusk/pilot-001-p01-candidate-20260626-172625.png
+generation_run_ids:
+  - gr-pilot-001-p01-20260626-172625-webgptimage
 related_assets:
   - scene-fork-at-dusk
   - char-xiaohe
   - char-mama
   - vs-pilot-001-child-horror-notebook
   - pr-pilot-001-child-horror-notebook
-source_paths: []
-last_run: ""
-qa_result: ""
+source_paths:
+  - 01-raw/story-lab/generated-raw/pilot-001/iep-pilot-001-p01-fork-at-dusk/pilot-001-p01-candidate-20260626-172625.png
+last_run: gr-pilot-001-p01-20260626-172625-webgptimage
+qa_result: pending
 r00_dependency_policy: "No R00 dependency. No ReferenceAsset exists or is required; any future anchor dependency must be separately accepted and declared before use."
 maximum_anchor_reuse_policy: "No anchor reuse. Do not create, reuse, or imply R00/R01/R02 assets from this package."
 dependency_notes: "Depends only on accepted Workflow A-C canonical cards (StoryProject, Scene, Character) plus the clean VisualStyle/PromptRecipe. No reference assets."
-blocking_notes: "Fresh draft after the visual pipeline reset. No compile/lint/handoff has been run under the clean recipe. Image generation, GenerationRun, ReferenceAsset, final package, and publishing records remain blocked. Image generation stays manual until a human operator uses the clean p01 GPTImage handoff."
+blocking_notes: "Workflow H backfill complete for one manual p01 candidate. Workflow I image QA is pending. ReferenceAsset, R00 master anchor activation, later-page generation, final package, and publishing records remain blocked."
 final_assembly_dependency: pilot-001
 tags:
   - story-lab
@@ -67,8 +71,10 @@ tags:
   - draft
   - blocked
   - clean-reset
+  - generation-run-backfilled
+  - qa-pending
 created_at: 2026-06-26
-updated_at: 2026-06-26
+updated_at: 2026-06-29
 owner: ichichuang
 version: v0
 canonical: true
@@ -76,7 +82,7 @@ canonical: true
 
 # pilot-001 p01 黄昏岔路口图像执行包 / The Fork at Dusk Image Execution Package
 
-> Fresh `draft` package created in the 2026-06-26 visual pipeline reset. It binds the clean child-drawn horror notebook VisualStyle and PromptRecipe. It is not a compiled prompt, semantic-lint record, GPTImage handoff, GenerationRun, ReferenceAsset, final package, publishing record, or image output. Image generation remains manual and blocked until a human operator uses the clean p01 GPTImage handoff.
+> Fresh `draft` package created in the 2026-06-26 visual pipeline reset. It binds the clean child-drawn horror notebook VisualStyle and PromptRecipe. Workflow H has backfilled one manual WebGPTImage / GPTImage candidate and GenerationRun. The image is not accepted, QA is pending, no ReferenceAsset exists, and the R00 master anchor is inactive.
 
 ## Package Summary / 执行包概要
 
@@ -87,23 +93,26 @@ canonical: true
 - VisualStyle: [vs-pilot-001-child-horror-notebook](../50-visual-styles/vs-pilot-001-child-horror-notebook.md)
 - PromptRecipe: [pr-pilot-001-child-horror-notebook](../60-prompts/pr-pilot-001-child-horror-notebook.md)
 - Recipe hash: `267c7dfe258e43ba` (the only active recipe hash for `pilot-001`)
+- GenerationRun: `gr-pilot-001-p01-20260626-172625-webgptimage`
+- Candidate image: `01-raw/story-lab/generated-raw/pilot-001/iep-pilot-001-p01-fork-at-dusk/pilot-001-p01-candidate-20260626-172625.png`
+- QA status: pending
 
 ## Series Master Anchor / 系列主锚
 
 **p01 is the designated series master anchor.** In this serialized picture book, style, character, and proportion consistency are mandatory across all pages. Once a p01 image is **accepted** at the p01 QA / human gate, that accepted image becomes the **master visual reference** for every later page (p02-p14): later pages upload it as the master reference and inherit its notebook-paper style, line quality, red-pen language, matte texture, square format, character design, and proportions — only the scene event changes per page (see the project card's "Series Continuity & Master Anchor" section and the recipe's "Series Continuity Prefix").
 
-- Current state: **no p01 image is accepted yet**; generation is manual and blocked, and no ReferenceAsset/GenerationRun exists. The anchor **activates only on a genuine acceptance** — a failed or unaccepted candidate must never be used as the master.
+- Current state: **no p01 image is accepted yet**; one manual p01 candidate has been backfilled, Workflow I QA is pending, and no ReferenceAsset exists. The anchor **activates only on a genuine acceptance** — a failed, pending, or unaccepted candidate must never be used as the master.
 - On acceptance: register the accepted p01 image as the `R00` master ReferenceAsset through the proper ReferenceAsset workflow before any later-page generation.
 
 ## Target Asset / 目标资产
 
-Draft package plan for the p01 page illustration: the dusk road fork rendered as a child-drawn horror notebook page, with human-only character locks. Story direction is the dusk fork scene (re-skin only). No image asset, compiled prompt, or handoff is created by this card.
+Draft package plan for the p01 page illustration: the dusk road fork rendered as a child-drawn horror notebook page, with human-only character locks. Story direction is the dusk fork scene (re-skin only). One candidate image path is recorded for QA, but no accepted asset is created by this card.
 
 ## Dependency Graph / 依赖图
 
 - Required canonical cards: StoryProject `pilot-001`, Scene `scene-fork-at-dusk`, Character cards `char-xiaohe` and `char-mama`, VisualStyle `vs-pilot-001-child-horror-notebook`, PromptRecipe `pr-pilot-001-child-horror-notebook`.
 - Required ReferenceAsset cards: none available, required, or created.
-- State: fresh draft. Not compiled, not linted, no handoff. Image generation is blocked and remains manual.
+- State: fresh draft with one manual candidate backfilled. Not accepted; Workflow I QA is pending. No ReferenceAsset is available, required, or created.
 
 ## Allowed Content / 允许内容
 
@@ -128,7 +137,8 @@ Bound to `pr-pilot-001-child-horror-notebook` (active `recipe_hash` `267c7dfe258
 
 - Planned aspect ratio: `1:1` (square image).
 - Output target: page illustration plan only.
-- No generated image file, no raw output, and no accepted asset are created here.
+- Candidate image path: `01-raw/story-lab/generated-raw/pilot-001/iep-pilot-001-p01-fork-at-dusk/pilot-001-p01-candidate-20260626-172625.png`.
+- `output_assets` remains empty because no accepted ReferenceAsset exists.
 
 ## Generation Order / 生成顺序
 
@@ -136,7 +146,7 @@ Initial full-story order: 1 of 14. Planning metadata only; does not authorize ge
 
 ## Manual Execution Notes / 人工执行说明
 
-Image generation is manual and blocked. A human operator may use the clean p01 GPTImage handoff (prepared as a gitignored operational record) in an external GPTImage window. This card does not authorize automated generation, and no prior p01 candidate may be reused as a reference.
+Image generation was performed manually in WebGPTImage / GPTImage for this candidate and backfilled through Workflow H. This card does not authorize automated generation, acceptance, ReferenceAsset creation, p02 start, or later-page generation.
 
 ## QA Acceptance Criteria / QA 验收标准
 
