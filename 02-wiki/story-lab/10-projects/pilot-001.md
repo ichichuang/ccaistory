@@ -43,7 +43,7 @@ publishing_readiness_status: blocked
 
 **Visual pipeline reset completed (2026-06-26).** The old warm-safe visual system was removed from active use and the visual pipeline was rebuilt around a single clean child-drawn horror notebook style for GPTImage production.
 
-- Current workflow: **p02 ImageExecutionPackage recreated with the accepted R00 master visual reference; p02 generation remains blocked.**
+- Current workflow: **p02 Workflow F compile and semantic lint passed; next controlled workflow is p02 GPTImage handoff preparation. p02 image generation remains blocked.**
 - Current active visual system: `vs-pilot-001-child-horror-notebook`.
 - Current active recipe: `pr-pilot-001-child-horror-notebook` (active `recipe_hash` `267c7dfe258e43ba` — the only active recipe hash for `pilot-001`).
 - Workflows A (Raw Intake), B (Story Analysis), C (Character & Scene Extraction) remain accepted; the story core, graph, characters, and scenes are unchanged.
@@ -162,7 +162,7 @@ Neither this card nor the active visual system authorizes automated image genera
 **Option B (clean restart)** chosen. Current recreated packages:
 
 - [p01 / The Fork at Dusk](../70-execution-packages/iep-pilot-001-p01-fork-at-dusk.md) - fresh `draft`, bound to the active style/recipe (`recipe_hash` `267c7dfe258e43ba`); Workflow H backfilled one manual candidate and GenerationRun; Workflow I QA passed; Workflow J accepted [ra-pilot-001-r00-master-style-character-anchor](../reference-assets/ra-pilot-001-r00-master-style-character-anchor.md).
-- [p02 / The Fading-Lamp Lane](../70-execution-packages/iep-pilot-001-p02-fading-lamp-lane.md) - fresh `draft`, bound to the active style/recipe and required R00 ReferenceAsset `ra-pilot-001-r00-master-style-character-anchor`; no compile, semantic lint, handoff, generation, QA, or acceptance has started.
+- [p02 / The Fading-Lamp Lane](../70-execution-packages/iep-pilot-001-p02-fading-lamp-lane.md) - `ready`, bound to the active style/recipe and required R00 ReferenceAsset `ra-pilot-001-r00-master-style-character-anchor`; Workflow F compile and semantic lint passed; no GPTImage handoff, generation, QA, or acceptance has started.
 
 p03-p14 packages remain deleted after the reset and **must be recreated later** before the full 14-page story can proceed.
 
@@ -221,8 +221,9 @@ For later pages, prepend the **Series Continuity Prefix** defined in `pr-pilot-0
 - Workflow J ReferenceAsset Acceptance for p01: **ACCEPTED**.
 - Accepted ReferenceAsset: `ra-pilot-001-r00-master-style-character-anchor`.
 - R00 / series master visual anchor active: **yes**.
-- p02 ImageExecutionPackage recreation: **COMPLETED** as draft, with required R00 master visual reference.
-- Current workflow: **p02 compile and semantic-lint preparation may be next if separately authorized; do not start p02 generation yet.**
+- p02 ImageExecutionPackage recreation: **COMPLETED** with required R00 master visual reference.
+- p02 Workflow F prompt compile and semantic lint: **PASSED**.
+- Current workflow: **p02 GPTImage handoff preparation may be next if separately authorized; do not start p02 generation yet.**
 - QA status: **pass**.
 - ReferenceAsset status: **accepted**.
 
@@ -230,15 +231,15 @@ For later pages, prepend the **Series Continuity Prefix** defined in `pr-pilot-0
 
 Workflows A, B, C are accepted. Workflow H backfilled one p01 candidate and GenerationRun, Workflow I QA passed, and Workflow J accepted the p01 ReferenceAsset. The following remain blocked:
 
-- p02 generation until compile, semantic lint, handoff, external generation, QA, and acceptance are separately authorized
+- p02 generation until GPTImage handoff, external generation, QA, and acceptance are separately authorized
 - p03-p14 package creation or generation until each package is recreated from canonical cards
 - final package assembly
 - publishing readiness
-- re-creation + compile/lint of p02-p14 packages (required before the full story can proceed)
+- re-creation + compile/lint of p03-p14 packages (required before the full story can proceed)
 
 ## Next Workflow
 
-p02 package recreation is complete. Next controlled step should prepare p02 compile and semantic lint if authorized. Do not start p02 generation in this step.
+p02 package recreation, compile, and semantic lint are complete. Next controlled step should prepare the p02 GPTImage handoff if authorized. Do not start p02 generation in this step.
 
 
 ## Notes

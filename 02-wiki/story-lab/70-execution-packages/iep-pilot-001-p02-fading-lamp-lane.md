@@ -3,7 +3,7 @@ type: image_execution_package
 id: iep-pilot-001-p02-fading-lamp-lane
 title_zh: pilot-001 p02 灯火渐稀小路图像执行包
 title_en: pilot-001 p02 The Fading-Lamp Lane Image Execution Package
-status: draft
+status: ready
 project_id: pilot-001
 scene_id: scene-fading-lamp-lane
 page_or_spread_range: p02
@@ -20,15 +20,15 @@ prompt_recipe: pr-pilot-001-child-horror-notebook
 prompt_recipe_id: pr-pilot-001-child-horror-notebook
 recipe_hash: "267c7dfe258e43ba"
 recipe_hash_expected: "267c7dfe258e43ba"
-recipe_hash_actual: ""
-recipe_hash_check: ""
-compile_result_ref: ""
-semantic_lint_result_ref: ""
-compile_status: ""
-semantic_lint_status: ""
+recipe_hash_actual: "267c7dfe258e43ba"
+recipe_hash_check: pass
+compile_result_ref: 50-agent-work/story-lab/compiled-prompts/compiled-prompt-pilot-001-p02-fading-lamp-lane.json
+semantic_lint_result_ref: 50-agent-work/story-lab/semantic-lint-results/semantic-lint-pilot-001-p02-fading-lamp-lane.json
+compile_status: pass
+semantic_lint_status: pass
 webgptimage_handoff_status: not_created
 downstream_generation_status: blocked
-blocked_reason: "p02 ImageExecutionPackage is recreated as a draft with the accepted R00 master visual reference. Compile, semantic lint, handoff, generation, QA, and acceptance have not started."
+blocked_reason: "Workflow F compile and semantic lint passed for p02. WebGPTImage handoff has not been created, and image generation remains blocked until separately authorized."
 target_model: "GPTImage manual window (human-operated); not authorized for automated generation"
 aspect_ratio: "1:1"
 reference_assets:
@@ -76,8 +76,9 @@ tags:
   - image-execution-package
   - child-horror-notebook
   - p02
-  - draft
+  - ready
   - r00-required
+  - workflow-f-passed
   - generation-blocked
 created_at: 2026-06-29
 updated_at: 2026-06-29
@@ -88,7 +89,7 @@ canonical: true
 
 # pilot-001 p02 灯火渐稀小路图像执行包 / The Fading-Lamp Lane Image Execution Package
 
-> Draft p02 ImageExecutionPackage recreated after p01 Workflow J acceptance. It binds the accepted R00 master visual reference for narrow continuity only. It does not authorize WebGPTImage handoff, image generation, QA, acceptance, final package assembly, or publishing records.
+> Ready p02 ImageExecutionPackage after Workflow F compile and semantic lint. It binds the accepted R00 master visual reference for narrow continuity only. It does not authorize WebGPTImage handoff, image generation, QA, acceptance, final package assembly, or publishing records.
 
 ## Package Summary / 执行包概要
 
@@ -100,8 +101,10 @@ canonical: true
 - PromptRecipe: [pr-pilot-001-child-horror-notebook](../60-prompts/pr-pilot-001-child-horror-notebook.md)
 - Recipe hash: `267c7dfe258e43ba`
 - Required R00 reference: [ra-pilot-001-r00-master-style-character-anchor](../reference-assets/ra-pilot-001-r00-master-style-character-anchor.md)
-- Package status: `draft`
+- Package status: `ready`
 - Downstream generation status: `blocked`
+- Compile result: `50-agent-work/story-lab/compiled-prompts/compiled-prompt-pilot-001-p02-fading-lamp-lane.json`
+- Semantic lint result: `50-agent-work/story-lab/semantic-lint-results/semantic-lint-pilot-001-p02-fading-lamp-lane.json`
 
 ## Target Asset / 目标资产
 
@@ -132,7 +135,7 @@ Planning card for the p02 page illustration. The page shows the shortcut lane be
 
 ## Prompt Recipe Binding / Prompt 技法绑定
 
-Bound to `pr-pilot-001-child-horror-notebook` with active `recipe_hash` `267c7dfe258e43ba`. This card does not contain compiled prompt text and does not contain external-tool execution text.
+Bound to `pr-pilot-001-child-horror-notebook` with active `recipe_hash` `267c7dfe258e43ba`. Workflow F recomputed `recipe_hash_actual` as `267c7dfe258e43ba`; `recipe_hash_check`, `compile_status`, and `semantic_lint_status` are all `pass`. This card does not contain compiled prompt text and does not contain external-tool execution text.
 
 ## Reference Asset Binding / 参考资产绑定
 
@@ -153,7 +156,7 @@ Initial full-story order: 2 of 14. This card is planning metadata only and does 
 
 ## Manual Execution Status / 人工执行状态
 
-No WebGPTImage handoff exists for p02. No image generation is authorized by this step.
+No WebGPTImage handoff exists for p02. No image generation is authorized by this step; the next controlled workflow is p02 GPTImage handoff preparation only.
 
 ## QA Acceptance Criteria / QA 验收标准
 
