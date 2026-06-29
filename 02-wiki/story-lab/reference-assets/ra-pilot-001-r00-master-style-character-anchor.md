@@ -6,7 +6,7 @@ title_en: pilot-001 R00 Master Style and Character Anchor
 status: accepted
 project_id: pilot-001
 canonical: true
-visual_role: paper-stroke-anchor
+visual_role: style
 quality_status: accepted
 file_location: 01-raw/story-lab/generated-raw/pilot-001/iep-pilot-001-p01-fork-at-dusk/pilot-001-p01-candidate-20260626-172625.png
 source_run: gr-pilot-001-p01-20260626-172625-webgptimage
@@ -18,13 +18,14 @@ accepted_at: 2026-06-29
 qa_required: true
 superseded_by: ""
 source_repair_note: ""
-used_by: []
+used_by:
+  - iep-pilot-001-p01-fork-at-dusk
 qa_evidence:
   - 50-agent-work/story-lab/runs/gr-pilot-001-p01-20260626-172625-webgptimage.md
   - 50-agent-work/story-lab/image-review-forms/review-pilot-001-p01-candidate-20260626-172625.json
   - 50-agent-work/story-lab/qa-results/qa-pilot-001-p01-candidate-20260626-172625.md
 allowed_usage:
-  - "Use as the accepted p01 R00 master reference for pilot-001 later-page generation after this Workflow J acceptance."
+  - "Use as the accepted p01 R00 master visual reference for pilot-001 later-page generation after this Workflow J acceptance."
   - "Borrow only paper texture, rough pencil/ballpoint line quality, colored-pencil/crayon fill, red-pen annotation language, square notebook-page composition, Xiao He and Mama costume locks, and their relative proportions."
   - "Use for p02-p14 continuity only when the downstream ImageExecutionPackage explicitly declares this ReferenceAsset dependency and states the borrowed properties."
 forbidden_usage:
@@ -52,7 +53,7 @@ tags:
   - reference-asset
   - r00
   - master-anchor
-  - paper-stroke-anchor
+  - style
   - accepted
 created_at: 2026-06-29
 updated_at: 2026-06-29
@@ -79,11 +80,11 @@ The asset anchors the later-page visual continuity for the child-drawn horror no
 
 ## Visual Role / 视觉角色
 
-`paper-stroke-anchor`: accepted R00 master reference for notebook-paper texture, rough pencil/ballpoint line quality, colored-pencil/crayon fill, red-pen annotation language, square scanned-page look, Xiao He and Mama costume locks, and their relative proportions.
+`style`: accepted p01 R00 master visual reference for notebook-paper texture, rough pencil/ballpoint line quality, colored-pencil/crayon fill, red-pen annotation language, square scanned-page look, Xiao He and Mama costume locks, and their relative proportions.
 
 ## Allowed Usage / 允许用途
 
-- Use as the accepted p01 master reference for `pilot-001` later-page generation after this Workflow J acceptance.
+- Use as the accepted p01 R00 master visual reference for `pilot-001` later-page generation after this Workflow J acceptance.
 - Use to preserve the child-drawn horror notebook look, paper texture, linework, red-pen language, character costume locks, and Xiao He / Mama relative proportions.
 - Use only through explicit downstream ImageExecutionPackage dependency declarations that state the borrowed R00 properties.
 
@@ -96,7 +97,7 @@ The asset anchors the later-page visual continuity for the child-drawn horror no
 
 ## Dependency Use / 依赖使用
 
-No downstream page package is bound yet. Future p02-p14 packages must list `ra-pilot-001-r00-master-style-character-anchor` in their ReferenceAsset dependencies before using the p01 master anchor.
+The p01 source package `iep-pilot-001-p01-fork-at-dusk` is bound to this accepted ReferenceAsset. No downstream p02-p14 page package is bound yet. Future p02-p14 packages must list `ra-pilot-001-r00-master-style-character-anchor` in their ReferenceAsset dependencies before using the p01 master visual reference.
 
 ## Quality Status / 质量状态
 
@@ -108,7 +109,7 @@ None.
 
 ## Used By / 被使用
 
-No downstream usage has been registered yet.
+- `iep-pilot-001-p01-fork-at-dusk`
 
 ## QA Evidence / QA 证据
 
