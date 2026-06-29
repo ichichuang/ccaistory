@@ -41,7 +41,7 @@ publishing_readiness_status: blocked
 
 **Visual pipeline reset completed (2026-06-26).** The old warm-safe visual system was removed from active use and the visual pipeline was rebuilt around a single clean child-drawn horror notebook style for GPTImage production.
 
-- Current workflow: **Workflow I gate after p01 GenerationRun backfill.**
+- Current workflow: **Workflow J gate after p01 Workflow I QA pass.**
 - Current active visual system: `vs-pilot-001-child-horror-notebook`.
 - Current active recipe: `pr-pilot-001-child-horror-notebook` (active `recipe_hash` `267c7dfe258e43ba` — the only active recipe hash for `pilot-001`).
 - Workflows A (Raw Intake), B (Story Analysis), C (Character & Scene Extraction) remain accepted; the story core, graph, characters, and scenes are unchanged.
@@ -50,9 +50,9 @@ publishing_readiness_status: blocked
 - **No image accepted. No ReferenceAsset exists.**
 - Workflow H for p01 is **started/completed**: one manual WebGPTImage / GPTImage candidate exists, with GenerationRun `gr-pilot-001-p01-20260626-172625-webgptimage`.
 - Candidate image: `01-raw/story-lab/generated-raw/pilot-001/iep-pilot-001-p01-fork-at-dusk/pilot-001-p01-candidate-20260626-172625.png`.
-- Workflow I QA is **pending**. The candidate must not be treated as accepted, as a ReferenceAsset, or as the R00 master anchor.
+- Workflow I QA is **passed**. The candidate must not be treated as accepted, as a ReferenceAsset, or as the R00 master anchor until Workflow J.
 - WebGPTImage / GPTImage remains **manual**. No automated generation is authorized.
-- Serialized production: **p01 is the designated series master anchor** — once a p01 image is accepted, that accepted image is the mandatory style/character/proportion reference for all later pages. See [Series Continuity & Master Anchor](#series-continuity--master-anchor-serialized-production). (No image accepted yet; the anchor activates on acceptance.)
+- Serialized production: **p01 is the designated series master anchor** — once a p01 image is accepted through Workflow J, that accepted image is the mandatory style/character/proportion reference for all later pages. See [Series Continuity & Master Anchor](#series-continuity--master-anchor-serialized-production). (No image accepted yet; the anchor activates on Workflow J acceptance.)
 
 ### Style is reusable; story content is variable
 
@@ -60,7 +60,7 @@ The child-drawn horror notebook style controls drawing method and atmosphere onl
 
 ### Removed History Summary
 
-An earlier warm-safe night-picture-book VisualStyle and its prompt recipe were used during the original visual pipeline, produced a failed p01 manual attempt (over-safe / polished digital / animalized humans / no horror), and have been **removed**. Their cards, old recipe hashes, repair iterations, stale handoffs, and stale compile/lint records are no longer part of the active pipeline and must not be bound. No image was ever accepted; no ReferenceAsset or GenerationRun was ever created.
+An earlier warm-safe night-picture-book VisualStyle and its prompt recipe were used during the original visual pipeline, produced a failed p01 manual attempt (over-safe / polished digital / animalized humans / no horror), and have been **removed**. Their cards, old recipe hashes, repair iterations, stale handoffs, and stale compile/lint records are no longer part of the active pipeline and must not be bound. No image from that removed visual system was ever accepted; no ReferenceAsset was created from it.
 
 
 ## Source Paths
@@ -153,21 +153,21 @@ Current (active) cards:
 - Character `visual_style` references point to the active style; global warm-safe visual bans were removed/downgraded to story-layer role notes; human identity locks preserved.
 - Scene cards: `linked_packages` reset to p01 only (other scenes cleared pending package re-creation).
 
-Neither this card nor the active visual system authorizes automated image generation, ReferenceAsset creation, or acceptance. The p01 candidate was produced manually and backfilled through Workflow H; Workflow I QA remains pending.
+Neither this card nor the active visual system authorizes automated image generation, ReferenceAsset creation, or acceptance. The p01 candidate was produced manually, backfilled through Workflow H, and passed Workflow I QA; Workflow J ReferenceAsset acceptance remains pending.
 
 ## Execution Packages
 
 **Option B (clean restart)** chosen. Only one package exists:
 
-- [p01 / The Fork at Dusk](../70-execution-packages/iep-pilot-001-p01-fork-at-dusk.md) - fresh `draft`, bound to the active style/recipe (`recipe_hash` `267c7dfe258e43ba`); Workflow H backfilled one manual candidate and GenerationRun; QA pending; no ReferenceAsset accepted.
+- [p01 / The Fork at Dusk](../70-execution-packages/iep-pilot-001-p01-fork-at-dusk.md) - fresh `draft`, bound to the active style/recipe (`recipe_hash` `267c7dfe258e43ba`); Workflow H backfilled one manual candidate and GenerationRun; Workflow I QA passed; no ReferenceAsset accepted.
 
 p02-p14 packages were deleted in the reset and **must be recreated later** before the full 14-page story can proceed.
 
 ## Series Continuity & Master Anchor (serialized production)
 
-This is a **serialized** picture book: across all pages **style consistency, character consistency, and proportion consistency are mandatory**. To enforce that, **p01 (the dusk fork page) is the designated series master anchor** — once a p01 image is accepted at the p01 QA / human gate, that **accepted p01 image is the master visual reference** for every later page (p02-p14). Only the scene event changes from page to page; the look stays locked to the master.
+This is a **serialized** picture book: across all pages **style consistency, character consistency, and proportion consistency are mandatory**. To enforce that, **p01 (the dusk fork page) is the designated series master anchor** — once a p01 image is accepted through Workflow J, that **accepted p01 image is the master visual reference** for every later page (p02-p14). Only the scene event changes from page to page; the look stays locked to the master.
 
-> **Acceptance precondition (current state).** No p01 image is accepted yet — one manual p01 candidate and its GenerationRun exist, but Workflow I QA is still pending and no ReferenceAsset exists. The master anchor **activates only when a genuinely accepted (QA-passed) p01 image exists**; a failed, pending, or unaccepted candidate must never be used as the anchor. On acceptance, the accepted p01 image should be registered as the `R00` master ReferenceAsset through the proper ReferenceAsset workflow before later-page generation begins. Until then, the rules below are the standing production contract for the series.
+> **Acceptance precondition (current state).** No p01 image is accepted yet — one manual p01 candidate and its GenerationRun exist, Workflow I QA has passed, and no ReferenceAsset exists. The master anchor **activates only when Workflow J accepts the QA-passed p01 image**; a QA-passed but unaccepted candidate must never be used as the anchor. On acceptance, the accepted p01 image should be registered as the `R00` master ReferenceAsset through the proper ReferenceAsset workflow before later-page generation begins. Until then, the rules below are the standing production contract for the series.
 
 ### Continuity Rule Set (mandatory for every future page)
 
@@ -213,15 +213,17 @@ For later pages, prepend the **Series Continuity Prefix** defined in `pr-pilot-0
 - Workflow H GenerationRun backfill for p01: **COMPLETED** (2026-06-29 backfill of 2026-06-26 manual WebGPTImage / GPTImage candidate).
 - Candidate image exists at `01-raw/story-lab/generated-raw/pilot-001/iep-pilot-001-p01-fork-at-dusk/pilot-001-p01-candidate-20260626-172625.png`.
 - GenerationRun: `50-agent-work/story-lab/runs/gr-pilot-001-p01-20260626-172625-webgptimage.md`.
-- Current workflow: **Workflow I image QA gate.**
-- QA status: **pending**.
+- Workflow I image QA for p01: **PASSED**.
+- QA evidence: `50-agent-work/story-lab/qa-results/qa-pilot-001-p01-candidate-20260626-172625.md`.
+- Current workflow: **Workflow J ReferenceAsset Acceptance gate.**
+- QA status: **pass**.
 - ReferenceAsset status: **none**.
 
 ## Blocked Actions
 
-Workflows A, B, C are accepted. Workflow H backfilled one p01 candidate and GenerationRun. The following remain blocked:
+Workflows A, B, C are accepted. Workflow H backfilled one p01 candidate and GenerationRun, and Workflow I QA passed. The following remain blocked:
 
-- Image acceptance
+- Image acceptance / final accepted asset marking
 - Workflow J ReferenceAsset acceptance
 - R00 master anchor activation
 - p02-p14 package creation or generation

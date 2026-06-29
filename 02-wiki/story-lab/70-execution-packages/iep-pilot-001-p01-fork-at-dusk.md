@@ -27,8 +27,8 @@ semantic_lint_result_ref: ""
 compile_status: ""
 semantic_lint_status: ""
 webgptimage_handoff_status: manual_candidate_generated
-downstream_generation_status: candidate_backfilled_qa_pending
-blocked_reason: "Workflow H backfilled one manual WebGPTImage/GPTImage p01 candidate. QA is pending; no ReferenceAsset is accepted; the R00 master anchor remains inactive until Workflow I passes and Workflow J accepts it."
+downstream_generation_status: qa_passed_reference_acceptance_pending
+blocked_reason: "Workflow I QA passed for the manual p01 candidate. ReferenceAsset is not accepted; the R00 master anchor remains inactive until Workflow J accepts it."
 target_model: "GPTImage manual window (human-operated); not authorized for automated generation"
 aspect_ratio: "1:1"
 reference_assets: []
@@ -57,11 +57,13 @@ related_assets:
 source_paths:
   - 01-raw/story-lab/generated-raw/pilot-001/iep-pilot-001-p01-fork-at-dusk/pilot-001-p01-candidate-20260626-172625.png
 last_run: gr-pilot-001-p01-20260626-172625-webgptimage
-qa_result: pending
+qa_result: pass
+image_review_form_ref: 50-agent-work/story-lab/image-review-forms/review-pilot-001-p01-candidate-20260626-172625.json
+asset_qa_result_ref: 50-agent-work/story-lab/qa-results/qa-pilot-001-p01-candidate-20260626-172625.md
 r00_dependency_policy: "No R00 dependency. No ReferenceAsset exists or is required; any future anchor dependency must be separately accepted and declared before use."
 maximum_anchor_reuse_policy: "No anchor reuse. Do not create, reuse, or imply R00/R01/R02 assets from this package."
 dependency_notes: "Depends only on accepted Workflow A-C canonical cards (StoryProject, Scene, Character) plus the clean VisualStyle/PromptRecipe. No reference assets."
-blocking_notes: "Workflow H backfill complete for one manual p01 candidate. Workflow I image QA is pending. ReferenceAsset, R00 master anchor activation, later-page generation, final package, and publishing records remain blocked."
+blocking_notes: "Workflow I QA passed for one manual p01 candidate. ReferenceAsset acceptance, R00 master anchor activation, later-page generation, final package, and publishing records remain blocked until Workflow J."
 final_assembly_dependency: pilot-001
 tags:
   - story-lab
@@ -72,7 +74,7 @@ tags:
   - blocked
   - clean-reset
   - generation-run-backfilled
-  - qa-pending
+  - qa-passed
 created_at: 2026-06-26
 updated_at: 2026-06-29
 owner: ichichuang
@@ -82,7 +84,7 @@ canonical: true
 
 # pilot-001 p01 黄昏岔路口图像执行包 / The Fork at Dusk Image Execution Package
 
-> Fresh `draft` package created in the 2026-06-26 visual pipeline reset. It binds the clean child-drawn horror notebook VisualStyle and PromptRecipe. Workflow H has backfilled one manual WebGPTImage / GPTImage candidate and GenerationRun. The image is not accepted, QA is pending, no ReferenceAsset exists, and the R00 master anchor is inactive.
+> Fresh `draft` package created in the 2026-06-26 visual pipeline reset. It binds the clean child-drawn horror notebook VisualStyle and PromptRecipe. Workflow H backfilled one manual WebGPTImage / GPTImage candidate and GenerationRun. Workflow I QA passed. The image is not accepted, no ReferenceAsset exists, and the R00 master anchor is inactive until Workflow J acceptance.
 
 ## Package Summary / 执行包概要
 
@@ -95,13 +97,14 @@ canonical: true
 - Recipe hash: `267c7dfe258e43ba` (the only active recipe hash for `pilot-001`)
 - GenerationRun: `gr-pilot-001-p01-20260626-172625-webgptimage`
 - Candidate image: `01-raw/story-lab/generated-raw/pilot-001/iep-pilot-001-p01-fork-at-dusk/pilot-001-p01-candidate-20260626-172625.png`
-- QA status: pending
+- QA status: pass
+- QA evidence: `50-agent-work/story-lab/qa-results/qa-pilot-001-p01-candidate-20260626-172625.md`
 
 ## Series Master Anchor / 系列主锚
 
-**p01 is the designated series master anchor.** In this serialized picture book, style, character, and proportion consistency are mandatory across all pages. Once a p01 image is **accepted** at the p01 QA / human gate, that accepted image becomes the **master visual reference** for every later page (p02-p14): later pages upload it as the master reference and inherit its notebook-paper style, line quality, red-pen language, matte texture, square format, character design, and proportions — only the scene event changes per page (see the project card's "Series Continuity & Master Anchor" section and the recipe's "Series Continuity Prefix").
+**p01 is the designated series master anchor.** In this serialized picture book, style, character, and proportion consistency are mandatory across all pages. Once a p01 image is **accepted** through Workflow J, that accepted image becomes the **master visual reference** for every later page (p02-p14): later pages upload it as the master reference and inherit its notebook-paper style, line quality, red-pen language, matte texture, square format, character design, and proportions — only the scene event changes per page (see the project card's "Series Continuity & Master Anchor" section and the recipe's "Series Continuity Prefix").
 
-- Current state: **no p01 image is accepted yet**; one manual p01 candidate has been backfilled, Workflow I QA is pending, and no ReferenceAsset exists. The anchor **activates only on a genuine acceptance** — a failed, pending, or unaccepted candidate must never be used as the master.
+- Current state: **no p01 image is accepted yet**; one manual p01 candidate has passed Workflow I QA, and no ReferenceAsset exists. The anchor **activates only on a genuine Workflow J acceptance** — a QA-passed but unaccepted candidate must never be used as the master.
 - On acceptance: register the accepted p01 image as the `R00` master ReferenceAsset through the proper ReferenceAsset workflow before any later-page generation.
 
 ## Target Asset / 目标资产
@@ -112,7 +115,7 @@ Draft package plan for the p01 page illustration: the dusk road fork rendered as
 
 - Required canonical cards: StoryProject `pilot-001`, Scene `scene-fork-at-dusk`, Character cards `char-xiaohe` and `char-mama`, VisualStyle `vs-pilot-001-child-horror-notebook`, PromptRecipe `pr-pilot-001-child-horror-notebook`.
 - Required ReferenceAsset cards: none available, required, or created.
-- State: fresh draft with one manual candidate backfilled. Not accepted; Workflow I QA is pending. No ReferenceAsset is available, required, or created.
+- State: fresh draft with one manual candidate backfilled and Workflow I QA passed. Not accepted; Workflow J ReferenceAsset acceptance is pending. No ReferenceAsset is available, required, or created.
 
 ## Allowed Content / 允许内容
 
@@ -150,7 +153,7 @@ Image generation was performed manually in WebGPTImage / GPTImage for this candi
 
 ## QA Acceptance Criteria / QA 验收标准
 
-Later QA must confirm: human child and human mother only (no animal/mascot/plush/doll); Xiao He and Mama visual locks; child-drawn horror notebook aesthetic (lined paper, rough pencil/ballpoint, colored-pencil/crayon, eraser marks, red-pen marks, childish proportions, matte scanned paper); readable bright-vs-dark road choice; source-distance compliance; and no in-image platform/prompt/handoff text or legible sign words.
+Workflow I QA confirmed: human child and human mother only (no animal/mascot/plush/doll); Xiao He and Mama visual locks; child-drawn horror notebook aesthetic (lined paper, rough pencil/ballpoint, colored-pencil/crayon, eraser marks, red-pen marks, childish proportions, matte scanned paper); readable bright-vs-dark road choice; source-distance compliance; and no in-image platform/prompt/handoff text or legible sign words.
 
 ## Reference Asset Binding / 参考资产绑定
 
