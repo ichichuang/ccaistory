@@ -18,6 +18,7 @@ output_targets:
   - image
 linked_packages:
   - iep-pilot-001-p03-dark-wooded-lane
+  - iep-pilot-001-p04-low-moan-lane
 related_assets: []
 source_paths: []
 tags:
@@ -62,7 +63,7 @@ The dots, the fence-pipe, and the mist must be placed and shaped so their cottag
 
 ## Image Targets / 出图目标
 
-`output_targets: [image]`. Execution packages for this scene were cleared in the 2026-06-26 visual pipeline reset (Option B clean restart); only p01 currently has a package, and a package for this scene must be recreated later. Image generation remains manual and blocked.
+`output_targets: [image]`. Execution packages for this scene were cleared in the 2026-06-26 visual pipeline reset (Option B clean restart). This scene currently links p03 and draft p04 packages; p05-p06 packages have not been recreated yet. Image generation remains manual and blocked.
 
 ## QA Notes / QA 备注
 

@@ -34,6 +34,7 @@ related_packages:
   - iep-pilot-001-p01-fork-at-dusk
   - iep-pilot-001-p02-fading-lamp-lane
   - iep-pilot-001-p03-dark-wooded-lane
+  - iep-pilot-001-p04-low-moan-lane
 final_package_status: not-started
 required_asset_count: 0
 accepted_asset_count: 3
@@ -46,11 +47,11 @@ publishing_readiness_status: blocked
 
 **Visual pipeline reset completed (2026-06-26).** The old warm-safe visual system was removed from active use and the visual pipeline was rebuilt around a single clean child-drawn horror notebook style for GPTImage production.
 
-- Current workflow: **p03 page image is accepted as `ra-pilot-001-p03-dark-wooded-lane`. p01 R00 remains the only series master visual anchor, p02 remains the p03 previous-page scene continuity reference, and the next controlled step is p04 package creation when separately authorized.**
+- Current workflow: **p04 ImageExecutionPackage has been recreated as draft only. It requires R00 `ra-pilot-001-r00-master-style-character-anchor` plus previous-page reference `ra-pilot-001-p03-dark-wooded-lane`. p04 generation remains blocked; next controlled step is p04 Workflow F compile + semantic lint.**
 - Current active visual system: `vs-pilot-001-child-horror-notebook`.
 - Current active recipe: `pr-pilot-001-child-horror-notebook` (active `recipe_hash` `267c7dfe258e43ba` — the only active recipe hash for `pilot-001`).
 - Workflows A (Raw Intake), B (Story Analysis), C (Character & Scene Extraction) remain accepted; the story core, graph, characters, and scenes are unchanged.
-- Packages: **Option B (clean restart)** was chosen. `iep-pilot-001-p01-fork-at-dusk`, `iep-pilot-001-p02-fading-lamp-lane`, and `iep-pilot-001-p03-dark-wooded-lane` now exist. **p04-p14 packages remain deleted and must be recreated later, one at a time.**
+- Packages: **Option B (clean restart)** was chosen. `iep-pilot-001-p01-fork-at-dusk`, `iep-pilot-001-p02-fading-lamp-lane`, `iep-pilot-001-p03-dark-wooded-lane`, and draft `iep-pilot-001-p04-low-moan-lane` now exist. **p05-p14 packages remain deleted and must be recreated later, one at a time.**
 - Failed earlier p01 output is **not accepted** and must **not** be used as a reference.
 - **ReferenceAssets exist:** `ra-pilot-001-r00-master-style-character-anchor`, `ra-pilot-001-p02-fading-lamp-lane`, and `ra-pilot-001-p03-dark-wooded-lane`.
 - Workflow H for p01 is **started/completed**: one manual WebGPTImage / GPTImage candidate exists, with GenerationRun `gr-pilot-001-p01-20260626-172625-webgptimage`.
@@ -171,7 +172,7 @@ Current (active) cards:
 - PromptRecipe: `pr-pilot-001-child-horror-notebook` - [Child-Drawn Horror Notebook Prompt Recipe](../60-prompts/pr-pilot-001-child-horror-notebook.md); reusable, story-driven recipe only, not an execution prompt.
 - recipe_hash: `267c7dfe258e43ba` (the only active recipe hash for `pilot-001`).
 - Character `visual_style` references point to the active style; global warm-safe visual bans were removed/downgraded to story-layer role notes; human identity locks preserved.
-- Scene cards: `linked_packages` currently restored for p01, p02, and p03 only; p04-p14 scene-package links remain cleared pending package re-creation.
+- Scene cards: `linked_packages` currently restored for p01, p02, p03, and draft p04 only; p05-p14 scene-package links remain cleared pending package re-creation.
 
 Neither this card nor the active visual system authorizes automated image generation. The p01 candidate was produced manually, backfilled through Workflow H, passed Workflow I QA, and was accepted through Workflow J as `ra-pilot-001-r00-master-style-character-anchor`.
 
@@ -182,8 +183,9 @@ Neither this card nor the active visual system authorizes automated image genera
 - [p01 / The Fork at Dusk](../70-execution-packages/iep-pilot-001-p01-fork-at-dusk.md) - fresh `draft`, bound to the active style/recipe (`recipe_hash` `267c7dfe258e43ba`); Workflow H backfilled one manual candidate and GenerationRun; Workflow I QA passed; Workflow J accepted [ra-pilot-001-r00-master-style-character-anchor](../reference-assets/ra-pilot-001-r00-master-style-character-anchor.md).
 - [p02 / The Fading-Lamp Lane](../70-execution-packages/iep-pilot-001-p02-fading-lamp-lane.md) - `ready`, bound to the active style/recipe and required R00 ReferenceAsset `ra-pilot-001-r00-master-style-character-anchor`; Workflow F compile and semantic lint passed; Workflow H repair candidate backfilled with GenerationRun `gr-pilot-001-p02-repair-01-20260630-154548-webgptimage`; Workflow I QA passed; Workflow J accepted page-level ReferenceAsset [ra-pilot-001-p02-fading-lamp-lane](../reference-assets/ra-pilot-001-p02-fading-lamp-lane.md); no final package or publishing record exists.
 - [p03 / The Dark Wooded Lane](../70-execution-packages/iep-pilot-001-p03-dark-wooded-lane.md) - `ready`, bound to required R00 ReferenceAsset [ra-pilot-001-r00-master-style-character-anchor](../reference-assets/ra-pilot-001-r00-master-style-character-anchor.md) for global visual continuity and required previous-page ReferenceAsset [ra-pilot-001-p02-fading-lamp-lane](../reference-assets/ra-pilot-001-p02-fading-lamp-lane.md) for scene continuity only; Workflow F compile and semantic lint passed; Workflow H backfilled GenerationRun `gr-pilot-001-p03-20260630-205406-webgptimage`; Workflow I QA passed; Workflow J accepted page-level ReferenceAsset [ra-pilot-001-p03-dark-wooded-lane](../reference-assets/ra-pilot-001-p03-dark-wooded-lane.md); no final package or publishing record exists.
+- [p04 / The Low Moan Lane](../70-execution-packages/iep-pilot-001-p04-low-moan-lane.md) - `draft`, bound to required R00 ReferenceAsset [ra-pilot-001-r00-master-style-character-anchor](../reference-assets/ra-pilot-001-r00-master-style-character-anchor.md) for global visual continuity and required previous-page ReferenceAsset [ra-pilot-001-p03-dark-wooded-lane](../reference-assets/ra-pilot-001-p03-dark-wooded-lane.md) for scene continuity only; generation remains blocked; next workflow is p04 Workflow F compile + semantic lint.
 
-p04-p14 packages remain deleted after the reset and **must be recreated later** before the full 14-page story can proceed.
+p05-p14 packages remain deleted after the reset and **must be recreated later** before the full 14-page story can proceed.
 
 ## Series Continuity & Master Anchor (serialized production)
 
@@ -258,8 +260,11 @@ For later pages, prepend the **Series Continuity Prefix** defined in `pr-pilot-0
 - p03 QA evidence: `50-agent-work/story-lab/qa-results/qa-pilot-001-p03-candidate-20260630-205406.md`.
 - Workflow J ReferenceAsset Acceptance for p03: **ACCEPTED**.
 - Accepted p03 ReferenceAsset: `ra-pilot-001-p03-dark-wooded-lane`.
-- p04-p14 packages: **not created**.
-- Current workflow: **p03 accepted page asset exists. Next controlled step is p04 package creation when separately authorized. Do not create p04 in the p03 acceptance task.**
+- p04 ImageExecutionPackage recreation: **COMPLETED AS DRAFT** with required references `ra-pilot-001-r00-master-style-character-anchor` and `ra-pilot-001-p03-dark-wooded-lane`.
+- p04 package status: **draft**.
+- p04 downstream generation status: **blocked**.
+- p05-p14 packages: **not created**.
+- Current workflow: **p04 draft package exists. Next controlled step is p04 Workflow F compile + semantic lint. Do not generate p04 images, create a GPTImage handoff, create GenerationRun, create ReferenceAsset, create p05-p14 packages, create a final package, or create publishing records before the relevant later workflow is authorized.**
 - p01 QA status: **pass**.
 - p01 ReferenceAsset status: **accepted**.
 - p02 QA status: **pass**.
@@ -271,14 +276,14 @@ For later pages, prepend the **Series Continuity Prefix** defined in `pr-pilot-0
 
 Workflows A, B, C are accepted. Workflow H/I/J accepted p01, p02, and p03 through their current page-level gates. The following remain blocked:
 
-- p04-p14 package creation or generation until each package is recreated from canonical cards
+- p04 generation and p05-p14 package creation or generation until each step is separately authorized from canonical cards
 - final package assembly
 - publishing readiness
-- p04-p14 re-creation + compile/lint (required before the full story can proceed)
+- p04 compile/lint and p05-p14 re-creation + compile/lint (required before the full story can proceed)
 
 ## Next Workflow
 
-p03 acceptance is complete. The accepted p03 page asset `ra-pilot-001-p03-dark-wooded-lane` may be used as the immediately previous accepted page reference for p04 continuity and hook QA. Next controlled step is p04 package creation when separately authorized. Do not generate images, create p04-p14 packages, create a final package, or create publishing records before the relevant later workflow is authorized.
+p04 draft package creation is complete. The p04 package uses `ra-pilot-001-r00-master-style-character-anchor` as the R00 master visual reference and `ra-pilot-001-p03-dark-wooded-lane` as the immediately previous accepted page reference for continuity and hook QA. Next controlled step is p04 Workflow F compile + semantic lint. Do not generate images, create a GPTImage handoff, create GenerationRun, create ReferenceAsset, create p05-p14 packages, create a final package, or create publishing records before the relevant later workflow is authorized.
 
 
 ## Notes
