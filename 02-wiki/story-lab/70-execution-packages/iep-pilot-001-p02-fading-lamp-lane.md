@@ -28,12 +28,13 @@ compile_status: pass
 semantic_lint_status: pass
 webgptimage_handoff_status: prepared
 webgptimage_handoff_record_ref: 50-agent-work/story-lab/webgptimage-handoffs/pilot-001/handoff-pilot-001-p02-fading-lamp-lane-gptimage.md
-downstream_generation_status: qa_passed_reference_asset_acceptance_pending
-blocked_reason: "Workflow I passed the p02 repair candidate. Workflow J ReferenceAsset Acceptance is pending; no p02 ReferenceAsset is accepted."
+downstream_generation_status: reference_asset_accepted
+blocked_reason: "Workflow J accepted the p02 page-level ReferenceAsset. p03 package creation, later-page generation, final package, and publishing records remain blocked until separately authorized."
 target_model: "GPTImage manual window (human-operated); not authorized for automated generation"
 aspect_ratio: "1:1"
 reference_assets:
   - ra-pilot-001-r00-master-style-character-anchor
+  - ra-pilot-001-p02-fading-lamp-lane
 required_reference_assets:
   - ra-pilot-001-r00-master-style-character-anchor
 prohibited_reference_assets: []
@@ -49,7 +50,8 @@ forbidden_content:
   - "No failed old p01 image, removed warm-safe visual system, animalized humans, plush/doll/mascot drift, or new characters."
   - "No explicit gore, realistic corpse, real child abuse, severe child injury or visible trauma, sexual/adult content, or real-crime reproduction."
   - "No platform UI, prompt text, image id, WebGPTImage handoff text, long body text, or legible signpost words inside a future image."
-output_assets: []
+output_assets:
+  - ra-pilot-001-p02-fading-lamp-lane
 candidate_image_paths:
   - 01-raw/story-lab/generated-raw/pilot-001/iep-pilot-001-p02-fading-lamp-lane/pilot-001-p02-candidate-repair-01-20260630-154548.png
 generation_run_ids:
@@ -61,6 +63,7 @@ related_assets:
   - vs-pilot-001-child-horror-notebook
   - pr-pilot-001-child-horror-notebook
   - ra-pilot-001-r00-master-style-character-anchor
+  - ra-pilot-001-p02-fading-lamp-lane
 source_paths:
   - 02-wiki/story-lab/40-scenes/scene-fading-lamp-lane.md
   - 02-wiki/story-lab/reference-assets/ra-pilot-001-r00-master-style-character-anchor.md
@@ -99,7 +102,7 @@ escalation_level: "early p02 controlled unease; one step beyond p01, before deep
 continuity_qa_required: true
 hook_qa_required: true
 dependency_notes: "Depends on scene-fading-lamp-lane, char-xiaohe, char-mama, vs-pilot-001-child-horror-notebook, pr-pilot-001-child-horror-notebook, and accepted R00 ReferenceAsset ra-pilot-001-r00-master-style-character-anchor."
-blocking_notes: "Workflow I image QA passed for the p02 repair candidate. ReferenceAsset acceptance, final package, publishing records, and p03-p14 package creation remain blocked until separately authorized."
+blocking_notes: "Workflow J accepted ra-pilot-001-p02-fading-lamp-lane as the p02 page-level ReferenceAsset. Final package, publishing records, and p03-p14 package creation remain blocked until separately authorized."
 final_assembly_dependency: pilot-001
 tags:
   - story-lab
@@ -113,6 +116,8 @@ tags:
   - generation-run-backfilled
   - qa-passed
   - workflow-i-passed
+  - workflow-j-accepted
+  - reference-asset-accepted
 created_at: 2026-06-29
 updated_at: 2026-06-30
 owner: ichichuang
@@ -122,7 +127,7 @@ canonical: true
 
 # pilot-001 p02 灯火渐稀小路图像执行包 / The Fading-Lamp Lane Image Execution Package
 
-> Ready p02 ImageExecutionPackage after Workflow F compile and semantic lint. It binds the accepted R00 master visual reference for narrow continuity only. Workflow H backfilled one manual repair candidate; Workflow I image QA passed. This does not mark p02 accepted and does not create a ReferenceAsset, final package, or publishing record.
+> Ready p02 ImageExecutionPackage after Workflow F compile and semantic lint. It binds the accepted R00 master visual reference for narrow continuity only. Workflow H backfilled one manual repair candidate, Workflow I image QA passed, and Workflow J accepted the p02 page-level ReferenceAsset `ra-pilot-001-p02-fading-lamp-lane`. This does not create p03-p14 packages, a final package, or publishing records.
 
 ## Package Summary / 执行包概要
 
@@ -137,12 +142,13 @@ canonical: true
 - Package status: `ready`
 - WebGPTImage handoff status: `prepared`
 - WebGPTImage handoff record: `50-agent-work/story-lab/webgptimage-handoffs/pilot-001/handoff-pilot-001-p02-fading-lamp-lane-gptimage.md`
-- Downstream generation status: `qa_passed_reference_asset_acceptance_pending`
+- Downstream generation status: `reference_asset_accepted`
 - GenerationRun: `gr-pilot-001-p02-repair-01-20260630-154548-webgptimage`
 - Candidate image: `01-raw/story-lab/generated-raw/pilot-001/iep-pilot-001-p02-fading-lamp-lane/pilot-001-p02-candidate-repair-01-20260630-154548.png`
 - QA status: pass
 - Image review form: `50-agent-work/story-lab/image-review-forms/review-pilot-001-p02-candidate-repair-01-20260630-154548.json`
 - Asset QA result: `50-agent-work/story-lab/qa-results/qa-pilot-001-p02-candidate-repair-01-20260630-154548.md`
+- Accepted ReferenceAsset: [ra-pilot-001-p02-fading-lamp-lane](../reference-assets/ra-pilot-001-p02-fading-lamp-lane.md)
 - Compile result: `50-agent-work/story-lab/compiled-prompts/compiled-prompt-pilot-001-p02-fading-lamp-lane.json`
 - Semantic lint result: `50-agent-work/story-lab/semantic-lint-results/semantic-lint-pilot-001-p02-fading-lamp-lane.json`
 
@@ -153,10 +159,11 @@ Planning card for the p02 page illustration. The page shows the shortcut lane be
 ## Dependency Graph / 依赖图
 
 - Required canonical cards: StoryProject `pilot-001`, Scene `scene-fading-lamp-lane`, Character cards `char-xiaohe` and `char-mama`, VisualStyle `vs-pilot-001-child-horror-notebook`, PromptRecipe `pr-pilot-001-child-horror-notebook`.
-- Required ReferenceAsset: `ra-pilot-001-r00-master-style-character-anchor`.
+- Required R00 ReferenceAsset: `ra-pilot-001-r00-master-style-character-anchor`.
+- Accepted p02 output ReferenceAsset: `ra-pilot-001-p02-fading-lamp-lane`.
 - One p02 repair GenerationRun exists: `gr-pilot-001-p02-repair-01-20260630-154548-webgptimage`.
 - Workflow I QA passed for the p02 repair candidate.
-- No output ReferenceAsset exists for p02.
+- Workflow J accepted the p02 page-level ReferenceAsset.
 
 ## Previous Page Continuity / 前页连续性
 
@@ -223,11 +230,13 @@ Bound to `pr-pilot-001-child-horror-notebook` with active `recipe_hash` `267c7df
 
 It must not transfer the p01 fork scene, p01 signpost layout, p01 road split, or p01 story event into p02.
 
+Workflow J accepted `ra-pilot-001-p02-fading-lamp-lane` as this package's page-level output ReferenceAsset. It is not R00 and must not replace `ra-pilot-001-r00-master-style-character-anchor`.
+
 ## Canvas and Output Rules / 画布与输出规则
 
 - Planned aspect ratio: `1:1`.
 - Candidate image paths: `01-raw/story-lab/generated-raw/pilot-001/iep-pilot-001-p02-fading-lamp-lane/pilot-001-p02-candidate-repair-01-20260630-154548.png`.
-- Output assets: none.
+- Output assets: `ra-pilot-001-p02-fading-lamp-lane`.
 - Generation runs: `gr-pilot-001-p02-repair-01-20260630-154548-webgptimage`.
 
 ## Generation Order / 生成顺序
@@ -236,7 +245,7 @@ Initial full-story order: 2 of 14. This card is planning metadata only and does 
 
 ## Manual Execution Status / 人工执行状态
 
-The p02 GPTImage handoff was executed manually outside Codex, and Workflow H backfilled one repair candidate. Codex did not generate a new image. Workflow I image QA passed, and no ReferenceAsset acceptance exists for p02.
+The p02 GPTImage handoff was executed manually outside Codex, and Workflow H backfilled one repair candidate. Codex did not generate a new image. Workflow I image QA passed, and Workflow J accepted the p02 page-level ReferenceAsset.
 
 ## QA Acceptance Criteria / QA 验收标准
 
@@ -262,7 +271,7 @@ Repair or regenerate later if the generated p02 image copies the p01 fork/signpo
 
 ## Result Backfill Procedure / 结果回填流程
 
-The current repair candidate has been backfilled through Workflow H and passed Workflow I image QA. It must next be accepted or rejected through Workflow J. This package has no accepted ReferenceAsset.
+The current repair candidate has been backfilled through Workflow H, passed Workflow I image QA, and was accepted through Workflow J as `ra-pilot-001-p02-fading-lamp-lane`. This package has no authority to create p03-p14 packages, final packages, or publishing records.
 
 ## R00 Anchor Dependency Policy / R00 锚图依赖策略
 
