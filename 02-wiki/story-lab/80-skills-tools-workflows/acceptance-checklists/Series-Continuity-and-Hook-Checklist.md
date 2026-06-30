@@ -30,6 +30,7 @@ For every serialized image page after p01, verify that the page is the next cont
 - [ ] Location continues logically from the previous accepted page.
 - [ ] Path, room, road, building, or other scene geometry does not jump unexpectedly.
 - [ ] Density, darkness, fog, light, crowding, or visual pressure evolves gradually.
+- [ ] `continuity_priority`: the new page still feels like a direct continuation of the previous accepted page before it reads as an isolated dramatic image.
 - [ ] No sudden new props or infrastructure unless previously seeded or story-required.
 - [ ] No copy-paste of the previous page composition.
 - [ ] No hard scene reset unless approved by the Story Graph.
@@ -39,12 +40,16 @@ For every serialized image page after p01, verify that the page is the next cont
 - [ ] Page does not feel like a later page too early.
 - [ ] Only one or two meaningful changes are introduced.
 - [ ] Scare or mystery escalation is controlled.
+- [ ] `progression_budget`: the page is only one controlled step beyond the previous accepted page.
+- [ ] `overcorrection_risk`: repair did not solve one issue by creating a stronger continuity break.
 - [ ] Rational and safety story arc remains intact unless the Story Core says otherwise.
 
 ## D. Hook Strength
 - [ ] Page has one clear visual question.
 - [ ] Hook is specific, not generic.
+- [ ] `symbol_semantics_clarity`: the intended clue reads as the intended clue, not another object class (for example, eyes vs lamps).
 - [ ] Red annotation points to the actual uncertainty.
+- [ ] `hook_integration`: the clue integrates into the environment instead of becoming an isolated block or early full-page focus.
 - [ ] Hook invites the next page.
 - [ ] Hook comes from approved page content.
 - [ ] Hook text is short, childlike, and page-specific.

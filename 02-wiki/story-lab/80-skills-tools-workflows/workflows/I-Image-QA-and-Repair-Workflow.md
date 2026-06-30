@@ -54,6 +54,10 @@ H 工作流生成了 GenerationRun 与 image_review_form。
 - `proportion_continuity`
 - `previous_page_scene_continuity`
 - `environment_progression`
+- `symbol_semantics_clarity`
+- `overcorrection_risk`
+- `progression_budget`
+- `hook_integration`
 - `hook_strength`
 - `annotation_relevance`
 - `story_stage_fit`
@@ -65,6 +69,10 @@ H 工作流生成了 GenerationRun 与 image_review_form。
 - Style passes but previous-page scene continuity fails → `REWORK`.
 - Character passes but progression is too fast → `REWORK`.
 - Hook is weak, generic, or does not create a page-turn question → `REWORK`.
+- Hook becomes clearer but previous-page continuity weakens → `REWORK`.
+- Strange clue reads as the wrong object class → `REWORK`.
+- Page escalates beyond its progression budget → `REWORK`.
+- Clue dominates the whole page and disrupts narrative pacing → `REWORK`.
 - Image looks like a later page too early → `REWORK`.
 - Image contradicts package content → `REJECT`.
 - Human characters become animals, plush, dolls, mascots, or anthropomorphic substitutes → `REJECT`.

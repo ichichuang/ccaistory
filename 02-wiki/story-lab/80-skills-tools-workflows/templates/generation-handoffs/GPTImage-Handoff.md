@@ -35,12 +35,45 @@ canonical: true
 - What changes on this page:
 - What must not appear yet:
 
+## What Must Stay From The Previous Page
+- Scene geometry that must remain continuous:
+- Light / darkness / density state that must remain continuous:
+- Character position or relationship state that must remain continuous:
+- Prior-page spatial logic that must not be broken:
+
+## What May Change By Only One Step
+- Allowed progression budget from previous page:
+- Darkness / density / enclosure change:
+- New clue or event change:
+- What would be too much for this page:
+
 ## Hook Direction
 - Page-turn question:
 - Hook visual target:
 - Red circle, arrow, or question mark target:
 - Suggested short Chinese annotations, 1-3 options:
 - Avoid generic mood labels unless the composition makes the visual question specific.
+
+## Main Hook Semantics
+- Intended clue semantics:
+- Where the clue sits in the environment:
+- How visible the clue should be:
+- Why it belongs to this page:
+
+## Common Misread To Avoid
+- Object class the clue must not become:
+- Visual traits that cause that misread:
+- Negative instruction to prevent the misread:
+
+## Do Not Overcorrect
+- Repair guardrails:
+- Continuity that must survive the repair:
+- Environment / composition changes that would break the previous-page link:
+
+## Read Order Goal
+- First read: overall scene continuity from the previous page.
+- Second read: hidden clue discovery.
+- The hook must not dominate the whole composition before the scene reads correctly.
 
 ## Escalation Control
 - Story-stage intensity:

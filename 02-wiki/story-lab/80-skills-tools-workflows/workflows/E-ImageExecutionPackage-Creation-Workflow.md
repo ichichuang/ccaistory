@@ -51,8 +51,16 @@ D 工作流完成；某目标资产需要出图。
    - `allowed_progression_delta`：什么可以稍微变暗、变怪、变近、变静、变亮或变安全。
    - `forbidden_continuity_breaks`：什么还不能出现，包含突然换地点、突然密集/深暗、未解释新道具或基础设施、构图复制、后页强度。
    - `page_hook_question`、`hook_visual_target`、`hook_annotation_guidance`、`escalation_level`。
-6. p02 及之后，执行包创建必须同时比较当前页与 R00 主参考、以及上一张 accepted 页面：R00 控制视觉连续性；上一页控制场景连续性与递进。
-7. 运行 `compile-asset` 与 `lint-asset`/`lint-prompt`（详见 F）；全部通过后才把 `status: draft → ready`。
+6. 对存在易误读线索或返修历史的页面，填写 Hook Semantics + Repair Guardrails：
+   - `hook_failure_mode_to_avoid`：本页钩子最容易失败的读法。
+   - `symbol_semantics_target`：线索应该被读成什么。
+   - `symbol_misread_to_avoid`：线索不得被读成什么物体类别。
+   - `repair_guardrails`：返修时必须保留的连续性与构图边界。
+   - `progression_budget_from_previous_page`：相对上一页只允许推进多少。
+   - `overcorrection_guardrail`：不得为了修正单点问题而破坏上一页连续性。
+   - `composition_priority_order`：第一眼读到整体场景连续性，第二眼才发现隐藏线索。
+7. p02 及之后，执行包创建必须同时比较当前页与 R00 主参考、以及上一张 accepted 页面：R00 控制视觉连续性；上一页控制场景连续性与递进。
+8. 运行 `compile-asset` 与 `lint-asset`/`lint-prompt`（详见 F）；全部通过后才把 `status: draft → ready`。
 
 ## Outputs / 输出
 - `02-wiki/story-lab/70-execution-packages/<package-id>.md`（status: draft → ready）。

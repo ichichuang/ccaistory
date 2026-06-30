@@ -110,6 +110,16 @@ def run_smoke_tests() -> dict[str, Any]:
         "escalation_level": "early controlled unease",
         "continuity_qa_required": True,
         "hook_qa_required": True,
+        "hook_failure_mode_to_avoid": ["gap reads as a separate object instead of a doorway clue"],
+        "symbol_semantics_target": "narrow shadow gap under the door",
+        "symbol_misread_to_avoid": "freestanding black object",
+        "repair_guardrails": ["clarify the gap without changing the hallway continuity"],
+        "progression_budget_from_previous_page": "one controlled step dimmer than the previous hallway page",
+        "overcorrection_guardrail": "do not darken the hallway so much that previous-page continuity breaks",
+        "composition_priority_order": [
+            "first read: same hallway continuity",
+            "second read: narrow gap under the door",
+        ],
     }
     valid_p02_series = lint_asset(valid_p02_series_spec)
     checks.append({"name": "valid p02 series continuity lint passes", "passed": valid_p02_series["passed"]})
@@ -149,6 +159,38 @@ def run_smoke_tests() -> dict[str, Any]:
         }
     )
 
+    missing_guardrail_series = lint_asset(
+        {
+            **valid_p02_series_spec,
+            "asset_id": "fixture_p02_series_missing_hook_guardrail",
+            "symbol_semantics_target": "hidden reflective eyes",
+            "symbol_misread_to_avoid": "",
+        }
+    )
+    checks.append(
+        {
+            "name": "declared hook semantics require misread guardrails",
+            "passed": not missing_guardrail_series["passed"]
+            and "missing_symbol_misread_to_avoid" in missing_guardrail_series["semantic_lint_result"]["failed_rules"],
+        }
+    )
+
+    dominant_hook_series = lint_asset(
+        {
+            **valid_p02_series_spec,
+            "asset_id": "fixture_p03_series_dominant_hook",
+            "page_or_spread_range": "p03",
+            "allowed_content": ["same lane continues, but a large central clue dominates the whole composition"],
+        }
+    )
+    checks.append(
+        {
+            "name": "hook dominating the page too early is blocked",
+            "passed": not dominant_hook_series["passed"]
+            and "hook_dominates_scene_too_early" in dominant_hook_series["semantic_lint_result"]["failed_rules"],
+        }
+    )
+
     telemetry = validate_telemetry(_load("telemetry_valid.json"))
     checks.append({"name": "valid telemetry passes", "passed": telemetry["passed"]})
 
@@ -172,8 +214,8 @@ def run_smoke_tests() -> dict[str, Any]:
             "name": "R00 image review form has 14 contract QA plus common questions",
             "passed": generated_review["passed"]
             and generated_review["contract_question_count"] == 14
-            and generated_review["common_question_count"] == 13
-            and generated_review["question_count"] == 27,
+            and generated_review["common_question_count"] == 17
+            and generated_review["question_count"] == 31,
         }
     )
     generated_question_ids = {
@@ -190,6 +232,10 @@ def run_smoke_tests() -> dict[str, Any]:
                 "proportion_continuity",
                 "previous_page_scene_continuity",
                 "environment_progression",
+                "symbol_semantics_clarity",
+                "overcorrection_risk",
+                "progression_budget",
+                "hook_integration",
                 "hook_strength",
                 "annotation_relevance",
                 "story_stage_fit",

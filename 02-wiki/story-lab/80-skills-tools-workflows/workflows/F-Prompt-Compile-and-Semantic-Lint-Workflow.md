@@ -51,8 +51,15 @@ E 工作流中执行包绑定本体后、`status: ready` 前。
    - hook 缺失、过泛、只描述 mood 而没有具体视觉问题 → block 或 warn；若无法形成翻页问题则 block。
    - 红笔标注不指向本页具体不确定性 → block。
    - R00 被当作故事内容、地点、道具或构图来源，而不是视觉/角色/比例连续性来源 → block。
-6. p02 专项回归：未来 lint 应拦截“过早深密林”“灯/基础设施突然过多”“黑暗强度跳太大”“hook 只有泛泛情绪标签”等问题；这些是 pilot-001 示例，不是全局风格公式。
-7. 通过后回到 E 把执行包 `status: ready`。
+6. Hook Semantics + Repair Guardrails 语义 Lint：
+   - 已声明 `symbol_semantics_target` 时，必须同时声明 `symbol_misread_to_avoid`；二者不得相同。
+   - 已声明返修/语义护栏时，必须有 `repair_guardrails`、`progression_budget_from_previous_page`、`overcorrection_guardrail`、`composition_priority_order`。
+   - clue semantic ambiguity（例如 eyes vs lamps）未被说明 → block。
+   - continuity over-escalation / progression too large relative to previous page → block。
+   - hook dominating scene too early → block。
+   - “repair solved X but broke Y” risk pattern without overcorrection guardrail → block。
+7. p02/p03 专项回归：未来 lint 应拦截“过早深密林”“灯/基础设施突然过多”“黑暗强度跳太大”“hook 只有泛泛情绪标签”“眼睛被误读成灯”“修眼睛导致林子过密/过黑/过封闭”等问题；这些是 pilot-001 示例，不是全局风格公式。
+8. 通过后回到 E 把执行包 `status: ready`。
 
 ## Outputs / 输出
 - `50-agent-work/story-lab/compiled-prompts/<id>.json`、`50-agent-work/story-lab/semantic-lint-results/<id>.json`。

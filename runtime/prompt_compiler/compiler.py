@@ -45,6 +45,13 @@ SERIES_CONTINUITY_FIELDS = [
     "escalation_level",
     "continuity_qa_required",
     "hook_qa_required",
+    "hook_failure_mode_to_avoid",
+    "symbol_semantics_target",
+    "symbol_misread_to_avoid",
+    "repair_guardrails",
+    "progression_budget_from_previous_page",
+    "overcorrection_guardrail",
+    "composition_priority_order",
 ]
 
 

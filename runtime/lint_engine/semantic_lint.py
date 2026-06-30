@@ -34,16 +34,30 @@ SERIES_CONTINUITY_FIELDS = [
     "escalation_level",
 ]
 
+HOOK_GUARDRAIL_FIELDS = [
+    "hook_failure_mode_to_avoid",
+    "symbol_semantics_target",
+    "symbol_misread_to_avoid",
+    "repair_guardrails",
+    "progression_budget_from_previous_page",
+    "overcorrection_guardrail",
+    "composition_priority_order",
+]
+
 EARLY_PAGE_INTENSITY_JUMP_TERMS = [
     "deep dense forest",
     "dense forest tunnel",
     "dense dark forest",
+    "fully enclosed dark tunnel",
+    "dramatically denser",
     "lamp-lined road",
     "many lamps",
     "too many lamps",
     "deep night",
     "pitch black",
     "full darkness",
+    "too black",
+    "visually heavy",
     "密林深处",
     "森林隧道",
     "整排路灯",
@@ -61,6 +75,17 @@ GENERIC_HOOK_TERMS = [
     "too dark",
     "scary",
     "creepy",
+]
+
+HOOK_DOMINANCE_TERMS = [
+    "dominates the page",
+    "dominates the whole composition",
+    "center of the whole composition",
+    "main focus of the whole page",
+    "large central clue",
+    "huge clue",
+    "占据画面",
+    "成为画面中心",
 ]
 
 
@@ -141,7 +166,7 @@ def _requires_series_continuity(spec: dict[str, Any]) -> bool:
 
 def _is_early_serial_page(spec: dict[str, Any]) -> bool:
     page_index = _page_index(spec)
-    return page_index is not None and 1 < page_index <= 2
+    return page_index is not None and 1 < page_index <= 3
 
 
 def _hook_is_generic(hook: str, target: str) -> bool:
@@ -153,6 +178,20 @@ def _hook_is_generic(hook: str, target: str) -> bool:
     if any(term in normalized for term in GENERIC_HOOK_TERMS) and not target.strip():
         return True
     return False
+
+
+def _nonempty_items(value: Any) -> list[str]:
+    if isinstance(value, str):
+        text = value.strip()
+        return [text] if text else []
+    if isinstance(value, list):
+        return [str(item).strip() for item in value if str(item).strip()]
+    return []
+
+
+def _words(value: Any) -> set[str]:
+    text = _stringify(value).lower()
+    return {item for item in re.split(r"[^a-z0-9\u4e00-\u9fff]+", text) if item}
 
 
 def lint_asset(spec: dict[str, Any]) -> dict[str, Any]:
@@ -232,6 +271,56 @@ def lint_asset(spec: dict[str, Any]) -> dict[str, Any]:
                 suggestions.append(
                     "Keep early serialized pages to one controlled environment or mystery delta unless the Story Graph explicitly requires more."
                 )
+
+        guardrail_payload_present = any(not _is_missing(spec.get(field)) for field in HOOK_GUARDRAIL_FIELDS)
+        if guardrail_payload_present:
+            symbol_target = spec.get("symbol_semantics_target")
+            symbol_misread = spec.get("symbol_misread_to_avoid")
+            overcorrection_guardrail = spec.get("overcorrection_guardrail")
+            progression_budget = spec.get("progression_budget_from_previous_page")
+            repair_guardrails = spec.get("repair_guardrails")
+            composition_priority = spec.get("composition_priority_order")
+
+            for field, value in (
+                ("symbol_semantics_target", symbol_target),
+                ("symbol_misread_to_avoid", symbol_misread),
+                ("overcorrection_guardrail", overcorrection_guardrail),
+                ("progression_budget_from_previous_page", progression_budget),
+                ("composition_priority_order", composition_priority),
+            ):
+                if _is_missing(value):
+                    missing_fields.append(field)
+                    series_continuity_violations.append(f"missing_{field}")
+                    failed.append(f"missing_{field}")
+
+            if not _nonempty_items(repair_guardrails):
+                missing_fields.append("repair_guardrails")
+                series_continuity_violations.append("missing_repair_guardrails")
+                failed.append("missing_repair_guardrails")
+
+            target_words = _words(symbol_target)
+            misread_words = _words(symbol_misread)
+            if target_words and misread_words and target_words == misread_words:
+                series_continuity_violations.append("symbol_semantics_target_matches_misread")
+                failed.append("symbol_semantics_target_matches_misread")
+                suggestions.append("Separate the intended clue semantics from the object class it must not be misread as.")
+
+            priority_items = _nonempty_items(composition_priority)
+            priority_text = " ".join(priority_items).lower()
+            if priority_items and not (("first" in priority_text or "第一" in priority_text) and ("second" in priority_text or "第二" in priority_text)):
+                series_continuity_violations.append("composition_priority_missing_read_order")
+                failed.append("composition_priority_missing_read_order")
+                suggestions.append("State the first read as scene continuity and the second read as hidden clue discovery.")
+
+            if any(term in positive_text for term in HOOK_DOMINANCE_TERMS):
+                series_continuity_violations.append("hook_dominates_scene_too_early")
+                failed.append("hook_dominates_scene_too_early")
+                suggestions.append("Keep the clue integrated into the environment; scene continuity should read before hook discovery.")
+
+            if _is_missing(overcorrection_guardrail) and _nonempty_items(repair_guardrails):
+                series_continuity_violations.append("repair_without_overcorrection_guardrail")
+                failed.append("repair_without_overcorrection_guardrail")
+                suggestions.append("Add an overcorrection guardrail so repairing one issue cannot break previous-page continuity.")
 
         r00_reference = str(spec.get("r00_reference_asset", ""))
         r00_policy_text = _stringify(
@@ -327,6 +416,8 @@ def lint_compiled_prompt(compiled: dict[str, Any]) -> dict[str, Any]:
         "hook_qa_required": continuity_field("hook_qa_required"),
     }
     for field in SERIES_CONTINUITY_FIELDS:
+        spec[field] = continuity_field(field)
+    for field in HOOK_GUARDRAIL_FIELDS:
         spec[field] = continuity_field(field)
     return lint_asset(spec)
 

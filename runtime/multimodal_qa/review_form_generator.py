@@ -54,6 +54,26 @@ COMMON_IMAGE_REVIEW_QUESTIONS = [
         "expected_answer": "yes",
     },
     {
+        "question_id": "symbol_semantics_clarity",
+        "question": "本页线索是否读成预期语义，而不是被误读成其他物体类别？",
+        "expected_answer": "yes",
+    },
+    {
+        "question_id": "overcorrection_risk",
+        "question": "返修是否没有为了解决单点问题而制造更强的连续性断裂？",
+        "expected_answer": "yes",
+    },
+    {
+        "question_id": "progression_budget",
+        "question": "本页是否只比上一张 accepted 页面推进一个受控步幅？",
+        "expected_answer": "yes",
+    },
+    {
+        "question_id": "hook_integration",
+        "question": "钩子线索是否整合在环境中，而不是过早主宰整页构图？",
+        "expected_answer": "yes",
+    },
+    {
         "question_id": "hook_strength",
         "question": "本页是否有具体的视觉翻页问题，而不只是泛泛情绪标签？",
         "expected_answer": "yes",

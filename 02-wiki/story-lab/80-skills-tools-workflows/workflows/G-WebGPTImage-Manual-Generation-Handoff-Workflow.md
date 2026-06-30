@@ -49,7 +49,13 @@ F 工作流通过；执行包 `status: ready`。
 ## Required Handoff Sections / 必需交接段落
 - **Master Reference**：上传 accepted R00；R00 只用于风格、角色外观、比例、纸张、线条、红笔语言。
 - **Previous Page Continuity**：写明上一页必须继承什么、本页改变什么、什么还不能出现。
+- **What Must Stay From The Previous Page**：明确场景几何、光线/密度状态、人物关系、空间逻辑中必须保留的部分。
+- **What May Change By Only One Step**：明确相对上一页的递进预算，防止一次跳到后页强度。
 - **Hook Direction**：写明 page-turn question、红圈/箭头/问号指向哪里、1-3 个短中文标注建议；避免泛泛 mood label。
+- **Main Hook Semantics**：写明线索应读成什么，例如隐藏活物的反光眼睛。
+- **Common Misread To Avoid**：写明线索不得被读成什么，例如路灯 / 灯泡 / 固定光源。
+- **Do Not Overcorrect**：写明修复单点问题时不得破坏的前页连续性、空间逻辑和构图边界。
+- **Read Order Goal**：第一眼读到场景连续性，第二眼发现隐藏线索；线索不得过早统治整页。
 - **Escalation Control**：写明本页正确故事强度、什么过早、哪些后页元素不得出现。
 
 ## Outputs / 输出
@@ -66,7 +72,7 @@ F 工作流通过；执行包 `status: ready`。
 - 无（QA 在 I 工作流）。
 
 ## Stop Conditions / 停止条件
-- 无受控执行单、受控执行单缺 Master Reference / Previous Page Continuity / Hook Direction / Escalation Control、包外即兴改图、或未记录实际 prompt → 阻断，不得进入回填。
+- 无受控执行单、受控执行单缺 Master Reference / Previous Page Continuity / Hook Direction / Escalation Control、或对易误读线索缺 Main Hook Semantics / Common Misread To Avoid / Do Not Overcorrect / Read Order Goal、包外即兴改图、或未记录实际 prompt → 阻断，不得进入回填。
 
 ## Related Skills / 关联技能
 - `skills/出图执行技能.md`

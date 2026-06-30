@@ -34,6 +34,13 @@ forbidden_continuity_breaks: []
 page_hook_question: ""
 hook_visual_target: ""
 hook_annotation_guidance: ""
+hook_failure_mode_to_avoid: []
+symbol_semantics_target: ""
+symbol_misread_to_avoid: ""
+repair_guardrails: []
+progression_budget_from_previous_page: ""
+overcorrection_guardrail: ""
+composition_priority_order: []
 escalation_level: ""
 continuity_qa_required: true
 hook_qa_required: true
@@ -84,6 +91,17 @@ canonical: true
 ## Hook Annotation Guidance / 钩子标注指导
 
 <!-- 红笔圈、箭头、问号或短中文标注应指向本页不确定性；给 1-3 个短、童稚、页内具体的中文标注候选。占位。 -->
+
+## Hook Semantics and Repair Guardrails / 钩子语义与返修护栏
+
+<!-- p02 及之后推荐填写；当本页有易误读线索时必填：
+- hook_failure_mode_to_avoid：本页钩子最容易失败的读法。
+- symbol_semantics_target：线索应该被读成什么。
+- symbol_misread_to_avoid：线索不得被读成什么物体类别。
+- repair_guardrails：返修时必须保留的连续性与构图边界。
+- progression_budget_from_previous_page：相对上一页只允许推进多少。
+- overcorrection_guardrail：不得为了修正单点问题而破坏上一页连续性。
+- composition_priority_order：第一眼读什么，第二眼才发现什么。占位。 -->
 
 ## Allowed Content / 允许内容
 
