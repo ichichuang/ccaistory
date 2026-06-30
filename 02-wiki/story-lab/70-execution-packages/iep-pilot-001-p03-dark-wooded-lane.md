@@ -3,7 +3,7 @@ type: image_execution_package
 id: iep-pilot-001-p03-dark-wooded-lane
 title_zh: pilot-001 p03 黑黑的林间小路图像执行包
 title_en: pilot-001 p03 The Dark Wooded Lane Image Execution Package
-status: draft
+status: ready
 project_id: pilot-001
 scene_id: scene-dark-wooded-lane
 page_or_spread_range: p03
@@ -20,16 +20,16 @@ prompt_recipe: pr-pilot-001-child-horror-notebook
 prompt_recipe_id: pr-pilot-001-child-horror-notebook
 recipe_hash: "267c7dfe258e43ba"
 recipe_hash_expected: "267c7dfe258e43ba"
-recipe_hash_actual: ""
-recipe_hash_check: ""
-compile_result_ref: ""
-semantic_lint_result_ref: ""
-compile_status: ""
-semantic_lint_status: ""
+recipe_hash_actual: "267c7dfe258e43ba"
+recipe_hash_check: pass
+compile_result_ref: 50-agent-work/story-lab/compiled-prompts/compiled-prompt-pilot-001-p03-dark-wooded-lane.json
+semantic_lint_result_ref: 50-agent-work/story-lab/semantic-lint-results/semantic-lint-pilot-001-p03-dark-wooded-lane.json
+compile_status: pass
+semantic_lint_status: pass
 webgptimage_handoff_status: not_created
 webgptimage_handoff_record_ref: ""
 downstream_generation_status: blocked
-blocked_reason: "p03 is recreated as a draft ImageExecutionPackage only. Next authorized workflow is p03 Workflow F compile + semantic lint; GPTImage handoff, image generation, GenerationRun creation, ReferenceAsset creation, p04-p14 package creation, final package, and publishing records remain blocked."
+blocked_reason: "p03 Workflow F compile + semantic lint passed. Next workflow is p03 GPTImage handoff preparation, but GPTImage handoff creation, image generation, GenerationRun creation, ReferenceAsset creation, p04-p14 package creation, final package, and publishing records remain blocked until separately authorized."
 target_model: "GPTImage manual window (human-operated); not authorized for automated generation"
 aspect_ratio: "1:1"
 reference_assets:
@@ -107,7 +107,7 @@ escalation_level: "p03 first gentle scare clue; one step beyond p02, before p04-
 continuity_qa_required: true
 hook_qa_required: true
 dependency_notes: "Depends on scene-dark-wooded-lane, char-xiaohe, char-mama, vs-pilot-001-child-horror-notebook, pr-pilot-001-child-horror-notebook, accepted R00 ReferenceAsset ra-pilot-001-r00-master-style-character-anchor, and accepted previous-page ReferenceAsset ra-pilot-001-p02-fading-lamp-lane."
-blocking_notes: "Draft-only p03 package recreation is complete. Workflow F compile + semantic lint is next; GPTImage handoff, image generation, GenerationRun creation, ReferenceAsset creation, p04-p14 package creation, final package, and publishing records remain blocked."
+blocking_notes: "Workflow F compile + semantic lint passed for p03. Next workflow is p03 GPTImage handoff preparation; GPTImage handoff creation, image generation, GenerationRun creation, ReferenceAsset creation, p04-p14 package creation, final package, and publishing records remain blocked until separately authorized."
 final_assembly_dependency: pilot-001
 tags:
   - story-lab
@@ -115,10 +115,11 @@ tags:
   - image-execution-package
   - child-horror-notebook
   - p03
-  - draft
+  - ready
   - r00-required
   - previous-page-reference-required
   - continuity-hook-required
+  - workflow-f-passed
   - generation-blocked
 created_at: 2026-06-30
 updated_at: 2026-06-30
@@ -129,7 +130,7 @@ canonical: true
 
 # pilot-001 p03 黑黑的林间小路图像执行包 / The Dark Wooded Lane Image Execution Package
 
-> Draft-only p03 ImageExecutionPackage. It binds the accepted R00 master visual reference for global style, character, and proportion continuity, plus the accepted p02 page-level ReferenceAsset for immediate previous-page scene continuity. This card does not compile prompts, create a GPTImage handoff, generate images, create GenerationRuns, create ReferenceAssets, create p04-p14 packages, or create publishing records.
+> Ready p03 ImageExecutionPackage after Workflow F compile and semantic lint. It binds the accepted R00 master visual reference for global style, character, and proportion continuity, plus the accepted p02 page-level ReferenceAsset for immediate previous-page scene continuity. This card does not create a GPTImage handoff, generate images, create GenerationRuns, create ReferenceAssets, create p04-p14 packages, or create publishing records.
 
 ## Package Summary / 执行包概要
 
@@ -142,10 +143,12 @@ canonical: true
 - Recipe hash: `267c7dfe258e43ba`
 - Required R00 reference: [ra-pilot-001-r00-master-style-character-anchor](../reference-assets/ra-pilot-001-r00-master-style-character-anchor.md)
 - Required previous-page reference: [ra-pilot-001-p02-fading-lamp-lane](../reference-assets/ra-pilot-001-p02-fading-lamp-lane.md)
-- Package status: `draft`
+- Package status: `ready`
 - WebGPTImage handoff status: `not_created`
 - Downstream generation status: `blocked`
-- Next workflow: p03 Workflow F compile + semantic lint
+- Compile result: `50-agent-work/story-lab/compiled-prompts/compiled-prompt-pilot-001-p03-dark-wooded-lane.json`
+- Semantic lint result: `50-agent-work/story-lab/semantic-lint-results/semantic-lint-pilot-001-p03-dark-wooded-lane.json`
+- Next workflow: p03 GPTImage handoff preparation
 
 ## Target Asset / 目标资产
 
@@ -220,7 +223,7 @@ Point the red circle, arrow, or question mark at the two tiny soft glowing dots 
 
 ## Prompt Recipe Binding / Prompt 技法绑定
 
-Bound to `pr-pilot-001-child-horror-notebook` with active `recipe_hash` `267c7dfe258e43ba`. This draft card does not contain compiled prompt text and does not contain external-tool execution text. Prompt compilation and semantic lint are the next authorized Workflow F step.
+Bound to `pr-pilot-001-child-horror-notebook` with active `recipe_hash` `267c7dfe258e43ba`. Workflow F recomputed `recipe_hash_actual` as `267c7dfe258e43ba`; `recipe_hash_check`, `compile_status`, and `semantic_lint_status` are all `pass`. This card does not contain compiled prompt text and does not contain external-tool execution text.
 
 ## Reference Asset Binding / 参考资产绑定
 
@@ -269,7 +272,7 @@ Repair or regenerate later if the generated p03 image copies the p02 composition
 
 ## Result Backfill Procedure / 结果回填流程
 
-No result backfill is authorized by this step. Later workflows must first run p03 Workflow F compile + semantic lint, then separately authorize any GPTImage handoff, manual generation, QA, GenerationRun backfill, and ReferenceAsset acceptance.
+Workflow F compile and semantic lint records are written under `50-agent-work`. Later workflows must separately authorize any GPTImage handoff, manual generation, QA, GenerationRun backfill, and ReferenceAsset acceptance.
 
 ## R00 Anchor Dependency Policy / R00 锚图依赖策略
 
