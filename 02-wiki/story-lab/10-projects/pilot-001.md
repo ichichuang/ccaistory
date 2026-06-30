@@ -43,7 +43,7 @@ publishing_readiness_status: blocked
 
 **Visual pipeline reset completed (2026-06-26).** The old warm-safe visual system was removed from active use and the visual pipeline was rebuilt around a single clean child-drawn horror notebook style for GPTImage production.
 
-- Current workflow: **p02 Workflow H repair candidate backfilled. The latest p02 repair candidate exists; Workflow I image QA is pending. No p02 ReferenceAsset or accepted p02 asset exists.**
+- Current workflow: **p02 Workflow I image QA passed. Workflow J p02 ReferenceAsset Acceptance is pending. No p02 ReferenceAsset or accepted p02 asset exists.**
 - Current active visual system: `vs-pilot-001-child-horror-notebook`.
 - Current active recipe: `pr-pilot-001-child-horror-notebook` (active `recipe_hash` `267c7dfe258e43ba` — the only active recipe hash for `pilot-001`).
 - Workflows A (Raw Intake), B (Story Analysis), C (Character & Scene Extraction) remain accepted; the story core, graph, characters, and scenes are unchanged.
@@ -57,7 +57,7 @@ publishing_readiness_status: blocked
 - Serialized production: **p01 is the designated series master anchor**. The accepted ReferenceAsset `ra-pilot-001-r00-master-style-character-anchor` is now the active R00 / series master visual reference for p02-p14. See [Series Continuity & Master Anchor](#series-continuity--master-anchor-serialized-production).
 - Workflow H for p02 repair candidate is **backfilled**: one manual WebGPTImage / GPTImage repair candidate exists, with GenerationRun `gr-pilot-001-p02-repair-01-20260630-154548-webgptimage`.
 - p02 candidate image: `01-raw/story-lab/generated-raw/pilot-001/iep-pilot-001-p02-fading-lamp-lane/pilot-001-p02-candidate-repair-01-20260630-154548.png`.
-- p02 QA is **pending**. p02 ReferenceAsset: **none**. p02 accepted asset: **none**.
+- p02 QA is **passed**. p02 ReferenceAsset: **none**. p02 accepted asset: **none**.
 - R00 master reference remains **p01 only**: `ra-pilot-001-r00-master-style-character-anchor`.
 
 ### Style is reusable; story content is variable
@@ -170,7 +170,7 @@ Neither this card nor the active visual system authorizes automated image genera
 **Option B (clean restart)** chosen. Current recreated packages:
 
 - [p01 / The Fork at Dusk](../70-execution-packages/iep-pilot-001-p01-fork-at-dusk.md) - fresh `draft`, bound to the active style/recipe (`recipe_hash` `267c7dfe258e43ba`); Workflow H backfilled one manual candidate and GenerationRun; Workflow I QA passed; Workflow J accepted [ra-pilot-001-r00-master-style-character-anchor](../reference-assets/ra-pilot-001-r00-master-style-character-anchor.md).
-- [p02 / The Fading-Lamp Lane](../70-execution-packages/iep-pilot-001-p02-fading-lamp-lane.md) - `ready`, bound to the active style/recipe and required R00 ReferenceAsset `ra-pilot-001-r00-master-style-character-anchor`; Workflow F compile and semantic lint passed; Workflow H repair candidate backfilled with GenerationRun `gr-pilot-001-p02-repair-01-20260630-154548-webgptimage`; QA pending; no p02 ReferenceAsset, accepted asset, final package, or publishing record exists.
+- [p02 / The Fading-Lamp Lane](../70-execution-packages/iep-pilot-001-p02-fading-lamp-lane.md) - `ready`, bound to the active style/recipe and required R00 ReferenceAsset `ra-pilot-001-r00-master-style-character-anchor`; Workflow F compile and semantic lint passed; Workflow H repair candidate backfilled with GenerationRun `gr-pilot-001-p02-repair-01-20260630-154548-webgptimage`; Workflow I QA passed; no p02 ReferenceAsset, accepted asset, final package, or publishing record exists.
 
 p03-p14 packages remain deleted after the reset and **must be recreated later** before the full 14-page story can proceed.
 
@@ -234,17 +234,18 @@ For later pages, prepend the **Series Continuity Prefix** defined in `pr-pilot-0
 - p02 Workflow H repair candidate backfill: **COMPLETED**.
 - p02 candidate image exists at `01-raw/story-lab/generated-raw/pilot-001/iep-pilot-001-p02-fading-lamp-lane/pilot-001-p02-candidate-repair-01-20260630-154548.png`.
 - p02 GenerationRun: `50-agent-work/story-lab/runs/gr-pilot-001-p02-repair-01-20260630-154548-webgptimage.md`.
-- Current workflow: **Workflow I p02 Image QA pending. Stop at Workflow I gate.**
+- p02 QA evidence: `50-agent-work/story-lab/qa-results/qa-pilot-001-p02-candidate-repair-01-20260630-154548.md`.
+- Current workflow: **Workflow I p02 Image QA passed. Stop before Workflow J unless separately authorized.**
 - p01 QA status: **pass**.
 - p01 ReferenceAsset status: **accepted**.
-- p02 QA status: **pending**.
+- p02 QA status: **pass**.
 - p02 ReferenceAsset status: **none**.
 
 ## Blocked Actions
 
 Workflows A, B, C are accepted. Workflow H backfilled one p01 candidate and GenerationRun, Workflow I QA passed, and Workflow J accepted the p01 ReferenceAsset. The following remain blocked:
 
-- p02 image QA and any later p02 acceptance until Workflow I and Workflow J are separately authorized
+- p02 ReferenceAsset acceptance until Workflow J is separately authorized
 - p03-p14 package creation or generation until each package is recreated from canonical cards
 - final package assembly
 - publishing readiness
@@ -252,7 +253,7 @@ Workflows A, B, C are accepted. Workflow H backfilled one p01 candidate and Gene
 
 ## Next Workflow
 
-p02 Workflow H repair candidate backfill is complete. Next controlled step is Workflow I p02 Image QA. Do not create a p02 ReferenceAsset, p03-p14 packages, final package, or publishing records before the relevant later workflow is authorized.
+p02 Workflow I image QA is complete. Next controlled step is Workflow J p02 ReferenceAsset Acceptance. Do not create a p02 ReferenceAsset, p03-p14 packages, final package, or publishing records before the relevant later workflow is authorized.
 
 
 ## Notes

@@ -28,8 +28,8 @@ compile_status: pass
 semantic_lint_status: pass
 webgptimage_handoff_status: prepared
 webgptimage_handoff_record_ref: 50-agent-work/story-lab/webgptimage-handoffs/pilot-001/handoff-pilot-001-p02-fading-lamp-lane-gptimage.md
-downstream_generation_status: candidate_backfilled_qa_pending
-blocked_reason: "Workflow H backfilled one manual p02 repair candidate. Workflow I image QA is pending; no ReferenceAsset is accepted."
+downstream_generation_status: qa_passed_reference_asset_acceptance_pending
+blocked_reason: "Workflow I passed the p02 repair candidate. Workflow J ReferenceAsset Acceptance is pending; no p02 ReferenceAsset is accepted."
 target_model: "GPTImage manual window (human-operated); not authorized for automated generation"
 aspect_ratio: "1:1"
 reference_assets:
@@ -65,9 +65,9 @@ source_paths:
   - 02-wiki/story-lab/40-scenes/scene-fading-lamp-lane.md
   - 02-wiki/story-lab/reference-assets/ra-pilot-001-r00-master-style-character-anchor.md
 last_run: gr-pilot-001-p02-repair-01-20260630-154548-webgptimage
-qa_result: pending
-image_review_form_ref: ""
-asset_qa_result_ref: ""
+qa_result: pass
+image_review_form_ref: 50-agent-work/story-lab/image-review-forms/review-pilot-001-p02-candidate-repair-01-20260630-154548.json
+asset_qa_result_ref: 50-agent-work/story-lab/qa-results/qa-pilot-001-p02-candidate-repair-01-20260630-154548.md
 r00_dependency_policy: "Use ra-pilot-001-r00-master-style-character-anchor only for notebook paper texture, rough child-drawn line quality, red-pen annotation language, scanned-paper material feeling, Xiao He and Mama visual appearance, and their relative proportions. Do not borrow the p01 fork scene, signpost layout, road split, or story event."
 maximum_anchor_reuse_policy: "R00 reuse is allowed only for p02-p14 continuity through explicit required_reference_assets binding. Each page must keep its own Scene and ImageExecutionPackage content."
 previous_page_reference: iep-pilot-001-p01-fork-at-dusk
@@ -99,7 +99,7 @@ escalation_level: "early p02 controlled unease; one step beyond p01, before deep
 continuity_qa_required: true
 hook_qa_required: true
 dependency_notes: "Depends on scene-fading-lamp-lane, char-xiaohe, char-mama, vs-pilot-001-child-horror-notebook, pr-pilot-001-child-horror-notebook, and accepted R00 ReferenceAsset ra-pilot-001-r00-master-style-character-anchor."
-blocking_notes: "Workflow H backfilled one manual repair candidate. Workflow I image QA, ReferenceAsset acceptance, final package, publishing records, and p03-p14 package creation remain blocked until separately authorized."
+blocking_notes: "Workflow I image QA passed for the p02 repair candidate. ReferenceAsset acceptance, final package, publishing records, and p03-p14 package creation remain blocked until separately authorized."
 final_assembly_dependency: pilot-001
 tags:
   - story-lab
@@ -111,7 +111,8 @@ tags:
   - r00-required
   - workflow-f-passed
   - generation-run-backfilled
-  - qa-pending
+  - qa-passed
+  - workflow-i-passed
 created_at: 2026-06-29
 updated_at: 2026-06-30
 owner: ichichuang
@@ -121,7 +122,7 @@ canonical: true
 
 # pilot-001 p02 灯火渐稀小路图像执行包 / The Fading-Lamp Lane Image Execution Package
 
-> Ready p02 ImageExecutionPackage after Workflow F compile and semantic lint. It binds the accepted R00 master visual reference for narrow continuity only. Workflow H backfilled one manual repair candidate; Workflow I image QA is pending. This does not mark p02 accepted and does not create a ReferenceAsset, final package, or publishing record.
+> Ready p02 ImageExecutionPackage after Workflow F compile and semantic lint. It binds the accepted R00 master visual reference for narrow continuity only. Workflow H backfilled one manual repair candidate; Workflow I image QA passed. This does not mark p02 accepted and does not create a ReferenceAsset, final package, or publishing record.
 
 ## Package Summary / 执行包概要
 
@@ -136,10 +137,12 @@ canonical: true
 - Package status: `ready`
 - WebGPTImage handoff status: `prepared`
 - WebGPTImage handoff record: `50-agent-work/story-lab/webgptimage-handoffs/pilot-001/handoff-pilot-001-p02-fading-lamp-lane-gptimage.md`
-- Downstream generation status: `candidate_backfilled_qa_pending`
+- Downstream generation status: `qa_passed_reference_asset_acceptance_pending`
 - GenerationRun: `gr-pilot-001-p02-repair-01-20260630-154548-webgptimage`
 - Candidate image: `01-raw/story-lab/generated-raw/pilot-001/iep-pilot-001-p02-fading-lamp-lane/pilot-001-p02-candidate-repair-01-20260630-154548.png`
-- QA status: pending
+- QA status: pass
+- Image review form: `50-agent-work/story-lab/image-review-forms/review-pilot-001-p02-candidate-repair-01-20260630-154548.json`
+- Asset QA result: `50-agent-work/story-lab/qa-results/qa-pilot-001-p02-candidate-repair-01-20260630-154548.md`
 - Compile result: `50-agent-work/story-lab/compiled-prompts/compiled-prompt-pilot-001-p02-fading-lamp-lane.json`
 - Semantic lint result: `50-agent-work/story-lab/semantic-lint-results/semantic-lint-pilot-001-p02-fading-lamp-lane.json`
 
@@ -152,6 +155,7 @@ Planning card for the p02 page illustration. The page shows the shortcut lane be
 - Required canonical cards: StoryProject `pilot-001`, Scene `scene-fading-lamp-lane`, Character cards `char-xiaohe` and `char-mama`, VisualStyle `vs-pilot-001-child-horror-notebook`, PromptRecipe `pr-pilot-001-child-horror-notebook`.
 - Required ReferenceAsset: `ra-pilot-001-r00-master-style-character-anchor`.
 - One p02 repair GenerationRun exists: `gr-pilot-001-p02-repair-01-20260630-154548-webgptimage`.
+- Workflow I QA passed for the p02 repair candidate.
 - No output ReferenceAsset exists for p02.
 
 ## Previous Page Continuity / 前页连续性
@@ -232,11 +236,11 @@ Initial full-story order: 2 of 14. This card is planning metadata only and does 
 
 ## Manual Execution Status / 人工执行状态
 
-The p02 GPTImage handoff was executed manually outside Codex, and Workflow H backfilled one repair candidate. Codex did not generate a new image. Workflow I image QA is pending, and no ReferenceAsset acceptance exists for p02.
+The p02 GPTImage handoff was executed manually outside Codex, and Workflow H backfilled one repair candidate. Codex did not generate a new image. Workflow I image QA passed, and no ReferenceAsset acceptance exists for p02.
 
 ## QA Acceptance Criteria / QA 验收标准
 
-Future QA must verify the p02 scene content, R00 continuity, human-only Xiao He and Mama, child-safe mild unease, no p01 fork/signpost copy, no platform/prompt/handoff text inside the image, and no prohibited safety content.
+Workflow I QA verified the p02 scene content, R00 continuity, human-only Xiao He and Mama, child-safe mild unease, no p01 fork/signpost copy, no platform/prompt/handoff text inside the image, and no prohibited safety content.
 
 ## Continuity QA Criteria / 连续性 QA 标准
 
@@ -258,7 +262,7 @@ Repair or regenerate later if the generated p02 image copies the p01 fork/signpo
 
 ## Result Backfill Procedure / 结果回填流程
 
-The current repair candidate has been backfilled through Workflow H. It must next be reviewed through Workflow I and, only if later approved, accepted or rejected through Workflow J. This package has no accepted ReferenceAsset.
+The current repair candidate has been backfilled through Workflow H and passed Workflow I image QA. It must next be accepted or rejected through Workflow J. This package has no accepted ReferenceAsset.
 
 ## R00 Anchor Dependency Policy / R00 锚图依赖策略
 
