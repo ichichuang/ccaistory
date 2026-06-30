@@ -80,6 +80,75 @@ def run_smoke_tests() -> dict[str, Any]:
     invalid_symbol = lint_asset(_load("r00_invalid_symbol_sheet_spec.json"))
     checks.append({"name": "R00 symbol sheet is blocked", "passed": not invalid_symbol["passed"]})
 
+    valid_p02_series_spec = {
+        "asset_id": "fixture_p02_series_valid",
+        "asset_type": "S_SOURCE_ILLUSTRATION",
+        "asset_scope": "fixture story p02 source illustration",
+        "allowed_content": [
+            "one narrowing hallway after the previous page",
+            "slightly dimmer light and one small new shadow near the door",
+        ],
+        "forbidden_content": ["no hard scene reset", "no later-page monster reveal"],
+        "visual_center": "child and caregiver noticing the dimmer doorway ahead",
+        "density_range": "medium-low",
+        "composition_mode": "single next-step page composition",
+        "acceptance_questions": ["single_page_semantics"],
+        "page_or_spread_range": "p02",
+        "reference_dependencies": ["fixture_r00"],
+        "r00_dependency_policy": "Use R00 only for paper, style, line quality, red-pen language, character appearance, and proportion continuity.",
+        "previous_page_reference": "fixture_p01",
+        "previous_page_scene_summary": "bright hallway with a visible door",
+        "current_page_scene_summary": "same hallway, door closer, light slightly dimmer",
+        "r00_reference_asset": "fixture_r00",
+        "continuity_from_previous_page": ["same hallway", "same two characters"],
+        "scene_delta_from_previous_page": ["door is closer", "light is slightly dimmer"],
+        "allowed_progression_delta": ["one step darker"],
+        "forbidden_continuity_breaks": ["no hard scene reset"],
+        "page_hook_question": "What is behind the closer door?",
+        "hook_visual_target": "the narrow gap under the door",
+        "hook_annotation_guidance": "Use a short childlike note such as 门后呢？",
+        "escalation_level": "early controlled unease",
+        "continuity_qa_required": True,
+        "hook_qa_required": True,
+    }
+    valid_p02_series = lint_asset(valid_p02_series_spec)
+    checks.append({"name": "valid p02 series continuity lint passes", "passed": valid_p02_series["passed"]})
+
+    missing_p02_series = lint_asset(
+        {
+            **valid_p02_series_spec,
+            "asset_id": "fixture_p02_series_missing",
+            "previous_page_reference": "",
+            "page_hook_question": "",
+        }
+    )
+    checks.append(
+        {
+            "name": "p02 missing continuity and hook fields is blocked",
+            "passed": not missing_p02_series["passed"]
+            and "missing_previous_page_reference" in missing_p02_series["semantic_lint_result"]["failed_rules"]
+            and "missing_page_hook_question" in missing_p02_series["semantic_lint_result"]["failed_rules"],
+        }
+    )
+
+    overescalated_p02_series = lint_asset(
+        {
+            **valid_p02_series_spec,
+            "asset_id": "fixture_p02_series_overescalated",
+            "allowed_content": ["deep dense forest with a lamp-lined road and many lamps"],
+            "page_hook_question": "有点黑",
+            "hook_visual_target": "",
+        }
+    )
+    checks.append(
+        {
+            "name": "p02 over-escalation and generic hook are blocked",
+            "passed": not overescalated_p02_series["passed"]
+            and "early_page_intensity_jump" in overescalated_p02_series["semantic_lint_result"]["failed_rules"]
+            and "generic_or_missing_page_hook" in overescalated_p02_series["semantic_lint_result"]["failed_rules"],
+        }
+    )
+
     telemetry = validate_telemetry(_load("telemetry_valid.json"))
     checks.append({"name": "valid telemetry passes", "passed": telemetry["passed"]})
 
@@ -103,8 +172,29 @@ def run_smoke_tests() -> dict[str, Any]:
             "name": "R00 image review form has 14 contract QA plus common questions",
             "passed": generated_review["passed"]
             and generated_review["contract_question_count"] == 14
-            and generated_review["common_question_count"] == 4
-            and generated_review["question_count"] == 18,
+            and generated_review["common_question_count"] == 13
+            and generated_review["question_count"] == 27,
+        }
+    )
+    generated_question_ids = {
+        item.get("question_id")
+        for item in generated_review["image_review_form"]["questions"]
+        if isinstance(item, dict)
+    }
+    checks.append(
+        {
+            "name": "image review form includes serialized continuity categories",
+            "passed": {
+                "style_continuity",
+                "character_continuity",
+                "proportion_continuity",
+                "previous_page_scene_continuity",
+                "environment_progression",
+                "hook_strength",
+                "annotation_relevance",
+                "story_stage_fit",
+                "safety",
+            }.issubset(generated_question_ids),
         }
     )
 

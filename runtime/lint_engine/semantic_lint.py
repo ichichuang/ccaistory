@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import re
 from typing import Any
 
 from contracts.contract_loader import ContractError, r00_forbidden_positive_terms
@@ -17,6 +18,50 @@ REQUIRED_FIELDS = [
 ]
 
 AUTHOR_STYLE_TERMS = ["style of", "by artist", "模仿", "仿照", "作者风格", "以某作者"]
+
+SERIES_CONTINUITY_FIELDS = [
+    "previous_page_reference",
+    "previous_page_scene_summary",
+    "current_page_scene_summary",
+    "r00_reference_asset",
+    "continuity_from_previous_page",
+    "scene_delta_from_previous_page",
+    "allowed_progression_delta",
+    "forbidden_continuity_breaks",
+    "page_hook_question",
+    "hook_visual_target",
+    "hook_annotation_guidance",
+    "escalation_level",
+]
+
+EARLY_PAGE_INTENSITY_JUMP_TERMS = [
+    "deep dense forest",
+    "dense forest tunnel",
+    "dense dark forest",
+    "lamp-lined road",
+    "many lamps",
+    "too many lamps",
+    "deep night",
+    "pitch black",
+    "full darkness",
+    "密林深处",
+    "森林隧道",
+    "整排路灯",
+    "很多路灯",
+    "深夜",
+    "漆黑一片",
+]
+
+GENERIC_HOOK_TERMS = [
+    "有点黑",
+    "好可怕",
+    "it is dark",
+    "so dark",
+    "very dark",
+    "too dark",
+    "scary",
+    "creepy",
+]
 
 
 def get_r00_forbidden_positive_terms() -> list[str]:
@@ -45,12 +90,78 @@ def _positive_text(spec: dict[str, Any]) -> str:
     return " ".join(_stringify(spec.get(field, "")) for field in fields).lower()
 
 
+def _is_missing(value: Any) -> bool:
+    return value in (None, "", [], {})
+
+
+def _truthy(value: Any) -> bool:
+    if isinstance(value, bool):
+        return value
+    if isinstance(value, str):
+        return value.strip().lower() in {"true", "yes", "1"}
+    return False
+
+
+def _page_index(spec: dict[str, Any]) -> int | None:
+    for field in ("page_index", "page_number"):
+        value = spec.get(field)
+        if isinstance(value, int):
+            return value
+        if isinstance(value, str) and value.strip().isdigit():
+            return int(value.strip())
+
+    page_text = _stringify(
+        [
+            spec.get("page_or_spread_range", ""),
+            spec.get("page", ""),
+            spec.get("asset_scope", ""),
+            spec.get("source_package_id", ""),
+            spec.get("asset_id", ""),
+        ]
+    ).lower()
+    match = re.search(r"\bp(?:age)?[-_ ]?0*(\d{1,3})\b", page_text)
+    if match:
+        return int(match.group(1))
+    return None
+
+
+def _requires_series_continuity(spec: dict[str, Any]) -> bool:
+    has_series_contract_payload = (
+        spec.get("continuity_qa_required") is not None
+        or spec.get("hook_qa_required") is not None
+        or any(not _is_missing(spec.get(field)) for field in SERIES_CONTINUITY_FIELDS)
+    )
+    if spec.get("_compiled_prompt") and not has_series_contract_payload:
+        return False
+    if _truthy(spec.get("continuity_qa_required")) or _truthy(spec.get("hook_qa_required")):
+        return True
+    page_index = _page_index(spec)
+    return spec.get("asset_type") == "S_SOURCE_ILLUSTRATION" and page_index is not None and page_index > 1
+
+
+def _is_early_serial_page(spec: dict[str, Any]) -> bool:
+    page_index = _page_index(spec)
+    return page_index is not None and 1 < page_index <= 2
+
+
+def _hook_is_generic(hook: str, target: str) -> bool:
+    normalized = hook.strip().lower()
+    if not normalized:
+        return True
+    if normalized in {"黑了", "dark", "scary", "creepy", "好黑", "可怕"}:
+        return True
+    if any(term in normalized for term in GENERIC_HOOK_TERMS) and not target.strip():
+        return True
+    return False
+
+
 def lint_asset(spec: dict[str, Any]) -> dict[str, Any]:
     failed: list[str] = []
     asset_scope_conflicts: list[str] = []
     missing_fields: list[str] = []
     risky_terms: list[str] = []
     forbidden_content_violations: list[str] = []
+    series_continuity_violations: list[str] = []
     suggestions: list[str] = []
     asset_type = spec.get("asset_type")
 
@@ -93,6 +204,51 @@ def lint_asset(spec: dict[str, Any]) -> dict[str, Any]:
         failed.append("s_long_handwritten_body")
         suggestions.append("Keep S page handwriting short and clue-like.")
 
+    if _requires_series_continuity(spec):
+        for field in SERIES_CONTINUITY_FIELDS:
+            if _is_missing(spec.get(field)):
+                missing_fields.append(field)
+                series_continuity_violations.append(f"missing_{field}")
+                failed.append(f"missing_{field}")
+        if not _truthy(spec.get("continuity_qa_required")):
+            series_continuity_violations.append("continuity_qa_not_required")
+            failed.append("continuity_qa_not_required")
+        if not _truthy(spec.get("hook_qa_required")):
+            series_continuity_violations.append("hook_qa_not_required")
+            failed.append("hook_qa_not_required")
+
+        hook = str(spec.get("page_hook_question", ""))
+        hook_target = str(spec.get("hook_visual_target", ""))
+        if _hook_is_generic(hook, hook_target):
+            series_continuity_violations.append("generic_or_missing_page_hook")
+            failed.append("generic_or_missing_page_hook")
+            suggestions.append("Replace generic mood hooks with a specific page-turn visual question.")
+
+        if _is_early_serial_page(spec):
+            intensity_terms = [term for term in EARLY_PAGE_INTENSITY_JUMP_TERMS if term in positive_text]
+            if intensity_terms:
+                series_continuity_violations.extend(f"early_page_intensity_jump:{term}" for term in intensity_terms)
+                failed.append("early_page_intensity_jump")
+                suggestions.append(
+                    "Keep early serialized pages to one controlled environment or mystery delta unless the Story Graph explicitly requires more."
+                )
+
+        r00_reference = str(spec.get("r00_reference_asset", ""))
+        r00_policy_text = _stringify(
+            {
+                "r00_dependency_policy": spec.get("r00_dependency_policy"),
+                "style_policy": spec.get("style_policy"),
+                "reference_dependencies": spec.get("reference_dependencies"),
+            }
+        ).lower()
+        if r00_reference and r00_policy_text and not any(
+            term in r00_policy_text
+            for term in ("style", "paper", "line", "red-pen", "character", "proportion", "纸", "线", "红笔", "角色", "比例")
+        ):
+            series_continuity_violations.append("r00_usage_not_limited_to_visual_continuity")
+            failed.append("r00_usage_not_limited_to_visual_continuity")
+            suggestions.append("Limit R00 usage to visual style, paper, line, red-pen language, character appearance, and proportions.")
+
     if asset_type == "P01_PLATFORM_LAYOUT_SAMPLE" and str(spec.get("canvas_ratio")) != "9:16":
         asset_scope_conflicts.append("canvas_ratio_not_9_16")
         failed.append("p01_not_9_16")
@@ -129,6 +285,7 @@ def lint_asset(spec: dict[str, Any]) -> dict[str, Any]:
             "missing_fields": list(dict.fromkeys(missing_fields)),
             "risky_terms": list(dict.fromkeys(risky_terms)),
             "forbidden_content_violations": list(dict.fromkeys(forbidden_content_violations)),
+            "series_continuity_violations": list(dict.fromkeys(series_continuity_violations)),
             "failed_rules": failed_unique,
             "repair_suggestions": list(dict.fromkeys(suggestions)),
         },
@@ -136,18 +293,41 @@ def lint_asset(spec: dict[str, Any]) -> dict[str, Any]:
 
 
 def lint_compiled_prompt(compiled: dict[str, Any]) -> dict[str, Any]:
+    prompt_sections = compiled.get("prompt_sections", {})
+    if not isinstance(prompt_sections, dict):
+        prompt_sections = {}
+    series_continuity = prompt_sections.get("series_continuity", {})
+    if not isinstance(series_continuity, dict):
+        series_continuity = {}
+
+    def continuity_field(name: str) -> Any:
+        return compiled.get(name, series_continuity.get(name))
+
     spec = {
         "asset_type": compiled.get("asset_type"),
-        "allowed_content": compiled.get("prompt_sections", {}).get("allowed_content", []),
+        "_compiled_prompt": True,
+        "asset_id": compiled.get("asset_id"),
+        "asset_scope": compiled.get("asset_scope"),
+        "source_package_id": compiled.get("source_package_id"),
+        "page_index": compiled.get("page_index"),
+        "page_or_spread_range": compiled.get("page_or_spread_range"),
+        "allowed_content": prompt_sections.get("allowed_content", []),
         "forbidden_content": compiled.get("forbidden_content", []),
-        "visual_center": compiled.get("prompt_sections", {}).get("visual_center"),
-        "density_range": compiled.get("prompt_sections", {}).get("density_range"),
-        "composition_mode": compiled.get("prompt_sections", {}).get("composition_mode"),
+        "visual_center": prompt_sections.get("visual_center"),
+        "density_range": prompt_sections.get("density_range"),
+        "composition_mode": prompt_sections.get("composition_mode"),
         "acceptance_questions": compiled.get("acceptance_questions") or compiled.get("asset_specific_acceptance_criteria"),
         "canvas_ratio": compiled.get("canvas_ratio"),
         "compiled_prompt": compiled.get("compiled_prompt", ""),
         "style_instruction": compiled.get("style_instruction"),
+        "style_policy": compiled.get("style_policy", prompt_sections.get("style_policy")),
+        "reference_dependencies": compiled.get("reference_dependencies", prompt_sections.get("reference_dependencies")),
+        "r00_dependency_policy": compiled.get("r00_dependency_policy"),
+        "continuity_qa_required": continuity_field("continuity_qa_required"),
+        "hook_qa_required": continuity_field("hook_qa_required"),
     }
+    for field in SERIES_CONTINUITY_FIELDS:
+        spec[field] = continuity_field(field)
     return lint_asset(spec)
 
 

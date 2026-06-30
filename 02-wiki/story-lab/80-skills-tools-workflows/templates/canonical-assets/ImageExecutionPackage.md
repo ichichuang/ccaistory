@@ -23,6 +23,20 @@ qa_result: ""
 r00_dependency_policy: ""
 maximum_anchor_reuse_policy: ""
 final_assembly_dependency: ""
+previous_page_reference: ""
+previous_page_scene_summary: ""
+current_page_scene_summary: ""
+r00_reference_asset: ""
+continuity_from_previous_page: []
+scene_delta_from_previous_page: []
+allowed_progression_delta: []
+forbidden_continuity_breaks: []
+page_hook_question: ""
+hook_visual_target: ""
+hook_annotation_guidance: ""
+escalation_level: ""
+continuity_qa_required: true
+hook_qa_required: true
 tags: []
 created_at: 2026-06-24
 updated_at: 2026-06-24
@@ -46,6 +60,30 @@ canonical: true
 ## Dependency Graph / 依赖图
 
 <!-- 依赖的角色、场景、视觉风格、参考图、前置锚图。占位。 -->
+
+## Previous Page Continuity / 前页连续性
+
+<!-- p02 及之后必填：previous_page_reference、previous accepted image/candidate reference、previous_page_scene_summary、current_page_scene_summary。R00 只控制视觉连续性；前一页控制场景连续性与递进。p01 可说明为 series master / no previous page。 -->
+
+## Scene Delta From Previous Page / 相对前页的场景变化
+
+<!-- 说明从前一页到本页只改变什么；每页只推进一到两个可见变化。占位。 -->
+
+## Allowed Progression / 允许递进
+
+<!-- 说明本页允许变暗、变近、变静、变怪、变亮或变安全的范围，必须符合 Story Graph 与当前页位置。占位。 -->
+
+## Forbidden Continuity Breaks / 禁止连续性断裂
+
+<!-- 说明不得突然出现的地点、密度、灯光、道具、人物、建筑、交通工具、构图复制或后页强度。占位。 -->
+
+## Page Hook / Page-Turn Question / 本页钩子与翻页问题
+
+<!-- 一句明确的视觉问题，来自 Story Graph / Scene / 本执行包。避免只写 mood label。占位。 -->
+
+## Hook Annotation Guidance / 钩子标注指导
+
+<!-- 红笔圈、箭头、问号或短中文标注应指向本页不确定性；给 1-3 个短、童稚、页内具体的中文标注候选。占位。 -->
 
 ## Allowed Content / 允许内容
 
@@ -78,6 +116,14 @@ canonical: true
 ## QA Acceptance Criteria / QA 验收标准
 
 <!-- accepted 前必须满足的 telemetry / image QA / asset QA 标准。占位。 -->
+
+## Continuity QA Criteria / 连续性 QA 标准
+
+<!-- p02 及之后必须同时通过 R00 视觉连续性、前页场景连续性、递进控制、禁止跳跃检查。占位。 -->
+
+## Hook QA Criteria / 钩子 QA 标准
+
+<!-- 检查 page_hook_question、hook_visual_target、hook_annotation_guidance 是否具体、页内有效，并能形成翻页问题。占位。 -->
 
 ## Repair Triggers / 修复触发条件
 

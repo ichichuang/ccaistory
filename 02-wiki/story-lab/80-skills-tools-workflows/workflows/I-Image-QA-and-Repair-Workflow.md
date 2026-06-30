@@ -48,6 +48,28 @@ H 工作流生成了 GenerationRun 与 image_review_form。
    - **reject** → 候选与记录入 `90-archive/story-lab/rejected-assets/`。
 5. **R00 未 accepted 时阻断依赖它的 R01/R02/S 出图。**
 
+## Serialized Page QA Categories / 连载页面 QA 类别
+- `style_continuity`
+- `character_continuity`
+- `proportion_continuity`
+- `previous_page_scene_continuity`
+- `environment_progression`
+- `hook_strength`
+- `annotation_relevance`
+- `story_stage_fit`
+- `safety`
+
+> A good serialized page is not only individually beautiful. It must feel like the next page after the previous accepted page.
+
+## Serialized Page Decision Logic / 连载页面判定逻辑
+- Style passes but previous-page scene continuity fails → `REWORK`.
+- Character passes but progression is too fast → `REWORK`.
+- Hook is weak, generic, or does not create a page-turn question → `REWORK`.
+- Image looks like a later page too early → `REWORK`.
+- Image contradicts package content → `REJECT`.
+- Human characters become animals, plush, dolls, mascots, or anthropomorphic substitutes → `REJECT`.
+- Hard safety line is violated → `REJECT`.
+
 ## Outputs / 输出
 - `50-agent-work/story-lab/qa-results/<id>.md`、`50-agent-work/story-lab/repair-notes/<id>.md`、`90-archive/story-lab/rejected-assets/`（拒绝时）。
 

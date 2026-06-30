@@ -39,12 +39,18 @@ F 工作流通过；执行包 `status: ready`。
 - ImageExecutionPackage 卡（ready） + 通过 Lint 的 compiled_prompt（`50-agent-work/compiled-prompts/`）。
 
 ## Steps / 步骤
-1. WebGPT 指令窗从执行包与 compiled_prompt 组装**受控执行单**（仅含本次出图所需信息：目标资产、prompt、参考图、画布比例、禁止项）。
+1. WebGPT 指令窗从执行包与 compiled_prompt 组装**受控执行单**（仅含本次出图所需信息：目标资产、prompt、参考图、画布比例、禁止项），使用 `templates/generation-handoffs/GPTImage-Handoff.md`。
 2. 把执行单交给独立 **WebGPTImage 生成窗**。
 3. 操作员在 WebGPTImage 窗**单张**出图，**不得在执行单/执行包之外即兴增删内容**。
 4. 记录实际发送的 `actual_prompt_sent_to_external_tool`、工具、模型、参数。
 5. 候选图落 `01-raw/story-lab/generated-raw/<project-id>/`（二进制不入 git）。
 6. 进入 H 工作流做 GenerationRun 回填。**本工作流自身永不把资产标记为 accepted。**
+
+## Required Handoff Sections / 必需交接段落
+- **Master Reference**：上传 accepted R00；R00 只用于风格、角色外观、比例、纸张、线条、红笔语言。
+- **Previous Page Continuity**：写明上一页必须继承什么、本页改变什么、什么还不能出现。
+- **Hook Direction**：写明 page-turn question、红圈/箭头/问号指向哪里、1-3 个短中文标注建议；避免泛泛 mood label。
+- **Escalation Control**：写明本页正确故事强度、什么过早、哪些后页元素不得出现。
 
 ## Outputs / 输出
 - `01-raw/story-lab/generated-raw/<project-id>/` 候选图（路径引用）。
@@ -60,7 +66,7 @@ F 工作流通过；执行包 `status: ready`。
 - 无（QA 在 I 工作流）。
 
 ## Stop Conditions / 停止条件
-- 无受控执行单、包外即兴改图、或未记录实际 prompt → 阻断，不得进入回填。
+- 无受控执行单、受控执行单缺 Master Reference / Previous Page Continuity / Hook Direction / Escalation Control、包外即兴改图、或未记录实际 prompt → 阻断，不得进入回填。
 
 ## Related Skills / 关联技能
 - `skills/出图执行技能.md`

@@ -28,6 +28,51 @@ COMMON_IMAGE_REVIEW_QUESTIONS = [
         "question": "是否可作为 accepted reference？",
         "expected_answer": "yes",
     },
+    {
+        "question_id": "style_continuity",
+        "question": "是否保持系列主参考的纸张、笔触、材质和整体风格连续性？",
+        "expected_answer": "yes",
+    },
+    {
+        "question_id": "character_continuity",
+        "question": "角色外观是否与已接受参考保持一致，且没有重设计？",
+        "expected_answer": "yes",
+    },
+    {
+        "question_id": "proportion_continuity",
+        "question": "角色相对身高和比例是否保持一致？",
+        "expected_answer": "yes",
+    },
+    {
+        "question_id": "previous_page_scene_continuity",
+        "question": "场景是否像上一张 accepted 页面之后自然发生的下一页？",
+        "expected_answer": "yes",
+    },
+    {
+        "question_id": "environment_progression",
+        "question": "环境强度、黑暗、密度、雾、灯光或道具变化是否只推进了受控一步？",
+        "expected_answer": "yes",
+    },
+    {
+        "question_id": "hook_strength",
+        "question": "本页是否有具体的视觉翻页问题，而不只是泛泛情绪标签？",
+        "expected_answer": "yes",
+    },
+    {
+        "question_id": "annotation_relevance",
+        "question": "红笔圈、箭头、问号或短注释是否指向本页具体不确定性？",
+        "expected_answer": "yes",
+    },
+    {
+        "question_id": "story_stage_fit",
+        "question": "画面强度是否符合本页故事位置，没有提前跳到后页？",
+        "expected_answer": "yes",
+    },
+    {
+        "question_id": "safety",
+        "question": "是否未违反硬安全线，且没有把人类角色动物化、玩偶化或吉祥物化？",
+        "expected_answer": "yes",
+    },
 ]
 
 

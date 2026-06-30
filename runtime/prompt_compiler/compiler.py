@@ -30,6 +30,23 @@ REQUIRED_SPEC_FIELDS = [
     "repair_policy",
 ]
 
+SERIES_CONTINUITY_FIELDS = [
+    "previous_page_reference",
+    "previous_page_scene_summary",
+    "current_page_scene_summary",
+    "r00_reference_asset",
+    "continuity_from_previous_page",
+    "scene_delta_from_previous_page",
+    "allowed_progression_delta",
+    "forbidden_continuity_breaks",
+    "page_hook_question",
+    "hook_visual_target",
+    "hook_annotation_guidance",
+    "escalation_level",
+    "continuity_qa_required",
+    "hook_qa_required",
+]
+
 
 def _is_missing_required(value: Any) -> bool:
     return value in (None, "", [], {})
@@ -65,6 +82,9 @@ def compile_asset(spec: dict[str, Any]) -> dict[str, Any]:
         "reference_dependencies": spec["reference_dependencies"],
         "negative_constraints_ref": "Use forbidden_content as blocking constraints; do not render them as requested content.",
     }
+    series_continuity = {field: spec[field] for field in SERIES_CONTINUITY_FIELDS if field in spec}
+    if series_continuity:
+        prompt_sections["series_continuity"] = series_continuity
     compiled_prompt = (
         f"Asset type: {asset_type}. "
         f"Visual center: {spec['visual_center']}. "
@@ -93,6 +113,7 @@ def compile_asset(spec: dict[str, Any]) -> dict[str, Any]:
             "style_policy": spec.get("style_policy"),
             "acceptance_questions": spec.get("acceptance_questions", spec.get("acceptance_criteria", [])),
             "repair_policy": spec.get("repair_policy"),
+            **series_continuity,
         },
     )
 

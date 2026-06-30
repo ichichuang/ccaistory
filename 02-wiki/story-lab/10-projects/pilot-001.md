@@ -64,6 +64,10 @@ The child-drawn horror notebook style controls drawing method and atmosphere onl
 
 An earlier warm-safe night-picture-book VisualStyle and its prompt recipe were used during the original visual pipeline, produced a failed p01 manual attempt (over-safe / polished digital / animalized humans / no horror), and have been **removed**. Their cards, old recipe hashes, repair iterations, stale handoffs, and stale compile/lint records are no longer part of the active pipeline and must not be bound. No image from that removed visual system was ever accepted; no ReferenceAsset was created from it.
 
+### p02 Continuity Lesson Learned
+
+p02 repair showed that visual style continuity alone is insufficient. The system must separately check page-to-page scene continuity, keep early pages from escalating too quickly, and require each hook to be a specific page-turn question rather than only a mood label. Future packages must define controlled deltas and forbidden continuity jumps before handoff; each page may only advance the environment and mystery by the amount justified by the Story Graph and the previous accepted page.
+
 
 ## Source Paths
 

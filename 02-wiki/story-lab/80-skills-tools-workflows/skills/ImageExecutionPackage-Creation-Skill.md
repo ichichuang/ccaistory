@@ -39,15 +39,18 @@ deprecated_by: ""
 
 ## Preconditions / 前置条件
 - 依赖卡齐全；R00 依赖必须以 `r00_dependency_policy` 声明仅借用属性。
+- p02 及之后必须有上一页引用、上一页/当前页场景摘要、受控场景差量、允许递进、禁止断裂、本页翻页问题、钩子视觉目标、红笔标注指导和故事强度位置。
 
 ## Runtime Support / Runtime 支撑
 - `compile-asset`、`lint-asset`（ready 前必须通过）。
 
 ## Human Review Gate / 人工复核门禁
 - 执行包内容（allowed/forbidden、依赖、R00 策略、`maximum_anchor_reuse_policy`）人工复核后才 `status: ready`。
+- p02 及之后必须人工确认：R00 只控制视觉连续性；上一 accepted 页控制场景连续性和递进；本页 hook 是具体视觉问题而不是泛泛 mood label。
 
 ## Failure Modes / 失败模式
 - R00 过载（把整套角色/场景压到一张 R00）/ 绑定了 rejected/deprecated 资产 / 缺 paper_policy。回退到 E 工作流或 D。
+- 连续性层缺失、场景突跳、过早升级到后页强度、复制前页构图、红笔标注未指向本页不确定性。回退到 E 工作流。
 
 ## Related Workflows / 关联工作流
 - `workflows/E-ImageExecutionPackage-Creation-Workflow.md`；codex：`00-system/codex-instructions/CREATE_IMAGE_EXECUTION_PACKAGE.md`

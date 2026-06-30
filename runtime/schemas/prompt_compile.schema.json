@@ -21,7 +21,8 @@
         "paper_policy": {"type": "object"},
         "style_policy": {"type": "object"},
         "reference_dependencies": {"type": "array", "items": {"type": "string"}},
-        "negative_constraints_ref": {"type": "string"}
+        "negative_constraints_ref": {"type": "string"},
+        "series_continuity": {"type": "object"}
       }
     },
     "forbidden_content": {"type": "array", "items": {"type": "string"}},

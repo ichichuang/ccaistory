@@ -68,6 +68,34 @@ image_review_form_ref: ""
 asset_qa_result_ref: ""
 r00_dependency_policy: "Use ra-pilot-001-r00-master-style-character-anchor only for notebook paper texture, rough child-drawn line quality, red-pen annotation language, scanned-paper material feeling, Xiao He and Mama visual appearance, and their relative proportions. Do not borrow the p01 fork scene, signpost layout, road split, or story event."
 maximum_anchor_reuse_policy: "R00 reuse is allowed only for p02-p14 continuity through explicit required_reference_assets binding. Each page must keep its own Scene and ImageExecutionPackage content."
+previous_page_reference: iep-pilot-001-p01-fork-at-dusk
+previous_page_scene_summary: "Open dusk fork; familiar road vs darker shortcut; right path begins at the edge of trees."
+current_page_scene_summary: "The chosen shortcut has become one narrowing lane with weaker lamp light, wider dark gaps, closer trees, and first low mist."
+r00_reference_asset: ra-pilot-001-r00-master-style-character-anchor
+continuity_from_previous_page:
+  - "same paper / style / characters / proportions from R00"
+  - "same darker right-hand shortcut continues"
+  - "Xiao He and Mama remain together and human"
+scene_delta_from_previous_page:
+  - "fork disappears; road becomes one lane"
+  - "light becomes weaker"
+  - "trees move slightly closer"
+  - "thin low mist begins"
+allowed_progression_delta:
+  - "slightly darker than p01"
+  - "slightly quieter than p01"
+  - "early shortcut edge, not deep forest"
+forbidden_continuity_breaks:
+  - "no dense forest tunnel"
+  - "no multiple prominent road lamps"
+  - "no sudden deep-night environment"
+  - "no p01 signpost / fork composition"
+page_hook_question: "The light is getting weaker; can they still see the way ahead?"
+hook_visual_target: "dim gap ahead / weak lamp / low mist on the road"
+hook_annotation_guidance: "Use a short childlike note such as 看不清？ or 灯少了."
+escalation_level: "early p02 controlled unease; one step beyond p01, before deep wooded-lane intensity"
+continuity_qa_required: true
+hook_qa_required: true
 dependency_notes: "Depends on scene-fading-lamp-lane, char-xiaohe, char-mama, vs-pilot-001-child-horror-notebook, pr-pilot-001-child-horror-notebook, and accepted R00 ReferenceAsset ra-pilot-001-r00-master-style-character-anchor."
 blocking_notes: "Workflow F compile and semantic lint are complete. GPTImage handoff is prepared for human use only; image generation, GenerationRun, QA, ReferenceAsset acceptance, final package, and publishing records remain blocked until separately authorized."
 final_assembly_dependency: pilot-001
@@ -82,7 +110,7 @@ tags:
   - workflow-f-passed
   - generation-blocked
 created_at: 2026-06-29
-updated_at: 2026-06-29
+updated_at: 2026-06-30
 owner: ichichuang
 version: v0
 canonical: true
@@ -119,6 +147,45 @@ Planning card for the p02 page illustration. The page shows the shortcut lane be
 - Required ReferenceAsset: `ra-pilot-001-r00-master-style-character-anchor`.
 - No GenerationRun exists for p02.
 - No output ReferenceAsset exists for p02.
+
+## Previous Page Continuity / 前页连续性
+
+- Previous page: [iep-pilot-001-p01-fork-at-dusk](iep-pilot-001-p01-fork-at-dusk.md).
+- Previous accepted image / master reference: [ra-pilot-001-r00-master-style-character-anchor](../reference-assets/ra-pilot-001-r00-master-style-character-anchor.md).
+- Previous scene summary: open dusk fork; familiar road vs darker shortcut; the right path begins at the edge of trees.
+- Current scene summary: the chosen shortcut has become one narrowing lane with weaker lamp light, wider dark gaps, closer trees, and first low mist.
+- Must inherit: same paper, style, characters, proportions, and the already chosen darker shortcut direction.
+- Must not inherit: p01 fork/signpost composition or choice-point event.
+
+## Scene Delta From Previous Page / 相对前页的场景变化
+
+- Fork disappears; road becomes one lane.
+- Light becomes weaker.
+- Trees move slightly closer.
+- Thin low mist begins.
+
+## Allowed Progression / 允许递进
+
+- Slightly darker than p01.
+- Slightly quieter than p01.
+- Early shortcut edge only; not deep wooded-lane intensity.
+- One controlled step stronger than the accepted p01 master image.
+
+## Forbidden Continuity Breaks / 禁止连续性断裂
+
+- No dense forest tunnel.
+- No multiple prominent road lamps or lamp-lined road.
+- No sudden deep-night environment.
+- No p01 signpost / fork composition.
+- No new characters, vehicles, buildings, or story props not required by this package.
+
+## Page Hook / Page-Turn Question / 本页钩子与翻页问题
+
+The light is getting weaker; can Xiao He and Mama still see the way ahead?
+
+## Hook Annotation Guidance / 钩子标注指导
+
+Point the red circle, arrow, or question mark at the dim gap ahead, the weak lamp, or the low mist on the road. Use one short childlike annotation such as `看不清？` or `灯少了`; do not place a random red mark away from the page uncertainty.
 
 ## Allowed Content / 允许内容
 
@@ -165,9 +232,23 @@ The p02 GPTImage handoff is prepared for human use only at `50-agent-work/story-
 
 Future QA must verify the p02 scene content, R00 continuity, human-only Xiao He and Mama, child-safe mild unease, no p01 fork/signpost copy, no platform/prompt/handoff text inside the image, and no prohibited safety content.
 
+## Continuity QA Criteria / 连续性 QA 标准
+
+- R00 visual continuity passes for paper, line quality, coloring material, red-pen language, character appearance, and Xiao He / Mama height ratio.
+- Previous-page scene continuity passes: p02 must feel like the chosen shortcut after p01, not a reset or a later deep-forest page.
+- Environment progression stays controlled: only weaker light, slightly closer trees, and first low mist are introduced.
+- Forbidden continuity breaks are absent.
+
+## Hook QA Criteria / 钩子 QA 标准
+
+- Candidate has one clear visual question around the weakening light and whether the path ahead is still visible.
+- Red annotation points to the dim gap, weak lamp, or low mist.
+- Annotation text is short, childlike, and page-specific.
+- Generic mood-only labels do not pass.
+
 ## Repair Triggers / 修复触发条件
 
-Repair or regenerate later if the generated p02 image copies the p01 fork/signpost layout, omits the fading lamp lane, loses the R00 notebook material and character/proportion continuity, animalizes either human, introduces later-page events, or violates child-safety constraints.
+Repair or regenerate later if the generated p02 image copies the p01 fork/signpost layout, omits the fading lamp lane, jumps too quickly into dense/dark later-page intensity, adds unseeded infrastructure or new props, loses the R00 notebook material and character/proportion continuity, animalizes either human, uses a generic or misplaced hook annotation, introduces later-page events, or violates child-safety constraints.
 
 ## Result Backfill Procedure / 结果回填流程
 

@@ -42,7 +42,7 @@ deprecated_by: ""
 - blocked_actions 或返修入口
 
 ## 4. 读取的唯一事实源字段
-- compiled_prompt、negative_constraints、reference_dependencies、asset_type
+- compiled_prompt、negative_constraints、reference_dependencies、asset_type、page_or_spread_range、previous_page_reference、previous_page_scene_summary、current_page_scene_summary、continuity_from_previous_page、scene_delta_from_previous_page、allowed_progression_delta、forbidden_continuity_breaks、page_hook_question、hook_visual_target、hook_annotation_guidance、escalation_level、r00_reference_asset
 
 ## 5. 允许创建的派生视图
 - 语义 Lint 报告、hard_fail 修复点
@@ -61,6 +61,7 @@ deprecated_by: ""
 - 输出字段能回写到 story_core.visual_pipeline.semantic_lint。
 - 对视觉链路：没有 compiled_prompt 不得出图；没有 execution_telemetry 和 actual_prompt_sent_to_external_tool 不得 accepted。
 - 对 R00：不得出现人物、火柴人、完整场景、道具集合或符号散点表；R00 未 accepted 不得继续 R01/R02。
+- 对 p02 及之后：缺 Series Continuity + Page Hook 字段、场景递进跳太远、hook 过泛、红笔不指向具体不确定性、或把 R00 当故事内容来源，均不得进入 G。
 
 ## 8. 失败回退位置
 - 字段缺失：回退到故事核心状态机技能。
