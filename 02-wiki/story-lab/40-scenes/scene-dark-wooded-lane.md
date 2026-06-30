@@ -16,7 +16,8 @@ props:
   - "a pale shape drifting low (later: mist)"
 output_targets:
   - image
-linked_packages: []
+linked_packages:
+  - iep-pilot-001-p03-dark-wooded-lane
 related_assets: []
 source_paths: []
 tags:
@@ -24,7 +25,7 @@ tags:
   - pilot-001
   - scene
 created_at: 2026-06-25
-updated_at: 2026-06-26
+updated_at: 2026-06-30
 owner: ichichuang
 version: v0
 canonical: true
