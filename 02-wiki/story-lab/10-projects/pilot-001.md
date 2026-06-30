@@ -45,7 +45,7 @@ publishing_readiness_status: blocked
 
 **Visual pipeline reset completed (2026-06-26).** The old warm-safe visual system was removed from active use and the visual pipeline was rebuilt around a single clean child-drawn horror notebook style for GPTImage production.
 
-- Current workflow: **p03 Workflow F compile + semantic lint passed. p01 R00 remains the only series master visual anchor, p02 is the previous-page scene continuity reference, and p03 generation remains blocked pending separately authorized GPTImage handoff preparation.**
+- Current workflow: **p03 GPTImage handoff prepared for human operation only. p01 R00 remains the only series master visual anchor, p02 is the previous-page scene continuity reference, and p03 generation remains blocked pending separately authorized human execution.**
 - Current active visual system: `vs-pilot-001-child-horror-notebook`.
 - Current active recipe: `pr-pilot-001-child-horror-notebook` (active `recipe_hash` `267c7dfe258e43ba` — the only active recipe hash for `pilot-001`).
 - Workflows A (Raw Intake), B (Story Analysis), C (Character & Scene Extraction) remain accepted; the story core, graph, characters, and scenes are unchanged.
@@ -173,7 +173,7 @@ Neither this card nor the active visual system authorizes automated image genera
 
 - [p01 / The Fork at Dusk](../70-execution-packages/iep-pilot-001-p01-fork-at-dusk.md) - fresh `draft`, bound to the active style/recipe (`recipe_hash` `267c7dfe258e43ba`); Workflow H backfilled one manual candidate and GenerationRun; Workflow I QA passed; Workflow J accepted [ra-pilot-001-r00-master-style-character-anchor](../reference-assets/ra-pilot-001-r00-master-style-character-anchor.md).
 - [p02 / The Fading-Lamp Lane](../70-execution-packages/iep-pilot-001-p02-fading-lamp-lane.md) - `ready`, bound to the active style/recipe and required R00 ReferenceAsset `ra-pilot-001-r00-master-style-character-anchor`; Workflow F compile and semantic lint passed; Workflow H repair candidate backfilled with GenerationRun `gr-pilot-001-p02-repair-01-20260630-154548-webgptimage`; Workflow I QA passed; Workflow J accepted page-level ReferenceAsset [ra-pilot-001-p02-fading-lamp-lane](../reference-assets/ra-pilot-001-p02-fading-lamp-lane.md); no final package or publishing record exists.
-- [p03 / The Dark Wooded Lane](../70-execution-packages/iep-pilot-001-p03-dark-wooded-lane.md) - `ready`, bound to required R00 ReferenceAsset [ra-pilot-001-r00-master-style-character-anchor](../reference-assets/ra-pilot-001-r00-master-style-character-anchor.md) for global visual continuity and required previous-page ReferenceAsset [ra-pilot-001-p02-fading-lamp-lane](../reference-assets/ra-pilot-001-p02-fading-lamp-lane.md) for scene continuity only; Workflow F compile and semantic lint passed; generation remains blocked and the next workflow is p03 GPTImage handoff preparation.
+- [p03 / The Dark Wooded Lane](../70-execution-packages/iep-pilot-001-p03-dark-wooded-lane.md) - `ready`, bound to required R00 ReferenceAsset [ra-pilot-001-r00-master-style-character-anchor](../reference-assets/ra-pilot-001-r00-master-style-character-anchor.md) for global visual continuity and required previous-page ReferenceAsset [ra-pilot-001-p02-fading-lamp-lane](../reference-assets/ra-pilot-001-p02-fading-lamp-lane.md) for scene continuity only; Workflow F compile and semantic lint passed; GPTImage handoff is prepared for human operation only; generation remains blocked.
 
 p04-p14 packages remain deleted after the reset and **must be recreated later** before the full 14-page story can proceed.
 
@@ -243,9 +243,10 @@ For later pages, prepend the **Series Continuity Prefix** defined in `pr-pilot-0
 - p03 ImageExecutionPackage recreation: **COMPLETED as draft only** with required references `ra-pilot-001-r00-master-style-character-anchor` and `ra-pilot-001-p02-fading-lamp-lane`.
 - p03 Workflow F prompt compile and semantic lint: **PASSED**.
 - p03 package status: **ready**.
-- p03 downstream generation status: **blocked**. No p03 GPTImage handoff, image generation, GenerationRun, or ReferenceAsset exists.
+- p03 GPTImage handoff preparation: **PREPARED** at `50-agent-work/story-lab/webgptimage-handoffs/pilot-001/handoff-pilot-001-p03-dark-wooded-lane-gptimage.md`.
+- p03 downstream generation status: **blocked**. No p03 image generation, GenerationRun, or ReferenceAsset exists.
 - p04-p14 packages: **not created**.
-- Current workflow: **p03 ready package exists. Next controlled step is p03 GPTImage handoff preparation. Stop before GPTImage handoff creation, external image execution, GenerationRun creation, or ReferenceAsset creation unless separately authorized.**
+- Current workflow: **p03 ready package and GPTImage handoff exist. Next controlled step is separately authorized human GPTImage execution. Stop before external image execution, GenerationRun creation, or ReferenceAsset creation unless separately authorized.**
 - p01 QA status: **pass**.
 - p01 ReferenceAsset status: **accepted**.
 - p02 QA status: **pass**.
@@ -255,7 +256,7 @@ For later pages, prepend the **Series Continuity Prefix** defined in `pr-pilot-0
 
 Workflows A, B, C are accepted. Workflow H backfilled one p01 candidate and GenerationRun, Workflow I QA passed, and Workflow J accepted the p01 ReferenceAsset. Workflow J also accepted the p02 page-level ReferenceAsset. The following remain blocked:
 
-- p03 GPTImage handoff creation, image generation, GenerationRun creation, and ReferenceAsset creation until the next workflow is separately authorized
+- p03 image generation, GenerationRun creation, and ReferenceAsset creation until human execution and the next backfill/QA workflows are separately authorized
 - p04-p14 package creation or generation until each package is recreated from canonical cards
 - final package assembly
 - publishing readiness
@@ -263,7 +264,7 @@ Workflows A, B, C are accepted. Workflow H backfilled one p01 candidate and Gene
 
 ## Next Workflow
 
-p03 Workflow F compile + semantic lint is complete. Next controlled step is p03 GPTImage handoff preparation, using `ra-pilot-001-r00-master-style-character-anchor` for global visual continuity and `ra-pilot-001-p02-fading-lamp-lane` as the immediately previous accepted page reference for p03 scene continuity. Do not create a GPTImage handoff, generate images, create GenerationRuns, create ReferenceAssets, create p04-p14 packages, create a final package, or create publishing records before the relevant later workflow is authorized.
+p03 GPTImage handoff preparation is complete, using `ra-pilot-001-r00-master-style-character-anchor` for global visual continuity and `ra-pilot-001-p02-fading-lamp-lane` as the immediately previous accepted page reference for p03 scene continuity. Next controlled step is separately authorized human GPTImage execution. Do not generate images, create GenerationRuns, create ReferenceAssets, create p04-p14 packages, create a final package, or create publishing records before the relevant later workflow is authorized.
 
 
 ## Notes
